@@ -1,0 +1,4 @@
+{
+  "/api/": "/",
+  "/oauth/token": "/token"
+}

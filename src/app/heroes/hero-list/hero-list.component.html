@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-10">
+    <h2 i18n>List of Super heroes</h2>
+  </div>
+  <div class="col-sm-2 align-bottom">
+    <button class="btn btn-primary pull-right" routerLink="/heroes/create">Create new</button>
+  </div>
+</div>
+<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+    <tr>
+      <th></th>
+      <th>
+        <mfDefaultSorter by="preview">Preview</mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="name">Name</mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="editorial">Editorial</mfDefaultSorter>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hero of mf.data">
+      <td>
+        <div class="btn-group">
+          <button routerLink="/heroes/detail/{{hero.id}}" class="btn btn-secondary btn-sm">
+          <i class="fa fa-search"></i>
+        </button>
+          <button (click)="delete(hero.id)" class="btn btn-danger btn-sm">
+          <i class="fa fa-times"></i>
+        </button>
+        </div>
+      </td>
+      <td><img src="assets/images/{{hero.image}}" alt="{{hero.name}}" width="60px" height="60px" /></td>
+      <td>{{hero.name}}</td>
+      <td>{{hero.editorialText}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="8">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h2 i18n>List of Villains</h2>
+  </div>
+  <div class="col-sm-4">
+    <app-villain-search (onSearch)="onSearchText($event)"></app-villain-search>
+  </div>
+</div>
+<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+    <tr>
+      <th></th>
+      <th>
+        <mfDefaultSorter by="preview">Preview</mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="name">Name</mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="editorial">Editorial</mfDefaultSorter>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let villain of mf.data">
+      <td>
+        <button routerLink="/villains/detail/{{villain.id}}" class="btn btn-secondary btn-sm">
+          <i class="fa fa-search"></i>
+        </button>
+      </td>
+      <td><img src="assets/images/{{villain.image}}" alt="{{villain.name}}" width="60px" height="60px" /></td>
+      <td>{{villain.name}}</td>
+      <td>{{villain.editorialText}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="8">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+  </tfoot>
+</table>

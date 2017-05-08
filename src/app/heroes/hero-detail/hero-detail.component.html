@@ -1,0 +1,23 @@
+<h1 i18n>Super Hero Details</h1>
+<div *ngIf="hero">
+  <div class="row">
+    <label class="col-sm-1">Name:</label>
+    <div class="col-sm-10">{{hero.name}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">Editorial: </label>
+    <div class="col-sm-10">{{hero.editorialText}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">Image:</label>
+    <div class="col-sm-10"><img src="assets/images/{{hero.image}}" alt="{{hero.name}}" /></div>
+  </div>
+</div>
+<div class="btn-group">
+  <button class="btn btn-secondary btn-sm" routerLink="/heroes">
+    <i class="fa fa-arrow-left"></i> Back
+  </button>
+  <button (click)="delete(hero.id)" class="btn btn-danger btn-sm">
+    <i class="fa fa-times"></i> Delete
+  </button>
+</div>

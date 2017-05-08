@@ -1,0 +1,18 @@
+<h1 i18n>Villain Details</h1>
+<div *ngIf="villain">
+  <div class="row">
+    <label class="col-sm-1">Name:</label>
+    <div class="col-sm-10">{{villain.name}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">Editorial: </label>
+    <div class="col-sm-10">{{villain.editorialText}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">Image:</label>
+    <div class="col-sm-10"><img src="assets/images/{{villain.image}}" alt="{{villain.name}}" /></div>
+  </div>
+</div>
+<button class="btn btn-secondary btn-sm" routerLink="/villains">
+  <i class="fa fa-arrow-left"></i> Back
+</button>

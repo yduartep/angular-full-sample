@@ -1,0 +1,14 @@
+<div *ngIf="isActive()">
+  <div class="row">
+    <div class="col-sm-10">
+      <h1>{{ 'tourOfHeroes' | translate }}</h1>
+    </div>
+    <div class="col-sm-2" *ngIf="getUser()">
+      <i class="fa fa-user" aria-hidden="true"> {{getUser()}} </i> | <a (click)="onLogout()">Logout</a>
+    </div>
+  </div>
+  <div class="header-bar"></div>
+  <app-nav [items]="menus" [languages]="languages"></app-nav>
+</div>
+<app-spinner></app-spinner>
+<router-outlet></router-outlet>

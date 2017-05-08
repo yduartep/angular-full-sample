@@ -1,0 +1,3 @@
+- Single use components should be created in the core module (nav, spinners, message-toasts, modal-dialogs ...).
+- This module should be started just one time in the AppModule and never import it anywhere else.
+- CoreModule will contain singleton services whose instance wil be shared throughout the application (e.g. ExceptionService and LoggerService).

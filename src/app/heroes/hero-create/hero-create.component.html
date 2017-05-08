@@ -1,0 +1,36 @@
+<h1 i18n>Create new Super hero</h1>
+
+<form [formGroup]="heroForm" (ngSubmit)="saveHero()" novalidate>
+  <div *ngIf="errorMessage" id="message" role="alert" class="alert alert-danger"><i class="fa fa-remove"></i> {{errorMessage}}</div>
+  <div class="form-group" [ngClass]="errorClass(heroForm.controls.name)">
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter super hero name ...">
+    <span *ngIf="isInvalid(heroForm.controls.name)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    <app-control-messages [control]="heroForm.controls.name" [message]="'Super hero name is required!'"></app-control-messages>
+  </div>
+  <div class="form-group" [ngClass]="errorClass(heroForm.controls.editorial)">
+    <label for="editorial">Editorial:</label>
+    <select id="editorial" class="form-control" formControlName="editorial" [(ngModel)]="selectedEditorial">
+      <option *ngFor="let e of editorials" [value]="e.id">{{e.value}}</option>
+    </select>
+    <app-control-messages [control]="heroForm.controls.editorial" [message]="'Select a valid editorial!'"></app-control-messages>
+  </div>
+  <div class="form-group">
+    <label for="image">Image name:</label>
+    <input type="text" class="form-control" id="image" formControlName="image" placeholder="Enter image name stored on assets ...">
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" [disabled]="heroForm.invalid">Save</button>
+
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" routerLink="/heroes">
+        <i class="fa fa-arrow-left"></i> Back
+      </button>
+          <button type="button" (click)="reset()" class="btn btn-danger btn-sm">
+        <i class="fa fa-undo"></i> Reset
+      </button>
+    </div>
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    />
+  </div>
+</form>
