@@ -5,5 +5,5 @@ export class ApiConfig {
   apiEnv: string;
   apiUrls: ApiUrl[] = [];
   timeExpired: number;
-  credentials: Credentials
+  credentials: Credentials;
 }

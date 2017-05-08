@@ -29,7 +29,7 @@ describe('VillainsService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should get list of all Villains', async(inject([VillainService], (VillainService) => {
+  it('should get list of all Villains', async(inject([VillainService], (service: VillainService) => {
       const mockResponse = [
         { id: '1', name: 'Villain 1', image: 'image1.png' },
         { id: '2', name: 'Villain 2', image: 'image2.png' }
@@ -38,7 +38,7 @@ describe('VillainsService', () => {
         connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse })));
       });
 
-      VillainService.findAll().subscribe((data) => {
+     service.findAll().subscribe((data) => {
           expect(data.length).toBe(2);
           expect(data[0].id).toBe('1');
           expect(data[0].name).toBe('Villain 1');
@@ -46,7 +46,7 @@ describe('VillainsService', () => {
       });
   })));
 
-  it('should get Villain by id', async(inject([VillainService], (VillainService) => {
+  it('should get Villain by id', async(inject([VillainService], (service: VillainService) => {
       const mockResponse = { id: '1', name: 'Villain 1', image: 'image1.png' };
 
       mockBackend.connections.subscribe((connection: MockConnection) => {
@@ -55,14 +55,14 @@ describe('VillainsService', () => {
         connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse })));
       });
 
-      VillainService.findById('1').subscribe((Villain: Villain) => {
-          expect(Villain.id).toBe('1');
+     service.findById(1).subscribe((Villain: Villain) => {
+          expect(Villain.id).toBe(1);
           expect(Villain.name).toBe('Villain 1');
           expect(Villain.image).toBe('image1.png');
       });
   })));
 
-  it('should insert new Villain', async(inject([VillainService], (villainService) => {
+  it('should insert new Villain', async(inject([VillainService], (service: VillainService) => {
       mockBackend.connections.subscribe((connection: MockConnection) => {
         // is it the correct REST type for an insert? (POST)
         expect(connection.request.method).toBe(RequestMethod.Post);
@@ -70,14 +70,14 @@ describe('VillainsService', () => {
         connection.mockRespond(new Response(new ResponseOptions({status: 201})));
       });
       const villain = new Villain(null, 'Villain new', 1, 'imageNew.jspg');
-      villainService.save(villain).subscribe((successResult) => {
+     service.insert(villain).subscribe((successResult) => {
           expect(successResult).toBeDefined();
           expect(successResult.status).toBe(201);
           expect(successResult.ok).toBe(true);
         });
     })));
 
-    it('should save updates to an existing Villain', async(inject([VillainService], (villainService) => {
+    it('should save updates to an existing Villain', async(inject([VillainService], (service: VillainService) => {
         mockBackend.connections.subscribe((connection: MockConnection) => {
           // is it the correct REST type for update? (PUT)
           expect(connection.request.method).toBe(RequestMethod.Put);
@@ -86,20 +86,20 @@ describe('VillainsService', () => {
         });
 
         const villain = new Villain(1, 'Villain changed', 1, 'imageChanged.jspg');
-        villainService.save(villain).subscribe((successResult) => {
+       service.update('id', villain).subscribe((successResult) => {
             expect(successResult).toBeDefined();
             expect(successResult.status).toBe(204);
             expect(successResult.ok).toBe(true);
           });
       })));
 
-    it('should delete an existing Villain', async(inject([VillainService], (VillainService) => {
+    it('should delete an existing Villain', async(inject([VillainService], (service: VillainService) => {
       mockBackend.connections.subscribe(connection => {
         expect(connection.request.method).toBe(RequestMethod.Delete);
-        connection.mockRespond(<Response>new ResponseOptions({status: 204}));
+        connection.mockRespond(new ResponseOptions({status: 204}));
       });
 
-      VillainService.delete('1').subscribe(
+     service.delete(1).subscribe(
         (successResult) => {
           expect(successResult).toBeDefined();
           expect(successResult.status).toBe(204);

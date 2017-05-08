@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoggerService } from '../services/logger.service';
 
 @Component({
-  selector: 'ftc-header',
+  selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })

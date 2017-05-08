@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoggerService } from '../logger.service';
+import { LoggerService } from '../services/logger.service';
 import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {

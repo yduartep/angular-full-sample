@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpinnerComponent } from './spinner.component';
 import { SpinnerState, SpinnerService } from './spinner.service';
-import { LoggerService } from '../logger.service';
+import { LoggerService } from '../services/logger.service';
 import { Subscription } from 'rxjs/Subscription';
 
 describe('SpinnerComponent', () => {

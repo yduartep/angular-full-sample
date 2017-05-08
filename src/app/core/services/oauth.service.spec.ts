@@ -1,16 +1,16 @@
 import { TestBed, getTestBed, async, inject } from '@angular/core/testing';
-import { AuthenticationService } from '../services/authentication.service';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { Headers, BaseRequestOptions, Response, HttpModule, Http, XHRBackend, RequestMethod, ResponseOptions } from '@angular/http';
-import { Application } from '../models/Application';
+import { ApiUrl } from '../models/api-url';
 import { ApiConfig } from '../models/api-config';
 import { MocksUtil } from '../utilities/mocks.util';
-import { AuthHelper } from '../utilities/auth.helper';
+import { OAuthService } from '../services/oauth.service';
+import { AuthService } from '../services/auth.service';
 
 describe('AuthenticationService', () => {
   let mockBackend: MockBackend;
   const expectedUrl = 'http://localhost:3000/api/oauth/token';
-  const apiConfig = MocksUtil.createMockedApiConfig([{ id: 'AUTH_SERVICE_URL', url: expectedUrl }]);
+  const apiConfig = MocksUtil.createMockedApiConfig([new ApiUrl('AUTH_SERVICE_URL', expectedUrl)]);
   const mockResponse = MocksUtil.createMockedOauthToken();
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('AuthenticationService', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'cookie.user.id', useValue: 'userId' },
         { provide: 'cookie.token.id', useValue: 'token' },
-        AuthenticationService,
+        { provide: 'AuthService', useClass: OAuthService },
         MockBackend,
         BaseRequestOptions,
         {
@@ -28,8 +28,7 @@ describe('AuthenticationService', () => {
           useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
             return new Http(backend, defaultOptions);
           }
-        },
-        AuthHelper
+        }
       ],
       imports: [HttpModule]
     });
@@ -37,17 +36,17 @@ describe('AuthenticationService', () => {
   });
 
   it('should create an instance of the service',
-    inject([AuthenticationService, AuthHelper], (service: AuthenticationService, authHelper: AuthHelper) => {
+    inject([OAuthService], (service: AuthService) => {
       expect(service).toBeTruthy();
     }));
 
   it('should get oauth token', async(
-    inject([AuthenticationService, AuthHelper], (service: AuthenticationService, authHelper: AuthHelper) => {
+    inject([OAuthService], (service: AuthService) => {
       const username = 'fakeUserId', password = 'fakePassword';
 
       mockBackend.connections.subscribe((connection: MockConnection) => {
         const data = 'grant_type=password&username=' + username + '&password=' + password;
-        const authorization = 'Basic ' + btoa(apiConfig.clientId + ':' + apiConfig.clientSecret);
+        const authorization = 'Basic ' + btoa(apiConfig.credentials.clientId + ':' + apiConfig.credentials.clientSecret);
 
         expect(connection.request.method).toBe(RequestMethod.Post);
         expect(connection.request.url).toEqual(expectedUrl);
@@ -64,19 +63,15 @@ describe('AuthenticationService', () => {
         expect(userData.refresh_token).toEqual(mockResponse.refresh_token);
         expect(userData.scope).toEqual(mockResponse.scope);
 
-        expect(authHelper.getUserLogged()).toEqual(username);
-        expect(authHelper.getToken()).toEqual(mockResponse.access_token);
+        expect(service.getUserLogged()).toEqual(username);
+        expect(service.getToken()).toEqual(mockResponse.access_token);
       });
     })));
 
-  it('should logout from the application', async(
-    inject([AuthenticationService, AuthHelper], (service: AuthenticationService, authHelper: AuthHelper) => {
-      authHelper.addUserInfo('fakeUserId', 10);
-      authHelper.addTokenInfo('12345-6789', 10);
+  it('should logout from the application', async(inject([OAuthService], (service: AuthService) => {
+    service.logout();
 
-      service.logout();
-
-      expect(authHelper.getUserLogged()).toEqual('');
-      expect(authHelper.getToken()).toEqual('');
-    })));
+    expect(service.getUserLogged()).toEqual('');
+    expect(service.getToken()).toEqual('');
+  })));
 });

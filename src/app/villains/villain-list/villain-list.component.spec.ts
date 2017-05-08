@@ -3,18 +3,18 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Routes, ActivatedRoute, Router } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
-import { VillainSearchComponent } from './villain-search.component';
+import { VillainListComponent } from './villain-list.component';
 import { VillainService } from '../shared/villain.service';
 
 export const fake_routes = [];
 
-describe('VillainSearchComponent', () => {
-  let component: VillainSearchComponent;
-  let fixture: ComponentFixture<VillainSearchComponent>;
+describe('VillainListComponent', () => {
+  let component: VillainListComponent;
+  let fixture: ComponentFixture<VillainListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [VillainSearchComponent],
+      declarations: [VillainListComponent],
       providers: [VillainService],
       imports: [RouterTestingModule.withRoutes(fake_routes), HttpModule]
     })
@@ -22,7 +22,7 @@ describe('VillainSearchComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VillainSearchComponent);
+    fixture = TestBed.createComponent(VillainListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

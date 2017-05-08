@@ -3,26 +3,26 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Routes, ActivatedRoute, Router } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
-import { HeroDetailComponent } from './hero-detail.component';
-import { HeroService } from '../shared/hero.service';
+import { VillainDetailComponent } from './villain-detail.component';
+import { VillainService } from '../shared/villain.service';
 
-export const fake_routes: Routes = [{path: 'detail/:id', component: HeroDetailComponent}];
+export const fake_routes: Routes = [{path: 'detail/:id', component: VillainDetailComponent}];
 
-describe('heroDetailComponent', () => {
-  let component: HeroDetailComponent;
-  let fixture: ComponentFixture<HeroDetailComponent>;
+describe('VillainDetailComponent', () => {
+  let component: VillainDetailComponent;
+  let fixture: ComponentFixture<VillainDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeroDetailComponent ],
-      providers: [ HeroService ],
+      declarations: [ VillainDetailComponent ],
+      providers: [ VillainService ],
       imports: [ RouterTestingModule.withRoutes(fake_routes), HttpModule ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeroDetailComponent);
+    fixture = TestBed.createComponent(VillainDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

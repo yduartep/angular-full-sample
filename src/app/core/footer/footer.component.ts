@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoggerService } from '../services/logger.service';
 
 @Component({
-  selector: 'ftc-footer',
+  selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })

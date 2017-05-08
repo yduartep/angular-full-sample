@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageNotFoundComponent } from './not-found.component';
-import { LoggerService } from '../../core/logger.service';
+import { LoggerService } from '../../core/services/logger.service';
 
 describe('NotFoundComponent', () => {
   let component: PageNotFoundComponent;
@@ -9,10 +9,10 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageNotFoundComponent ],
-      providers: [ LoggerService ]
+      declarations: [PageNotFoundComponent],
+      providers: [LoggerService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
