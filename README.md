@@ -7,7 +7,7 @@ Full sample application built with Angular 4 that follows all best practices. Th
 3. Integration with ng2-translate module.
 4. Mock system defined with "json-server" and "faker.js" library.
 
-Core Module
+## Core Module
 1. Spinner component to be displayed before to load any resource and hidden at the end.
 2. Base "Header" and "Footer" component to be overriden.
 3. Include a nav customizable bar with language selector that allow the creation of multi-language apps.
@@ -18,7 +18,7 @@ Core Module
 8. Validation service included to define new custom validations to be used in any form validation (es. creditCardValidator, emailValidator, passwordValidator ...).
 9. Include logger customizable service in the core module to logs anything in the app.
 
-Shared Module:
+## Shared Module:
 1. Control message component created in the shared module to display custom messages in input controls depending of the validators and messages configured.
 2. Login component displayed depending of the authentication service configured.
 3. Not found component displayed when invalid routes.
