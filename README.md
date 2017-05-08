@@ -1,6 +1,27 @@
 # Getting Started
 
-Super simple Angular app with 1 module and 2 routes 
+Full sample application built with Angular 4 that follows all best practices. This app contains:
+
+1. Two modules "Heroes" and "Villains" loaded in a lazy way.
+2. Different api configurations loaded depending of the current environment. Could be "dev", "prod" or "mock".
+3. Integration with ng2-translate module.
+4. Mock system defined with "json-server" and "faker.js" library.
+
+Core Module
+1. Spinner component to be displayed before to load any resource and hidden at the end.
+2. Base "Header" and "Footer" component to be overriden.
+3. Include a nav customizable bar with language selector that allow the creation of multi-language apps.
+4. Automatic handle errors to display different messages and formats depending of the error type.
+5. Http Interceptor system to configure extra things on each http call.
+6. Multiple guards (auth, login, module-import) to protect routes and module loading.
+7. Custom authentication service implementation. Include an "Oauth2 client" service to integrate your login page with OAuth 2.0 service and other service (SkypAuthService) to by pass the login automatically and redirect to the home page.
+8. Validation service included to define new custom validations to be used in any form validation (es. creditCardValidator, emailValidator, passwordValidator ...).
+9. Include logger customizable service in the core module to logs anything in the app.
+
+Shared Module:
+1. Control message component created in the shared module to display custom messages in input controls depending of the validators and messages configured.
+2. Login component displayed depending of the authentication service configured.
+3. Not found component displayed when invalid routes.
 
 ## Get the Code
 ```
