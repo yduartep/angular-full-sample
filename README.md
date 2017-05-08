@@ -6,6 +6,9 @@ Full sample application built with Angular 4 that follows all best practices. Th
 2. Different api configurations loaded depending of the current environment. Could be "dev", "prod" or "mock".
 3. Integration with ng2-translate module.
 4. Mock system defined with "json-server" and "faker.js" library.
+5. Bootstrap and Font-awsone integration.
+6. TSLint integration for quality.
+7. Unit and Functional test with Jasmine, Karma and Protractor.
 
 ## Core Module
 1. Spinner component to be displayed before to load any resource and hidden at the end.
