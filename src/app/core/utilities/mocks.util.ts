@@ -1,6 +1,8 @@
 import { ApiConfig } from '../models/api-config';
 import { ApiUrl } from '../models/api-url';
 import { Credentials } from '../models/credentials';
+import { Hero } from '../../heroes/shared/hero';
+import { Villain } from '../../villains/shared/villain';
 const faker = require('faker');
 
 export class MocksUtil {
@@ -10,11 +12,15 @@ export class MocksUtil {
      * Create a mocked instance of the ApiConfig object to be used in tests
      * @param apiUrls the list of ApiUrls with which must be created.
      */
-    static createMockedApiConfig(apiUrls: ApiUrl[]): ApiConfig {
+    static createMockedApiConfig(): ApiConfig {
         const apiConfig: ApiConfig = new ApiConfig();
         apiConfig.credentials = new Credentials(faker.internet.userName(), faker.internet.password());
         apiConfig.timeExpired = 5;
-        apiConfig.apiUrls = apiUrls;
+        apiConfig.apiUrls = [
+            { id: 'HEROES_SERVICE_URL', url: 'http://127.0.0.1:3000/api/heroes' },
+            { id: 'VILLAINS_SERVICE_URL', url: 'http://127.0.0.1:3000/api/villains' },
+            { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:3000/api/oauth/token' }
+        ];
 
         return apiConfig;
     }
@@ -30,5 +36,29 @@ export class MocksUtil {
             'expires_in': 43199,
             'scope': 'openid'
         };
+    }
+
+    /**
+     * Create a mocked list of heroes
+     */
+    static createMockedHeroes(): Hero[] {
+        const result: Hero[] = [];
+        for (let i = 1; i <= 3; i++) {
+            const data = new Hero(i, 'Hero ' + i, 1, 'image ' + i + '.png');
+            result.push(data);
+        }
+        return result;
+    }
+
+    /**
+     * Create a mocked list of villains
+     */
+    static createMockedVillains(): Villain[] {
+        const result: Villain[] = [];
+        for (let i = 1; i <= 3; i++) {
+            const data = new Villain(i, 'Villain ' + i, 1, 'image ' + i + '.png');
+            result.push(data);
+        }
+        return result;
     }
 }

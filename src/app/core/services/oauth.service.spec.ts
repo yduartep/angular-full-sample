@@ -7,10 +7,10 @@ import { MocksUtil } from '../utilities/mocks.util';
 import { OAuthService } from '../services/oauth.service';
 import { AuthService } from '../services/auth.service';
 
-describe('AuthenticationService', () => {
+describe('OAuthService', () => {
   let mockBackend: MockBackend;
   const expectedUrl = 'http://localhost:3000/api/oauth/token';
-  const apiConfig = MocksUtil.createMockedApiConfig([new ApiUrl('AUTH_SERVICE_URL', expectedUrl)]);
+  const apiConfig = MocksUtil.createMockedApiConfig();
   const mockResponse = MocksUtil.createMockedOauthToken();
 
   beforeEach(() => {
@@ -19,7 +19,6 @@ describe('AuthenticationService', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'cookie.user.id', useValue: 'userId' },
         { provide: 'cookie.token.id', useValue: 'token' },
-        { provide: 'AuthService', useClass: OAuthService },
         MockBackend,
         BaseRequestOptions,
         {
@@ -28,7 +27,8 @@ describe('AuthenticationService', () => {
           useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
             return new Http(backend, defaultOptions);
           }
-        }
+        },
+        OAuthService
       ],
       imports: [HttpModule]
     });
@@ -36,12 +36,12 @@ describe('AuthenticationService', () => {
   });
 
   it('should create an instance of the service',
-    inject([OAuthService], (service: AuthService) => {
+    inject([OAuthService], (service: OAuthService) => {
       expect(service).toBeTruthy();
     }));
 
   it('should get oauth token', async(
-    inject([OAuthService], (service: AuthService) => {
+    inject([OAuthService], (service: OAuthService) => {
       const username = 'fakeUserId', password = 'fakePassword';
 
       mockBackend.connections.subscribe((connection: MockConnection) => {
@@ -68,7 +68,7 @@ describe('AuthenticationService', () => {
       });
     })));
 
-  it('should logout from the application', async(inject([OAuthService], (service: AuthService) => {
+  it('should logout from the application', async(inject([OAuthService], (service: OAuthService) => {
     service.logout();
 
     expect(service.getUserLogged()).toEqual('');

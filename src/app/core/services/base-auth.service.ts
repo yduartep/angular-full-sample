@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CommonUtil } from '../utilities/common.util'
+import { CommonUtil } from '../utilities/common.util';
 
 export abstract class BaseAuthService {
 

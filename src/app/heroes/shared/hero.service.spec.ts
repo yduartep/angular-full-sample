@@ -3,14 +3,20 @@ import { MockBackend, MockConnection } from '@angular/http/testing';
 import { Headers, BaseRequestOptions, Response, HttpModule, Http, XHRBackend, RequestMethod, ResponseOptions } from '@angular/http';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
+import { MocksUtil } from '../../core/utilities/mocks.util';
 
 describe('HerosService', () => {
   let mockBackend: MockBackend;
+  const apiConfig = MocksUtil.createMockedApiConfig();
+  const expectedUrl = 'http://127.0.0.1:3000/api/heroes';
+  const mockResponse = MocksUtil.createMockedHeroes();
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        HeroService,
+        { provide: 'api.config', useValue: apiConfig },
+        { provide: 'cookie.user.id', useValue: 'backUserId' },
+        { provide: 'cookie.token.id', useValue: 'backToken' },
         MockBackend,
         BaseRequestOptions,
         {
@@ -19,7 +25,9 @@ describe('HerosService', () => {
           useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
             return new Http(backend, defaultOptions);
           }
-        }],
+        },
+        HeroService
+      ],
       imports: [HttpModule]
     });
     mockBackend = getTestBed().get(MockBackend);
@@ -29,64 +37,60 @@ describe('HerosService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should get list of all Heros', async(inject([HeroService], (heroService) => {
-    const mockResponse = [
-      { id: '1', name: 'Hero 1', image: 'image1.png' },
-      { id: '2', name: 'Hero 2', image: 'image2.png' }
-    ];
+  it('should get list of all heroes', async(inject([HeroService], (heroService) => {
     mockBackend.connections.subscribe((connection: MockConnection) => {
       connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse })));
     });
 
     heroService.findAll().subscribe((data) => {
-      expect(data.length).toBe(2);
-      expect(data[0].id).toBe('1');
+      expect(data.length).toBe(3);
+      expect(data[0].id).toBe(1);
       expect(data[0].name).toBe('Hero 1');
-      expect(data[0].image).toBe('image1.png');
+      expect(data[0].image).toBe('image 1.png');
     });
   })));
 
-  it('should get Hero by id', async(inject([HeroService], (heroService) => {
-    const mockResponse = { id: '1', name: 'Hero 1', image: 'image1.png' };
+  it('should get hero by id', async(inject([HeroService], (service: HeroService) => {
+    const id = 1;
 
     mockBackend.connections.subscribe((connection: MockConnection) => {
-      // make sure the URL is correct
-      expect(connection.request.url).toMatch(/\/api\/Hero\/1/);
-      connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse })));
+      expect(connection.request.method).toBe(RequestMethod.Get);
+      expect(connection.request.url).toEqual(expectedUrl + '/' + id);
+      connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse[0] })));
     });
 
-    heroService.findById(1).subscribe((Hero: Hero) => {
-      expect(Hero.id).toBe(1);
-      expect(Hero.name).toBe('Hero 1');
-      expect(Hero.image).toBe('image1.png');
+    service.findById(id).subscribe((response: Hero) => {
+      expect(response.id).toBe(1);
+      expect(response.name).toBe('Hero 1');
+      expect(response.image).toBe('image 1.png');
+      expect(response.editorial).toBe(1);
     });
   })));
 
   it('should insert new Hero', async(inject([HeroService], (heroService) => {
     mockBackend.connections.subscribe((connection: MockConnection) => {
-      // is it the correct REST type for an insert? (POST)
       expect(connection.request.method).toBe(RequestMethod.Post);
-      // if ok
-      connection.mockRespond(new Response(new ResponseOptions({ status: 201 })));
+      expect(connection.request.url).toEqual(expectedUrl);
+      connection.mockRespond(new Response(new ResponseOptions({ status: 201, body: mockResponse[1] })));
     });
     const hero = new Hero(null, 'Hero new', 1, 'imageNew.jspg');
-    heroService.save(hero).subscribe((successResult) => {
+    heroService.insert(hero).subscribe((successResult) => {
       expect(successResult).toBeDefined();
       expect(successResult.status).toBe(201);
       expect(successResult.ok).toBe(true);
     });
   })));
 
-  it('should save updates to an existing Hero', async(inject([HeroService], (heroService) => {
+  it('should save updates to an existing hero', async(inject([HeroService], (service: HeroService) => {
+    const id = 1;
     mockBackend.connections.subscribe((connection: MockConnection) => {
-      // is it the correct REST type for update? (PUT)
       expect(connection.request.method).toBe(RequestMethod.Put);
-      // if ok
+      expect(connection.request.url).toEqual(expectedUrl + '/' + id);
       connection.mockRespond(new Response(new ResponseOptions({ status: 204 })));
     });
 
     const hero = new Hero(1, 'Hero changed', 1, 'imageChanged.jspg');
-    heroService.save(hero).subscribe((successResult) => {
+    service.update('id', hero).subscribe((successResult) => {
       expect(successResult).toBeDefined();
       expect(successResult.status).toBe(204);
       expect(successResult.ok).toBe(true);

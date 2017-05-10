@@ -21,7 +21,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 2, name: 'Venon', editorial: 1, image: 'venon.PNG' },
       { id: 3, name: 'Ultron', editorial: 1, image: 'ultron.PNG' },
       { id: 4, name: 'Joker', editorial: 2, image: 'joker.PNG' },
-      { id: 5, name: "R'as Al Ghul", editorial: 2, image: 'rasalghul.PNG' },
+      { id: 5, name: 'R\'as Al Ghul', editorial: 2, image: 'rasalghul.PNG' },
       { id: 6, name: 'Mr. Freeze', editorial: 2, image: 'freeze.PNG' },
       { id: 7, name: 'Scarecrow', editorial: 2, image: 'scarecrow.PNG' }
     ];

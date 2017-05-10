@@ -6,12 +6,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Routes, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './shared/login/login.component';
 import { CoreModule } from './core/core.module';
 import { OAuthService } from './core/services/oauth.service';
 import { ApiConfig } from './core/models/api-config';
 
-const appTitle = 'E-filing Front Office';
+import { TranslateModule, TranslateLoader, TranslateService, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
+import { TranslateLoaderFactory } from './app.translate.factory';
+
+const appTitle = 'Tour of Heroes and Villains';
 export const fake_routes: Routes = [];
 
 describe('AppComponent', () => {
@@ -24,11 +26,19 @@ describe('AppComponent', () => {
       imports: [
         CoreModule,
         SharedModule,
-        RouterTestingModule.withRoutes(fake_routes)
+        RouterTestingModule.withRoutes(fake_routes),
+        TranslateModule.forRoot({
+          provide: TranslateLoader,
+          useFactory: TranslateLoaderFactory,
+          deps: [Http]
+        })
       ],
       providers: [
         { provide: 'AuthService', useClass: OAuthService },
-        { provide: 'api.config', useValue: new ApiConfig() }
+        { provide: 'api.config', useValue: new ApiConfig() },
+         { provide: 'cookie.user.id', useValue: 'userId' },
+        { provide: 'cookie.token.id', useValue: 'token' },
+        TranslateService
       ]
     }).compileComponents();
   }));

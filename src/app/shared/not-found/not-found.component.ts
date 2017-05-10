@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoggerService } from '../../core/services/logger.service';
 
 @Component({
-  selector: 'ftc-page-not-found',
+  selector: 'app-page-not-found',
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.css']
 })

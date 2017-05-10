@@ -8,7 +8,7 @@ import {
   Http, Headers
 } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { CommonUtil } from './utilities/common.util'
+import { CommonUtil } from './utilities/common.util';
 
 @Injectable()
 export class InterceptedHttp extends Http {
