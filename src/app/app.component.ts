@@ -11,7 +11,6 @@ import { Menu } from './core/nav/menu';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  title = 'Tour of Heroes and Villains';
   menus: Menu[] = [
     new Menu('Heroes', '/heroes', 'fa-flash'),
     new Menu('Villains', '/villains', 'fa-user-secret ')

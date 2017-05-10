@@ -2,7 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Routes, ActivatedRoute, Router } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { Http, HttpModule } from '@angular/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { createTranslateLoader } from '../../app.translate.factory';
+import { TranslateService } from '@ngx-translate/core';
 
 import { SharedModule } from '../../shared/shared.module';
 import { MocksUtil } from '../../core/utilities/mocks.util';
@@ -18,8 +22,16 @@ describe('heroDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      schemas: [NO_ERRORS_SCHEMA],
       imports: [
         HttpModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [Http]
+          }
+        }),
         SharedModule,
         RouterTestingModule.withRoutes([])
       ],
@@ -29,8 +41,7 @@ describe('heroDetailComponent', () => {
         { provide: 'cookie.user.id', useValue: 'backUserId' },
         { provide: 'cookie.token.id', useValue: 'backToken' },
         HeroService
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
 
     })
       .compileComponents();

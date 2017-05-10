@@ -2,7 +2,7 @@
   <app-header *ngIf="isActive()"></app-header>
   <div class="app-body">
     <div class="row" *ngIf="isActive()">
-     <h1>{{title}}</h1>
+     <h1>{{ 'tourOfHeroes' | translate }}</h1>
     </div>
     <div class="header-bar" *ngIf="isActive()"></div>
     <app-nav *ngIf="isActive()" class="align-self-center pr-1" [items]="menus" [languages]="languages"></app-nav>

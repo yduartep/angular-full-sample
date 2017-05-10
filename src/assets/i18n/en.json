@@ -1,9 +1,22 @@
 {
   "HELLO": "Welcome to my Angular application!<br><strong>This is an amazing app which uses the latest technologies!</strong>",
   "home": "Home",
+  "back": "Back",
+  "delete": "Delete",
+  "about": "About",
+  "help": "Help",
   "heroesList": "List of Super heroes",
   "villainsList": "List of Villains",
-  "tourOfHeroes": "Tour of heroes",
+  "heroDetail": "Super heroes Details",
+  "villainDetail": "Villain Details",
+  "tourOfHeroes": "Tour of Heroes and Villains",
+  "button-createNew": "Create new",
+  "button-search": "Search",
+
+  "column-preview": "Preview",
+  "column-name": "Name",
+  "column-editorial": "Editorial",
+
   "language": "Language",
   "english": "English",
   "spanish": "Spanish",

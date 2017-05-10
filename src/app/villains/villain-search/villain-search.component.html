@@ -1,6 +1,6 @@
 <div id="custom-search-input" (keydown)="handleKeyDown($event)">
   <div class="input-group col-md-12">
-    <input type="text" class="form-control input-lg" placeholder="Buscar" [(ngModel)]="searchText" />
+    <input type="text" class="form-control input-lg" placeholder="{{ 'button-search' | translate}}" [(ngModel)]="searchText" />
     <span class="input-group-btn">
         <button class="btn btn-info btn-lg" type="submit" (click)="onSearchEvent()">
             <i class="glyphicon glyphicon-search"></i>

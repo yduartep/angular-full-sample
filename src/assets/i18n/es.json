@@ -1,9 +1,22 @@
 {
   "HELLO": "Bienvenido a mi aplicacion de Angular!<br><strong>Esta es una app increible que usa lo ultimo en tecnologia!</strong>",
   "home": "Inicio",
+  "back": "Atras",
+  "delete": "Eliminar",
+  "about": "Sobre nosotros",
+  "help": "Ayuda",
   "heroesList": "Lista de Super heroes",
   "villainsList": "Lista de Villanos",
-  "tourOfHeroes": "Tour de los heroes",
+  "heroDetail": "Detalles del Super heroe",
+  "villainDetail": "Detalles del Villano",
+  "tourOfHeroes": "Tour de los heroes y villanos",
+  "button-createNew": "Crear",
+  "button-search": "Buscar",
+
+  "column-preview": "Imagen",
+  "column-name": "Nombre",
+  "column-editorial": "Editorial",
+
   "language": "Idioma",
   "english": "Inglés",
   "spanish": "Español",

@@ -3,7 +3,7 @@
     <h2>{{ 'heroesList' | translate }}</h2>
   </div>
   <div class="col-sm-2 align-bottom">
-    <button class="btn btn-primary pull-right" routerLink="/heroes/create">Create new</button>
+    <button class="btn btn-primary pull-right" routerLink="/heroes/create">{{ 'button-createNew' | translate }}</button>
   </div>
 </div>
 <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
@@ -11,13 +11,13 @@
     <tr>
       <th></th>
       <th>
-        <mfDefaultSorter by="preview">Preview</mfDefaultSorter>
+        <mfDefaultSorter by="preview">{{ 'column-preview' | translate}}</mfDefaultSorter>
       </th>
       <th>
-        <mfDefaultSorter by="name">Name</mfDefaultSorter>
+        <mfDefaultSorter by="name">{{ 'column-name' | translate}}</mfDefaultSorter>
       </th>
       <th>
-        <mfDefaultSorter by="editorial">Editorial</mfDefaultSorter>
+        <mfDefaultSorter by="editorial">{{ 'column-editorial' | translate}}</mfDefaultSorter>
       </th>
     </tr>
   </thead>
