@@ -5,14 +5,5 @@
         <a routerLink="{{menu.action}}" class="text-center"><i *ngIf="menu.icon" class="fa fa-2x {{menu.icon}}"></i> <span>{{menu.title}}</span></a>
       </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right" *ngIf="languages">
-      <li>
-        <div class="form-group">
-          <select class="form-control" id="languages" (change)="onLanguageChange($event.target.value)">
-            <option *ngFor="let lang of languages" [value]="lang.id">{{lang.value}}</option>
-          </select>
-        </div>
-      </li>
-    </ul>
   </div>
 </nav>

@@ -6,6 +6,7 @@ import { Editorial } from '../shared/editorial.enum';
 import { HeroService } from '../shared/hero.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
 import { LoggerService } from '../../core/services/logger.service';
+import { TranslateService } from '@ngx-translate/core';
 
 import 'rxjs/add/operator/map';
 
@@ -23,7 +24,8 @@ export class HeroListComponent implements OnInit {
     private service: HeroService,
     private route: ActivatedRoute,
     private router: Router,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {

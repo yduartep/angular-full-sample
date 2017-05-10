@@ -19,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavComponent } from './nav/nav.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 
 // services
 import { AuthService } from './services/auth.service';
@@ -27,14 +28,15 @@ import { SkypAuthService } from './services/skyp-auth.service';
 import { LoggerService } from './services/logger.service';
 import { SpinnerService } from './spinner/spinner.service';
 import { environment } from '../../environments/environment';
+// environment vars
 import { COOKIE_IDENTIFIERS } from '../cookie.identifiers';
 
 @NgModule({
   imports: [
-    SharedModule, AppRoutingModule
+    SharedModule
   ],
-  exports: [HeaderComponent, FooterComponent, NavComponent, SpinnerComponent],
-  declarations: [HeaderComponent, FooterComponent, NavComponent, SpinnerComponent],
+  exports: [HeaderComponent, FooterComponent, NavComponent, SpinnerComponent, LanguageSelectorComponent],
+  declarations: [HeaderComponent, FooterComponent, NavComponent, SpinnerComponent, LanguageSelectorComponent],
   providers: [
     LoggerService,
     SpinnerService,

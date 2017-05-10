@@ -1,16 +1,15 @@
-<app-header></app-header>
-<div *ngIf="isActive()">
-  <div class="row">
-    <div class="col-sm-10">
-      <h1>{{ 'tourOfHeroes' | translate }}</h1>
+<div class="app d-flex">
+  <app-header *ngIf="isActive()"></app-header>
+  <div class="app-body">
+    <div class="row" *ngIf="isActive()">
+     <h1>{{title}}</h1>
     </div>
-    <div class="col-sm-2" *ngIf="getUser()">
-      <i class="fa fa-user" aria-hidden="true"> {{getUser()}} </i> | <a (click)="onLogout()">Logout</a>
-    </div>
+    <div class="header-bar" *ngIf="isActive()"></div>
+    <app-nav *ngIf="isActive()" class="align-self-center pr-1" [items]="menus" [languages]="languages"></app-nav>
+    <main class="p-1">
+      <app-spinner></app-spinner>
+      <router-outlet></router-outlet>
+    </main>
   </div>
-  <div class="header-bar"></div>
-  <app-nav [items]="menus" [languages]="languages"></app-nav>
+  <app-footer *ngIf="isActive()"></app-footer>
 </div>
-<app-spinner></app-spinner>
-<router-outlet></router-outlet>
-<app-footer></app-footer>

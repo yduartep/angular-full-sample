@@ -1,4 +1,4 @@
-<h1 i18n>Create new Super hero</h1>
+<h1>Create new Super hero</h1>
 
 <form [formGroup]="heroForm" (ngSubmit)="saveHero()" novalidate>
   <div *ngIf="errorMessage" id="message" role="alert" class="alert alert-danger"><i class="fa fa-remove"></i> {{errorMessage}}</div>

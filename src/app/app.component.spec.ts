@@ -1,22 +1,27 @@
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpModule, Http, ConnectionBackend, RequestOptions } from '@angular/http';
 import { TestBed, async } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
+import { HttpModule, Http, ConnectionBackend, RequestOptions } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Routes, Router, RouterModule, ActivatedRoute } from '@angular/router';
-import { SharedModule } from './shared/shared.module';
-import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
-import { OAuthService } from './core/services/oauth.service';
-import { ApiConfig } from './core/models/api-config';
 
-import { TranslateModule, TranslateLoader, TranslateService, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
-import { TranslateLoaderFactory } from './app.translate.factory';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { ApiConfig } from './core/models/api-config';
+import { OAuthService } from './core/services/oauth.service';
+import { MocksUtil } from './core/utilities/mocks.util';
+import { AppComponent } from './app.component';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { createTranslateLoader } from './app.translate.factory';
+// import { TranslateService } from '@ngx-translate/core';
 
 const appTitle = 'Tour of Heroes and Villains';
 export const fake_routes: Routes = [];
 
 describe('AppComponent', () => {
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -24,21 +29,24 @@ describe('AppComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
-        CoreModule,
-        SharedModule,
-        RouterTestingModule.withRoutes(fake_routes),
+        HttpModule,
         TranslateModule.forRoot({
-          provide: TranslateLoader,
-          useFactory: TranslateLoaderFactory,
-          deps: [Http]
-        })
+          loader: {
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [Http]
+          }
+        }),
+        SharedModule,
+        CoreModule,
+        RouterTestingModule.withRoutes(fake_routes)
       ],
       providers: [
         { provide: 'AuthService', useClass: OAuthService },
         { provide: 'api.config', useValue: new ApiConfig() },
-         { provide: 'cookie.user.id', useValue: 'userId' },
-        { provide: 'cookie.token.id', useValue: 'token' },
-        TranslateService
+        { provide: 'cookie.user.id', useValue: 'userId' },
+        { provide: 'cookie.token.id', useValue: 'token' }/*,
+        TranslateService*/
       ]
     }).compileComponents();
   }));

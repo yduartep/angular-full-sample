@@ -8,16 +8,15 @@ import { createTranslateLoader } from '../../app.translate.factory';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
+import { LanguageSelectorComponent } from './language-selector.component';
 
-import { NavComponent } from './nav.component';
-
-describe('NavComponent', () => {
-  let component: NavComponent;
-  let fixture: ComponentFixture<NavComponent>;
+describe('LanguageSelectorComponent', () => {
+  let component: LanguageSelectorComponent;
+  let fixture: ComponentFixture<LanguageSelectorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NavComponent],
+      declarations: [LanguageSelectorComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         HttpModule,
@@ -39,7 +38,7 @@ describe('NavComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavComponent);
+    fixture = TestBed.createComponent(LanguageSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

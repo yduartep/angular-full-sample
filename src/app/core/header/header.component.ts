@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { LoggerService } from '../services/logger.service';
 
 @Component({
@@ -8,11 +9,29 @@ import { LoggerService } from '../services/logger.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  languages = [{ id: 'en', value: 'English' }, { id: 'es', value: 'Spanish' }];
 
-  constructor(private loggerService: LoggerService) { }
+  constructor(
+    private router: Router,
+    private loggerService: LoggerService,
+    @Inject('AuthService') private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.loggerService.log('... initializing header component from core module.');
   }
 
+  isActive(): boolean {
+    return this.authService.isUserLogged();
+  }
+
+  getUser(): string {
+    return this.authService.getUserLogged();
+  }
+
+  onLogout() {
+    localStorage.removeItem('language');
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

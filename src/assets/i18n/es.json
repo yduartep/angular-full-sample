@@ -1,6 +1,8 @@
 {
+  "HELLO": "Bienvenido a mi aplicacion de Angular!<br><strong>Esta es una app increible que usa lo ultimo en tecnologia!</strong>",
   "home": "Inicio",
-  "heroesList": "Lista de heroes",
+  "heroesList": "Lista de Super heroes",
+  "villainsList": "Lista de Villanos",
   "tourOfHeroes": "Tour de los heroes",
   "language": "Idioma",
   "english": "Inglés",

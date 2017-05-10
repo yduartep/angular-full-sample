@@ -39,7 +39,8 @@ export class InterceptedHttp extends Http {
   }
 
   private canCallHttp(url) {
-    if (url) {
+    // this method just check the http urls
+    if (url && url.startsWith('http')) {
       const userId = CommonUtil.getCookie(this.USER_ID), token = CommonUtil.getCookie(this.TOKEN_ID);
       return (!CommonUtil.isEmpty(userId) && !CommonUtil.isEmpty(token)) || !this.needAuthBefore(url);
     }

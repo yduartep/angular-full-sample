@@ -1,17 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { Routes, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Routes, ActivatedRoute, Router } from '@angular/router';
-
-import { DataTableModule } from 'angular2-datatable';
 import { SharedModule } from '../../shared/shared.module';
-import { MocksUtil } from '../../core/utilities/mocks.util';
-import { HeroService } from '../shared/hero.service';
-import { SpinnerService } from '../../core/spinner/spinner.service';
-import { LoggerService } from '../../core/services/logger.service';
 import { HeroListComponent } from './hero-list.component';
+import { HeroService } from '../shared/hero.service';
+import { OAuthService } from '../../core/services/oauth.service';
+import { ApiConfig } from '../../core/models/api-config';
+import { ApiUrl } from '../../core/models/api-url';
+import { MocksUtil } from '../../core/utilities/mocks.util';
+import { Http, HttpModule } from '@angular/http';
+import { DataTableModule } from 'angular2-datatable';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { createTranslateLoader } from '../../app.translate.factory';
+import { TranslateService } from '@ngx-translate/core';
+import { LoggerService } from '../../core/services/logger.service';
+import { SpinnerService } from '../../core/spinner/spinner.service';
 
 describe('HeroListComponent', () => {
   let component: HeroListComponent;
@@ -24,6 +30,13 @@ describe('HeroListComponent', () => {
       imports: [
         HttpModule,
         SharedModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [Http]
+          }
+        }),
         DataTableModule,
         RouterTestingModule.withRoutes([])
       ],
@@ -31,7 +44,10 @@ describe('HeroListComponent', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'cookie.user.id', useValue: 'backUserId' },
         { provide: 'cookie.token.id', useValue: 'backToken' },
-        SpinnerService, LoggerService, HeroService
+        { provide: 'AuthService', useClass: OAuthService },
+        HeroService,
+        LoggerService,
+        SpinnerService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
