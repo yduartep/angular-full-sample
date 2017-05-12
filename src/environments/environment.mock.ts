@@ -16,7 +16,7 @@ export const environment = {
     apiUrls: [
       { id: 'HEROES_SERVICE_URL', url: 'http://127.0.0.1:3000/api/heroes' },
       { id: 'VILLAINS_SERVICE_URL', url: 'http://127.0.0.1:3000/api/villains' },
-      { id: 'AUTH_SERVICE_URL', url: 'http://127.0.0.1:3000/api/oauth/token' }
+      { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:3000/api/oauth/token' }
     ],
   }
 };

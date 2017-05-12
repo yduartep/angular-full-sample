@@ -13,7 +13,8 @@ import { Menu } from './core/nav/menu';
 export class AppComponent implements OnInit {
   menus: Menu[] = [
     new Menu('Heroes', '/heroes', 'fa-flash'),
-    new Menu('Villains', '/villains', 'fa-user-secret ')
+    new Menu('Villains', '/villains', 'fa-user-secret '),
+    new Menu('About us', '/about', 'fa-users ')
   ];
 
   constructor(

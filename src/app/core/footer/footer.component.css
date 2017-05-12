@@ -1,5 +1,11 @@
-footer {
-  background-color: #8ec9e8;
+:host>div {
+  background: #263238;
+  color: #fff;
   padding-top: 10px;
   margin-top: 10px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
+}
+
+.footer a {
+  color: white;
 }

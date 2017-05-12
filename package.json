@@ -26,7 +26,6 @@
     "start:mocks": "npm-run-all --parallel client:mocks server:mocks"
   },
   "dependencies": {
-    "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
@@ -35,13 +34,14 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-	"@ngx-translate/core": "^6.0.1",
+    "@ngx-translate/core": "^6.0.1",
     "@ngx-translate/http-loader": "0.0.3",
     "angular-in-memory-web-api": "^0.3.2",
     "angular2-datatable": "^0.6.0",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
+    "ngx-bootstrap": "^1.6.6",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },

@@ -15,6 +15,8 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { httpFactory } from './core/http.factory';
 import { COOKIE_IDENTIFIERS } from './cookie.identifiers';
+import { BsDropdownModule } from 'ngx-bootstrap';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   imports: [
@@ -29,11 +31,13 @@ import { COOKIE_IDENTIFIERS } from './cookie.identifiers';
         useFactory: (createTranslateLoader),
         deps: [Http]
       }
-    })
+    }),
+    BsDropdownModule.forRoot()
     // TODO InMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 600 })
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    AboutComponent
   ],
   providers: [
     { provide: 'api.config', useValue: environment.apiConfig },

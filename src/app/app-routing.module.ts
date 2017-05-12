@@ -4,6 +4,7 @@ import { LoginComponent } from './shared/login/login.component';
 import { PageNotFoundComponent } from './shared/not-found/not-found.component';
 import { AuthGuard } from './core/auth.guard';
 import { LoginGuard } from './core/login.guard';
+import { AboutComponent } from './about/about.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/heroes', pathMatch: 'full' },
@@ -21,6 +22,10 @@ const routes: Routes = [
     path: 'villains',
     loadChildren: 'app/villains/villains.module#VillainsModule',
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
   },
   { path: '**', component: PageNotFoundComponent }
 ];

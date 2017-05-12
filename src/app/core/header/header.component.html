@@ -1,12 +1,16 @@
-<div class="row header">
-  <div class="col-sm-10" *ngIf="isActive()">
-    <img src="assets/images/logo.png"><span> Angular demo!!!</span>
-  </div>
-  <div class="col-sm-2" *ngIf="getUser()">
-    <i class="fa fa-user" aria-hidden="true"> {{getUser()}} </i> | <a (click)="onLogout()">Logout</a>
-  </div>
-  <div class="col-sm-2" *ngIf="isActive()">
-    <app-language-selector [languages]="languages"></app-language-selector>
+<div class="row">
+  <span class="helper"></span>
+  <div class="row content full-width">
+    <div class="col-xs-8" *ngIf="isActive()">
+      <img src="assets/images/logo.png"><span> Angular demo!!!</span>
+    </div>
+    <div class="col-xs-2" *ngIf="getUser()">
+      <i class="fa fa-user" aria-hidden="true"></i> {{getUser()}} | 
+      <a (click)="onLogout()">Logout</a>
+    </div>
+    <div class="col-xs-2" *ngIf="isActive()">
+      <app-language-selector [languages]="languages"></app-language-selector>
+    </div>
   </div>
 </div>
 

@@ -1,11 +1,15 @@
-:host div {
-  background-color: #8ec9e8;
+:host>div {
+  background-color: #1976D2;
+  color: whitesmoke;
+  height: 56px;
+  min-height: 56px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
 }
 
-img {
-  height: 3rem;
+a {
+  color: cyan;
 }
 
-.header {
-  height: 40px;
-}
+/*img {
+  height: 100%;
+}*/
