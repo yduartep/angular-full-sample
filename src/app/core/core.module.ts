@@ -44,7 +44,7 @@ import { COOKIE_IDENTIFIERS } from '../cookie.identifiers';
     LoginGuard,
     { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions] },
     { provide: ErrorHandler, useClass: HagueErrorHandler },
-    { provide: 'AuthService', useClass: SkypAuthService }
+    { provide: 'AuthService', useClass: OAuthService }
   ]
 })
 export class CoreModule {

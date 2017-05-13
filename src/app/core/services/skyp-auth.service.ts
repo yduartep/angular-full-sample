@@ -20,11 +20,11 @@ export class SkypAuthService extends BaseAuthService implements AuthService {
   }
 
   getUserLogged(): string {
-    return 'yahima';
+    return null;
   }
 
   getToken(): string {
-    return 'yahima';
+    return null;
   }
 
   login(username: string, password: string) {

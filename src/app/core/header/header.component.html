@@ -2,13 +2,13 @@
   <span class="helper"></span>
   <div class="row content full-width">
     <div class="col-xs-8" *ngIf="isActive()">
-      <img src="assets/images/logo.png"><span> Angular demo!!!</span>
+      <img src="assets/images/logo.png"><span> Sample Full Application!!!</span>
     </div>
     <div class="col-xs-2" *ngIf="getUser()">
       <i class="fa fa-user" aria-hidden="true"></i> {{getUser()}} | 
       <a (click)="onLogout()">Logout</a>
     </div>
-    <div class="col-xs-2" *ngIf="isActive()">
+    <div class="col-xs-2 pull-right" *ngIf="isActive()">
       <app-language-selector [languages]="languages"></app-language-selector>
     </div>
   </div>

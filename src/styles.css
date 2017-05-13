@@ -8,17 +8,6 @@ body, input[text], button { color: #888; font-family: Cambria, Georgia; }
 button { padding: 0.2em; font-size: 14px}
 * { font-family: Arial; }
 
-/*.middle > * {
-  vertical-align: middle;
-}
-
-.top > * {
-  vertical-align: top;
-}
-
-.bottom > * {
-  vertical-align: bottom;
-}*/
 .full-width {
     width: 100%;
 }
@@ -57,13 +46,3 @@ button { padding: 0.2em; font-size: 14px}
   display: inline-block;
   vertical-align: middle;
 }
-
-/*.v-align-top {
-    vertical-align: top;
-}
-.v-align-bottom {
-    vertical-align: bottom;
-}
-.v-align-middle {
-    vertical-align: middle;
-}*/
