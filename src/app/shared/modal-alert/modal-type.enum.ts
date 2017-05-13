@@ -1,3 +1,3 @@
 export enum ModalType {
-	BLOCKING = 1, CONFIRM = 2
+   BLOCKING = 1, CONFIRM = 2
 }

@@ -21,8 +21,8 @@ export class HeroListComponent implements OnInit {
   public isRequesting = false;
   heroIdSelected: number;
   data: Hero[];
-  @ViewChild("confirmDelete") confirmDelete: ModalAlertComponent;
-  @ViewChild("alertResult") alertResult: ModalAlertComponent;
+  @ViewChild('confirmDelete') confirmDelete: ModalAlertComponent;
+  @ViewChild('alertResult') alertResult: ModalAlertComponent;
 
   constructor(
     private loggerService: LoggerService,
@@ -54,13 +54,13 @@ export class HeroListComponent implements OnInit {
     this.confirmDelete.show();
   }
 
-  showError(message){
+  showError(message) {
     this.alertResult.message = message;
     this.alertResult.status = ModalStatus.DANGER;
     this.alertResult.show();
   }
 
-  showSuccess(message){
+  showSuccess(message) {
     this.alertResult.message = message;
     this.alertResult.status = ModalStatus.SUCCESS;
     this.alertResult.show();
@@ -72,9 +72,9 @@ export class HeroListComponent implements OnInit {
         if (res.ok) {
           const index = this.data.findIndex(hero => hero.id === this.heroIdSelected);
           this.data.splice(index, 1);
-          this.heroIdSelected = null;          
+          this.heroIdSelected = null;
           this.showSuccess('The super hero was deleted successfully!!');
-        } else{
+        } else {
           this.showError('Impossible to delete the super hero!!');
         }
       }, err => this.showError('Impossible to delete the super hero!!'));

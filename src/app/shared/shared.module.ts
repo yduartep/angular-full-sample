@@ -37,7 +37,7 @@ import { ModalAlertComponent } from './modal-alert/modal-alert.component';
     RouterModule,
     TranslateModule,
     ModalModule,
-    
+
     LoginComponent,
     PageNotFoundComponent,
     ControlMessagesComponent,

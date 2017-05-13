@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewChild, ElementRef, Input, Output } from "@angular/core";
+import { Component, OnInit, EventEmitter, ViewChild, ElementRef, Input, Output } from '@angular/core';
 import { ModalType } from './modal-type.enum';
 import { ModalStatus } from './modal-status.enum';
 import { ModalDirective } from 'ngx-bootstrap/modal';
@@ -68,7 +68,7 @@ export class ModalAlertComponent implements OnInit {
    * Mehtod that returns the Ok title button translated
    */
   getOkTitle() {
-    //TO be translated
+    // TO be translated
     return 'OK';
   }
 
@@ -76,7 +76,7 @@ export class ModalAlertComponent implements OnInit {
    * Method that returns the cancel title button translated
    */
   getCancelTitle() {
-    //TO be translated
+    // TO be translated
     if (this.type === ModalType.BLOCKING) {
       return 'Close';
     } else {
