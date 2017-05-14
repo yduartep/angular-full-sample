@@ -219,4 +219,17 @@ In the second case, the languages will loaded from the file 'assets/data/languag
 ```
 The icon should be stored in the 'assets/images/flags' folder to be displayed correctly in the component.
 
+#### iv. How to define new language
+1. Add new json file in the folder 'assets/i18n' and copy the content from other json file already defined. Example: `assets/i18n/fr.json`
+2. Translate all the properties of the new file 'fr.json'.
+3. Add new entry in the json file 'assets/data/languages.json':
+   ```
+   {
+        "id": "fr",
+        "title": "French",
+        "icon": "fr-FR.png"
+   }
+   ```
+4. Download and store the flag icon for French in the folder 'assets/images/flags'.
+5. Restart the application
 More Info: https://github.com/ngx-translate/core/blob/master/README.md
