@@ -103,7 +103,11 @@ Notes:
    })
    export class HeroesModule { }
    ```
-5. Add the new route /heroes to the list of menus defined in the file '''/assets/data/menu.data'''
+5. Add the new route /heroes to the list of menus defined in the file /assets/data/menu.data
    ```
    [{ "title": "Heroes", "action": "/heroes", "icon": "fa-flash"}, ... ]
+   ```
+6. Add the new route /heroes to the main routes defined in app-routing.module:
+   ```
+   const routes: Routes = [..., {path: 'heroes', loadChildren: 'app/heroes/heroes.module#HeroesModule', canActivate: [AuthGuard]},...];
    ```
