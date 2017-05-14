@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { Hero } from '../shared/hero';
@@ -24,7 +24,7 @@ export class HeroListComponent implements OnInit {
   @ViewChild('alertResult') alertResult: ModalAlertComponent;
 
   constructor(
-    private loggerService: LoggerService,
+    @Inject('LoggerService') private loggerService: LoggerService,
     private service: HeroService,
     private route: ActivatedRoute,
     private router: Router,

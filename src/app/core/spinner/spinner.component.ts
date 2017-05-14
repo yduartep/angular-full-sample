@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { LoggerService } from '../services/logger.service';
 import { SpinnerState, SpinnerService } from './spinner.service';
@@ -14,7 +14,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     private spinnerStateChanged: Subscription;
 
     constructor(
-        private loggerService: LoggerService,
+        @Inject('LoggerService') private loggerService: LoggerService,
         private spinnerService: SpinnerService
     ) { }
 

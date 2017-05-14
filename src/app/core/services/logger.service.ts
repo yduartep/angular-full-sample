@@ -1,11 +1,16 @@
-import { Injectable } from '@angular/core';
+export interface LoggerService {
+    /**
+     * Log the message
+     */
+    log(msg: string);
 
-@Injectable()
-export class LoggerService {
-  log(msg: string) {
-    console.log(msg);
-  }
-  error(msg: string) {
-    console.error(msg);
-  }
+    /**
+     * Log an error message
+     */
+    error(msg: string);
+
+    /**
+     * Log a warning message
+     */
+    warn(msg: string);
 }

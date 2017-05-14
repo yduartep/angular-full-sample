@@ -16,6 +16,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { createTranslateLoader } from '../../app.translate.factory';
 import { TranslateService } from '@ngx-translate/core';
+
+import { loggerFactory } from '../../core/factories/logger.factory';
 import { LoggerService } from '../../core/services/logger.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
 
@@ -46,7 +48,7 @@ describe('HeroListComponent', () => {
         { provide: 'cookie.token.id', useValue: 'backToken' },
         { provide: 'AuthService', useClass: OAuthService },
         HeroService,
-        LoggerService,
+        { provide: 'LoggerService', useFactory: loggerFactory },
         SpinnerService
       ],
       schemas: [NO_ERRORS_SCHEMA]

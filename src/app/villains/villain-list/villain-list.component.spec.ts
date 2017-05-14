@@ -11,6 +11,7 @@ import { MocksUtil } from '../../core/utilities/mocks.util';
 import { VillainService } from '../shared/villain.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
 import { LoggerService } from '../../core/services/logger.service';
+import { loggerFactory } from '../../core/factories/logger.factory';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { createTranslateLoader } from '../../app.translate.factory';
@@ -42,7 +43,8 @@ describe('VillainListComponent', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'cookie.user.id', useValue: 'backUserId' },
         { provide: 'cookie.token.id', useValue: 'backToken' },
-        SpinnerService, LoggerService, VillainService
+        { provide: 'LoggerService', useFactory: loggerFactory },
+        SpinnerService, VillainService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

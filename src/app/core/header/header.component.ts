@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private loggerService: LoggerService,
+    @Inject('LoggerService') private loggerService: LoggerService,
     @Inject('AuthService') private authService: AuthService
   ) { }
 

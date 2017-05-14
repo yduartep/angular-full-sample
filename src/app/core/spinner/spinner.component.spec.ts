@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SpinnerComponent } from './spinner.component';
 import { SpinnerState, SpinnerService } from './spinner.service';
 import { LoggerService } from '../services/logger.service';
+import { loggerFactory } from '../factories/logger.factory';
 import { Subscription } from 'rxjs/Subscription';
 
 describe('SpinnerComponent', () => {
@@ -12,7 +13,7 @@ describe('SpinnerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SpinnerComponent ],
-      providers: [ SpinnerService, LoggerService ]
+      providers: [ SpinnerService, { provide: 'LoggerService', useFactory: loggerFactory } ]
     })
     .compileComponents();
   }));

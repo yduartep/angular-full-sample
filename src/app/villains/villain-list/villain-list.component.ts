@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { Villain } from '../shared/villain';
@@ -19,7 +19,7 @@ export class VillainListComponent implements OnInit {
   data: Villain[];
 
   constructor(
-    private loggerService: LoggerService,
+    @Inject('LoggerService') private loggerService: LoggerService,
     private service: VillainService,
     private route: ActivatedRoute,
     private router: Router,

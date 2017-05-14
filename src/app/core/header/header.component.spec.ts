@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { OAuthService } from '../services/oauth.service';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
+import { loggerFactory } from '../factories/logger.factory';
 import { LoggerService } from '../services/logger.service';
 import { HeaderComponent } from './header.component';
 import { MocksUtil } from '../../core/utilities/mocks.util';
@@ -36,7 +37,7 @@ describe('HeaderComponent', () => {
         RouterTestingModule.withRoutes([])
       ],
       providers: [
-        LoggerService,
+        { provide: 'LoggerService', useFactory: loggerFactory },
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'cookie.user.id', useValue: 'backUserId' },
         { provide: 'cookie.token.id', useValue: 'backToken' },

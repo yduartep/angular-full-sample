@@ -8,6 +8,7 @@ import { createTranslateLoader } from '../../app.translate.factory';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
+import { loggerFactory } from '../factories/logger.factory';
 import { LoggerService } from '../services/logger.service';
 import { FooterComponent } from './footer.component';
 
@@ -31,7 +32,7 @@ describe('FooterComponent', () => {
         SharedModule,
         RouterTestingModule.withRoutes([])
       ],
-      providers: [ LoggerService ]
+      providers: [ { provide: 'LoggerService', useFactory: loggerFactory } ]
     })
     .compileComponents();
   }));

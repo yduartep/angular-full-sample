@@ -28,6 +28,7 @@ import { LanguageService } from './language-selector/language.service';
 
 //factories
 import { authFactory } from './factories/auth.factory';
+import { loggerFactory } from './factories/logger.factory';
 import { errorHandlerFactory } from './factories/error-handler.factory';
 
 // environment
@@ -41,14 +42,14 @@ import { COOKIE_IDENTIFIERS } from '../cookie.identifiers';
   exports: [HeaderComponent, FooterComponent, NavComponent, SpinnerComponent, LanguageSelectorComponent],
   declarations: [HeaderComponent, FooterComponent, NavComponent, SpinnerComponent, LanguageSelectorComponent],
   providers: [
-    LoggerService,
     SpinnerService,
     MenuService,
     LanguageService,
     AuthGuard,
     LoginGuard,
     { provide: ErrorHandler, useFactory: errorHandlerFactory },
-    { provide: 'AuthService', useFactory: authFactory, deps: [Http] }
+    { provide: 'AuthService', useFactory: authFactory, deps: [Http] },
+    { provide: 'LoggerService', useFactory: loggerFactory }
   ]
 })
 export class CoreModule {

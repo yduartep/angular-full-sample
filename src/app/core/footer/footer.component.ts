@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { LoggerService } from '../services/logger.service';
 
@@ -10,7 +10,7 @@ import { LoggerService } from '../services/logger.service';
 export class FooterComponent implements OnInit {
 
   year: Number;
-  constructor(private loggerService: LoggerService) {
+  constructor(@Inject('LoggerService') private loggerService: LoggerService) {
     this.year = new Date().getFullYear();
   }
 

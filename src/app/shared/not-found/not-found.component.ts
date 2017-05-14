@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { LoggerService } from '../../core/services/logger.service';
 
@@ -11,7 +11,7 @@ export class PageNotFoundComponent implements OnInit {
   title = 'Page not found';
   message = 'Sorry, This page is not available';
 
-  constructor(private loggerService: LoggerService) { }
+  constructor(@Inject('LoggerService') private loggerService: LoggerService) { }
 
   ngOnInit() {
     this.loggerService.log('... initializing page not found component from shared module.');
