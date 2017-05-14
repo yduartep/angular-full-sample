@@ -38,24 +38,8 @@ npm start
 Runs the Angular AoT compiler, rollup, uglify for an optimized bundle, then launches the app
 
 ```
-npm run start-aot
+npm run start:aot
 ```
-
-### AoT + gzip 
-
-Runs AoT plus gzips and launches the app 
-
-```
-gulp copy-aot-gzip
-npm run aot
-npm run rollup
-http-server
-```
-
-Notes:
-- Use your favorite server in place of `http-server`
-- This could be scripted, obviously
-- `lite-server` does not launch gzipped files by default.
 
 # Functionalities
 
