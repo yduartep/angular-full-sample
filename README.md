@@ -151,7 +151,7 @@ More Info: https://angular-2-training-book.rangle.io/handout/modules/lazy-loadin
 
 More Info: http://tattoocoder.com/angular-cli-using-the-environment-option/
 
-### 3. How translate elements in a page
+## 3. How translate elements in a page
 The application use the module ngx-translate for translation. The configuration of the TranslateModule is defined in the app.module.ts and exported from the SharedModule, so always be sure the module who expose the component to be translated import the SharedModule. The json files used during translation are stored in the folder /assets/i18n/ with the code of the specific language of translation (es. es.json, en.json, it.json ...).
    ```
    // app.translate.factory.ts
@@ -184,12 +184,12 @@ The application use the module ngx-translate for translation. The configuration 
    @NgModule({ imports: [SharedModule, ...] })
     export class HeroesModule { }
    ```
-#### i. Language initialization
+### i. Language initialization
 When the app.component is instantiated set the following translation settings:
 - Set the language to be used as a fallback when a translation isn't found in the current language based on the property 'defaultLanguage' defined in the current environment: `translate.setDefaultLang(defaultLanguage);`.
 - Set the language to use, if the lang isn't available. First take the language defined in the localStorage and if no value was defined will use the default language defined before: `translate.use(localStorage['language'] || defaultLanguage);`
 
-#### ii. Word translations
+### ii. Word translations
 Now to translate our words in the HTML view:
 1. Create a pipe that we can use to translate our words: `<h2>{{ 'heroesList' | translate }}</h2>`
 2. Add the translation ID used in our [language].json files:
@@ -202,7 +202,7 @@ Now to translate our words in the HTML view:
    ```
 3. Each time you change the language, that title will change.
 
-#### iii. How to use the language selector
+### iii. How to use the language selector
 In the core module, there is a 'language-selector' component that could be displayed anywhere to select the language for translation. On this sample application, was added in the header component.
 
 The 'language-selector' component could be initialized in two ways:
@@ -219,7 +219,7 @@ In the second case, the languages will loaded from the file 'assets/data/languag
 ```
 The icon should be stored in the 'assets/images/flags' folder to be displayed correctly in the component.
 
-#### iv. How to define new language
+### iv. How to define new language
 1. Add new json file in the folder 'assets/i18n' and copy the content from other json file already defined. Example: `assets/i18n/fr.json`
 2. Translate all the properties of the new file 'fr.json'.
 3. Add new entry in the json file 'assets/data/languages.json':
@@ -235,8 +235,9 @@ The icon should be stored in the 'assets/images/flags' folder to be displayed co
 
 More Info: https://github.com/ngx-translate/core/blob/master/README.md
 
-### 4. How to mock services
+## 4. How to mock services
 1. Go to the prototype folder out of the app and define the list of elements for the new api request (/heroes) in the file 'prototype/apiMocks.js'. You can also use the faker.js module to generate massive amounts of fake data:
+
    ```
    module.exports = function () {
     var faker = require("faker");
@@ -250,3 +251,26 @@ More Info: https://github.com/ngx-translate/core/blob/master/README.md
    { ..., "/oauth/token": "/token", ... }
    ```
 3. Start the mock server using the command: `npm run server:mocks`
+
+More Info:
+https://github.com/typicode/json-server
+https://scotch.io/tutorials/json-server-as-a-fake-rest-api-in-frontend-development
+https://github.com/marak/Faker.js/
+
+## 5. Bootstrap and Font-awsone integration
+The application has already installed the library 'font-awesome' and 'bootstrap', so you can create new responsive components with a pack of pre-defined icons. The application also incorporate the library 'ngx-bootstrap' that contains many modules like accordion, alerts, datepicker, progressbar, etc, that could be imported separately in the case you need it. See how to use it from http://valor-software.com/ngx-bootstrap/#/.
+
+## 6. Dynamic nav bar definition
+The application contains a 'nav' component in the core module that could be initialized in two ways:
+1. With a list of custom menu items: `<app-nav [items]="menuData"></app-nav>`
+2. Without any predefined menu: `<app-nav></app-nav>`
+
+In the second case, the menus will loaded from the file 'assets/data/menu.json'. The format of a menu is:
+```
+{
+    "title": "Heroes",
+    "action": "/heroes",
+    "icon": "fa-flash"
+}
+```
+The icon is a font-awsone icon. See some example from http://fontawesome.io/examples/.
