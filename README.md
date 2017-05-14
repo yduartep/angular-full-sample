@@ -79,6 +79,15 @@ Notes:
 3. Create new routing module in the folder of the module created before: `ng g module heroes-routing`
    - Define the routes and import them into the module as child routes: 
       ```
+      export const heroesRoutes: Routes = <Routes>[{
+        path: '',
+        component: HeroesComponent,
+        children: [
+          { path: '', component: HeroListComponent },
+          { path: 'detail/:id', component: HeroDetailComponent },
+          { path: 'create', component: HeroCreateComponent }
+        ]
+      }];
       @NgModule({
         imports: [RouterModule.forChild(heroesRoutes)],
         exports: [RouterModule]
@@ -93,4 +102,8 @@ Notes:
       declarations: [heroesRoutedComponents]
    })
    export class HeroesModule { }
+   ```
+5. Add the new route /heroes to the list of menus defined in the file '''/assets/data/menu.data'''
+   ```
+   [{ "title": "Heroes", "action": "/heroes", "icon": "fa-flash"}, ... ]
    ```
