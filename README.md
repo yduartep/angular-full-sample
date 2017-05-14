@@ -73,7 +73,7 @@ Notes:
 
 # Functionalities
 
-## How create new lazy module
+## 1. How create new lazy module
 1. Install agular-cli globally: `npm install -g @angular/cli`
 2. Create new module from the root of the app using command: `ng g module heroes`
 3. Create new routing module in the folder of the module created before: `ng g module heroes-routing`
@@ -111,7 +111,9 @@ Notes:
    ```
    const routes: Routes = [..., {path: 'heroes', loadChildren: 'app/heroes/heroes.module#HeroesModule', canActivate: [AuthGuard]},...];
    ```
-## How create new api config environment
+More Info: https://angular-2-training-book.rangle.io/handout/modules/lazy-loading-module.html
+
+## 2. How create new api config environment
 1. Go to the folder environments and create a new file configuration: `environment.qa.ts`
 2. Define the configuration to be used in this new environment:
    ```
@@ -146,3 +148,75 @@ Notes:
    }
    ```
 4. Serve the application using the new environment: `ng serve --environment=qa`
+
+More Info: http://tattoocoder.com/angular-cli-using-the-environment-option/
+
+### 3. How translate elements in a page
+The application use the module ngx-translate for translation. The configuration of the TranslateModule is defined in the app.module.ts and exported from the SharedModule, so always be sure the module who expose the component to be translated import the SharedModule. The json files used during translation are stored in the folder /assets/i18n/ with the code of the specific language of translation (es. es.json, en.json, it.json ...).
+   ```
+   // app.translate.factory.ts
+   export function createTranslateLoader(http: Http) {
+      return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+   }
+   
+   // app.module.ts
+   @NgModule({
+    imports: [..., 
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [Http]
+        }
+      })
+     ], ...
+   })
+   export class AppModule { }
+   
+   // shared/shared.module
+   @NgModule({
+      imports: [..., TranslateModule, ...],
+      exports: [..., TranslateModule, ...]
+   })
+   export class SharedModule { }
+   
+   // heroes/heroes.module
+   @NgModule({ imports: [SharedModule, ...] })
+    export class HeroesModule { }
+   ```
+#### i. Language initialization
+When the app.component is instantiated set the following translation settings:
+- Set the language to be used as a fallback when a translation isn't found in the current language based on the property 'defaultLanguage' defined in the current environment: `translate.setDefaultLang(defaultLanguage);`.
+- Set the language to use, if the lang isn't available. First take the language defined in the localStorage and if no value was defined will use the default language defined before: `translate.use(localStorage['language'] || defaultLanguage);`
+
+#### ii. Word translations
+Now to translate our words in the HTML view:
+1. Create a pipe that we can use to translate our words: `<h2>{{ 'heroesList' | translate }}</h2>`
+2. Add the translation ID used in our [language].json files:
+   ```
+   // assets/i18n/en.json
+   { ..., "heroesList": "List of Super heroes", ...}
+   
+   // assets/i18n/es.json
+   { ..., "heroesList": "Lista de Super heroes", ...}
+   ```
+3. Each time you change the language, that title will change.
+
+#### iii. How to use the language selector
+In the core module, there is a 'language-selector' component that could be displayed anywhere to select the language for translation. On this sample application, was added in the header component.
+
+The 'language-selector' component could be initialized in two ways:
+1. With a list of custom languages: `<app-language-selector [languages]="languages"></app-language-selector>`
+2. Without any predefined language: `<app-language-selector></app-language-selector>`
+
+In the second case, the languages will loaded from the file 'assets/data/languages.json'. The format of a language is:
+```
+{
+    "id": "en",
+    "title": "English",    
+    "icon": "en-EN.png"
+}
+```
+The icon should be stored in the 'assets/images/flags' folder to be displayed correctly in the component.
+
+More Info: https://github.com/ngx-translate/core/blob/master/README.md
