@@ -278,6 +278,10 @@ The icon is a font-awsone icon. See some example from http://fontawesome.io/exam
 ## 7. Http interceptor system
 The application include an 'Http Interceptor' used to capture HTTP errors, authentication and show loading after any HTTP requests. The class is defined as a provider of the shared module (/shared/http.interceptor.ts), in that way, will be imported for each new module automatically. 
 
+More Info:
+https://blog.slinto.sk/angular-2-http-interceptors-7e2d74b7f14e
+https://scotch.io/@kashyapmukkamala/using-http-interceptor-with-angular2
+
 ## 8. Login component configurable with different authentication service
 The application include a login component that could be integrated with any authentication service that implements the interface AuthService present in the core module. The application already includes:
 
@@ -286,14 +290,33 @@ The application include a login component that could be integrated with any auth
 
 ### How to create new Authentication service
 1. Create new class that implement the interface AuthService. The BaseAuthService is an abstract class that contains some util functionalities like adding or removing user and token info from and to the cookie.
+
     ```
     @Injectable()
     export class LDAPService extends BaseAuthService implements AuthService {...}
     ```
  2. Go to the authFactory function defined in the core module in '/core/factories/auth.factory.ts' and replace the instance created using the new class:
+ 
     ```
     export function authFactory(http: Http): AuthService {
-      return new LDAPService(http, ...);
+      return new LDAPService(...);
     }
     ```
  3. Restart the application
+ 
+ ## 9. Custom service validation and control messages
+ The 'Core' module contains an static class 'ValidationService' in '/core/services/validation.service.ts' that include some custom validations that could be used during forms validations (es. creditCardValidator, emailValidator, passwordValidator ...). Angular provide the validators require, minLength, maxLength and pattern but you can assign also your custom validators to any form control.
+ 
+ ```
+ this.f = this.formBuilder.group({
+    'username': ['', Validators.required],
+    'password': ['', [Validators.required, Validator.passwordValidator] ]
+ });
+ ```
+ 
+ In the 'Shared' module there is a 'control-messages' component that could be used to display errors associated to one or many validators over an specific field. If you don't initialize the component with an specific message, a default message would be displayed. Also, if you don't initialize the 'validator' attribute, the component will display all the messages associated to each validator failed. 
+ 
+ ```
+ <app-control-messages [control]="f.controls.password" [message]="'Password is required!'" [validator]="'required'"></app-control-messages>
+ ```
+The component will display the invalid field with a red border and all the validator will be activated when you click on the field and leave it.
