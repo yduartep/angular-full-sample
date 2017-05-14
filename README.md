@@ -12,6 +12,7 @@ Full sample application built with Angular 4 that follows all best practices. Th
 8. Login component configurable with different authentication service implementation.
 9. Custom service validation already available (es. creditCardValidator, emailValidator, passwordValidator ...).
 10. Customizable logger system.
+11. Incorporated automatic handle errors.
 11. TSLint integration for quality.
 12. Unit and Functional test with Jasmine, Karma and Protractor.
 
@@ -70,4 +71,8 @@ Notes:
 - This could be scripted, obviously
 - `lite-server` does not launch gzipped files by default.
 
+# Functionalities
 
+## How create new lazy module
+1. Install agular-cli globally: `npm install -g @angular/cli`
+2. Create new module from the root of the app using command: `ng g module my-module`
