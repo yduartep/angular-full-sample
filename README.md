@@ -111,3 +111,38 @@ Notes:
    ```
    const routes: Routes = [..., {path: 'heroes', loadChildren: 'app/heroes/heroes.module#HeroesModule', canActivate: [AuthGuard]},...];
    ```
+## How create new api config environment
+1. Go to the folder environments and create a new file configuration: `environment.qa.ts`
+2. Define the configuration to be used in this new environment:
+   ```
+   export const environment = {
+      production: false,
+      envName: 'qa',
+      apiConfig: {
+        apiEnv: 'qa',
+        timeExpired: 5,
+        credentials: {
+          clientId: 'userClientId',
+          clientSecret: 'pwdClient'
+        },
+        apiUrls: [
+          { id: 'HEROES_SERVICE_URL', url: 'http://127.0.0.1:3000/api/heroes' },
+          ...
+          { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:3000/api/oauth/token' }
+        ],
+      }
+    };
+   ```
+   Note: If you want to use the OAuth Client during authentication, the ID of the url should be OAUTH_SERVICE_URL.
+3. Edit the file .angular-cli.json, go to the environments property and add the new configuration:
+   ```
+   {
+      "apps": [
+         "environments": {
+            ...,
+            "qa": "environments/environment.qa.ts"
+         }
+      ]
+   }
+   ```
+4. Serve the application using the new environment: `ng serve --environment=qa`
