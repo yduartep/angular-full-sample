@@ -133,7 +133,7 @@ Notes:
       }
     };
    ```
-   Note: If you want to use the OAuth Client during authentication, the ID of the url should be OAUTH_SERVICE_URL.
+   Note: If you want to use the OAuth Client during authentication, the ID of the url should be OAUTH_SERVICE_URL. Also, if your services use the basic authentication, define the property credentials like in the example below.
 3. Edit the file .angular-cli.json, go to the environments property and add the new configuration:
    ```
    {
