@@ -277,3 +277,23 @@ The icon is a font-awsone icon. See some example from http://fontawesome.io/exam
 
 ## 7. Http interceptor system
 The application include an 'Http Interceptor' used to capture HTTP errors, authentication and show loading after any HTTP requests. The class is defined as a provider of the shared module (/shared/http.interceptor.ts), in that way, will be imported for each new module automatically. 
+
+## 8. Login component configurable with different authentication service
+The application include a login component that could be integrated with any authentication service that implements the interface AuthService present in the core module. The application already includes:
+
+- OAuth Service client to be integrated with an OAuth2 server (/core/services/oauth.service.ts).
+- Skyp Service that allow to display the application without to use the login component (/core/services/skyp-auth.service.ts).
+
+### How to create new Authentication service
+1. Create new class that implement the interface AuthService. The BaseAuthService is an abstract class that contains some util functionalities like adding or removing user and token info from and to the cookie.
+    ```
+    @Injectable()
+    export class LDAPService extends BaseAuthService implements AuthService {...}
+    ```
+ 2. Go to the authFactory function defined in the core module in '/core/factories/auth.factory.ts' and replace the instance created using the new class:
+    ```
+    export function authFactory(http: Http): AuthService {
+      return new LDAPService(http, ...);
+    }
+    ```
+ 3. Restart the application
