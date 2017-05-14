@@ -9,13 +9,13 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { ApiConfig } from './core/models/api-config';
 import { OAuthService } from './core/services/oauth.service';
+import { MessageService } from './modal-message/message.service';
 import { MocksUtil } from './core/utilities/mocks.util';
 import { AppComponent } from './app.component';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { createTranslateLoader } from './app.translate.factory';
-// import { TranslateService } from '@ngx-translate/core';
 
 const appTitle = 'Tour of Heroes and Villains';
 export const fake_routes: Routes = [];
@@ -44,7 +44,8 @@ describe('AppComponent', () => {
       providers: [
         { provide: 'AuthService', useClass: OAuthService },
         { provide: 'api.config', useValue: new ApiConfig() },
-        { provide: 'defaultLanguage', useValue: 'en' }
+        { provide: 'defaultLanguage', useValue: 'en' },
+        MessageService
       ]
     }).compileComponents();
   }));

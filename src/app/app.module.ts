@@ -18,9 +18,11 @@ import { AppRoutingModule } from './app-routing.module';
 // components
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
+import { ModalMessageComponent } from './modal-message/modal-message.component';
 
 // services
 import { SpinnerService } from './core/spinner/spinner.service';
+import { MessageService } from './modal-message/message.service';
 
 // factories and configurations
 import { environment } from '../environments/environment';
@@ -45,11 +47,13 @@ import { httpFactory } from './shared/http.factory';
   ],
   declarations: [
     AppComponent,
-    AboutComponent
+    AboutComponent,
+    ModalMessageComponent
   ],
   providers: [
     { provide: 'api.config', useValue: environment.apiConfig },
-    { provide: 'defaultLanguage', useValue: environment.defaultLanguage }
+    { provide: 'defaultLanguage', useValue: environment.defaultLanguage },
+    MessageService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

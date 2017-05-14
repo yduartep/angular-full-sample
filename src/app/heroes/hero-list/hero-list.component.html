@@ -2,12 +2,12 @@
   <div class="col-sm-6">
     <h2>{{ 'heroesList' | translate }}</h2>
   </div>
-  <div class="col-sm-5 align-bottom">
+  <!--<div class="col-sm-5 align-bottom">
       <button class="btn btn-success pull-right" (click)="modalSuccessAlert.show()">Succes Alert</button>
       <button class="btn btn-info pull-right" (click)="modalInfoAlert.show()">Info Alert</button>
       <button class="btn btn-warning pull-right" (click)="modalWarnConfirm.show()">Warning Confirm</button>
       <button class="btn btn-danger pull-right" (click)="modalDangerConfirm.show()">Danger Confirm</button>   
-  </div>
+  </div>-->
   <div class="col-sm-1 align-bottom">
     <button class="btn btn-primary pull-right" routerLink="/heroes/create">{{ 'button-createNew' | translate }}</button>
   </div>
@@ -52,14 +52,3 @@
     </tr>
   </tfoot>
 </table>
-
-<app-modal-alert #confirmDelete [message]="'Are you sure you want to delete this Hero?'" [status]="3" [type]="2" 
-                (onOk)="onOkDelete($event)"></app-modal-alert>
-<app-modal-alert #alertResult [type]="1"></app-modal-alert>
-
-<app-modal-alert #modalSuccessAlert [message]="'This is a success blocking message'" [status]="1" [type]="1"></app-modal-alert>
-<app-modal-alert #modalInfoAlert [message]="'This is an info blocking message'" [status]="2" [type]="1"></app-modal-alert>
-<app-modal-alert #modalWarnConfirm [message]="'This is a warning confirm message'" [status]="3" [type]="2" 
-                (onOk)="onOkConfirm($event)" (onClose)="onCloseConfirm($event)"></app-modal-alert>
-<app-modal-alert #modalDangerConfirm [message]="'This is an error confirm message'" [status]="4" [type]="2" 
-                (onOk)="onOkConfirm($event)" (onClose)="onCloseConfirm($event)"></app-modal-alert>

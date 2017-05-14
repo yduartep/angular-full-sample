@@ -1,13 +1,18 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+
+// models
 import { Hero } from '../shared/hero';
 import { Editorial } from '../shared/editorial.enum';
+import { Message } from '../../modal-message/message';
+import { MessageType } from '../../modal-message/message-type';
+
+// services
 import { HeroService } from '../shared/hero.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
 import { LoggerService } from '../../core/services/logger.service';
-import { ModalAlertComponent } from '../../shared/modal-alert/modal-alert.component';
-import { ModalStatus } from '../../shared/modal-alert/modal-status.enum';
+import { MessageService } from '../../modal-message/message.service';
 
 import 'rxjs/add/operator/map';
 
@@ -20,16 +25,21 @@ export class HeroListComponent implements OnInit {
   public isRequesting = false;
   heroIdSelected: number;
   data: Hero[];
-  @ViewChild('confirmDelete') confirmDelete: ModalAlertComponent;
-  @ViewChild('alertResult') alertResult: ModalAlertComponent;
+  subscription: Subscription;
 
   constructor(
     @Inject('LoggerService') private loggerService: LoggerService,
     private service: HeroService,
     private route: ActivatedRoute,
     private router: Router,
-    private spinnerService: SpinnerService
-  ) { }
+    private spinnerService: SpinnerService,
+    private messageService: MessageService
+  ) {
+    // subscribe to the messages sent from other components
+    this.subscription = this.messageService.getConfirmed().subscribe((isConfirmed: boolean) => {
+      this.onOkDelete(isConfirmed);
+    });
+  }
 
   ngOnInit() {
     this.loggerService.log('... initializing Hero list component.');
@@ -46,19 +56,7 @@ export class HeroListComponent implements OnInit {
 
   delete(id: number) {
     this.heroIdSelected = id;
-    this.confirmDelete.show();
-  }
-
-  showError(message) {
-    this.alertResult.message = message;
-    this.alertResult.status = ModalStatus.DANGER;
-    this.alertResult.show();
-  }
-
-  showSuccess(message) {
-    this.alertResult.message = message;
-    this.alertResult.status = ModalStatus.SUCCESS;
-    this.alertResult.show();
+    this.messageService.showMessage(new Message('Are you sure do you want to delete this Hero?', 'warning', MessageType.CONFIRM));
   }
 
   onOkDelete(value) {
@@ -68,21 +66,13 @@ export class HeroListComponent implements OnInit {
           const index = this.data.findIndex(hero => hero.id === this.heroIdSelected);
           this.data.splice(index, 1);
           this.heroIdSelected = null;
-          this.showSuccess('The super hero was deleted successfully!!');
+          this.messageService.showMessage(new Message('The super hero was deleted successfully!!', 'success'));
         } else {
-          this.showError('Impossible to delete the super hero!!');
+          this.messageService.showMessage(new Message('Impossible to delete the super hero!'));
         }
-      }, err => this.showError('Impossible to delete the super hero!!'));
+      }, err => this.messageService.showMessage(new Message('Impossible to delete the super hero!')));
     } else {
       this.heroIdSelected = null;
     }
-  }
-
-  onOkConfirm(isOk) {
-    console.log('I have clicked on ok buton. Value: ' + isOk);
-  }
-
-  onCloseConfirm() {
-    console.log('I have just closed the modal');
   }
 }

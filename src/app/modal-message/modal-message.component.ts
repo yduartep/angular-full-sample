@@ -1,27 +1,27 @@
 import { Component, OnInit, EventEmitter, ViewChild, ElementRef, Input, Output } from '@angular/core';
-import { ModalType } from './modal-type.enum';
-import { ModalStatus } from './modal-status.enum';
+import { MessageType } from './message-type';
+import { MessageStatus } from './message-status';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-modal-alert',
-  templateUrl: './modal-alert.component.html',
-  styleUrls: ['./modal-alert.component.css']
+  selector: 'app-modal-message',
+  templateUrl: './modal-message.component.html',
+  styleUrls: ['./modal-message.component.css']
 })
-export class ModalAlertComponent implements OnInit {
+export class ModalMessageComponent implements OnInit {
   @Input()
   message: string;
 
   @Input()
-  status: ModalStatus;
+  status: string;
 
   @Input()
-  type: ModalType;
+  type: string;
 
   @Output() onOk: EventEmitter<boolean> = new EventEmitter();
   @Output() onClose: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('modalAlert') modal: ModalDirective;
+  @ViewChild('modalMsg') modal: ModalDirective;
 
   constructor() {
   }
@@ -33,13 +33,13 @@ export class ModalAlertComponent implements OnInit {
    */
   getIcon() {
     switch (this.status) {
-      case ModalStatus.DANGER:
+      case MessageStatus.DANGER:
         return 'fa-times';
-      case ModalStatus.INFO:
+      case MessageStatus.INFO:
         return 'fa-info-circle';
-      case ModalStatus.SUCCESS:
+      case MessageStatus.SUCCESS:
         return 'fa-check ';
-      case ModalStatus.WARNING:
+      case MessageStatus.WARNING:
         return 'fa-exclamation-triangle';
       default:
         return 'fa-times';
@@ -51,13 +51,13 @@ export class ModalAlertComponent implements OnInit {
    */
   getTitle() {
     switch (this.status) {
-      case ModalStatus.DANGER:
+      case MessageStatus.DANGER:
         return 'Error';
-      case ModalStatus.INFO:
+      case MessageStatus.INFO:
         return 'Info';
-      case ModalStatus.SUCCESS:
+      case MessageStatus.SUCCESS:
         return 'Success ';
-      case ModalStatus.WARNING:
+      case MessageStatus.WARNING:
         return 'Warning';
       default:
         return 'Error';
@@ -77,7 +77,7 @@ export class ModalAlertComponent implements OnInit {
    */
   getCancelTitle() {
     // TO be translated
-    if (this.type === ModalType.BLOCKING) {
+    if (this.type === MessageType.BLOCKING) {
       return 'Close';
     } else {
       return 'Cancel';
@@ -96,7 +96,7 @@ export class ModalAlertComponent implements OnInit {
    */
   hide() {
     if (this.modal && this.modal.isShown) {
-      if (this.type === ModalType.CONFIRM) {
+      if (this.type === MessageType.CONFIRM) {
         this.onOk.emit(false);
       }
       this.modal.hide();
