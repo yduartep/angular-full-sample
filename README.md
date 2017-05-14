@@ -321,6 +321,10 @@ The application include a login component that could be integrated with any auth
  ```
 The component will display the invalid field with a red border and all the validator will be activated when you click on the field and leave it.
 
+More Info: 
+https://angular.io/docs/ts/latest/cookbook/form-validation.html
+https://auth0.com/blog/angular2-series-forms-and-custom-validation/
+
 ## 10. Customizable logger system
 The application include a 'Logger' service in the 'Core' module that could be implemented in different ways: Using just the console or using other system like logs into a file. To enable the application to use one or other system you have to change the class to be instanciated in the factory '/core/factories/logger.factory.ts'.
 
@@ -341,3 +345,26 @@ The application include a 'Logger' service in the 'Core' module that could be im
     }
     ```
 3. Restart the server
+
+## 11. Incorporated automatic handle errors
+The 'Core' module contains also a 'Simple Error Handler' that implements the interface 'ErrorHandler' present in the package '@angular/core'. Each http call that fails, automatically will call the method handleError() of the handler. In 'Simple Error Handler' the errors are displayed in different ways depending of the HTTP status code (if is a server, authentication or request errors...).
+
+### How to create a new ErrorHandler:
+1. Create a new class that implement the angular interface 'ErrorHandler'.
+
+    ```
+    import { Injectable, Injector, ErrorHandler } from '@angular/core';
+    @Injectable()
+    export class CustomErrorHandler implements ErrorHandler {...}
+    ```
+    
+2. Go to the factory '/core/factories/error-handler.factory.ts' and change the class to be used during initialization:
+    ```
+    export function errorHandlerFactory(): ErrorHandler {
+        return new CustomErrorHandler(...);
+    }
+    ```
+3. Restart the server
+
+More Info:
+https://netbasal.com/angular-2-custom-exception-handler-1bcbc45c3230
