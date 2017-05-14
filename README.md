@@ -2,13 +2,18 @@
 
 Full sample application built with Angular 4 that follows all best practices. This app contains:
 
-1. Two modules "Heroes" and "Villains" loaded in a lazy way.
-2. Different api configurations loaded depending of the current environment. Could be "dev", "prod" or "mock".
-3. Integration with ng2-translate module.
+1. Application of Lazy Loading Modules.
+2. Api configurations by environments ("dev", "prod" or "mock").
+3. Integration with translation module.
 4. Mock system defined with "json-server" and "faker.js" library.
 5. Bootstrap and Font-awsone integration.
-6. TSLint integration for quality.
-7. Unit and Functional test with Jasmine, Karma and Protractor.
+6. Dynamic nav bar definition.
+7. Http interceptor system.
+8. Login component configurable with different authentication service implementation.
+9. Custom service validation already available (es. creditCardValidator, emailValidator, passwordValidator ...).
+10. Customizable logger system.
+11. TSLint integration for quality.
+12. Unit and Functional test with Jasmine, Karma and Protractor.
 
 ## Core Module
 1. Spinner component to be displayed before to load any resource and hidden at the end.
@@ -28,8 +33,8 @@ Full sample application built with Angular 4 that follows all best practices. Th
 
 ## Get the Code
 ```
-git clone https://github.com/johnpapa/angular-tour-of-heroes.git toh
-cd toh
+git clone https://github.com/yduartep/angular-full-sample.git
+cd angular-full-sample
 npm i
 ```
 
