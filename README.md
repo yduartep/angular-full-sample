@@ -320,3 +320,24 @@ The application include a login component that could be integrated with any auth
  <app-control-messages [control]="f.controls.password" [message]="'Password is required!'" [validator]="'required'"></app-control-messages>
  ```
 The component will display the invalid field with a red border and all the validator will be activated when you click on the field and leave it.
+
+## 10. Customizable logger system
+The application include a 'Logger' service in the 'Core' module that could be implemented in different ways: Using just the console or using other system like logs into a file. To enable the application to use one or other system you have to change the class to be instanciated in the factory '/core/factories/logger.factory.ts'.
+
+### How to create a new Logger system:
+1. Create a new class that implement the interface '/core/services/logger.service'.
+    ```
+    @Injectable()
+    export class FileLoggerService implements LoggerService {
+      log(msg: string) {...}
+      error(msg: string) {...}
+      warn(msg: string) {...}
+    }
+    ```
+2. Go to the factory '/core/factories/logger.factory.ts' and change the class to be used during initialization:
+    ```
+    export function loggerFactory(): LoggerService {
+        return new FileLoggerService(...);
+    }
+    ```
+3. Restart the server
