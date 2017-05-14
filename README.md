@@ -221,6 +221,7 @@ More Info: https://github.com/ngx-translate/core/blob/master/README.md
    { ..., "/oauth/token": "/token", ... }
    ```
 3. Start the mock server using the command: `npm run server:mocks`
+4. Start the application using the 'mock' environment: `npm run client:mocks`
 
 More Info:
 https://github.com/typicode/json-server
