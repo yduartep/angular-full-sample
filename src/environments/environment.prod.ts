@@ -1,3 +1,7 @@
+import { AuthTypes } from '../app/core/factories/auth.type';
+import { ErrorHandlerTypes } from '../app/core/factories/error-handler.type';
+import { LoggerTypes } from '../app/core/factories/logger.type';
+
 export const environment = {
   production: true,
   envName: 'prod',
@@ -14,5 +18,8 @@ export const environment = {
       { id: 'VILLAINS_SERVICE_URL', url: 'app/villains' },
       { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:3000/api/oauth/token' }
     ],
+    authService: AuthTypes.SKYP,
+    errorHandler: ErrorHandlerTypes.SIMPLE,
+    loggerService: LoggerTypes.CONSOLE,
   }
 };

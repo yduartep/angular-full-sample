@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from './core/services/auth.service';
+import { AuthHelper } from './core/services/auth.helper';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,6 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent implements OnInit {
   constructor(
     private router: Router,
-    @Inject('AuthService') private authService: AuthService,
     @Inject('defaultLanguage') private defaultLanguage: string,
     private translate: TranslateService
   ) {
@@ -26,6 +25,6 @@ export class AppComponent implements OnInit {
   }
 
   isActive(): boolean {
-    return this.authService.isUserLogged();
+    return AuthHelper.isUserLogged();
   }
 }

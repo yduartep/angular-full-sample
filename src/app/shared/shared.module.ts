@@ -19,6 +19,9 @@ import { httpFactory } from './http.factory';
 // services
 import { SpinnerService } from '../core/spinner/spinner.service';
 
+// environments
+import { environment } from '../../environments/environment';
+
 @NgModule({
   imports: [
     CommonModule,

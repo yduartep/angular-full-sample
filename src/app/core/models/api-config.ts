@@ -6,4 +6,7 @@ export class ApiConfig {
   apiUrls: ApiUrl[] = [];
   timeExpired: number;
   credentials: Credentials;
+  authService: string;
+  errorHandler: string;
+  loggerService: string;
 }

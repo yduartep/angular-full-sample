@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { loggerFactory } from '../factories/logger.factory';
 import { LoggerService } from '../services/logger.service';
+import { SpinnerService } from '../spinner/spinner.service';
 import { HeaderComponent } from './header.component';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 
@@ -39,9 +40,10 @@ describe('HeaderComponent', () => {
       providers: [
         { provide: 'LoggerService', useFactory: loggerFactory },
         { provide: 'api.config', useValue: apiConfig },
-        { provide: 'cookie.user.id', useValue: 'backUserId' },
-        { provide: 'cookie.token.id', useValue: 'backToken' },
-        { provide: 'AuthService', useClass: OAuthService }]
+        { provide: 'AuthService', useClass: OAuthService },
+        { provide: 'defaultLanguage', useValue: 'en' },
+        SpinnerService
+      ]
     })
       .compileComponents();
   }));

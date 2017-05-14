@@ -3,7 +3,7 @@ import { LoggerService } from './logger.service';
 
 @Injectable()
 export class ConsoleLoggerService implements LoggerService {
-  
+
   log(msg: string) {
     console.log(msg);
   }

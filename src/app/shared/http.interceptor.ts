@@ -10,6 +10,7 @@ import {
 import { Observable } from 'rxjs/Rx';
 import { CommonUtil } from '../core/utilities/common.util';
 import { AuthService } from '../core/services/auth.service';
+import { AuthHelper } from '../core/services/auth.helper';
 import { SpinnerService } from '../core/spinner/spinner.service';
 import { COOKIE_IDENTIFIERS } from '../cookie.identifiers';
 
@@ -28,12 +29,12 @@ export class InterceptedHttp extends Http {
   }
 
   get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    if (this.isValidHttp(url)) {
+    if (this.isHttpService(url)) {
       if (this.canCallHttp(url)) {
         this.requestInterceptor(url);
         return super.get(url, this.getRequestOptionArgs(options)).finally(() => this.onFinally());
       } else {
-        return this.getAuthError()
+        return this.getAuthError();
       }
     } else {
       // if is other kind of resource
@@ -42,12 +43,12 @@ export class InterceptedHttp extends Http {
   }
 
   post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-    if (this.isValidHttp(url)) {
+    if (this.isHttpService(url)) {
       if (this.canCallHttp(url)) {
         this.requestInterceptor(url);
         return super.post(url, body, this.getRequestOptionArgs(options)).finally(() => this.onFinally());
       } else {
-        return this.getAuthError()
+        return this.getAuthError();
       }
     } else {
       // if is other kind of resource
@@ -56,12 +57,12 @@ export class InterceptedHttp extends Http {
   }
 
   put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-    if (this.isValidHttp(url)) {
+    if (this.isHttpService(url)) {
       if (this.canCallHttp(url)) {
         this.requestInterceptor(url);
         return super.put(url, body, this.getRequestOptionArgs(options)).finally(() => this.onFinally());
       } else {
-        return this.getAuthError()
+        return this.getAuthError();
       }
     } else {
       // if is other kind of resource
@@ -70,12 +71,12 @@ export class InterceptedHttp extends Http {
   }
 
   delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    if (this.isValidHttp(url)) {
+    if (this.isHttpService(url)) {
       if (this.canCallHttp(url)) {
         this.requestInterceptor(url);
         return super.delete(url, this.getRequestOptionArgs(options)).finally(() => this.onFinally());
       } else {
-        return this.getAuthError()
+        return this.getAuthError();
       }
     } else {
       // if is other kind of resource
@@ -85,7 +86,7 @@ export class InterceptedHttp extends Http {
   /**
    * Determine if the url is a valid http service
    */
-  private isValidHttp(url) {
+  private isHttpService(url) {
     return url && url.startsWith('http');
   }
 
@@ -93,8 +94,7 @@ export class InterceptedHttp extends Http {
    * Returns true If the url doesn't require previous authentication or require it bu the user is already logged in
    */
   private canCallHttp(url) {
-    const userId = CommonUtil.getCookie(COOKIE_IDENTIFIERS.USER_ID), token = CommonUtil.getCookie(COOKIE_IDENTIFIERS.TOKEN_ID);
-    return (!CommonUtil.isEmpty(userId) && !CommonUtil.isEmpty(token)) || !this.needAuthBefore(url);
+    return AuthHelper.isUserLogged || !this.needAuthBefore(url);
   }
 
   private needAuthBefore(url: string) {

@@ -12,6 +12,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 import { VillainDetailComponent } from './villain-detail.component';
 import { VillainService } from '../shared/villain.service';
+import { SpinnerService } from '../../core/spinner/spinner.service';
 
 export const fake_routes: Routes = [{ path: 'detail/:id', component: VillainDetailComponent }];
 
@@ -37,9 +38,9 @@ describe('VillainDetailComponent', () => {
       declarations: [VillainDetailComponent],
       providers: [
         { provide: 'api.config', useValue: apiConfig },
-        { provide: 'cookie.user.id', useValue: 'backUserId' },
-        { provide: 'cookie.token.id', useValue: 'backToken' },
-        VillainService
+        { provide: 'defaultLanguage', useValue: 'en' },
+        VillainService,
+        SpinnerService
       ],
       schemas: [NO_ERRORS_SCHEMA]
 

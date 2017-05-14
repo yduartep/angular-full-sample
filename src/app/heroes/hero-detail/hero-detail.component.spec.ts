@@ -12,6 +12,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from '../shared/hero.service';
+import { SpinnerService } from '../../core/spinner/spinner.service';
 
 export const fake_routes: Routes = [{ path: 'detail/:id', component: HeroDetailComponent }];
 
@@ -38,9 +39,9 @@ describe('heroDetailComponent', () => {
       declarations: [HeroDetailComponent],
       providers: [
         { provide: 'api.config', useValue: apiConfig },
-        { provide: 'cookie.user.id', useValue: 'backUserId' },
-        { provide: 'cookie.token.id', useValue: 'backToken' },
-        HeroService
+        { provide: 'defaultLanguage', useValue: 'en' },
+        HeroService,
+        SpinnerService
       ]
 
     })

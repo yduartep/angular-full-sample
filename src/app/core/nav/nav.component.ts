@@ -13,11 +13,11 @@ export class NavComponent implements OnInit {
   items: Menu[];
 
   constructor(private menuService: MenuService) { }
-  
+
   ngOnInit() {
-    if (!this.items || this.items.length == 0) {
+    if (!this.items || this.items.length === 0) {
       this.menuService.getData().subscribe(data => {
-        this.items = data
+        this.items = data;
       });
     }
   }

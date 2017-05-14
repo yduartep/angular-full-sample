@@ -5,27 +5,12 @@ import 'rxjs/add/operator/map';
 
 import { ApiConfig } from '../models/api-config';
 import { CommonUtil } from '../utilities/common.util';
-import { BaseAuthService } from './base-auth.service';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class SkypAuthService extends BaseAuthService implements AuthService {
+export class SkypAuthService  implements AuthService {
 
-  constructor() {
-      super(null, null);
-  }
-
-  isUserLogged(): boolean {
-    return true;
-  }
-
-  getUserLogged(): string {
-    return null;
-  }
-
-  getToken(): string {
-    return null;
-  }
+  constructor() {}
 
   login(username: string, password: string) {
     // DO nothing

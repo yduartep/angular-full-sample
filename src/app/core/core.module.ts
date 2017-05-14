@@ -1,5 +1,5 @@
 import { NgModule, Optional, SkipSelf, ErrorHandler } from '@angular/core';
-import { Http  } from '@angular/http';
+import { Http } from '@angular/http';
 
 // modules
 import { AppRoutingModule } from '../app-routing.module';
@@ -19,6 +19,7 @@ import { LanguageSelectorComponent } from './language-selector/language-selector
 
 // services
 import { AuthService } from './services/auth.service';
+import { AuthHelper } from './services/auth.helper';
 import { OAuthService } from './services/oauth.service';
 import { SkypAuthService } from './services/skyp-auth.service';
 import { LoggerService } from './services/logger.service';
@@ -26,7 +27,7 @@ import { SpinnerService } from './spinner/spinner.service';
 import { MenuService } from './nav/menu.service';
 import { LanguageService } from './language-selector/language.service';
 
-//factories
+// factories
 import { authFactory } from './factories/auth.factory';
 import { loggerFactory } from './factories/logger.factory';
 import { errorHandlerFactory } from './factories/error-handler.factory';

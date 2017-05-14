@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { loggerFactory } from '../factories/logger.factory';
 import { LoggerService } from '../services/logger.service';
+import { SpinnerService } from '../spinner/spinner.service';
 import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {
@@ -32,7 +33,7 @@ describe('FooterComponent', () => {
         SharedModule,
         RouterTestingModule.withRoutes([])
       ],
-      providers: [ { provide: 'LoggerService', useFactory: loggerFactory } ]
+      providers: [ { provide: 'LoggerService', useFactory: loggerFactory }, SpinnerService ]
     })
     .compileComponents();
   }));

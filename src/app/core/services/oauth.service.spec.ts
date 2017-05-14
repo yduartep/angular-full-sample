@@ -6,6 +6,8 @@ import { ApiConfig } from '../models/api-config';
 import { MocksUtil } from '../utilities/mocks.util';
 import { OAuthService } from '../services/oauth.service';
 import { AuthService } from '../services/auth.service';
+import { AuthHelper } from '../services/auth.helper';
+import { authFactory } from '../factories/auth.factory';
 
 describe('OAuthService', () => {
   let mockBackend: MockBackend;
@@ -17,8 +19,7 @@ describe('OAuthService', () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: 'api.config', useValue: apiConfig },
-        { provide: 'cookie.user.id', useValue: 'userId' },
-        { provide: 'cookie.token.id', useValue: 'token' },
+        { provide: 'defaultLanguage', useValue: 'en' },
         MockBackend,
         BaseRequestOptions,
         {
@@ -28,6 +29,7 @@ describe('OAuthService', () => {
             return new Http(backend, defaultOptions);
           }
         },
+        { provide: 'AuthService', useFactory: authFactory, deps: [Http] },
         OAuthService
       ],
       imports: [HttpModule]
@@ -36,12 +38,12 @@ describe('OAuthService', () => {
   });
 
   it('should create an instance of the service',
-    inject([OAuthService], (service: OAuthService) => {
+    inject([OAuthService], (service: AuthService) => {
       expect(service).toBeTruthy();
     }));
 
   it('should get oauth token', async(
-    inject([OAuthService], (service: OAuthService) => {
+    inject([OAuthService], (service: AuthService) => {
       const username = 'fakeUserId', password = 'fakePassword';
 
       mockBackend.connections.subscribe((connection: MockConnection) => {
@@ -63,15 +65,18 @@ describe('OAuthService', () => {
         expect(userData.refresh_token).toEqual(mockResponse.refresh_token);
         expect(userData.scope).toEqual(mockResponse.scope);
 
-        expect(service.getUserLogged()).toEqual(username);
-        expect(service.getToken()).toEqual(mockResponse.access_token);
+        expect(AuthHelper.getUserLogged()).toEqual(username);
+        expect(AuthHelper.getToken()).toEqual(mockResponse.access_token);
       });
     })));
 
-  it('should logout from the application', async(inject([OAuthService], (service: OAuthService) => {
-    service.logout();
+  it('should logout from the application', async(
+    inject([OAuthService], (service: AuthService) => {
+      AuthHelper.addTokenInfo('aaabbbccc', 5);
+      AuthHelper.addUserInfo('testUser', 5);
+      service.logout();
 
-    expect(service.getUserLogged()).toEqual('');
-    expect(service.getToken()).toEqual('');
-  })));
+      expect(AuthHelper.getUserLogged()).toEqual('');
+      expect(AuthHelper.getToken()).toEqual('');
+    })));
 });

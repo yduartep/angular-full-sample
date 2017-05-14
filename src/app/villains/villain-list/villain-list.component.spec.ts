@@ -41,8 +41,7 @@ describe('VillainListComponent', () => {
       ],
       providers: [
         { provide: 'api.config', useValue: apiConfig },
-        { provide: 'cookie.user.id', useValue: 'backUserId' },
-        { provide: 'cookie.token.id', useValue: 'backToken' },
+        { provide: 'defaultLanguage', useValue: 'en' },
         { provide: 'LoggerService', useFactory: loggerFactory },
         SpinnerService, VillainService
       ],

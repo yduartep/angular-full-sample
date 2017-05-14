@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { AuthHelper } from '../services/auth.helper';
 import { LoggerService } from '../services/logger.service';
 
 @Component({
@@ -21,11 +22,11 @@ export class HeaderComponent implements OnInit {
   }
 
   isActive(): boolean {
-    return this.authService.isUserLogged();
+    return AuthHelper.isUserLogged();
   }
 
   getUser(): string {
-    return this.authService.getUserLogged();
+    return AuthHelper.getUserLogged();
   }
 
   onLogout() {

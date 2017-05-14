@@ -5,16 +5,16 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthHelper } from '../services/auth.helper';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, @Inject('AuthService') private authService: AuthService) { }
+  constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     console.log('... check if can active menu');
-    if (this.authService.isUserLogged()) {
+    if (AuthHelper.isUserLogged()) {
       // logged in so return true
       console.log('... the user is logged so you can activate the menu');
       return true;

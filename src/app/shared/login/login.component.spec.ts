@@ -7,7 +7,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { CoreModule } from '../../core/core.module';
 import { OAuthService } from '../../core/services/oauth.service';
-import { httpFactory } from '../../core/http.factory';
+import { httpFactory } from '../http.factory';
 import { LoginComponent } from './login.component';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 
@@ -28,8 +28,7 @@ describe('LoginComponent', () => {
       ],
       providers: [
         { provide: 'api.config', apiConfig },
-        { provide: 'cookie.user.id', useValue: 'userId' },
-        { provide: 'cookie.token.id', useValue: 'token' },
+        { provide: 'defaultLanguage', useValue: 'en' },
         { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions] }
       ]
     })

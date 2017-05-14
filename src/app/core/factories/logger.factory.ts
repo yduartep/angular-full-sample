@@ -4,6 +4,15 @@ import { Http } from '@angular/http';
 import { LoggerService } from '../services/logger.service';
 import { ConsoleLoggerService } from '../services/console-logger.service';
 
+// configurations
+import { LoggerTypes } from './logger.type';
+import { environment } from '../../../environments/environment';
+
 export function loggerFactory(): LoggerService {
-    return new ConsoleLoggerService();
+    switch (environment.apiConfig.loggerService) {
+        case LoggerTypes.CONSOLE:
+            return new ConsoleLoggerService();
+        default:
+            return new ConsoleLoggerService();
+    }
 }

@@ -18,9 +18,9 @@ export class LanguageSelectorComponent implements OnInit {
     private translate: TranslateService) { }
 
   ngOnInit() {
-    if (!this.languages || this.languages.length == 0) {
+    if (!this.languages || this.languages.length === 0) {
       this.languageService.getData().subscribe(data => {
-        this.languages = data
+        this.languages = data;
       });
     }
   }

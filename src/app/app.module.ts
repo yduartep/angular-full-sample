@@ -49,8 +49,6 @@ import { httpFactory } from './shared/http.factory';
   ],
   providers: [
     { provide: 'api.config', useValue: environment.apiConfig },
-    { provide: 'cookie.user.id', useValue: COOKIE_IDENTIFIERS.USER_ID },
-    { provide: 'cookie.token.id', useValue: COOKIE_IDENTIFIERS.TOKEN_ID },
     { provide: 'defaultLanguage', useValue: environment.defaultLanguage }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

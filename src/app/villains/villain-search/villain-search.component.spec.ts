@@ -12,6 +12,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 import { VillainSearchComponent } from './villain-search.component';
 import { VillainService } from '../shared/villain.service';
+import { SpinnerService } from '../../core/spinner/spinner.service';
 
 describe('VillainSearchComponent', () => {
   let component: VillainSearchComponent;
@@ -35,9 +36,9 @@ describe('VillainSearchComponent', () => {
       declarations: [VillainSearchComponent],
       providers: [
         { provide: 'api.config', useValue: apiConfig },
-        { provide: 'cookie.user.id', useValue: 'backUserId' },
-        { provide: 'cookie.token.id', useValue: 'backToken' },
-        VillainService
+        { provide: 'defaultLanguage', useValue: 'en' },
+        VillainService,
+        SpinnerService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

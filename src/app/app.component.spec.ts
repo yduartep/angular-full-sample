@@ -44,9 +44,7 @@ describe('AppComponent', () => {
       providers: [
         { provide: 'AuthService', useClass: OAuthService },
         { provide: 'api.config', useValue: new ApiConfig() },
-        { provide: 'cookie.user.id', useValue: 'userId' },
-        { provide: 'cookie.token.id', useValue: 'token' }/*,
-        TranslateService*/
+        { provide: 'defaultLanguage', useValue: 'en' }
       ]
     }).compileComponents();
   }));

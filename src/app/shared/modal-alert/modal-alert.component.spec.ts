@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ModalModule } from 'ngx-bootstrap';
+import { SharedModule } from '../shared.module';
 import { ModalAlertComponent } from './modal-alert.component';
 
 describe('ModalAlertComponent', () => {
@@ -8,9 +9,10 @@ describe('ModalAlertComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalAlertComponent ]
+      imports: [ModalModule.forRoot()],
+      declarations: [ModalAlertComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,7 +8,8 @@ import { createTranslateLoader } from '../../app.translate.factory';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
-
+import { MenuService } from './menu.service';
+import { SpinnerService } from '../spinner/spinner.service';
 import { NavComponent } from './nav.component';
 
 describe('NavComponent', () => {
@@ -32,7 +33,9 @@ describe('NavComponent', () => {
         RouterTestingModule.withRoutes([])
       ],
       providers: [
-        TranslateService
+        TranslateService,
+        MenuService,
+        SpinnerService
       ]
     })
       .compileComponents();

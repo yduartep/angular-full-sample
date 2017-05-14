@@ -9,6 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { LanguageSelectorComponent } from './language-selector.component';
+import { LanguageService } from './language.service';
+import { SpinnerService } from '../spinner/spinner.service';
 
 describe('LanguageSelectorComponent', () => {
   let component: LanguageSelectorComponent;
@@ -31,7 +33,9 @@ describe('LanguageSelectorComponent', () => {
         RouterTestingModule.withRoutes([])
       ],
       providers: [
-        TranslateService
+        TranslateService,
+        LanguageService,
+        SpinnerService
       ]
     })
       .compileComponents();

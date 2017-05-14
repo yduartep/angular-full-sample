@@ -44,9 +44,8 @@ describe('HeroListComponent', () => {
       ],
       providers: [
         { provide: 'api.config', useValue: apiConfig },
-        { provide: 'cookie.user.id', useValue: 'backUserId' },
-        { provide: 'cookie.token.id', useValue: 'backToken' },
         { provide: 'AuthService', useClass: OAuthService },
+        { provide: 'defaultLanguage', useValue: 'en' },
         HeroService,
         { provide: 'LoggerService', useFactory: loggerFactory },
         SpinnerService

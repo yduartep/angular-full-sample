@@ -2,38 +2,22 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, URLSearchParams, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { ApiConfig } from '../models/api-config';
-import { CommonUtil } from '../utilities/common.util';
-import { BaseAuthService } from './base-auth.service';
 import 'rxjs/add/operator/map';
+
+import { CommonUtil } from '../utilities/common.util';
 import { AuthService } from './auth.service';
+import { AuthHelper } from './auth.helper';
 
 @Injectable()
-export class OAuthService extends BaseAuthService implements AuthService {
+export class OAuthService implements AuthService {
 
   constructor(
     private http: Http,
-    @Inject('api.config') private apiConfig: ApiConfig,
-    @Inject('cookie.user.id') protected cookieUserId: string,
-    @Inject('cookie.token.id') protected cookieTokenId: string) {
-      super(cookieUserId, cookieTokenId);
-  }
+    @Inject('api.config') private apiConfig: ApiConfig
+  ) { }
 
   getServiceUrl(): string {
     return CommonUtil.getApiUrl('OAUTH_SERVICE_URL', this.apiConfig);
-  }
-
-  isUserLogged(): boolean {
-    const userId = this.getUserLogged();
-    const token = this.getToken();
-    return (!CommonUtil.isEmpty(userId) && !CommonUtil.isEmpty(token));
-  }
-
-  getUserLogged(): string {
-    return CommonUtil.getCookie(this.cookieUserId);
-  }
-
-  getToken(): string {
-    return CommonUtil.getCookie(this.cookieTokenId);
   }
 
   login(username: string, password: string) {
@@ -55,8 +39,8 @@ export class OAuthService extends BaseAuthService implements AuthService {
 
       // login successful if there's a jwt token in the response
       if (userData.access_token) {
-        this.addUserInfo(username, expiresIn);
-        this.addTokenInfo(userData.access_token, expiresIn);
+        AuthHelper.addUserInfo(username, expiresIn);
+        AuthHelper.addTokenInfo(userData.access_token, expiresIn);
       }
 
       return userData;
@@ -65,7 +49,7 @@ export class OAuthService extends BaseAuthService implements AuthService {
 
   logout() {
     // remove user session info
-    this.removeUserInfo();
-    this.removeTokenInfo();
+    AuthHelper.removeUserInfo();
+    AuthHelper.removeTokenInfo();
   }
 }

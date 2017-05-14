@@ -15,8 +15,7 @@ describe('HerosService', () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: 'api.config', useValue: apiConfig },
-        { provide: 'cookie.user.id', useValue: 'backUserId' },
-        { provide: 'cookie.token.id', useValue: 'backToken' },
+        { provide: 'defaultLanguage', useValue: 'en' },
         MockBackend,
         BaseRequestOptions,
         {
