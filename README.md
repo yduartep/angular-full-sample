@@ -75,4 +75,18 @@ Notes:
 
 ## How create new lazy module
 1. Install agular-cli globally: `npm install -g @angular/cli`
-2. Create new module from the root of the app using command: `ng g module my-module`
+2. Create new module from the root of the app using command: `ng g module heroes`
+3. Create new routing module in the folder of the module created before: `ng g module heroes-routing`
+   - Define the routes and import them into the module as child routes: 
+      `@NgModule({
+        imports: [RouterModule.forChild(heroesRoutes)],
+        exports: [RouterModule]
+      })`
+   - Export the module `export class HeroesRoutingModule {}`
+   - Export the list of components used `export const heroesRoutedComponents = [ MyComponent, ...];`.
+4. Import the routing module and the routed components in the first module created:
+   `@NgModule({
+      imports: [HeroesRoutingModule, ...],
+      declarations: [heroesRoutedComponents]
+    })
+    export class HeroesModule { }`
