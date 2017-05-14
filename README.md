@@ -260,7 +260,7 @@ https://github.com/marak/Faker.js/
 ## 5. Bootstrap and Font-awsone integration
 The application has already installed the library 'font-awesome' and 'bootstrap', so you can create new responsive components with a pack of pre-defined icons. The application also incorporate the library 'ngx-bootstrap' that contains many modules like accordion, alerts, datepicker, progressbar, etc, that could be imported separately in the case you need it. See how to use it from http://valor-software.com/ngx-bootstrap/#/.
 
-## 6. Dynamic nav bar definition
+## 6. Dynamic nav bar
 The application contains a 'nav' component in the core module that could be initialized in two ways:
 1. With a list of custom menu items: `<app-nav [items]="menuData"></app-nav>`
 2. Without any predefined menu: `<app-nav></app-nav>`
@@ -274,3 +274,6 @@ In the second case, the menus will loaded from the file 'assets/data/menu.json'.
 }
 ```
 The icon is a font-awsone icon. See some example from http://fontawesome.io/examples/.
+
+## 7. Http interceptor system
+The application include an 'Http Interceptor' used to capture HTTP errors, authentication and show loading after any HTTP requests. The class is defined as a provider of the shared module (/shared/http.interceptor.ts), in that way, will be imported for each new module automatically. 
