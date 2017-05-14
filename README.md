@@ -106,6 +106,7 @@ More Info: https://angular-2-training-book.rangle.io/handout/modules/lazy-loadin
     };
    ```
    Note: If you want to use the OAuth Client during authentication, the ID of the url should be OAUTH_SERVICE_URL. Also, if your services use the basic authentication, define the property credentials like in the example below.
+   
 3. Edit the file .angular-cli.json, go to the environments property and add the new configuration:
    ```
    {
@@ -224,9 +225,9 @@ More Info: https://github.com/ngx-translate/core/blob/master/README.md
 4. Start the application using the 'mock' environment: `npm run client:mocks`
 
 More Info:
-https://github.com/typicode/json-server
-https://scotch.io/tutorials/json-server-as-a-fake-rest-api-in-frontend-development
-https://github.com/marak/Faker.js/
+- https://github.com/typicode/json-server
+- https://scotch.io/tutorials/json-server-as-a-fake-rest-api-in-frontend-development
+- https://github.com/marak/Faker.js/
 
 ## 5. Bootstrap and Font-awsone integration
 The application has already installed the library 'font-awesome' and 'bootstrap', so you can create new responsive components with a pack of pre-defined icons. The application also incorporate the library 'ngx-bootstrap' that contains many modules like accordion, alerts, datepicker, progressbar, etc, that could be imported separately in the case you need it. See how to use it from http://valor-software.com/ngx-bootstrap/#/.
@@ -250,8 +251,8 @@ The icon is a font-awsone icon. See some example from http://fontawesome.io/exam
 The application include an 'Http Interceptor' used to capture HTTP errors, authentication and show loading after any HTTP requests. The class is defined as a provider of the shared module (/shared/http.interceptor.ts), in that way, will be imported for each new module automatically. 
 
 More Info:
-https://blog.slinto.sk/angular-2-http-interceptors-7e2d74b7f14e
-https://scotch.io/@kashyapmukkamala/using-http-interceptor-with-angular2
+- https://blog.slinto.sk/angular-2-http-interceptors-7e2d74b7f14e
+- https://scotch.io/@kashyapmukkamala/using-http-interceptor-with-angular2
 
 ## 8. Login component configurable with different authentication service
 The application include a login component that could be integrated with any authentication service that implements the interface AuthService present in the core module. The application already includes:
@@ -283,8 +284,8 @@ The application have implemented multiple guards (auth, login, module-import) to
 - module-import.guard: This is another kind of guard that check the 'Core' module is imported just one time in all the application otherwise will rise an error.
 
 More Info:
-https://angular.io/docs/ts/latest/guide/router.html#!#guards
-https://blog.thoughtram.io/angular/2016/07/18/guards-in-angular-2.html
+- https://angular.io/docs/ts/latest/guide/router.html#!#guards
+- https://blog.thoughtram.io/angular/2016/07/18/guards-in-angular-2.html
  
  ## 10. Custom service validation and control messages
  The 'Core' module contains an static class 'ValidationService' in '/core/services/validation.service.ts' that include some custom validations that could be used during forms validations (es. creditCardValidator, emailValidator, passwordValidator ...). Angular provide the validators require, minLength, maxLength and pattern but you can assign also your custom validators to any form control.
@@ -304,8 +305,8 @@ https://blog.thoughtram.io/angular/2016/07/18/guards-in-angular-2.html
 The component will display the invalid field with a red border and all the validator will be activated when you click on the field and leave it.
 
 More Info: 
-https://angular.io/docs/ts/latest/cookbook/form-validation.html
-https://auth0.com/blog/angular2-series-forms-and-custom-validation/
+- https://angular.io/docs/ts/latest/cookbook/form-validation.html
+- https://auth0.com/blog/angular2-series-forms-and-custom-validation/
 
 ## 11. Customizable logger system
 The application include a 'Logger' service in the 'Core' module that could be implemented in different ways: Using just the console or using other system like logs into a file. To enable the application to use one or other system you have to change the class to be instanciated in the factory '/core/factories/logger.factory.ts'.
@@ -348,8 +349,7 @@ The 'Core' module contains also a 'Simple Error Handler' that implements the int
     ```
 3. Restart the server
 
-More Info:
-https://netbasal.com/angular-2-custom-exception-handler-1bcbc45c3230
+More Info: https://netbasal.com/angular-2-custom-exception-handler-1bcbc45c3230
 
 ## 13. Not found component
 The application include a 'Not-Found' component inside the 'Shared' module that will be displayed in the case the user type an invalid route in the browser.
@@ -361,8 +361,7 @@ To check if the application have quality errors execute the following command:
 npm run lint
 ```
 
-More Info:
-http://blog.rangle.io/understanding-the-real-advantages-of-using-eslint/
+More Info: http://blog.rangle.io/understanding-the-real-advantages-of-using-eslint/
 
 ## 15. Unit and Functional test
 The project have some predefined unit tests defined in the files '.spec' related of each service and component and the functional test should be implemented in the 'e2e' folder outside of the app.
@@ -378,5 +377,5 @@ npm run e2e
 ```
 
 More Info:
-https://angular.io/docs/ts/latest/guide/testing.html
-https://blog.jscrambler.com/getting-started-with-angular-2-end-to-end-testing/
+- https://angular.io/docs/ts/latest/guide/testing.html
+- https://blog.jscrambler.com/getting-started-with-angular-2-end-to-end-testing/
