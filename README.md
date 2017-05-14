@@ -10,27 +10,13 @@ Full sample application built with Angular 4 that follows all best practices. Th
 6. Dynamic nav bar definition.
 7. Http interceptor system.
 8. Login component configurable with different authentication service implementation.
-9. Custom service validation already available (es. creditCardValidator, emailValidator, passwordValidator ...).
-10. Customizable logger system.
-11. Incorporated automatic handle errors.
-11. TSLint integration for quality.
-12. Unit and Functional test with Jasmine, Karma and Protractor.
-
-## Core Module
-1. Spinner component to be displayed before to load any resource and hidden at the end.
-2. Base "Header" and "Footer" component to be overriden.
-3. Include a nav customizable bar with language selector that allow the creation of multi-language apps.
-4. Automatic handle errors to display different messages and formats depending of the error type.
-5. Http Interceptor system to configure extra things on each http call.
-6. Multiple guards (auth, login, module-import) to protect routes and module loading.
-7. Custom authentication service implementation. Include an "Oauth2 client" service to integrate your login page with OAuth 2.0 service and other service (SkypAuthService) to by pass the login automatically and redirect to the home page.
-8. Validation service included to define new custom validations to be used in any form validation (es. creditCardValidator, emailValidator, passwordValidator ...).
-9. Include logger customizable service in the core module to logs anything in the app.
-
-## Shared Module:
-1. Control message component created in the shared module to display custom messages in input controls depending of the validators and messages configured.
-2. Login component displayed depending of the authentication service configured.
-3. Not found component displayed when invalid routes.
+9. Multiple guards (auth, login, module-import) to protect routes and module loading.
+10. Custom service validation already available (es. creditCardValidator, emailValidator, passwordValidator ...).
+11. Customizable logger system.
+12. Incorporated automatic handle errors.
+13. Not found component displayed when invalid routes.
+14. TSLint integration for quality.
+15. Unit and Functional test with Jasmine, Karma and Protractor.
 
 ## Get the Code
 ```
@@ -304,7 +290,18 @@ The application include a login component that could be integrated with any auth
     ```
  3. Restart the application
  
- ## 9. Custom service validation and control messages
+## 9. Guards
+The application have implemented multiple guards (auth, login, module-import) to protect routes and module loading. All the guards are registered using providers in the 'Core' module. 
+
+- auth.guard: Is used to check if the user was already logged before to continue or redirect it to the login page if a Login system is enable. Note: If you are using the SkypAuthentication service, no login is enable so you always will be able to continue without to be redirected to the login page.
+- login.guard: Is used to check if the user wants to go to the login page after he was logged in the application. In that case will be redirected to the home page (/).
+- module-import.guard: This is another kind of guard that check the 'Core' module is imported just one time in all the application otherwise will rise an error.
+
+More Info:
+https://angular.io/docs/ts/latest/guide/router.html#!#guards
+https://blog.thoughtram.io/angular/2016/07/18/guards-in-angular-2.html
+ 
+ ## 10. Custom service validation and control messages
  The 'Core' module contains an static class 'ValidationService' in '/core/services/validation.service.ts' that include some custom validations that could be used during forms validations (es. creditCardValidator, emailValidator, passwordValidator ...). Angular provide the validators require, minLength, maxLength and pattern but you can assign also your custom validators to any form control.
  
  ```
@@ -325,7 +322,7 @@ More Info:
 https://angular.io/docs/ts/latest/cookbook/form-validation.html
 https://auth0.com/blog/angular2-series-forms-and-custom-validation/
 
-## 10. Customizable logger system
+## 11. Customizable logger system
 The application include a 'Logger' service in the 'Core' module that could be implemented in different ways: Using just the console or using other system like logs into a file. To enable the application to use one or other system you have to change the class to be instanciated in the factory '/core/factories/logger.factory.ts'.
 
 ### How to create a new Logger system:
@@ -346,7 +343,7 @@ The application include a 'Logger' service in the 'Core' module that could be im
     ```
 3. Restart the server
 
-## 11. Incorporated automatic handle errors
+## 12. Incorporated automatic handle errors
 The 'Core' module contains also a 'Simple Error Handler' that implements the interface 'ErrorHandler' present in the package '@angular/core'. Each http call that fails, automatically will call the method handleError() of the handler. In 'Simple Error Handler' the errors are displayed in different ways depending of the HTTP status code (if is a server, authentication or request errors...).
 
 ### How to create a new ErrorHandler:
@@ -369,15 +366,21 @@ The 'Core' module contains also a 'Simple Error Handler' that implements the int
 More Info:
 https://netbasal.com/angular-2-custom-exception-handler-1bcbc45c3230
 
-## 12. TSLint integration
+## 13. Not found component
+The application include a 'Not-Found' component inside the 'Shared' module that will be displayed in the case the user type an invalid route in the browser.
+
+## 14. TSLint integration
 To check if the application have quality errors execute the following command:
 
 ```
 npm run lint
 ```
 
-## 13. Unit and Functional test
-The project have some predefined unit tests defined in the files '.spec' related of each service and component and the functional test should be implemented in the e2e folder outside of the app.
+More Info:
+http://blog.rangle.io/understanding-the-real-advantages-of-using-eslint/
+
+## 15. Unit and Functional test
+The project have some predefined unit tests defined in the files '.spec' related of each service and component and the functional test should be implemented in the 'e2e' folder outside of the app.
 
 - To run then unit tests execute the command:
 ```
@@ -388,3 +391,7 @@ npm run test
 ```
 npm run e2e
 ```
+
+More Info:
+https://angular.io/docs/ts/latest/guide/testing.html
+https://blog.jscrambler.com/getting-started-with-angular-2-end-to-end-testing/
