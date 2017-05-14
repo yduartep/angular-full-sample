@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     @Inject('defaultLanguage') private defaultLanguage: string,
+    private authHelper: AuthHelper,
     private translate: TranslateService
   ) {
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -25,6 +26,6 @@ export class AppComponent implements OnInit {
   }
 
   isActive(): boolean {
-    return AuthHelper.isUserLogged();
+    return this.authHelper.isUserLogged();
   }
 }

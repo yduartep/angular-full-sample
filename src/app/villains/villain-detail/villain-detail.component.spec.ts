@@ -13,6 +13,7 @@ import { MocksUtil } from '../../core/utilities/mocks.util';
 import { VillainDetailComponent } from './villain-detail.component';
 import { VillainService } from '../shared/villain.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
+import { AuthHelper } from '../../core/services/auth.helper';
 
 export const fake_routes: Routes = [{ path: 'detail/:id', component: VillainDetailComponent }];
 
@@ -40,7 +41,8 @@ describe('VillainDetailComponent', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'defaultLanguage', useValue: 'en' },
         VillainService,
-        SpinnerService
+        SpinnerService,
+        AuthHelper
       ],
       schemas: [NO_ERRORS_SCHEMA]
 

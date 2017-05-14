@@ -11,10 +11,13 @@ import { SharedModule } from '../../shared/shared.module';
 import { LanguageSelectorComponent } from './language-selector.component';
 import { LanguageService } from './language.service';
 import { SpinnerService } from '../spinner/spinner.service';
+import { AuthHelper } from '../services/auth.helper';
+import { MocksUtil } from '../utilities/mocks.util';
 
 describe('LanguageSelectorComponent', () => {
   let component: LanguageSelectorComponent;
   let fixture: ComponentFixture<LanguageSelectorComponent>;
+  const apiConfig = MocksUtil.createMockedApiConfig();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,9 +36,12 @@ describe('LanguageSelectorComponent', () => {
         RouterTestingModule.withRoutes([])
       ],
       providers: [
+        { provide: 'api.config', useValue: apiConfig },
+        { provide: 'defaultLanguage', useValue: 'en' },
         TranslateService,
         LanguageService,
-        SpinnerService
+        SpinnerService,
+        AuthHelper
       ]
     })
       .compileComponents();

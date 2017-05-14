@@ -13,7 +13,8 @@ export class OAuthService implements AuthService {
 
   constructor(
     private http: Http,
-    @Inject('api.config') private apiConfig: ApiConfig
+    @Inject('api.config') private apiConfig: ApiConfig,
+    private authHelper: AuthHelper
   ) { }
 
   getServiceUrl(): string {
@@ -39,8 +40,8 @@ export class OAuthService implements AuthService {
 
       // login successful if there's a jwt token in the response
       if (userData.access_token) {
-        AuthHelper.addUserInfo(username, expiresIn);
-        AuthHelper.addTokenInfo(userData.access_token, expiresIn);
+        this.authHelper.addUserInfo(username, expiresIn);
+        this.authHelper.addTokenInfo(userData.access_token, expiresIn);
       }
 
       return userData;
@@ -49,7 +50,7 @@ export class OAuthService implements AuthService {
 
   logout() {
     // remove user session info
-    AuthHelper.removeUserInfo();
-    AuthHelper.removeTokenInfo();
+    this.authHelper.removeUserInfo();
+    this.authHelper.removeTokenInfo();
   }
 }

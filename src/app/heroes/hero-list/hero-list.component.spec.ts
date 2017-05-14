@@ -20,6 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { loggerFactory } from '../../core/factories/logger.factory';
 import { LoggerService } from '../../core/services/logger.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
+import { AuthHelper } from '../../core/services/auth.helper';
 
 describe('HeroListComponent', () => {
   let component: HeroListComponent;
@@ -48,7 +49,8 @@ describe('HeroListComponent', () => {
         { provide: 'defaultLanguage', useValue: 'en' },
         HeroService,
         { provide: 'LoggerService', useFactory: loggerFactory },
-        SpinnerService
+        SpinnerService,
+        AuthHelper
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

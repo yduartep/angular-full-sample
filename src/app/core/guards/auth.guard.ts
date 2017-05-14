@@ -10,11 +10,11 @@ import { AuthHelper } from '../services/auth.helper';
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authHelper: AuthHelper) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     console.log('... check if can active menu');
-    if (AuthHelper.isUserLogged()) {
+    if (this.authHelper.isUserLogged()) {
       // logged in so return true
       console.log('... the user is logged so you can activate the menu');
       return true;

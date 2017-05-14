@@ -10,11 +10,14 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { MenuService } from './menu.service';
 import { SpinnerService } from '../spinner/spinner.service';
+import { AuthHelper } from '../services/auth.helper';
 import { NavComponent } from './nav.component';
+import { MocksUtil } from '../utilities/mocks.util';
 
 describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
+  const apiConfig = MocksUtil.createMockedApiConfig();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,9 +36,12 @@ describe('NavComponent', () => {
         RouterTestingModule.withRoutes([])
       ],
       providers: [
+        { provide: 'api.config', useValue: apiConfig },
+        { provide: 'defaultLanguage', useValue: 'en' },
         TranslateService,
         MenuService,
-        SpinnerService
+        SpinnerService,
+        AuthHelper
       ]
     })
       .compileComponents();

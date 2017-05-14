@@ -30,6 +30,7 @@ describe('OAuthService', () => {
           }
         },
         { provide: 'AuthService', useFactory: authFactory, deps: [Http] },
+        AuthHelper,
         OAuthService
       ],
       imports: [HttpModule]
@@ -43,7 +44,7 @@ describe('OAuthService', () => {
     }));
 
   it('should get oauth token', async(
-    inject([OAuthService], (service: AuthService) => {
+    inject([OAuthService, AuthHelper], (service: AuthService, authHelper: AuthHelper) => {
       const username = 'fakeUserId', password = 'fakePassword';
 
       mockBackend.connections.subscribe((connection: MockConnection) => {
@@ -65,18 +66,18 @@ describe('OAuthService', () => {
         expect(userData.refresh_token).toEqual(mockResponse.refresh_token);
         expect(userData.scope).toEqual(mockResponse.scope);
 
-        expect(AuthHelper.getUserLogged()).toEqual(username);
-        expect(AuthHelper.getToken()).toEqual(mockResponse.access_token);
+        expect(authHelper.getUserLogged()).toEqual(username);
+        expect(authHelper.getToken()).toEqual(mockResponse.access_token);
       });
     })));
 
   it('should logout from the application', async(
-    inject([OAuthService], (service: AuthService) => {
-      AuthHelper.addTokenInfo('aaabbbccc', 5);
-      AuthHelper.addUserInfo('testUser', 5);
+    inject([OAuthService, AuthHelper], (service: AuthService, authHelper: AuthHelper) => {
+      authHelper.addTokenInfo('aaabbbccc', 5);
+      authHelper.addUserInfo('testUser', 5);
       service.logout();
 
-      expect(AuthHelper.getUserLogged()).toEqual(null);
-      expect(AuthHelper.getToken()).toEqual(null);
+      expect(authHelper.getUserLogged()).toEqual('');
+      expect(authHelper.getToken()).toEqual('');
     })));
 });

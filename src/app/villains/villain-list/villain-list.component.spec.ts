@@ -10,6 +10,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 import { VillainService } from '../shared/villain.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
+import { AuthHelper } from '../../core/services/auth.helper';
 import { LoggerService } from '../../core/services/logger.service';
 import { loggerFactory } from '../../core/factories/logger.factory';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -43,7 +44,7 @@ describe('VillainListComponent', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'defaultLanguage', useValue: 'en' },
         { provide: 'LoggerService', useFactory: loggerFactory },
-        SpinnerService, VillainService
+        SpinnerService, VillainService, AuthHelper
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

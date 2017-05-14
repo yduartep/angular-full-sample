@@ -15,6 +15,7 @@ import { ModalAlertComponent } from './modal-alert/modal-alert.component';
 
 // factories
 import { httpFactory } from './http.factory';
+import { AuthHelper } from '../core/services/auth.helper';
 
 // services
 import { SpinnerService } from '../core/spinner/spinner.service';
@@ -39,7 +40,7 @@ import { environment } from '../../environments/environment';
     ModalAlertComponent
   ],
   providers: [
-    { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, SpinnerService] }
+    { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, SpinnerService, AuthHelper] }
   ],
   exports: [
     CommonModule,

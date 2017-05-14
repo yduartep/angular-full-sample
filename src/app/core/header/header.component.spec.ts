@@ -13,6 +13,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { loggerFactory } from '../factories/logger.factory';
 import { LoggerService } from '../services/logger.service';
 import { SpinnerService } from '../spinner/spinner.service';
+import { AuthHelper } from '../services/auth.helper';
 import { HeaderComponent } from './header.component';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 
@@ -42,7 +43,8 @@ describe('HeaderComponent', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'AuthService', useClass: OAuthService },
         { provide: 'defaultLanguage', useValue: 'en' },
-        SpinnerService
+        SpinnerService,
+        AuthHelper
       ]
     })
       .compileComponents();

@@ -23,7 +23,8 @@ export class InterceptedHttp extends Http {
   constructor(
     backend: ConnectionBackend,
     defaultOptions: RequestOptions,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private authHelper: AuthHelper
   ) {
     super(backend, defaultOptions);
   }
@@ -94,7 +95,7 @@ export class InterceptedHttp extends Http {
    * Returns true If the url doesn't require previous authentication or require it bu the user is already logged in
    */
   private canCallHttp(url) {
-    return AuthHelper.isUserLogged || !this.needAuthBefore(url);
+    return this.authHelper.isUserLogged || !this.needAuthBefore(url);
   }
 
   private needAuthBefore(url: string) {

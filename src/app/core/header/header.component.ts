@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private authHelper: AuthHelper,
     @Inject('LoggerService') private loggerService: LoggerService,
     @Inject('AuthService') private authService: AuthService
   ) { }
@@ -22,11 +23,11 @@ export class HeaderComponent implements OnInit {
   }
 
   isActive(): boolean {
-    return AuthHelper.isUserLogged();
+    return this.authHelper.isUserLogged();
   }
 
   getUser(): string {
-    return AuthHelper.getUserLogged();
+    return this.authHelper.getUserLogged();
   }
 
   onLogout() {

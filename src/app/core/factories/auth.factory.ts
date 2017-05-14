@@ -14,10 +14,10 @@ import { AuthTypes } from './auth.type';
 import { environment } from '../../../environments/environment';
 import { COOKIE_IDENTIFIERS } from '../../cookie.identifiers';
 
-export function authFactory(http: Http): AuthService {
+export function authFactory(http: Http, authHelper: AuthHelper): AuthService {
     switch (environment.apiConfig.authService) {
         case AuthTypes.OAUTH:
-            return new OAuthService(http, environment.apiConfig);
+            return new OAuthService(http, environment.apiConfig, authHelper);
         case AuthTypes.SKYP:
             return new SkypAuthService();
         default:

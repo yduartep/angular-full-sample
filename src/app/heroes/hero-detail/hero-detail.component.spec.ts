@@ -13,6 +13,7 @@ import { MocksUtil } from '../../core/utilities/mocks.util';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from '../shared/hero.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
+import { AuthHelper } from '../../core/services/auth.helper';
 
 export const fake_routes: Routes = [{ path: 'detail/:id', component: HeroDetailComponent }];
 
@@ -41,7 +42,8 @@ describe('heroDetailComponent', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'defaultLanguage', useValue: 'en' },
         HeroService,
-        SpinnerService
+        SpinnerService,
+        AuthHelper
       ]
 
     })

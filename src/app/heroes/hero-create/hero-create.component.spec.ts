@@ -9,6 +9,7 @@ import { MocksUtil } from '../../core/utilities/mocks.util';
 import { HeroCreateComponent } from './hero-create.component';
 import { HeroService } from '../shared/hero.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
+import { AuthHelper } from '../../core/services/auth.helper';
 
 describe('HeroCreateComponent', () => {
   let component: HeroCreateComponent;
@@ -27,7 +28,8 @@ describe('HeroCreateComponent', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'defaultLanguage', useValue: 'en' },
         HeroService,
-        SpinnerService
+        SpinnerService,
+        AuthHelper
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

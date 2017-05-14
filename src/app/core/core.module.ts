@@ -48,8 +48,9 @@ import { COOKIE_IDENTIFIERS } from '../cookie.identifiers';
     LanguageService,
     AuthGuard,
     LoginGuard,
+    AuthHelper,
     { provide: ErrorHandler, useFactory: errorHandlerFactory },
-    { provide: 'AuthService', useFactory: authFactory, deps: [Http] },
+    { provide: 'AuthService', useFactory: authFactory, deps: [Http, AuthHelper] },
     { provide: 'LoggerService', useFactory: loggerFactory }
   ]
 })

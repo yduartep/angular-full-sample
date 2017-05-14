@@ -11,15 +11,18 @@ import { SharedModule } from '../../shared/shared.module';
 import { loggerFactory } from '../factories/logger.factory';
 import { LoggerService } from '../services/logger.service';
 import { SpinnerService } from '../spinner/spinner.service';
+import { AuthHelper } from '../services/auth.helper';
 import { FooterComponent } from './footer.component';
+import { MocksUtil } from '../utilities/mocks.util';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
+  const apiConfig = MocksUtil.createMockedApiConfig();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FooterComponent ],
+      declarations: [FooterComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         HttpModule,
@@ -33,9 +36,14 @@ describe('FooterComponent', () => {
         SharedModule,
         RouterTestingModule.withRoutes([])
       ],
-      providers: [ { provide: 'LoggerService', useFactory: loggerFactory }, SpinnerService ]
+      providers: [
+        { provide: 'api.config', useValue: apiConfig },
+        { provide: 'defaultLanguage', useValue: 'en' },
+        { provide: 'LoggerService', useFactory: loggerFactory },
+        SpinnerService, AuthHelper
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

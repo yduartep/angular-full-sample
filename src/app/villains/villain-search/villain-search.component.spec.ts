@@ -13,6 +13,7 @@ import { MocksUtil } from '../../core/utilities/mocks.util';
 import { VillainSearchComponent } from './villain-search.component';
 import { VillainService } from '../shared/villain.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
+import { AuthHelper } from '../../core/services/auth.helper';
 
 describe('VillainSearchComponent', () => {
   let component: VillainSearchComponent;
@@ -38,7 +39,8 @@ describe('VillainSearchComponent', () => {
         { provide: 'api.config', useValue: apiConfig },
         { provide: 'defaultLanguage', useValue: 'en' },
         VillainService,
-        SpinnerService
+        SpinnerService,
+        AuthHelper
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
