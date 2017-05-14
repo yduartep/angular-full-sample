@@ -30,9 +30,9 @@ export class HeroDetailComponent implements OnInit {
     private messageService: MessageService
   ) {
     // subscribe to the messages sent from other components
-    this.subscription = this.messageService.getConfirmed().subscribe((isConfirmed: boolean) => {
+    /*this.subscription = this.messageService.getConfirmed().subscribe((isConfirmed: boolean) => {
       this.onOkDelete(isConfirmed);
-    });
+    });*/
   }
 
   ngOnInit() {
@@ -45,11 +45,12 @@ export class HeroDetailComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.heroIdSelected = id;
+    /*this.heroIdSelected = id;
     this.messageService.showMessage(new Message('Are you sure do you want to delete this Hero?', 'warning', MessageType.CONFIRM));
     localStorage['action'] = 'DELETE_HERO';
-    localStorage['from'] = 'HERO_DETAIL';
-    /*const confirmation = window.confirm('Are you sure you want to delete this Super Hero?');
+    localStorage['from'] = 'HERO_DETAIL';*/
+
+    const confirmation = window.confirm('Are you sure you want to delete this Super Hero?');
     if (confirmation) {
       this.service.delete(id).subscribe(res => {
         if (res.ok) {
@@ -58,10 +59,10 @@ export class HeroDetailComponent implements OnInit {
           alert('Couldn\'t delete 💩');
         }
       });
-    }*/
+    }
   }
 
-  onOkDelete(value) {
+  /*onOkDelete(value) {
     if (localStorage['action'] === 'DELETE_HERO' && localStorage['from'] === 'HERO_DETAIL') {
       localStorage.removeItem('action');
       localStorage.removeItem('from');
@@ -79,5 +80,5 @@ export class HeroDetailComponent implements OnInit {
         this.heroIdSelected = null;
       }
     }
-  }
+  }*/
 }

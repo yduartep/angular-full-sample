@@ -55,30 +55,23 @@ export class HeroListComponent implements OnInit {
 
   delete(id: number) {
     this.heroIdSelected = id;
-    localStorage['action'] = 'DELETE_HERO';
-    localStorage['from'] = 'HERO_LIST';
     this.messageService.showMessage(new Message('Are you sure do you want to delete this Hero?', 'warning', MessageType.CONFIRM));
   }
 
   onOkDelete(value) {
-    if (localStorage['action'] === 'DELETE_HERO' && localStorage['from'] === 'HERO_LIST') {
-      localStorage.removeItem('action');
-      localStorage.removeItem('from');
-
-      if (value) {
-        this.service.delete(this.heroIdSelected).subscribe(res => {
-          if (res.ok) {
-            const index = this.data.findIndex(hero => hero.id === this.heroIdSelected);
-            this.data.splice(index, 1);
-            this.heroIdSelected = null;
-            this.messageService.showMessage(new Message('The super hero was deleted successfully!!', 'success'));
-          } else {
-            this.messageService.showMessage(new Message('Impossible to delete the super hero!'));
-          }
-        }, err => this.messageService.showMessage(new Message('Impossible to delete the super hero!')));
-      } else {
-        this.heroIdSelected = null;
-      }
+    if (value) {
+      this.service.delete(this.heroIdSelected).subscribe(res => {
+        if (res.ok) {
+          const index = this.data.findIndex(hero => hero.id === this.heroIdSelected);
+          this.data.splice(index, 1);
+          this.heroIdSelected = null;
+          this.messageService.showMessage(new Message('The super hero was deleted successfully!!', 'success'));
+        } else {
+          this.messageService.showMessage(new Message('Impossible to delete the super hero!'));
+        }
+      }, err => this.messageService.showMessage(new Message('Impossible to delete the super hero!')));
+    } else {
+      this.heroIdSelected = null;
     }
   }
 }
