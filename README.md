@@ -232,4 +232,21 @@ The icon should be stored in the 'assets/images/flags' folder to be displayed co
    ```
 4. Download and store the flag icon for French in the folder 'assets/images/flags'.
 5. Restart the application
+
 More Info: https://github.com/ngx-translate/core/blob/master/README.md
+
+### 4. How to mock services
+1. Go to the prototype folder out of the app and define the list of elements for the new api request (/heroes) in the file 'prototype/apiMocks.js'. You can also use the faker.js module to generate massive amounts of fake data:
+   ```
+   module.exports = function () {
+    var faker = require("faker");
+    return {
+      heroes: [...]
+    }
+   }
+   ```
+2. If the path of the request is different as the default (default: http://localhost:3000/token, expected: http://localhost:3000/oauth/token), redefine the route in the file routes.json:
+   ```
+   { ..., "/oauth/token": "/token", ... }
+   ```
+3. Start the mock server using the command: `npm run server:mocks`
