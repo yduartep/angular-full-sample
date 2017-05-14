@@ -22,7 +22,7 @@ export class AuthHelper {
      * Returns the name of the user logged in the app
      */
     static getUserLogged(): string {
-        console.log('...... authService = ' + environment.apiConfig);
+        console.log('...... authService = ' + environment.apiConfig.authService);
         if (environment.apiConfig.authService === AuthTypes.SKYP) {
             return null;
         }

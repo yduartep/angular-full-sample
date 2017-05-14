@@ -76,7 +76,7 @@ describe('OAuthService', () => {
       AuthHelper.addUserInfo('testUser', 5);
       service.logout();
 
-      expect(AuthHelper.getUserLogged()).toEqual('');
-      expect(AuthHelper.getToken()).toEqual('');
+      expect(AuthHelper.getUserLogged()).toEqual(null);
+      expect(AuthHelper.getToken()).toEqual(null);
     })));
 });
