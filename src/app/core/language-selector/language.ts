@@ -1,4 +1,3 @@
 export class Language {
-    constructor(public id: string, public value: string) {
-    }
+    constructor(public id: string, public title: string, public icon: string) {}
 }

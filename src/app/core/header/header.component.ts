@@ -9,7 +9,6 @@ import { LoggerService } from '../services/logger.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  languages = [{ id: 'en', value: 'English' }, { id: 'es', value: 'Spanish' }];
 
   constructor(
     private router: Router,

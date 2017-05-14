@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <app-header *ngIf="isActive()"></app-header>
-  <app-nav *ngIf="isActive()" [items]="menus" [languages]="languages"></app-nav>
-  <main class="full-height">
-    <app-spinner></app-spinner>
+  <app-nav *ngIf="isActive()"></app-nav>
+  <app-spinner></app-spinner>
+  <main class="full-height">    
     <router-outlet></router-outlet>
   </main>
   <app-footer *ngIf="isActive()"></app-footer>

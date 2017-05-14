@@ -1,16 +1,23 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalModule } from 'ngx-bootstrap';
 
+// components
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './not-found/not-found.component';
 import { ControlMessagesComponent } from './control-messages/control-messages.component';
 import { ModalAlertComponent } from './modal-alert/modal-alert.component';
+
+// factories
+import { httpFactory } from './http.factory';
+
+// services
+import { SpinnerService } from '../core/spinner/spinner.service';
 
 @NgModule({
   imports: [
@@ -19,8 +26,8 @@ import { ModalAlertComponent } from './modal-alert/modal-alert.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    TranslateModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TranslateModule
   ],
   declarations: [
     LoginComponent,
@@ -28,7 +35,9 @@ import { ModalAlertComponent } from './modal-alert/modal-alert.component';
     ControlMessagesComponent,
     ModalAlertComponent
   ],
-  providers: [],
+  providers: [
+    { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, SpinnerService] }
+  ],
   exports: [
     CommonModule,
     HttpModule,

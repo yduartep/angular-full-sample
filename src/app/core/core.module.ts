@@ -1,18 +1,14 @@
 import { NgModule, Optional, SkipSelf, ErrorHandler } from '@angular/core';
-import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
+import { Http  } from '@angular/http';
 
 // modules
 import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 // guards
-import { throwIfAlreadyLoaded } from './module-import.guard';
-import { AuthGuard } from './auth.guard';
-import { LoginGuard } from './login.guard';
-import { httpFactory } from './http.factory';
-
-// helpers and handlers
-import { HagueErrorHandler } from './error.handler';
+import { throwIfAlreadyLoaded } from './guards/module-import.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 // components
 import { HeaderComponent } from './header/header.component';
@@ -27,8 +23,15 @@ import { OAuthService } from './services/oauth.service';
 import { SkypAuthService } from './services/skyp-auth.service';
 import { LoggerService } from './services/logger.service';
 import { SpinnerService } from './spinner/spinner.service';
+import { MenuService } from './nav/menu.service';
+import { LanguageService } from './language-selector/language.service';
+
+//factories
+import { authFactory } from './factories/auth.factory';
+import { errorHandlerFactory } from './factories/error-handler.factory';
+
+// environment
 import { environment } from '../../environments/environment';
-// environment vars
 import { COOKIE_IDENTIFIERS } from '../cookie.identifiers';
 
 @NgModule({
@@ -40,11 +43,12 @@ import { COOKIE_IDENTIFIERS } from '../cookie.identifiers';
   providers: [
     LoggerService,
     SpinnerService,
+    MenuService,
+    LanguageService,
     AuthGuard,
     LoginGuard,
-    { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions] },
-    { provide: ErrorHandler, useClass: HagueErrorHandler },
-    { provide: 'AuthService', useClass: OAuthService }
+    { provide: ErrorHandler, useFactory: errorHandlerFactory },
+    { provide: 'AuthService', useFactory: authFactory, deps: [Http] }
   ]
 })
 export class CoreModule {

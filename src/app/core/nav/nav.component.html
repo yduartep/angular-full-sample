@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="items">
   <nav class="navbar navbar-default full-width">
     <ul class="nav navbar-nav">
       <li *ngFor="let menu of items" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">

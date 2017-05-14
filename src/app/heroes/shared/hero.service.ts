@@ -1,6 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
-
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { Hero } from './hero';

@@ -1,0 +1,13 @@
+[{
+    "title": "Heroes",
+    "action": "/heroes",
+    "icon": "fa-flash"
+}, {
+    "title": "Villains",
+    "action": "/villains",
+    "icon": "fa-user-secret"
+}, {
+    "title": "About us",
+    "action": "/about",
+    "icon": "fa-users"
+}]

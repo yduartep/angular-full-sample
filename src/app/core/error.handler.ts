@@ -6,7 +6,7 @@ import {
 import { Response } from '@angular/http';
 
 @Injectable()
-export class HagueErrorHandler implements ErrorHandler {
+export class SimpleErrorHandler implements ErrorHandler {
 
   unwrap(err) {
     let res = err.rejection ? err.rejection : err;

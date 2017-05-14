@@ -2,20 +2,31 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { XHRBackend, Http, RequestOptions } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+
+// translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { createTranslateLoader } from './app.translate.factory';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
+// modules
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
+
+// components
 import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
-import { httpFactory } from './core/http.factory';
-import { COOKIE_IDENTIFIERS } from './cookie.identifiers';
 import { AboutComponent } from './about/about.component';
+
+// services
+import { SpinnerService } from './core/spinner/spinner.service';
+
+// factories and configurations
+import { environment } from '../environments/environment';
+import { COOKIE_IDENTIFIERS } from './cookie.identifiers';
+
+import { httpFactory } from './shared/http.factory';
 
 @NgModule({
   imports: [
@@ -40,7 +51,7 @@ import { AboutComponent } from './about/about.component';
     { provide: 'api.config', useValue: environment.apiConfig },
     { provide: 'cookie.user.id', useValue: COOKIE_IDENTIFIERS.USER_ID },
     { provide: 'cookie.token.id', useValue: COOKIE_IDENTIFIERS.TOKEN_ID },
-    { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions] },
+    { provide: 'defaultLanguage', useValue: environment.defaultLanguage }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

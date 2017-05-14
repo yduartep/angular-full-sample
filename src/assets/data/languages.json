@@ -1,0 +1,9 @@
+[{
+    "id": "en",
+    "title": "English",    
+    "icon": "en-EN.png"
+}, {
+    "id": "es",
+    "title": "Español",
+    "icon": "es-ES.png"
+}]

@@ -28,7 +28,6 @@ export class VillainListComponent implements OnInit {
 
   ngOnInit() {
     this.loggerService.log('... initializing Villain list component.');
-    this.spinnerService.show();
     this.isRequesting = true;
 
     this.service.findAll()
@@ -37,8 +36,6 @@ export class VillainListComponent implements OnInit {
           villain['editorialText'] = Editorial[villain.editorial];
           return villain;
         });
-
-        this.spinnerService.hide();
       });
   }
 

@@ -7,16 +7,16 @@ export interface SpinnerState {
 
 @Injectable()
 export class SpinnerService {
-    private spinnerSubject = new Subject<SpinnerState>();
-    spinnerState = this.spinnerSubject.asObservable();
+  private spinnerSubject = new Subject<SpinnerState>();
+  spinnerState = this.spinnerSubject.asObservable();
 
-    constructor() { }
+  constructor() { }
 
-    show() {
-      this.spinnerSubject.next(<SpinnerState>{ show: true });
-    }
+  show() {
+    this.spinnerSubject.next(<SpinnerState>{ show: true });
+  }
 
-    hide() {
-      this.spinnerSubject.next(<SpinnerState>{ show: false });
-    }
+  hide() {
+    this.spinnerSubject.next(<SpinnerState>{ show: false });
+  }
 }

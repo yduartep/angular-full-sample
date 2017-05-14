@@ -6,6 +6,7 @@
 export const environment = {
   production: false,
   envName: 'dev',
+  defaultLanguage: 'en',
   apiConfig: {
     apiEnv: 'dev',
     timeExpired: 20,

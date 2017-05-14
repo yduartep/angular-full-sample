@@ -6,6 +6,7 @@
 export const environment = {
   production: false,
   envName: 'mock',
+  defaultLanguage: 'en',
   apiConfig: {
     apiEnv: 'mock',
     timeExpired: 20,

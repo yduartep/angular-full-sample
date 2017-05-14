@@ -6,7 +6,6 @@ import { Editorial } from '../shared/editorial.enum';
 import { HeroService } from '../shared/hero.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
 import { LoggerService } from '../../core/services/logger.service';
-import { TranslateService } from '@ngx-translate/core';
 import { ModalAlertComponent } from '../../shared/modal-alert/modal-alert.component';
 import { ModalStatus } from '../../shared/modal-alert/modal-status.enum';
 
@@ -29,13 +28,11 @@ export class HeroListComponent implements OnInit {
     private service: HeroService,
     private route: ActivatedRoute,
     private router: Router,
-    private spinnerService: SpinnerService,
-    private translate: TranslateService
+    private spinnerService: SpinnerService
   ) { }
 
   ngOnInit() {
     this.loggerService.log('... initializing Hero list component.');
-    this.spinnerService.show();
     this.isRequesting = true;
 
     this.service.findAll()
@@ -44,8 +41,6 @@ export class HeroListComponent implements OnInit {
           hero['editorialText'] = Editorial[hero.editorial];
           return hero;
         });
-
-        this.spinnerService.hide();
       });
   }
 
