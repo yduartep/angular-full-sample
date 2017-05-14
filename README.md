@@ -368,3 +368,23 @@ The 'Core' module contains also a 'Simple Error Handler' that implements the int
 
 More Info:
 https://netbasal.com/angular-2-custom-exception-handler-1bcbc45c3230
+
+## 12. TSLint integration
+To check if the application have quality errors execute the following command:
+
+```
+npm run lint
+```
+
+## 13. Unit and Functional test
+The project have some predefined unit tests defined in the files '.spec' related of each service and component and the functional test should be implemented in the e2e folder outside of the app.
+
+- To run then unit tests execute the command:
+```
+npm run test
+```
+
+- To run then functional tests execute the command:
+```
+npm run e2e
+```
