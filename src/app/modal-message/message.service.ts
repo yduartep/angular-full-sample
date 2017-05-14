@@ -13,7 +13,7 @@ export class MessageService {
         this.subjectMsg.next(message);
     }
 
-    confirmMessage(value: boolean) {
+    confirmMessage(value: boolean, ) {
         this.subjectConfirmed.next(value);
     }
 

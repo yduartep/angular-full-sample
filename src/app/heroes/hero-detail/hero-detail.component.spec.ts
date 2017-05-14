@@ -14,6 +14,7 @@ import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from '../shared/hero.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
 import { AuthHelper } from '../../core/services/auth.helper';
+import { MessageService } from '../../modal-message/message.service';
 
 export const fake_routes: Routes = [{ path: 'detail/:id', component: HeroDetailComponent }];
 
@@ -43,7 +44,8 @@ describe('heroDetailComponent', () => {
         { provide: 'defaultLanguage', useValue: 'en' },
         HeroService,
         SpinnerService,
-        AuthHelper
+        AuthHelper,
+        MessageService
       ]
 
     })
