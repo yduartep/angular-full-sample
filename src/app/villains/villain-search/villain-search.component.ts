@@ -44,7 +44,7 @@ export class VillainSearchComponent implements OnInit {
       });
   }
 
-  private handleKeyDown(event: any) {
+  handleKeyDown(event: any) {
     if (event.keyCode === 13) {
       this.onSearchEvent();
     }

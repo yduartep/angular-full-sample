@@ -17,17 +17,7 @@ module.exports = function () {
       { id: 9, name: 'Wonder Woman', editorial: 2, image: 'wonder-woman.PNG' },
       { id: 10, name: 'Superman', editorial: 2, image: 'superman.PNG' },
       { id: 11, name: 'Cyborg', editorial: 2, image: 'cyborg.PNG' }
-    ].concat(Array(5).fill(0).map((i, index) => {
-      var id = index + 1;
-      var editorials = [1, 2];
-      var images = ['batman.PNG', 'captain-america.PNG', 'cyborg.PNG', 'deadpool.PNG', 'flash.PNG'];
-      return {
-        "id": id,
-        "name": faker.name.findName(),
-        "editorial": editorials[Math.floor(Math.random() * editorials.length)],
-        "image": images[Math.floor(Math.random() * images.length)]
-      }
-    })),
+    ],
     villains: [
       { id: 1, name: 'Magneto', editorial: 1, image: 'magneto.PNG' },
       { id: 2, name: 'Venon', editorial: 1, image: 'venon.PNG' },
@@ -36,17 +26,7 @@ module.exports = function () {
       { id: 5, name: 'R\'as Al Ghul', editorial: 2, image: 'rasalghul.PNG' },
       { id: 6, name: 'Mr. Freeze', editorial: 2, image: 'freeze.PNG' },
       { id: 7, name: 'Scarecrow', editorial: 2, image: 'scarecrow.PNG' }
-    ].concat(Array(5).fill(0).map((i, index) => {
-      var id = index + 1;
-      var editorials = [1, 2];
-      var images = ['magneto.PNG', 'rasalghul.PNG', 'scarecrow.PNG', 'ultron.PNG', 'venon.PNG'];
-      return {
-        "id": id,
-        "name": faker.name.findName(),
-        "editorial": editorials[Math.floor(Math.random() * editorials.length)],
-        "image": images[Math.floor(Math.random() * images.length)]
-      }
-    })),
+    ],
     token: [{
       "id": faker.random.uuid(),
       "access_token": "a61afd98-8e9e-4f16-9366-31abcc0bb522",

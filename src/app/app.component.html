@@ -7,4 +7,4 @@
   </main>
   <app-footer *ngIf="isActive()"></app-footer>
 </div>
-<app-modal-message #modalMessage [type]="BLOCKING" (onOk)="onOkConfirm($event)" (onClose)="onCloseModal($event)"></app-modal-message>
+<app-modal-message #modalMessage [type]="'BLOCKING'" (onOk)="onOkConfirm($event)" (onClose)="onCloseModal($event)"></app-modal-message>
