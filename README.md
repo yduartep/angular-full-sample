@@ -5,37 +5,34 @@ Full sample application built with Angular 4 that follows all best practices. Th
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-  - [Get the Code](#get-the-code)
-    - [Just in Time (JiT) Compilation](#just-in-time-jit-compilation)
-    - [Ahead of Time (AoT) Compilation](#ahead-of-time-aot-compilation)
+- [Get the Code](#get-the-code)
+  - [Just in Time (JiT) Compilation](#just-in-time-jit-compilation)
+  - [Ahead of Time (AoT) Compilation](#ahead-of-time-aot-compilation)
 - [Functionalities](#functionalities)
-    - [1. How create new lazy module](#1-how-create-new-lazy-module)
-    - [](#)
-    - [](#-1)
-    - [](#-2)
-- [ii. Word translations](#ii-word-translations)
-    - [](#-3)
-- [iii. How to use the language selector](#iii-how-to-use-the-language-selector)
-    - [](#-4)
-- [iv. How to define new language](#iv-how-to-define-new-language)
-    - [](#-5)
-    - [](#-6)
-    - [](#-7)
-    - [](#-8)
-    - [](#-9)
-    - [](#-10)
-- [How to create new Authentication service](#how-to-create-new-authentication-service)
-    - [](#-11)
-    - [](#-12)
-    - [](#-13)
-- [How to create a new Logger system:](#how-to-create-a-new-logger-system)
-    - [](#-14)
-      - [How to create a new ErrorHandler:](#how-to-create-a-new-errorhandler)
-    - [](#-15)
-    - [](#-16)
-    - [15. Unit and Functional test](#15-unit-and-functional-test)
-  - [Useful Commands](#useful-commands)
-    - [Application execution](#application-execution)
+  - [1. How create new lazy module](#1-how-create-new-lazy-module)
+  - [2. How create new api config environment](#2-how-create-new-api-config-environment)
+  - [3. How translate elements in a page](#3-how-translate-elements-in-a-page)
+    - [i. Language initialization](#i-language-initialization)
+    - [ii. Word translations](#ii-word-translations)
+    - [iii. How to use the language selector](#iii-how-to-use-the-language-selector)
+    - [iv. How to define new language](#iv-how-to-define-new-language)
+  - [4. How to mock services](#4-how-to-mock-services)
+  - [5. Bootstrap and Font-awsone integration](#5-bootstrap-and-font-awsone-integration)
+  - [6. Dynamic nav bar](#6-dynamic-nav-bar)
+  - [7. Http interceptor system](#7-http-interceptor-system)
+  - [8. Login component configurable with different authentication service](#8-login-component-configurable-with-different-authentication-service)
+    - [How to create new Authentication service](#how-to-create-new-authentication-service)
+  - [9. Guards](#9-guards)
+  - [10. Custom service validation and control messages](#10-custom-service-validation-and-control-messages)
+  - [11. Customizable logger system](#11-customizable-logger-system)
+    - [How to create a new Logger system:](#how-to-create-a-new-logger-system)
+  - [12. Incorporated automatic handle errors](#12-incorporated-automatic-handle-errors)
+    - [How to create a new ErrorHandler:](#how-to-create-a-new-errorhandler)
+  - [13. Not found component](#13-not-found-component)
+  - [14. TSLint integration](#14-tslint-integration)
+  - [15. Unit and Functional test](#15-unit-and-functional-test)
+- [Useful Commands](#useful-commands)
+  - [Application execution](#application-execution)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -62,7 +59,7 @@ Runs the Angular AoT compiler, rollup, uglify for an optimized bundle, then laun
 ng build --aot
 ```
 
-# Functionalities
+## Functionalities
 
 ### 1. How create new lazy module
 1. Install agular-cli globally: `npm install -g @angular/cli`
@@ -104,8 +101,7 @@ ng build --aot
    ```
 More Info: https://angular-2-training-book.rangle.io/handout/modules/lazy-loading-module.html
 
-###
- 2. How create new api config environment
+### 2. How create new api config environment
 1. Go to the folder environments and create a new file configuration: `environment.qa.ts`
 2. Define the configuration to be used in this new environment:
    ```
@@ -144,8 +140,7 @@ More Info: https://angular-2-training-book.rangle.io/handout/modules/lazy-loadin
 
 More Info: http://tattoocoder.com/angular-cli-using-the-environment-option/
 
-###
- 3. How translate elements in a page
+### 3. How translate elements in a page
 The application use the module ngx-translate for translation. The configuration of the TranslateModule is defined in the app.module.ts and exported from the SharedModule, so always be sure the module who expose the component to be translated import the SharedModule. The json files used during translation are stored in the folder /assets/i18n/ with the code of the specific language of translation (es. es.json, en.json, it.json ...).
    ```
    // app.translate.factory.ts
@@ -178,14 +173,12 @@ The application use the module ngx-translate for translation. The configuration 
    @NgModule({ imports: [SharedModule, ...] })
     export class HeroesModule { }
    ```
-###
-# i. Language initialization
+#### i. Language initialization
 When the app.component is instantiated set the following translation settings:
 - Set the language to be used as a fallback when a translation isn't found in the current language based on the property 'defaultLanguage' defined in the current environment: `translate.setDefaultLang(defaultLanguage);`.
 - Set the language to use, if the lang isn't available. First take the language defined in the localStorage and if no value was defined will use the default language defined before: `translate.use(localStorage['language'] || defaultLanguage);`
 
-###
-# ii. Word translations
+#### ii. Word translations
 Now to translate our words in the HTML view:
 1. Create a pipe that we can use to translate our words: `<h2>{{ 'heroesList' | translate }}</h2>`
 2. Add the translation ID used in our [language].json files:
@@ -198,8 +191,7 @@ Now to translate our words in the HTML view:
    ```
 3. Each time you change the language, that title will change.
 
-###
-# iii. How to use the language selector
+#### iii. How to use the language selector
 In the core module, there is a 'language-selector' component that could be displayed anywhere to select the language for translation. On this sample application, was added in the header component.
 
 The 'language-selector' component could be initialized in two ways:
@@ -216,8 +208,7 @@ In the second case, the languages will loaded from the file 'assets/data/languag
 ```
 The icon should be stored in the 'assets/images/flags' folder to be displayed correctly in the component.
 
-###
-# iv. How to define new language
+#### iv. How to define new language
 1. Add new json file in the folder 'assets/i18n' and copy the content from other json file already defined. Example: `assets/i18n/fr.json`
 2. Translate all the properties of the new file 'fr.json'.
 3. Add new entry in the json file 'assets/data/languages.json':
@@ -233,8 +224,7 @@ The icon should be stored in the 'assets/images/flags' folder to be displayed co
 
 More Info: https://github.com/ngx-translate/core/blob/master/README.md
 
-###
- 4. How to mock services
+### 4. How to mock services
 1. Go to the prototype folder out of the app and define the list of elements for the new api request (/heroes) in the file 'prototype/apiMocks.js'. You can also use the faker.js module to generate massive amounts of fake data:
 
    ```
@@ -257,12 +247,10 @@ More Info:
 - https://scotch.io/tutorials/json-server-as-a-fake-rest-api-in-frontend-development
 - https://github.com/marak/Faker.js/
 
-###
- 5. Bootstrap and Font-awsone integration
+### 5. Bootstrap and Font-awsone integration
 The application has already installed the library 'font-awesome' and 'bootstrap', so you can create new responsive components with a pack of pre-defined icons. The application also incorporate the library 'ngx-bootstrap' that contains many modules like accordion, alerts, datepicker, progressbar, etc, that could be imported separately in the case you need it. See how to use it from http://valor-software.com/ngx-bootstrap/#/.
 
-###
- 6. Dynamic nav bar
+### 6. Dynamic nav bar
 The application contains a 'nav' component in the core module that could be initialized in two ways:
 1. With a list of custom menu items: `<app-nav [items]="menuData"></app-nav>`
 2. Without any predefined menu: `<app-nav></app-nav>`
@@ -277,23 +265,20 @@ In the second case, the menus will loaded from the file 'assets/data/menu.json'.
 ```
 The icon is a font-awsone icon. See some example from http://fontawesome.io/examples/.
 
-###
- 7. Http interceptor system
+### 7. Http interceptor system
 The application include an 'Http Interceptor' used to capture HTTP errors, authentication and show loading after any HTTP requests. The class is defined as a provider of the shared module (/shared/http.interceptor.ts), in that way, will be imported for each new module automatically. 
 
 More Info:
 - https://blog.slinto.sk/angular-2-http-interceptors-7e2d74b7f14e
 - https://scotch.io/@kashyapmukkamala/using-http-interceptor-with-angular2
 
-###
- 8. Login component configurable with different authentication service
+### 8. Login component configurable with different authentication service
 The application include a login component that could be integrated with any authentication service that implements the interface AuthService present in the core module. The application already includes:
 
 - OAuth Service client to be integrated with an OAuth2 server (/core/services/oauth.service.ts).
 - Skyp Service that allow to display the application without to use the login component (/core/services/skyp-auth.service.ts).
 
-###
-# How to create new Authentication service
+#### How to create new Authentication service
 1. Create new class that implement the interface AuthService. The BaseAuthService is an abstract class that contains some util functionalities like adding or removing user and token info from and to the cookie.
 
     ```
@@ -309,8 +294,7 @@ The application include a login component that could be integrated with any auth
     ```
  3. Restart the application
  
-###
- 9. Guards
+### 9. Guards
 The application have implemented multiple guards (auth, login, module-import) to protect routes and module loading. All the guards are registered using providers in the 'Core' module. 
 
 - auth.guard: Is used to check if the user was already logged before to continue or redirect it to the login page if a Login system is enable. Note: If you are using the SkypAuthentication service, no login is enable so you always will be able to continue without to be redirected to the login page.
@@ -321,8 +305,7 @@ More Info:
 - https://angular.io/docs/ts/latest/guide/router.html#!#guards
 - https://blog.thoughtram.io/angular/2016/07/18/guards-in-angular-2.html
  
- ###
- 10. Custom service validation and control messages
+### 10. Custom service validation and control messages
  The 'Core' module contains an static class 'ValidationService' in '/core/services/validation.service.ts' that include some custom validations that could be used during forms validations (es. creditCardValidator, emailValidator, passwordValidator ...). Angular provide the validators require, minLength, maxLength and pattern but you can assign also your custom validators to any form control.
  
  ```
@@ -343,12 +326,10 @@ More Info:
 - https://angular.io/docs/ts/latest/cookbook/form-validation.html
 - https://auth0.com/blog/angular2-series-forms-and-custom-validation/
 
-###
- 11. Customizable logger system
+### 11. Customizable logger system
 The application include a 'Logger' service in the 'Core' module that could be implemented in different ways: Using just the console or using other system like logs into a file. To enable the application to use one or other system you have to change the class to be instanciated in the factory '/core/factories/logger.factory.ts'.
 
-###
-# How to create a new Logger system:
+#### How to create a new Logger system:
 1. Create a new class that implement the interface '/core/services/logger.service'.
     ```
     @Injectable()
@@ -366,8 +347,7 @@ The application include a 'Logger' service in the 'Core' module that could be im
     ```
 3. Restart the server
 
-###
- 12. Incorporated automatic handle errors
+### 12. Incorporated automatic handle errors
 The 'Core' module contains also a 'Simple Error Handler' that implements the interface 'ErrorHandler' present in the package '@angular/core'. Each http call that fails, automatically will call the method handleError() of the handler. In 'Simple Error Handler' the errors are displayed in different ways depending of the HTTP status code (if is a server, authentication or request errors...).
 
 #### How to create a new ErrorHandler:
@@ -389,12 +369,10 @@ The 'Core' module contains also a 'Simple Error Handler' that implements the int
 
 More Info: https://netbasal.com/angular-2-custom-exception-handler-1bcbc45c3230
 
-###
- 13. Not found component
+### 13. Not found component
 The application include a 'Not-Found' component inside the 'Shared' module that will be displayed in the case the user type an invalid route in the browser.
 
-###
- 14. TSLint integration
+### 14. TSLint integration
 To check if the application have quality errors execute the following command:
 
 ```
