@@ -42,5 +42,8 @@
   "remove": "Remove",
   "findHero": "Find a hero",
   "back": "Back",
-  "noHero": "There is no hero!"
+  "noHero": "There is no hero!",
+
+  "heroes": "Heroes",
+  "villains" : "Viallains"
 }
