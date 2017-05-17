@@ -1,0 +1,39 @@
+<h1>{{ 'processDetail' | translate }}</h1>
+<div *ngIf="process">
+  <div class="row">
+    <label class="col-sm-1">{{ 'column-processInstanceId' | translate}}:</label>
+    <div class="col-sm-10">{{process.processInstanceId}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">{{ 'column-processKey' | translate}}:</label>
+    <div class="col-sm-10">{{process.processKey}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">{{ 'column-processDefinitionId' | translate}}:</label>
+    <div class="col-sm-10">{{process.processDefinitionId}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">{{ 'column-latestActivity' | translate}}:</label>
+    <div class="col-sm-10">{{process.latestActivity}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">{{ 'column-tasks' | translate}}:</label>
+    <div class="col-sm-10">{{process.tasks}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">{{ 'column-processVariables' | translate}}: </label>
+    <div class="col-sm-10">{{process.processVariables}}</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1">{{ 'column-preview' | translate}}:</label>
+    <div class="col-sm-10"><img src="assets/images/{{process.diagramURL}}" alt="{{process.processInstanceId}}" /></div>
+  </div>
+</div>
+<div class="btn-group">
+  <button class="btn btn-secondary btn-sm" routerLink="/process">
+    <i class="fa fa-arrow-left"></i> {{ 'back' | translate}}
+  </button>
+  <button (click)="delete(process.id)" class="btn btn-danger btn-sm">
+    <i class="fa fa-times"></i> {{ 'delete' | translate}}
+  </button>
+</div>

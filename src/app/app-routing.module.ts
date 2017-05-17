@@ -11,11 +11,16 @@ import { PageNotFoundComponent } from './shared/not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/heroes', pathMatch: 'full' },
+  { path: '', redirectTo: '/process', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
     canActivate: [LoginGuard]
+  },
+  {
+    path: 'process',
+    loadChildren: 'app/process/process.module#ProcessModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'heroes',

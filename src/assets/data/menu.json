@@ -1,13 +1,17 @@
 [{
-    "title": "Heroes",
+    "title": "heroes",
     "action": "/heroes",
     "icon": "fa-flash"
 }, {
-    "title": "Villains",
-    "action": "/villains",
-    "icon": "fa-user-secret"
+  "title": "villains",
+  "action": "/villains",
+  "icon": "fa-user-secret"
 }, {
-    "title": "About us",
+  "title": "processes",
+  "action": "/process",
+  "icon": "fa-cog"
+}, {
+    "title": "aboutus",
     "action": "/about",
     "icon": "fa-users"
 }]

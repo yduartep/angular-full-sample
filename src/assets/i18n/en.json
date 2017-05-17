@@ -1,4 +1,5 @@
 {
+  "application.title": "Process Management",
   "HELLO": "Welcome to my Angular application!<br><strong>This is an amazing app which uses the latest technologies!</strong>",
   "home": "Home",
   "back": "Back",
@@ -9,6 +10,7 @@
   "villainsList": "List of Villains",
   "heroDetail": "Super heroes Details",
   "villainDetail": "Villain Details",
+  "processDetail": "Process Details",
   "tourOfHeroes": "Tour of Heroes and Villains",
   "button-createNew": "Create new",
   "button-search": "Search",
@@ -16,6 +18,16 @@
   "column-preview": "Preview",
   "column-name": "Name",
   "column-editorial": "Editorial",
+
+  "column-executionId":"Execution ID",
+  "column-processInstanceId":"Process Instance ID",
+  "column-processKey":"Process Key",
+  "column-processDefinitionId":"Process Definition ID",
+  "column-diagramURL":"Diagram URL",
+  "column-tenantId":"Tenant ID",
+  "column-latestActivity":"Latest Activity",
+  "column-tasks":"Tasks",
+  "column-processVariables":"Process Variables",
 
   "language": "Language",
   "english": "English",
@@ -42,5 +54,12 @@
   "remove": "Remove",
   "findHero": "Find a hero",
   "back": "Back",
-  "noHero": "There is no hero!"
+  "noHero": "There is no hero!",
+
+  "heroes": "Heroes",
+  "villains" : "Viallains",
+  "aboutus" : "About Us",
+  "processes": "Processes",
+
+  "processList": "Process List"
 }

@@ -20,6 +20,7 @@ export const environment = {
     },
     apiUrls: [
       { id: 'HEROES_SERVICE_URL', url: 'app/heroes' },
+      { id: 'PROCESS_SERVICE_URL', url: 'app/process' },
       { id: 'VILLAINS_SERVICE_URL', url: 'app/villains' },
       { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:3000/api/oauth/token' }
     ],
