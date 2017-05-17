@@ -20,9 +20,9 @@
     "pretest": "npm run lint",
     "e2e": "ng e2e",
     "lint": "ng lint",
-    "start": "concurrently --kill-others --prefix \"[{name}]\" --names \"MOCKS,SERVER\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run start:mocks\" \"npm run start:application\"",
-    "start:mocks": "npm-run-all --parallel server:mocks",
-    "server:mocks": "json-server prototype/apiMocks.js --routes prototype/routes.json",
+
+    "start": "concurrent --kill-others --kill-others-on-fail --prefix \"[{time}-{name}]\" --names \"MOCKS,APPLICATION\" -c \"blue.bold,magenta\" \"npm run start:mocks\" \"npm run start:application\"",
+    "start:mocks": "json-server prototype/apiMocks.js --routes prototype/routes.json",
     "start:application": "ng serve --environment=mock --open true --live-reload true"
   },
   "dependencies": {
