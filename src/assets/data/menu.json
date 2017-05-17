@@ -1,13 +1,13 @@
 [{
-    "title": "Heroes",
+    "title": "heroes",
     "action": "/heroes",
     "icon": "fa-flash"
 }, {
-    "title": "Villains",
+    "title": "villains",
     "action": "/villains",
     "icon": "fa-user-secret"
 }, {
-    "title": "About us",
+    "title": "aboutus",
     "action": "/about",
     "icon": "fa-users"
 }]
