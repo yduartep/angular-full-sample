@@ -9,27 +9,33 @@ Full sample application built with Angular 4 that follows all best practices. Th
     - [Just in Time (JiT) Compilation](#just-in-time-jit-compilation)
     - [Ahead of Time (AoT) Compilation](#ahead-of-time-aot-compilation)
 - [Functionalities](#functionalities)
-  - [1. How create new lazy module](#1-how-create-new-lazy-module)
-  - [2. How create new api config environment](#2-how-create-new-api-config-environment)
-  - [3. How translate elements in a page](#3-how-translate-elements-in-a-page)
-    - [i. Language initialization](#i-language-initialization)
-    - [ii. Word translations](#ii-word-translations)
-    - [iii. How to use the language selector](#iii-how-to-use-the-language-selector)
-    - [iv. How to define new language](#iv-how-to-define-new-language)
-  - [4. How to mock services](#4-how-to-mock-services)
-  - [5. Bootstrap and Font-awsone integration](#5-bootstrap-and-font-awsone-integration)
-  - [6. Dynamic nav bar](#6-dynamic-nav-bar)
-  - [7. Http interceptor system](#7-http-interceptor-system)
-  - [8. Login component configurable with different authentication service](#8-login-component-configurable-with-different-authentication-service)
-    - [How to create new Authentication service](#how-to-create-new-authentication-service)
-  - [9. Guards](#9-guards)
-  - [11. Customizable logger system](#11-customizable-logger-system)
-    - [How to create a new Logger system:](#how-to-create-a-new-logger-system)
-  - [12. Incorporated automatic handle errors](#12-incorporated-automatic-handle-errors)
-    - [How to create a new ErrorHandler:](#how-to-create-a-new-errorhandler)
-  - [13. Not found component](#13-not-found-component)
-  - [14. TSLint integration](#14-tslint-integration)
-  - [15. Unit and Functional test](#15-unit-and-functional-test)
+    - [1. How create new lazy module](#1-how-create-new-lazy-module)
+    - [](#)
+    - [](#-1)
+    - [](#-2)
+- [ii. Word translations](#ii-word-translations)
+    - [](#-3)
+- [iii. How to use the language selector](#iii-how-to-use-the-language-selector)
+    - [](#-4)
+- [iv. How to define new language](#iv-how-to-define-new-language)
+    - [](#-5)
+    - [](#-6)
+    - [](#-7)
+    - [](#-8)
+    - [](#-9)
+    - [](#-10)
+- [How to create new Authentication service](#how-to-create-new-authentication-service)
+    - [](#-11)
+    - [](#-12)
+    - [](#-13)
+- [How to create a new Logger system:](#how-to-create-a-new-logger-system)
+    - [](#-14)
+      - [How to create a new ErrorHandler:](#how-to-create-a-new-errorhandler)
+    - [](#-15)
+    - [](#-16)
+    - [15. Unit and Functional test](#15-unit-and-functional-test)
+  - [Useful Commands](#useful-commands)
+    - [Application execution](#application-execution)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -58,8 +64,7 @@ ng build --aot
 
 # Functionalities
 
-###
- 1. How create new lazy module
+### 1. How create new lazy module
 1. Install agular-cli globally: `npm install -g @angular/cli`
 2. Create new module from the root of the app using command: `ng g module heroes`
 3. Create new routing module in the folder of the module created before: `ng g module heroes-routing`
@@ -365,8 +370,7 @@ The application include a 'Logger' service in the 'Core' module that could be im
  12. Incorporated automatic handle errors
 The 'Core' module contains also a 'Simple Error Handler' that implements the interface 'ErrorHandler' present in the package '@angular/core'. Each http call that fails, automatically will call the method handleError() of the handler. In 'Simple Error Handler' the errors are displayed in different ways depending of the HTTP status code (if is a server, authentication or request errors...).
 
-###
-# How to create a new ErrorHandler:
+#### How to create a new ErrorHandler:
 1. Create a new class that implement the angular interface 'ErrorHandler'.
 
     ```
@@ -399,8 +403,7 @@ npm run lint
 
 More Info: http://blog.rangle.io/understanding-the-real-advantages-of-using-eslint/
 
-###
- 15. Unit and Functional test
+### 15. Unit and Functional test
 The project have some predefined unit tests defined in the files '.spec' related of each service and component and the functional test should be implemented in the 'e2e' folder outside of the app.
 
 - To run then unit tests execute the command:
@@ -416,3 +419,13 @@ npm run e2e
 More Info:
 - https://angular.io/docs/ts/latest/guide/testing.html
 - https://blog.jscrambler.com/getting-started-with-angular-2-end-to-end-testing/
+
+## Useful Commands
+### Application execution
+- npm start: starts the application, starts the mock server and opens a browser.
+- npm run start:mocks: starts the mock server.
+- npm run start:application: starts the application and opens a browser.
+### Build
+- npm run build:prod: builds the application for production environment.
+### Documentation
+- npm run documentation:gentoc: generates the table of contents of the README.md file.
