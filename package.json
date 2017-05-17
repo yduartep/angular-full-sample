@@ -21,7 +21,7 @@
     "e2e": "ng e2e",
     "lint": "ng lint",
 
-    "documentation:gentoc": "doctoc README.md",
+    "documentation:gentoc": "doctoc -s --maxlevel 2 README.md",
 
     "start": "concurrent --kill-others --kill-others-on-fail --prefix \"[{time}-{name}]\" --names \"MOCKS,APPLICATION\" -c \"blue.bold,magenta\" \"npm run start:mocks\" \"npm run start:application\"",
     "start:mocks": "json-server prototype/apiMocks.js --routes prototype/routes.json",
