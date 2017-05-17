@@ -2,7 +2,7 @@
   <span class="helper"></span>
   <div class="row content full-width">
     <div class="col-xs-8" *ngIf="isActive()">
-      <img class="logo" src="assets/images/logo.png"><span> Sample Full Application!!!</span>
+      <img class="logo" src="assets/images/logo.png"><span>{{ "application.title" | translate}}</span>
     </div>
     <div class="col-xs-2" *ngIf="getUser()">
       <i class="fa fa-user" aria-hidden="true"></i> {{getUser()}} | 
