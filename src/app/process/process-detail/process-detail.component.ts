@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./process-detail.component.css']
 })
 export class ProcessDetailComponent implements OnInit {
-  processIdSelected: number;
+  processIdSelected: string;
   process: Process;
   subscription: Subscription;
 
@@ -36,13 +36,13 @@ export class ProcessDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.service.findById(+params['processInstanceId']).subscribe((process: Process) => {
+      this.service.findById(params['id']).subscribe((process: Process) => {
         this.process = process;
       });
     });
   }
 
-  delete(id: number) {
+  delete(id: string) {
     /*this.processIdSelected = id;
     this.messageService.showMessage(new Message('Are you sure do you want to delete this Process?', 'warning', MessageType.CONFIRM));
     localStorage['action'] = 'DELETE_HERO';

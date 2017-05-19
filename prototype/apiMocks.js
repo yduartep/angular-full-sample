@@ -28,15 +28,15 @@ module.exports = function () {
       { id: 7, name: 'Scarecrow', editorial: 2, image: 'scarecrow.PNG' }
     ],
     process: [
-      {executionId: '1', processInstanceId: '1', processKey: 'processKey1', processDefinitionId: 'processDefinitionId1',
+      {executionId: '1', processInstanceId: 1, processKey: 'processKey1', processDefinitionId: 'processDefinitionId1',
         diagramURL: 'imagen_url', tenantId: '', activity: '', tasks: [], processVariables: ''},
-      {executionId: '2', processInstanceId: '2', processKey: 'processKey2', processDefinitionId: 'processDefinitionId2',
+      {executionId: '2', processInstanceId: 2, processKey: 'processKey2', processDefinitionId: 'processDefinitionId2',
         diagramURL: 'imagen_url', tenantId: '', activity: '', tasks: [], processVariables: ''},
-      {executionId: '3', processInstanceId: '3', processKey: 'processKey3', processDefinitionId: 'processDefinitionId3',
+      {executionId: '3', processInstanceId: 3, processKey: 'processKey3', processDefinitionId: 'processDefinitionId3',
         diagramURL: 'imagen_url', tenantId: '', activity: '', tasks: [], processVariables: ''},
-      {executionId: '4', processInstanceId: '4', processKey: 'processKey4', processDefinitionId: 'processDefinitionId4',
+      {executionId: '4', processInstanceId: 4, processKey: 'processKey4', processDefinitionId: 'processDefinitionId4',
         diagramURL: 'imagen_url', tenantId: '', activity: '', tasks: [], processVariables: ''},
-      {executionId: '5', processInstanceId: '5', processKey: 'processKey5', processDefinitionId: 'processDefinitionId5',
+      {executionId: '5', processInstanceId: 5, processKey: 'processKey5', processDefinitionId: 'processDefinitionId5',
         diagramURL: 'imagen_url', tenantId: '', activity: '', tasks: [], processVariables: ''}
     ],
     token: [{

@@ -6,6 +6,7 @@
   "delete": "Eliminar",
   "about": "Sobre nosotros",
   "help": "Ayuda",
+
   "heroesList": "Lista de Super heroes",
   "villainsList": "Lista de Villanos",
   "heroDetail": "Detalles del Super heroe",
@@ -17,6 +18,7 @@
 
   "column-preview": "Imagen",
   "column-name": "Nombre",
+  "column-actions": "Acciones",
   "column-editorial": "Editorial",
 
   "column-executionId":"Id Ejecución",
