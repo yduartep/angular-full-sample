@@ -1,4 +1,5 @@
 {
+  "application.title": "Process Management",
   "HELLO": "Welcome to my Angular application!<br><strong>This is an amazing app which uses the latest technologies!</strong>",
   "home": "Home",
   "back": "Back",

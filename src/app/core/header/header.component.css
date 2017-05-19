@@ -10,6 +10,7 @@ a {
   color: cyan;
 }
 
-/*img {
-  height: 100%;
-}*/
+.header .logo {
+  width: 100px;
+  padding-right: 20px;
+}
