@@ -403,6 +403,9 @@ More Info:
 - npm start: starts the application, starts the mock server and opens a browser.
 - npm run start:mocks: starts the mock server.
 - npm run start:application: starts the application and opens a browser.
+## Management Console
+- npm run management:console:start: starts the management console which is accessible from http://server:2000
+- npm run management:console:stop: sopts the management console
 ## Build
 - npm run build:prod: builds the application for production environment.
 ## Documentation
