@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { processRoutedComponents, ProcessRoutingModule } from './process-routing.module';
 import { ProcessService } from './shared/process.service';
+import { ProcessHistoryService } from './shared/processHistory.service';
 import { DataTableModule } from 'angular2-datatable';
 
 @NgModule({
@@ -12,7 +13,8 @@ import { DataTableModule } from 'angular2-datatable';
   ],
   declarations: [processRoutedComponents],
   providers: [
-    ProcessService
+    ProcessService,
+    ProcessHistoryService
   ]
 })
 export class ProcessModule { }

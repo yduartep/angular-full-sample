@@ -70,4 +70,16 @@ export abstract class BaseService<T> {
     const body = res.json() || {};
     return body.data || body;
   }
+
+  protected extractBody(res: Response) {
+    console.info(res.text());
+    console.log(res);
+    return res.text();
+  }
+
+  protected getBlob(res: Response) {
+    console.info(res.blob());
+    return res.blob();
+  }
+
 }

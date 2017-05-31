@@ -3,14 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Process } from '../shared/process';
 import { ProcessService } from '../shared/process.service';
+import { ProcessHistoryService } from '../shared/processHistory.service';
 
 import { Message } from '../../modal-message/message';
 import { MessageType } from '../../modal-message/message-type';
+import { MessageStatus } from '../../modal-message/message-status';
 import { MessageService } from '../../modal-message/message.service';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
+import {ProcessHistory} from '../shared/processHistory';
+import {MessageFormat} from '../../modal-message/message-format';
+
 
 @Component({
   selector: 'app-process-detail',
@@ -20,14 +25,18 @@ import { Subscription } from 'rxjs/Subscription';
 export class ProcessDetailComponent implements OnInit {
   processIdSelected: string;
   process: Process;
+  processHistoryList: ProcessHistory[];
+  image: any;
+  imageShow: boolean;
   subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: ProcessService,
-    private messageService: MessageService
-  ) {
+    private historyService: ProcessHistoryService,
+    private messageService: MessageService,
+) {
     // subscribe to the messages sent from other components
     /*this.subscription = this.messageService.getConfirmed().subscribe((isConfirmed: boolean) => {
       this.onOkDelete(isConfirmed);
@@ -35,19 +44,27 @@ export class ProcessDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.imageShow = false;
     this.route.params.subscribe(params => {
       this.service.findById(params['id']).subscribe((process: Process) => {
         this.process = process;
       });
     });
+
+    this.route.params.subscribe(params => {
+      this.service.getImage(params['id']).subscribe((image: any) => {
+        this.image = image;
+      });
+    });
+
+    this.route.params.subscribe(params => {
+      this.historyService.findByProcessInstanceId(params['id']).subscribe((processHistoryList: ProcessHistory[]) => {
+        this.processHistoryList = processHistoryList;
+      });
+    });
   }
 
   delete(id: string) {
-    /*this.processIdSelected = id;
-    this.messageService.showMessage(new Message('Are you sure do you want to delete this Process?', 'warning', MessageType.CONFIRM));
-    localStorage['action'] = 'DELETE_HERO';
-    localStorage['from'] = 'HERO_DETAIL';*/
-
     const confirmation = window.confirm('Are you sure you want to delete this Super Process?');
     if (confirmation) {
       this.service.delete(id).subscribe(res => {
@@ -60,23 +77,12 @@ export class ProcessDetailComponent implements OnInit {
     }
   }
 
-  /*onOkDelete(value) {
-    if (localStorage['action'] === 'DELETE_HERO' && localStorage['from'] === 'HERO_DETAIL') {
-      localStorage.removeItem('action');
-      localStorage.removeItem('from');
+  showTasks() {
+    this.messageService.showMessage(new Message(JSON.stringify(this.process.tasks), MessageStatus.INFO,
+      MessageType.BLOCKING, MessageFormat.JSON));
+  }
 
-      if (value) {
-        this.service.delete(this.processIdSelected).subscribe(res => {
-          if (res.ok) {
-            this.messageService.showMessage(new Message('The super process was deleted successfully!!', 'success'));
-            this.router.navigate(['/process']);
-          } else {
-            this.messageService.showMessage(new Message('Impossible to delete the super process!'));
-          }
-        }, err => this.messageService.showMessage(new Message('Impossible to delete the super process!')));
-      } else {
-        this.processIdSelected = null;
-      }
-    }
-  }*/
+  toggleImage() {
+    this.imageShow = !this.imageShow;
+  }
 }

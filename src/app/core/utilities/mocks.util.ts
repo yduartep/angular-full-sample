@@ -1,7 +1,5 @@
 import {ApiConfig} from '../models/api-config';
 import {Credentials} from '../models/credentials';
-import {Hero} from '../../heroes/shared/hero';
-import {Villain} from '../../villains/shared/villain';
 import {Process} from '../../process/shared/process';
 import {Activity} from '../../process/shared/activity';
 import {Task} from '../../process/shared/task';
@@ -19,8 +17,7 @@ export class MocksUtil {
     apiConfig.credentials = new Credentials(faker.internet.userName(), faker.internet.password());
     apiConfig.timeExpired = 5;
     apiConfig.apiUrls = [
-      {id: 'HEROES_SERVICE_URL', url: 'http://127.0.0.1:3000/api/heroes'},
-      {id: 'VILLAINS_SERVICE_URL', url: 'http://127.0.0.1:3000/api/villains'},
+      {id: 'PROCESSES_SERVICE_URL', url: 'http://127.0.0.1:3000/api/process'},
       {id: 'OAUTH_SERVICE_URL', url: 'http://localhost:3000/api/oauth/token'}
     ];
     apiConfig.errorHandler = 'SIMPLE';
@@ -43,31 +40,7 @@ export class MocksUtil {
     };
   }
 
-  /**
-   * Create a mocked list of heroes
-   */
-  static createMockedHeroes(): Hero[] {
-    const result: Hero[] = [];
-    for (let i = 1; i <= 3; i++) {
-      const data = new Hero(i, 'Hero ' + i, 1, 'image ' + i + '.png');
-      result.push(data);
-    }
-    return result;
-  }
-
-  /**
-   * Create a mocked list of villains
-   */
-  static createMockedVillains(): Villain[] {
-    const result: Villain[] = [];
-    for (let i = 1; i <= 3; i++) {
-      const data = new Villain(i, 'Villain ' + i, 1, 'image ' + i + '.png');
-      result.push(data);
-    }
-    return result;
-  }
-
-  /**
+    /**
    * Create a mocked list of processes
    * @returns {Process[]}
    */

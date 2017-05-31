@@ -4,9 +4,9 @@ html, body {
     height: 100%;
 }
 h2 { color: #444; font-weight: lighter; }
-body, input[text], button { color: #888; font-family: Cambria, Georgia; }
+body, input[text], button { color: #888; font-family: 'Open Sans', Helvetica Neue, sans-serif; }
 button { padding: 0.2em; font-size: 14px}
-* { font-family: Arial; }
+* {   font-family: "Open Sans", "Helvetica Neue", sans-serif;  }
 
 .full-width {
     width: 100%;
@@ -32,7 +32,7 @@ button { padding: 0.2em; font-size: 14px}
   /* May want to do this if there is risk the container may be narrower than the element inside */
   white-space: nowrap;
 }
- 
+
 /* The ghost, nudged to maintain perfect centering */
 .block:before {
   content: '';
@@ -41,7 +41,7 @@ button { padding: 0.2em; font-size: 14px}
   vertical-align: middle;
 }
 
-/* The element to be centered, can also be of any width and height */ 
+/* The element to be centered, can also be of any width and height */
 .centered {
   display: inline-block;
   vertical-align: middle;

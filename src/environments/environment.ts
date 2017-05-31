@@ -19,10 +19,9 @@ export const environment = {
       clientSecret: 'trustedclient123'
     },
     apiUrls: [
-      { id: 'HEROES_SERVICE_URL', url: 'app/heroes' },
-      { id: 'PROCESS_SERVICE_URL', url: 'app/process' },
-      { id: 'VILLAINS_SERVICE_URL', url: 'app/villains' },
-      { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:3000/api/oauth/token' }
+      { id: 'PROCESS_SERVICE_URL', url: 'http://localhost:8080/process' },
+      { id: 'PROCESS_HISTORY_SERVICE_URL', url: 'http://localhost:8080/history' },
+      { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:8080/oauth/token' }
     ],
     authService: AuthTypes.SKYP,
     errorHandler: ErrorHandlerTypes.SIMPLE,

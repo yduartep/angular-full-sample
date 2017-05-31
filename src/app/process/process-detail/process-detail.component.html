@@ -1,39 +1,109 @@
-<h1>{{ 'processDetail' | translate }}</h1>
-<div *ngIf="process">
-  <div class="row">
-    <label class="col-sm-1">{{ 'column-processInstanceId' | translate}}:</label>
-    <div class="col-sm-10">{{process.processInstanceId}}</div>
+<div class="panel panel-default" *ngIf="process">
+  <div class="panel-heading"><h2>{{ 'processDetail' | translate }}</h2></div>
+  <div class="panel-body ">
+    <div class="row">
+      <div class="col-md-4">
+        <label for="processInstanceId">{{ 'column-processInstanceId' | translate}}:</label>
+        <div id="processInstanceId">{{process.processInstanceId}}</div>
+      </div>
+      <div class="col-md-4">
+        <label for="processKey">{{ 'column-processKey' | translate}}:</label>
+        <div id="processKey">{{process.processKey}}</div>
+      </div>
+      <div class="col-md-4">
+        <label for="processDefinitionId">{{ 'column-processDefinitionId' | translate}}:</label>
+        <div id="processDefinitionId">{{process.processDefinitionId}}</div>
+      </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row row-m-t">
+      <div class="col-md-4" *ngIf="process.latestActivity">
+        <label for="latestActiviti">{{ 'column-latestActivity' | translate}}:</label>
+        <div id="latestActiviti">{{process.latestActivity.id}} | {{process.latestActivity.name}} |
+          {{process.latestActivity.creationDate | date: ('DATE_TIME_FORMAT' | translate)}}
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <a class="btn btn-info" md-button (click)="toggleImage()" *ngIf="!imageShow">
+          <i class="fa fa-picture-o" aria-hidden="true"></i> {{'processPreview' | translate}}
+        </a>
+        <a class="btn btn-info" md-button (click)="toggleImage()" *ngIf="imageShow">
+          <i class="fa fa-times-circle"></i> {{'close' | translate}} {{'processPreview' | translate}}
+        </a>
+      </div>
+      <div class="col-md-4" >
+        <a class="btn btn-default" class="btn btn-info" md-button (click)="showTasks()" *ngIf="process.tasks">
+          <i class="fa fa-tasks" aria-hidden="true"></i> {{'view-tasks' | translate}}
+        </a>
+        <span *ngIf="!process.tasks"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{'no-tasks' | translate}}</span>
+
+      </div>
+      <div class="col-md-4" *ngIf="process.processVariables">
+        <label for="processVariables">{{ 'column-processVariables' | translate}}: </label>
+        <div id="processVariables">{{process.processVariables}}</div>
+      </div>
+    </div>
+    <div cclass="row">
+      <div id="image-panel" *ngIf="imageShow" class="panel panel-default">
+        <div class="panel-body">
+          <img class="image" [src]="image" alt="{{process.processInstanceId}} image"/>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <h3>{{ 'processHistoryList' | translate }}</h3>
+      <table class="table table-striped" [mfData]="processHistoryList" #mf="mfDataTable" [mfRowsOnPage]="25">
+        <thead>
+        <tr>
+          <th class="col-lg-2">
+            <mfDefaultSorter by="activityId">{{ 'column-activityId' | translate}}</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="activityName">{{ 'column-activityName' | translate}}</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="activityType">{{ 'column-activityType' | translate}}</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="assignee">{{ 'column-assignee' | translate}}</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="startDate">{{ 'column-startDate' | translate}}</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="endDate">{{ 'column-endDate' | translate}}</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="duration">{{ 'column-duration' | translate}}</mfDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let processHistory of mf.data">
+          <td>{{processHistory.activityId}}</td>
+          <td>{{processHistory.activityName}}</td>
+          <td>{{processHistory.activityType}}</td>
+          <td>{{processHistory.assignee}}</td>
+          <td>{{processHistory.startDate | date: ('DATE_TIME_FORMAT' | translate)}}</td>
+          <td>{{processHistory.endDate | date: ('DATE_TIME_FORMAT' | translate)}}</td>
+          <td>{{processHistory.duration}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="8">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
-  <div class="row">
-    <label class="col-sm-1">{{ 'column-processKey' | translate}}:</label>
-    <div class="col-sm-10">{{process.processKey}}</div>
+
+  <div class="panel-footer">
+    <a class="btn btn-secondary btn-sm" md-button routerLink="/process">
+      <i class="fa fa-arrow-left"></i> {{ 'back' | translate}}
+    </a>
   </div>
-  <div class="row">
-    <label class="col-sm-1">{{ 'column-processDefinitionId' | translate}}:</label>
-    <div class="col-sm-10">{{process.processDefinitionId}}</div>
-  </div>
-  <div class="row">
-    <label class="col-sm-1">{{ 'column-latestActivity' | translate}}:</label>
-    <div class="col-sm-10">{{process.latestActivity}}</div>
-  </div>
-  <div class="row">
-    <label class="col-sm-1">{{ 'column-tasks' | translate}}:</label>
-    <div class="col-sm-10">{{process.tasks}}</div>
-  </div>
-  <div class="row">
-    <label class="col-sm-1">{{ 'column-processVariables' | translate}}: </label>
-    <div class="col-sm-10">{{process.processVariables}}</div>
-  </div>
-  <div class="row">
-    <label class="col-sm-1">{{ 'column-preview' | translate}}:</label>
-    <div class="col-sm-10"><img src="assets/images/{{process.diagramURL}}" alt="{{process.processInstanceId}}" /></div>
-  </div>
-</div>
-<div class="btn-group">
-  <button class="btn btn-secondary btn-sm" routerLink="/process">
-    <i class="fa fa-arrow-left"></i> {{ 'back' | translate}}
-  </button>
-  <button (click)="delete(process.id)" class="btn btn-danger btn-sm">
-    <i class="fa fa-times"></i> {{ 'delete' | translate}}
-  </button>
 </div>

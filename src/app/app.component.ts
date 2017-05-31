@@ -7,10 +7,11 @@ import { AuthHelper } from './core/services/auth.helper';
 import { Message } from './modal-message/message';
 import { MessageService } from './modal-message/message.service';
 import { ModalMessageComponent } from './modal-message/modal-message.component';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css', './fonts.css'],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -22,13 +23,19 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject('defaultLanguage') private defaultLanguage: string,
     private authHelper: AuthHelper,
     private translate: TranslateService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private titleService: Title
   ) {
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang(defaultLanguage);
 
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use(localStorage['language'] || defaultLanguage);
+
+    // The page title translated
+    translate.get('application.title').subscribe((res: string) => {
+      titleService.setTitle(res);
+    });
 
     // subscribe to the messages sent from other components
     this.subscription = this.messageService.getMessage().subscribe((message: Message) => {

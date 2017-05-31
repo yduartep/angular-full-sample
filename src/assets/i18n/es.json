@@ -1,25 +1,26 @@
 {
-  "application.title": "Gestión de Procesos",
+  "application.title": "Aplicación de Gestión de Procesos",
   "HELLO": "Bienvenido a mi aplicacion de Angular!<br><strong>Esta es una app increible que usa lo ultimo en tecnologia!</strong>",
+  "DATE_TIME_FORMAT": "dd/MM/yyyy HH:mm:ss",
+  "DATE_FORMAT": "yyyy/MM/dd",
   "home": "Inicio",
   "back": "Atras",
   "delete": "Eliminar",
   "about": "Sobre nosotros",
   "help": "Ayuda",
+  "close": "Cerrar",
 
-  "heroesList": "Lista de Super heroes",
-  "villainsList": "Lista de Villanos",
-  "heroDetail": "Detalles del Super heroe",
-  "villainDetail": "Detalles del Villano",
+  "filter": "Filtrar",
+  "search": "Buscar",
+  "reset": "Reiniciar",
+
   "processDetail": "Detalles de Proceso",
-  "tourOfHeroes": "Tour de los heroes y villanos",
   "button-createNew": "Crear",
   "button-search": "Buscar",
 
   "column-preview": "Imagen",
   "column-name": "Nombre",
   "column-actions": "Acciones",
-  "column-editorial": "Editorial",
 
   "column-executionId":"Id Ejecución",
   "column-processInstanceId":"Id Instancia Proceso",
@@ -30,6 +31,14 @@
   "column-latestActivity":"Última Actividad",
   "column-tasks":"Tareas",
   "column-processVariables":"Variables del Proceso",
+
+  "column-activityId":"ID Actividad",
+  "column-activityName":"Nombre Actividad",
+  "column-activityType":"Tipo Actividad",
+  "column-assignee":"Asignación",
+  "column-startDate":"Fecha Inicio",
+  "column-endDate":"Fecha Fin",
+  "column-duration":"Duración",
 
   "language": "Idioma",
   "english": "Inglés",
@@ -45,24 +54,22 @@
   "hero-create-new": {
     "newHero": "Nuevo heroe"
   },
-  "heroPower": "Poder del heroe",
   "details": "info",
-  "saveHero": "Guardar heroe",
-  "createNewHero": "Crear nuevo heroe",
   "pickColor": "Escoge un color para resaltar",
   "alert": "Alerta",
-  "sureRemoveHero": "¿Estas seguro de que quieres eliminar el heroe?",
   "cancel": "Cancelar",
   "remove": "Eliminar",
-  "findHero": "Busca un heroe",
   "back": "Atras",
-  "noHero": "No hay heroe!",
 
-  "heroes": "Heroes",
-  "villains" : "Villanos",
   "aboutus" : "Acerca de Nosotros",
   "processes": "Procesos",
 
-  "processList": "Lista de Procesos"
+  "processList": "Lista de Procesos",
+  "processHistoryList": "Lista de Histórico de Procesos",
+  "processDetail":"Detalle del Proceso",
+  "processPreview":"Previsualización del Proceso",
+
+  "view-tasks": "Ver Tareas",
+  "no-tasks": "No hay tareas"
 
 }

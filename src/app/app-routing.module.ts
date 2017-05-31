@@ -23,16 +23,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'heroes',
-    loadChildren: 'app/heroes/heroes.module#HeroesModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'villains',
-    loadChildren: 'app/villains/villains.module#VillainsModule',
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'about',
     component: AboutComponent,
     canActivate: [AuthGuard]

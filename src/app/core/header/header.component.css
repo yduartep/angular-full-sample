@@ -1,6 +1,6 @@
 :host>div {
-  background-color: #1976D2;
-  color: whitesmoke;
+  background-color: #ffffff;
+  color: #2194a4;
   height: 56px;
   min-height: 56px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
@@ -17,4 +17,9 @@ a {
 .header .logo {
   width: 100px;
   padding-right: 20px;
+}
+
+.title {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
 }

@@ -18,15 +18,20 @@ export class ModalMessageComponent implements OnInit {
   @Input()
   type: string;
 
+  @Input()
+  format: string;
+
   @Output() onOk: EventEmitter<boolean> = new EventEmitter();
   @Output() onClose: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('modalMsg') modal: ModalDirective;
 
   constructor() {
+
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   /**
    * Mehtod that returns the modal icon to display depending of the modal status

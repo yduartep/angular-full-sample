@@ -3,38 +3,51 @@
     <h2>{{ 'processList' | translate }}</h2>
   </div>
 </div>
-<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+<div class="panel panel-default" >
+  <div class="panel-heading">{{ 'filter' | translate }}</div>
+  <div class="panel-footer">
+    <button class="btn btn-primary" routerLink="/process">
+      <i class="fa"></i> {{ 'search' | translate}}
+    </button>
+    <button class="btn btn-warning" routerLink="/process">
+      <i class="fa"></i> {{ 'reset' | translate}}
+    </button>
+  </div>
+</div>
+<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="data && data.length">
   <thead>
-    <tr>
-      <th class="col-lg-2">
-        <mfDefaultSorter by="processInstanceId">{{ 'column-processInstanceId' | translate}}</mfDefaultSorter>
-      </th>
-      <th>
-        <mfDefaultSorter by="processKey">{{ 'column-processKey' | translate}}</mfDefaultSorter>
-      </th>
-      <th>
-        <mfDefaultSorter by="processDefinitionId">{{ 'column-processDefinitionId' | translate}}</mfDefaultSorter>
-      </th>
-      <th>
-        <mfDefaultSorter by="preview">{{ 'column-actions' | translate}}</mfDefaultSorter>
-      </th>
-    </tr>
+  <tr>
+    <th class="col-lg-2">
+      <mfDefaultSorter by="processInstanceId">{{ 'column-processInstanceId' | translate}}</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="processKey">{{ 'column-processKey' | translate}}</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="processDefinitionId">{{ 'column-processDefinitionId' | translate}}</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="preview">{{ 'column-actions' | translate}}</mfDefaultSorter>
+    </th>
+  </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let process of mf.data">
-      <td>{{process.processInstanceId}}</td>
-      <td>{{process.processKey}}</td>
-      <td>{{process.processDefinitionId}}</td>
-      <td><button routerLink="/process/detail/{{process.processInstanceId}}" class="btn btn-secondary btn-sm">
+  <tr *ngFor="let process of mf.data">
+    <td>{{process.processInstanceId}}</td>
+    <td>{{process.processKey}}</td>
+    <td>{{process.processDefinitionId}}</td>
+    <td>
+      <button routerLink="/process/detail/{{process.processInstanceId}}" class="btn btn-secondary btn-sm">
         <i class="fa fa-search"></i>
-      </button></td>
-    </tr>
+      </button>
+    </td>
+  </tr>
   </tbody>
   <tfoot>
-    <tr>
-      <td colspan="8">
-        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-      </td>
-    </tr>
+  <tr>
+    <td colspan="8">
+      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+    </td>
+  </tr>
   </tfoot>
 </table>

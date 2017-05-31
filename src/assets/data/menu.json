@@ -1,12 +1,4 @@
 [{
-    "title": "heroes",
-    "action": "/heroes",
-    "icon": "fa-flash"
-}, {
-  "title": "villains",
-  "action": "/villains",
-  "icon": "fa-user-secret"
-}, {
   "title": "processes",
   "action": "/process",
   "icon": "fa-cog"
