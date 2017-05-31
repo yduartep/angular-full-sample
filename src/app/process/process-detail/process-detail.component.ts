@@ -16,11 +16,18 @@ import { Subscription } from 'rxjs/Subscription';
 import {ProcessHistory} from '../shared/processHistory';
 import {MessageFormat} from '../../modal-message/message-format';
 
+import { fadeInNewAnimation } from '../../_animations/index';
 
 @Component({
+  moduleId: module.id.toString(),
   selector: 'app-process-detail',
   templateUrl: './process-detail.component.html',
-  styleUrls: ['./process-detail.component.css']
+  styleUrls: ['./process-detail.component.css'],
+  // make fade in animation available to this component
+  animations: [fadeInNewAnimation],
+
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInNewAnimation]': '' }
 })
 export class ProcessDetailComponent implements OnInit {
   processIdSelected: string;

@@ -14,6 +14,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // components
 import { AppComponent } from './app.component';
@@ -36,6 +37,7 @@ import { httpFactory } from './shared/http.factory';
     SharedModule,
     CoreModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
