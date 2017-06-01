@@ -1,9 +1,10 @@
-﻿import {Component, OnInit} from "@angular/core";
+﻿import {Component, OnInit} from '@angular/core';
 // import slide in/out animation
-import {slideInOutAnimation} from "../../_animations/index";
-import {ProcessService} from "../shared/process.service";
-import {Process} from "../shared/process";
-import {ProcessDetailComponent} from "./process-detail.component";
+import {slideInOutAnimation} from '../../_animations/index';
+import {ProcessService} from '../shared/process.service';
+import {Process} from '../shared/process';
+import {ProcessDetailComponent} from './process-detail.component';
+import {PrettyJsonComponent} from 'angular2-prettyjson';
 
 @Component({
   moduleId: module.id.toString(),
@@ -25,7 +26,7 @@ export class ProcessDetailVariablesComponent implements OnInit {
 
   ngOnInit() {
     this.service.findById(this.parent.route.snapshot.params['id']).subscribe((process: Process) => {
-      this.processVariables = JSON.stringify(process.processVariables);
+      this.processVariables = process.processVariables;
     });
   }
 }

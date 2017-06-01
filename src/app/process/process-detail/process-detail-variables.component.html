@@ -2,7 +2,7 @@
   <h1>{{"processVariables" | translate}}</h1>
   <div class="form-container">
     <div class="form-group" *ngIf="processVariables">
-      <span>{{processVariables}}</span>
+      <prettyjson [obj]="processVariables"></prettyjson>
     </div>
     <div class="form-group">
       <a class="btn btn-default" [routerLink]="['../']">{{"close" | translate}}</a>
