@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
-import { fadeInNewAnimation } from '../../_animations/index';
+import { fadeInAnimation } from '../../_animations/index';
 
 
 // models
@@ -22,10 +22,10 @@ import { MessageService } from '../../modal-message/message.service';
   templateUrl: './process-list.component.html',
   styleUrls: ['./process-list.component.css'],
   // make fade in animation available to this component
-  animations: [fadeInNewAnimation],
+  animations: [fadeInAnimation],
 
   // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInNewAnimation]': '' }
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ProcessListComponent implements OnInit {
   public isRequesting = false;

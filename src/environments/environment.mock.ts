@@ -9,7 +9,7 @@ import { LoggerTypes } from '../app/core/factories/logger.type';
 export const environment = {
   production: false,
   envName: 'mock',
-  defaultLanguage: 'en',
+  defaultLanguage: 'es',
   apiConfig: {
     apiEnv: 'mock',
     timeExpired: 20,

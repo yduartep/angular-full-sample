@@ -5,7 +5,7 @@ import { LoggerTypes } from '../app/core/factories/logger.type';
 export const environment = {
   production: true,
   envName: 'prod',
-  defaultLanguage: 'en',
+  defaultLanguage: 'es',
   apiConfig: {
     apiEnv: 'prod',
     timeExpired: 20,

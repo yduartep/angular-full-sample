@@ -68,7 +68,12 @@
   "processHistoryList": "Process History List",
   "processDetail":"Process Detail",
   "processPreview":"Process Preview",
+  "processVariables":"Process Variables",
+  "processTasks":"Process Tasks",
+  "processImage":"Process Image",
 
   "view-tasks": "View Tasks",
-  "no-tasks": "There are no tasks"
+  "view-variables": "View Variables",
+  "no-tasks": "There are no tasks",
+  "no-variables": "There are no variables"
 }

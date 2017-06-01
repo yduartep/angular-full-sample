@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { fadeInNewAnimation } from '../_animations/index';
+import { fadeInAnimation } from '../_animations/index';
 
 
 @Component({
@@ -10,10 +10,10 @@ import { fadeInNewAnimation } from '../_animations/index';
   styleUrls: ['./about.component.css'],
 
   // make fade in animation available to this component
-  animations: [fadeInNewAnimation],
+  animations: [fadeInAnimation],
 
   // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInNewAnimation]': '' }
+  host: { '[@fadeInAnimation]': '' }
 })
 export class AboutComponent implements OnInit {
   constructor() { }

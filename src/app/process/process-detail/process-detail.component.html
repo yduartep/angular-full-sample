@@ -25,30 +25,22 @@
       </div>
 
       <div class="col-md-4">
-        <a class="btn btn-info" md-button (click)="toggleImage()" *ngIf="!imageShow">
+        <a class="btn btn-info" md-button [routerLink]="['image']">
           <i class="fa fa-picture-o" aria-hidden="true"></i> {{'processPreview' | translate}}
         </a>
-        <a class="btn btn-info" md-button (click)="toggleImage()" *ngIf="imageShow">
-          <i class="fa fa-times-circle"></i> {{'close' | translate}} {{'processPreview' | translate}}
-        </a>
       </div>
-      <div class="col-md-4" >
-        <a class="btn btn-default" class="btn btn-info" md-button (click)="showTasks()" *ngIf="process.tasks">
+      <div class="col-md-4">
+        <a class="btn btn-default" class="btn btn-info" md-button [routerLink]="['tasks']" *ngIf="process.tasks">
           <i class="fa fa-tasks" aria-hidden="true"></i> {{'view-tasks' | translate}}
         </a>
         <span *ngIf="!process.tasks"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{'no-tasks' | translate}}</span>
-
       </div>
-      <div class="col-md-4" *ngIf="process.processVariables">
-        <label for="processVariables">{{ 'column-processVariables' | translate}}: </label>
-        <div id="processVariables">{{process.processVariables}}</div>
-      </div>
-    </div>
-    <div cclass="row">
-      <div id="image-panel" *ngIf="imageShow" class="panel panel-default">
-        <div class="panel-body">
-          <img class="image" [src]="image" alt="{{process.processInstanceId}} image"/>
-        </div>
+      <div class="col-md-4">
+        <a class="btn btn-default" class="btn btn-info" md-button [routerLink]="['variables']"
+           *ngIf="process.processVariables">
+          <i class="fa fa-database" aria-hidden="true"></i> {{'view-variables' | translate}}
+        </a>
+        <span *ngIf="!process.processVariables"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{'no-variables' | translate}}</span>
       </div>
     </div>
     <div class="table-responsive">
@@ -106,4 +98,10 @@
       <i class="fa fa-arrow-left"></i> {{ 'back' | translate}}
     </a>
   </div>
+
+  <div class="view-side-form">
+    <router-outlet></router-outlet>
+  </div>
 </div>
+
+

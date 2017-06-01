@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { fadeInNewAnimation } from '../_animations/index';
+import { fadeInAnimation } from '../_animations/index';
 
 @Component({
   moduleId: module.id.toString(),
@@ -8,10 +8,10 @@ import { fadeInNewAnimation } from '../_animations/index';
   template: `<router-outlet></router-outlet>`,
 
   // make fade in animation available to this component
-  animations: [fadeInNewAnimation],
+  animations: [fadeInAnimation],
 
   // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInNewAnimation]': '' }
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ProcessComponent implements OnInit {
 

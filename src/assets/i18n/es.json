@@ -68,8 +68,13 @@
   "processHistoryList": "Lista de Histórico de Procesos",
   "processDetail":"Detalle del Proceso",
   "processPreview":"Previsualización del Proceso",
+  "processVariables":"Variables del Proceso",
+  "processTasks":"Tareas del Proceso",
+  "processImage":"Imagen del Proceso",
 
   "view-tasks": "Ver Tareas",
-  "no-tasks": "No hay tareas"
+  "view-variables": "Ver Variables",
+  "no-tasks": "No hay tareas",
+  "no-variables": "No hay variables"
 
 }

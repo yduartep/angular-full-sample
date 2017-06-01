@@ -3,15 +3,17 @@
     <h2>{{ 'processList' | translate }}</h2>
   </div>
 </div>
-<div class="panel panel-default" >
+<div class="panel panel-default">
   <div class="panel-heading">{{ 'filter' | translate }}</div>
   <div class="panel-footer">
-    <button class="btn btn-primary" routerLink="/process">
-      <i class="fa"></i> {{ 'search' | translate}}
-    </button>
-    <button class="btn btn-warning" routerLink="/process">
-      <i class="fa"></i> {{ 'reset' | translate}}
-    </button>
+    <form>
+      <button class="btn btn-primary" routerLink="/process">
+        <i class="fa"></i> {{ 'search' | translate}}
+      </button>
+      <button class="btn btn-warning" routerLink="/process">
+        <i class="fa"></i> {{ 'reset' | translate}}
+      </button>
+    </form>
   </div>
 </div>
 <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="data && data.length">
@@ -33,11 +35,11 @@
   </thead>
   <tbody>
   <tr *ngFor="let process of mf.data">
-    <td>{{process.processInstanceId}}</td>
+    <td><a class="btn btn-default" [routerLink]="['/process/detail/'+process.processInstanceId]">{{process.processInstanceId}}</a> </td>
     <td>{{process.processKey}}</td>
     <td>{{process.processDefinitionId}}</td>
     <td>
-      <button routerLink="/process/detail/{{process.processInstanceId}}" class="btn btn-secondary btn-sm">
+      <button [routerLink]="['/process/detail/'+process.processInstanceId]" class="btn btn-secondary btn-sm">
         <i class="fa fa-search"></i>
       </button>
     </td>

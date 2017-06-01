@@ -10,7 +10,7 @@ import { LoggerTypes } from '../app/core/factories/logger.type';
 export const environment = {
   production: false,
   envName: 'dev',
-  defaultLanguage: 'en',
+  defaultLanguage: 'es',
   apiConfig: {
     apiEnv: 'dev',
     timeExpired: 20,
