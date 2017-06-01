@@ -1,9 +1,9 @@
 ﻿// import the required animation functions from the angular animations module
 import {trigger, state, animate, transition, style} from '@angular/animations';
 
-export const fadeInwAnimation =
+export const fadeInAnimation =
   // trigger name for attaching this animation to an element using the [@triggerName] syntax
-  trigger('fadeInwAnimation', [
+  trigger('fadeInAnimation', [
 
 
     // end state styles for route container (host)

@@ -13,7 +13,8 @@ export const slideInOutAnimation =
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.8)'
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            zIndex: 4
         })),
 
         // route 'enter' transition
@@ -21,7 +22,7 @@ export const slideInOutAnimation =
 
             // styles at start of transition
             style({
-                // start with the content positioned off the right of the screen, 
+                // start with the content positioned off the right of the screen,
                 // -400% is required instead of -100% because the negative position adds to the width of the element
                 right: '-400%',
 
