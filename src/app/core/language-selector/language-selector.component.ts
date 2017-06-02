@@ -11,7 +11,7 @@ import { LanguageService } from './language.service';
 export class LanguageSelectorComponent implements OnInit {
   @Input()
   languages: Language[];
-  languageSelected: string = localStorage['language'] || 'en';
+  languageSelected: string = localStorage['language'] || 'es';
 
   constructor(
     private languageService: LanguageService,

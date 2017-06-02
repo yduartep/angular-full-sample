@@ -6,6 +6,7 @@
 import { AuthTypes } from '../app/core/factories/auth.type';
 import { ErrorHandlerTypes } from '../app/core/factories/error-handler.type';
 import { LoggerTypes } from '../app/core/factories/logger.type';
+import {DomSanitizer} from '@angular/platform-browser';
 
 export const environment = {
   production: false,
@@ -20,11 +21,13 @@ export const environment = {
     },
     apiUrls: [
       { id: 'PROCESS_SERVICE_URL', url: 'http://localhost:8080/process' },
+      { id: 'PROCESS_DEFINITION_SERVICE_URL', url: 'http://localhost:8080/definition' },
       { id: 'PROCESS_HISTORY_SERVICE_URL', url: 'http://localhost:8080/history' },
       { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:8080/oauth/token' }
     ],
     authService: AuthTypes.SKYP,
     errorHandler: ErrorHandlerTypes.SIMPLE,
     loggerService: LoggerTypes.CONSOLE,
+    domSanitizer: DomSanitizer,
   }
 };

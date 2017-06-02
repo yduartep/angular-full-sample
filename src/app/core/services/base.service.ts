@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {Injectable, Inject} from '@angular/core';
+import { Http, Response, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -44,6 +44,23 @@ export abstract class BaseService<T> {
   }
 
   /**
+   * Gets an image resource
+   * @param id
+   * @param imageResourceUrl
+   * @param contentType
+   * @returns {Observable<R>}
+   */
+  public getImage(id: string, imageResourceUrl: string= '/image', contentType: string= 'image/jpg'): Observable<Blob> {
+    const headers = new Headers({'Content-Type': contentType});
+    const options = new RequestOptions({headers: headers, responseType: ResponseContentType.Blob});
+    return this.http.get(this.getServiceUrl() + imageResourceUrl + '/' + id, options).map(res => {
+      return new Blob([res.blob()], {
+        type: res.headers.get('Content-Type')
+      });
+    });
+  }
+
+  /**
    * Insert the data
    * @param data the object containing the data to be inserted
    * @returns gets the response
@@ -72,13 +89,10 @@ export abstract class BaseService<T> {
   }
 
   protected extractBody(res: Response) {
-    console.info(res.text());
-    console.log(res);
     return res.text();
   }
 
   protected getBlob(res: Response) {
-    console.info(res.blob());
     return res.blob();
   }
 

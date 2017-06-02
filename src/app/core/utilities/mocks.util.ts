@@ -49,7 +49,7 @@ export class MocksUtil {
     for (let i = 1; i <= 3; i++) {
       const activity = new Activity('idTask' + i, 'name' + i, new Date());
       const tasks = Array<Task>();
-      const processVariables = new Map<string, any>();
+      const processVariables = [];
       const data = new Process('executionId' + i, 'processInstanceId' + i, 'processKey' + i, 'processDefinitionId' + i,
         'diagramURL' + i, 'tenantId' + i, activity, tasks, processVariables);
       result.push(data);

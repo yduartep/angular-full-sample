@@ -15,6 +15,7 @@ export const environment = {
     },
     apiUrls: [
       { id: 'PROCESS_SERVICE_URL', url: 'app/process' },
+      { id: 'PROCESS_DEFINITION_SERVICE_URL', url: 'app/definition' },
       { id: 'PROCESS_HISTORY_SERVICE_URL', url: 'app/history' },
       { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:8080/oauth/token' }
     ],

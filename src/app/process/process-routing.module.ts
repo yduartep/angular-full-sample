@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ProcessComponent} from './process.component';
 import {ProcessListComponent} from './process-list/process-list.component';
+import {ProcessDefinitionImageComponent} from './process-definition/process-definition-image.component';
 import {ProcessDetailComponent} from './process-detail/process-detail.component';
 import {ProcessDetailVariablesComponent} from './process-detail/process-detail-variables.component';
 import {ProcessDetailTasksComponent} from './process-detail/process-detail-tasks.component';
@@ -12,7 +13,13 @@ export const processRoutes: Routes = <Routes>[{
   path: '',
   component: ProcessComponent,
   children: [
-    {path: '', component: ProcessListComponent},
+    {
+      path: '',
+      component: ProcessListComponent,
+      children: [
+        {path: 'definition/:id', component: ProcessDefinitionImageComponent},
+      ]
+    },
     {
       path: 'detail/:id',
       component: ProcessDetailComponent,
@@ -33,5 +40,5 @@ export const processRoutes: Routes = <Routes>[{
 export class ProcessRoutingModule {
 }
 
-export const processRoutedComponents = [ProcessComponent, ProcessListComponent, ProcessDetailComponent,
-ProcessDetailVariablesComponent, ProcessDetailImageComponent, ProcessDetailTasksComponent];
+export const processRoutedComponents = [ProcessComponent, ProcessDefinitionImageComponent, ProcessListComponent, ProcessDetailComponent,
+  ProcessDetailVariablesComponent, ProcessDetailImageComponent, ProcessDetailTasksComponent];

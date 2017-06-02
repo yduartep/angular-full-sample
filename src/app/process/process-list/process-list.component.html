@@ -5,16 +5,73 @@
 </div>
 <div class="panel panel-default">
   <div class="panel-heading">{{ 'filter' | translate }}</div>
-  <div class="panel-footer">
-    <form>
-      <button class="btn btn-primary" routerLink="/process">
+  <form (ngSubmit)="filter()">
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="selectedProcessInstanceId">{{ 'column-processInstanceId' | translate }}</label>
+        <input type="number" class="form-control" id="selectedProcessInstanceId" name="selectedProcessInstanceId"
+               [(ngModel)]="processFilterForm.processInstanceId"
+               placeholder="{{ 'column-processInstanceId' | translate }}">
+        <p class="bg-primary" *ngIf="processFilterForm.processInstanceId">&nbsp;<i class="fa fa-info-circle"
+                                                                                   aria-hidden="true"></i>
+          {{'processlist.filter.processInstanceId.notEmptyHelper' | translate}}</p>
+      </div>
+      <div *ngIf="!processFilterForm.processInstanceId">
+        <div class="form-group">
+          <label for="processType">{{ 'processType' | translate }}</label>
+          <select id="processType" class="form-control" [(ngModel)]="processFilterForm.processDefinition"
+                  name="processType" (change)="loadProcessDefinitionElements(processFilterForm.processDefinition)">
+            <option *ngFor="let processDefinition of processDefinitions" [ngValue]="processDefinition">
+              {{processDefinition.name}} ({{processDefinition.id}} | {{processDefinition.deploymentDate | date:
+              ('DATE_TIME_FORMAT' | translate)}})
+            </option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="processDefinitionElements">
+          <label for="activityId">{{ 'activityId' | translate }}</label>
+          <select id="activityId" class="form-control" [(ngModel)]="processFilterForm.processDefinitionElement"
+                  name="activityId">
+            <option *ngFor="let processDefinitionElement of processDefinitionElements"
+                    [ngValue]="processDefinitionElement">
+              {{processDefinitionElement.key}} ({{processDefinitionElement.value}})
+            </option>
+          </select>
+          <p class="help-block"><a class="btn btn-info" md-button
+                                   [routerLink]="['definition',processFilterForm.processDefinition.id]">
+            <i class="fa fa-picture-o" aria-hidden="true"></i> {{'processDefinitionPreview' | translate}}
+          </a></p>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" [disabled]="isAddNewVariableDisabled()" (click)="addVariable()">
+            <i class="fa fa-plus"></i> {{ 'processlist.filter.variablesToFilter.add' | translate}}
+          </button>
+          <div class="form-inline">
+            <div class="variable-to-filter" *ngFor="let variableToFilter of processFilterForm.variablesToFilter">
+              <input type="text" class="form-control" name="variableToFilterKey"
+                     [value]="variableToFilter.variableKey" (input)="variableToFilter.variableKey = $event.target.value"
+                     placeholder="{{ 'processlist.filter.variablesToFilter.key' | translate }}">
+              <input type="text" class="form-control" name="variableToFilterValue"
+                     [value]="variableToFilter.variableValue" (input)="variableToFilter.variableValue = $event.target.value"
+                     placeholder="{{ 'processlist.filter.variablesToFilter.value' | translate }}">
+              <button type="button btn-primary" class="btn btn-danger" (click)="removeVariable(variableToFilter)">
+                <i class="fa fa-times"></i> {{ 'processlist.filter.variablesToFilter.remove' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="panel-footer">
+      <button type="submit" class="btn btn-primary"
+              [disabled]="!isFormEnabled()">
         <i class="fa"></i> {{ 'search' | translate}}
       </button>
-      <button class="btn btn-warning" routerLink="/process">
+      <button type="button" class="btn btn-warning" (click)="reset()">
         <i class="fa"></i> {{ 'reset' | translate}}
       </button>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
 <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="data && data.length">
   <thead>
@@ -35,7 +92,9 @@
   </thead>
   <tbody>
   <tr *ngFor="let process of mf.data">
-    <td><a class="btn btn-default" [routerLink]="['/process/detail/'+process.processInstanceId]">{{process.processInstanceId}}</a> </td>
+    <td><a class="btn btn-default"
+           [routerLink]="['detail/', process.processInstanceId]">{{process.processInstanceId}}</a>
+    </td>
     <td>{{process.processKey}}</td>
     <td>{{process.processDefinitionId}}</td>
     <td>
@@ -53,3 +112,7 @@
   </tr>
   </tfoot>
 </table>
+<div *ngIf="!data || !data.length"><p>{{'no-processes' | translate}}</p></div>
+<div class="view-side-form">
+  <router-outlet></router-outlet>
+</div>

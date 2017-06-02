@@ -10,11 +10,11 @@ export class Process {
   tenantId: string;
   latestActivity: Activity;
   tasks: Array<Task>;
-  processVariables: Map<string, any>;
+  processVariables: Array<any>;
 
   constructor(executionId: string, processInstanceId: string, processKey: string, processDefinitionId: string,
               diagramURL: string, tenantId: string, latestActivity: Activity,
-              tasks: Array<Task>, processVariables: Map<string, any>) {
+              tasks: Array<Task>, processVariables: Array<any>) {
     this.executionId = executionId;
     this.processInstanceId = processInstanceId;
     this.processKey = processKey;

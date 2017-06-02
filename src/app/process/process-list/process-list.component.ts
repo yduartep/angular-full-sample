@@ -1,20 +1,17 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import 'rxjs/add/operator/map';
-import { Subscription } from 'rxjs/Subscription';
-import { fadeInAnimation } from '../../_animations/index';
-
-
+import {Component, Inject, OnInit} from '@angular/core';
+import {fadeInAnimation} from '../../_animations/index';
 // models
-import { Process } from '../shared/process';
-import { Message } from '../../modal-message/message';
-import { MessageType } from '../../modal-message/message-type';
-
+import {Process} from '../shared/process';
+import {ProcessDefinition} from '../shared/process-definition';
+import {ProcessDefinitionElement} from '../shared/process-definition-element';
+import {ProcessFilterForm} from './process-filter-form';
 // services
-import { ProcessService } from '../shared/process.service';
-import { SpinnerService } from '../../core/spinner/spinner.service';
-import { LoggerService } from '../../core/services/logger.service';
-import { MessageService } from '../../modal-message/message.service';
+import {ProcessService} from '../shared/process.service';
+import {ProcessDefinitionService} from '../shared/process-definition.service';
+import {LoggerService} from '../../core/services/logger.service';
+import {MessageService} from '../../modal-message/message.service';
+import {ProcessFilter} from '../shared/process-filter';
+import {ProcessFilterFormVariable} from './process-filter-form-variable';
 
 @Component({
   moduleId: module.id.toString(),
@@ -25,59 +22,134 @@ import { MessageService } from '../../modal-message/message.service';
   animations: [fadeInAnimation],
 
   // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' }
+  host: {'[@fadeInAnimation]': ''}
 })
 export class ProcessListComponent implements OnInit {
   public isRequesting = false;
-  processIdSelected: string;
-  data: Process[];
-  subscription: Subscription;
+  private _data: Process[];
+  private _processDefinitions: ProcessDefinition[];
+  private _processDefinitionElements: ProcessDefinitionElement[];
+  private _processFilterForm: ProcessFilterForm = new ProcessFilterForm();
 
-  constructor(
-    @Inject('LoggerService') private loggerService: LoggerService,
-    private service: ProcessService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private spinnerService: SpinnerService,
-    private messageService: MessageService
-  ) {
+  constructor(@Inject('LoggerService') private loggerService: LoggerService,
+              private processService: ProcessService,
+              private processDefinitionService: ProcessDefinitionService,
+              private messageService: MessageService) {
     // subscribe to the messages sent from other components
-    this.subscription = this.messageService.getConfirmed().subscribe((isConfirmed: boolean) => {
-      this.onOkDelete(isConfirmed);
-    });
   }
 
   ngOnInit() {
     this.loggerService.log('... initializing Process list component.');
     this.isRequesting = true;
+    this.loadProcessDefinitions();
+    this.findAll();
+  }
 
-    this.service.findAll()
+  findAll() {
+    this.processService.findAll()
       .subscribe(processes => {
-        this.data = processes.map(process => {
+        this._data = processes.map(process => {
           return process;
         });
       });
   }
 
-  delete(id: string) {
-    this.processIdSelected = id;
-    this.messageService.showMessage(new Message('Are you sure do you want to delete this Process?', 'warning', MessageType.CONFIRM));
+  loadProcessDefinitions() {
+    this.processDefinitionService.findAll()
+      .subscribe(processDefinitions => {
+        this._processDefinitions = processDefinitions.map(processDefinition => {
+          return processDefinition;
+        });
+      });
   }
 
-  onOkDelete(value) {
-    if (value) {
-      this.service.delete(this.processIdSelected).subscribe(res => {
-        if (res.ok) {
-          const index = this.data.findIndex(process => process.processInstanceId === this.processIdSelected);
-          this.data.splice(index, 1);
-          this.processIdSelected = null;
-          this.messageService.showMessage(new Message('The process was deleted successfully!!', 'success'));
-        } else {
-          this.messageService.showMessage(new Message('Impossible to delete the process!'));
-        }
-      }, err => this.messageService.showMessage(new Message('Impossible to delete the process!')));
+  loadProcessDefinitionElements(processDefinition: ProcessDefinition) {
+    this.processDefinitionService.getElements(processDefinition.id)
+      .subscribe(processDefinitionElements => {
+        this._processDefinitionElements = processDefinitionElements.map(processDefinitionElement => {
+          return processDefinitionElement;
+        });
+      });
+  }
+
+  filter() {
+    if (this.processFilterForm.processInstanceId) {
+      this.processService.findById(this.processFilterForm.processInstanceId).subscribe(process => {
+        this.data = [process];
+      });
     } else {
-      this.processIdSelected = null;
+      const processVariableToFilterMap = {};
+      this.processFilterForm.variablesToFilter.forEach(processVariableToFilter =>
+        processVariableToFilterMap[processVariableToFilter.variableKey] = processVariableToFilter.variableValue);
+
+      const processFilter = new ProcessFilter(this.processFilterForm.processDefinitionElement ?
+          this.processFilterForm.processDefinitionElement.key : undefined,
+        this.processFilterForm.processDefinition ? this.processFilterForm.processDefinition.id : undefined, processVariableToFilterMap);
+
+      this.processService.filter(processFilter)
+        .subscribe(processes => {
+          this._data = processes;
+        });
     }
+  }
+
+  reset() {
+    this.processFilterForm = new ProcessFilterForm();
+    this.processDefinitionElements = null;
+    this.findAll();
+  }
+
+  addVariable() {
+    this.processFilterForm.variablesToFilter.push(new ProcessFilterFormVariable('', ''));
+  }
+
+  removeVariable(processFilterFormVariable: ProcessFilterFormVariable) {
+    const index = this.processFilterForm.variablesToFilter.indexOf(processFilterFormVariable, 0);
+    this.processFilterForm.variablesToFilter.splice(index, 1);
+  }
+
+  isFormEnabled() {
+    return this.processFilterForm.processInstanceId ||
+      ((this.processFilterForm.processDefinition && !this.isAddNewVariableDisabled()) ||
+      (this.processFilterForm.variablesToFilter.length > 0 && !this.isAddNewVariableDisabled()));
+  }
+
+  isAddNewVariableDisabled() {
+    return this.processFilterForm.variablesToFilter.length > 0 &&
+      this.processFilterForm.variablesToFilter.find(processVariable => !processVariable.variableKey ||
+      !processVariable.variableValue);
+  }
+
+
+  get data(): Process[] {
+    return this._data;
+  }
+
+  set data(value: Process[]) {
+    this._data = value;
+  }
+
+  get processDefinitions(): ProcessDefinition[] {
+    return this._processDefinitions;
+  }
+
+  set processDefinitions(value: ProcessDefinition[]) {
+    this._processDefinitions = value;
+  }
+
+  get processDefinitionElements(): ProcessDefinitionElement[] {
+    return this._processDefinitionElements;
+  }
+
+  set processDefinitionElements(value: ProcessDefinitionElement[]) {
+    this._processDefinitionElements = value;
+  }
+
+  get processFilterForm(): ProcessFilterForm {
+    return this._processFilterForm;
+  }
+
+  set processFilterForm(value: ProcessFilterForm) {
+    this._processFilterForm = value;
   }
 }

@@ -13,13 +13,14 @@ animations_1.trigger('slideInOutAnimation', [
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.8)'
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        zIndex: 4
     })),
     // route 'enter' transition
     animations_1.transition(':enter', [
         // styles at start of transition
         animations_1.style({
-            // start with the content positioned off the right of the screen, 
+            // start with the content positioned off the right of the screen,
             // -400% is required instead of -100% because the negative position adds to the width of the element
             right: '-400%',
             // start with background opacity set to 0 (invisible)
@@ -44,4 +45,3 @@ animations_1.trigger('slideInOutAnimation', [
         }))
     ])
 ]);
-//# sourceMappingURL=slide-in-out.animation.js.map

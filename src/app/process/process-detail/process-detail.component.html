@@ -1,14 +1,14 @@
 <div class="panel panel-default" *ngIf="process">
-  <div class="panel-heading"><h2>{{ 'processDetail' | translate }}</h2></div>
+  <div class="panel-heading"><strong>{{ 'processDetail' | translate }}</strong></div>
   <div class="panel-body ">
     <div class="row">
       <div class="col-md-4">
         <label for="processInstanceId">{{ 'column-processInstanceId' | translate}}:</label>
-        <div id="processInstanceId">{{process.processInstanceId}}</div>
+        <div id="processInstanceId"><strong>{{process.processInstanceId}}</strong></div>
       </div>
       <div class="col-md-4">
         <label for="processKey">{{ 'column-processKey' | translate}}:</label>
-        <div id="processKey">{{process.processKey}}</div>
+        <div id="processKey" >{{process.processKey}}</div>
       </div>
       <div class="col-md-4">
         <label for="processDefinitionId">{{ 'column-processDefinitionId' | translate}}:</label>
@@ -19,8 +19,8 @@
     <div class="row row-m-t">
       <div class="col-md-4" *ngIf="process.latestActivity">
         <label for="latestActiviti">{{ 'column-latestActivity' | translate}}:</label>
-        <div id="latestActiviti">{{process.latestActivity.id}} | {{process.latestActivity.name}} |
-          {{process.latestActivity.creationDate | date: ('DATE_TIME_FORMAT' | translate)}}
+        <div id="latestActiviti"><u><small>{{process.latestActivity.id}} | {{process.latestActivity.name}} |
+          {{process.latestActivity.creationDate | date: ('DATE_TIME_FORMAT' | translate)}}</small></u>
         </div>
       </div>
 
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="table-responsive">
-      <h3>{{ 'processHistoryList' | translate }}</h3>
+      <h4>{{ 'processHistoryList' | translate }}</h4>
       <table class="table table-striped" [mfData]="processHistoryList" #mf="mfDataTable" [mfRowsOnPage]="25">
         <thead>
         <tr>
@@ -79,7 +79,7 @@
           <td>{{processHistory.assignee}}</td>
           <td>{{processHistory.startDate | date: ('DATE_TIME_FORMAT' | translate)}}</td>
           <td>{{processHistory.endDate | date: ('DATE_TIME_FORMAT' | translate)}}</td>
-          <td>{{processHistory.duration}}</td>
+          <td>{{processHistory.duration/1000}} {{'seconds' | translate }} ({{processHistory.duration}} ms)</td>
         </tr>
         </tbody>
         <tfoot>

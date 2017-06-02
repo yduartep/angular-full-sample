@@ -29,6 +29,7 @@ import {fadeInAnimation} from '../../_animations/index';
   // attach the fade in animation to the host (root) element of this component
   host: {'[@fadeInAnimation]': ''}
 })
+
 export class ProcessDetailComponent implements OnInit {
   process: Process;
   processHistoryList: ProcessHistory[];
