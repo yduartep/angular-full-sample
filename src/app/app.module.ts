@@ -18,7 +18,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // components
 import { AppComponent } from './app.component';
-import { AboutComponent } from './about/about.component';
 import { ModalMessageComponent } from './modal-message/modal-message.component';
 
 // services
@@ -49,7 +48,6 @@ import { httpFactory } from './shared/http.factory';
   ],
   declarations: [
     AppComponent,
-    AboutComponent,
     ModalMessageComponent
   ],
   providers: [

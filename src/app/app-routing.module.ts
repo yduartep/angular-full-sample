@@ -8,7 +8,6 @@ import { LoginGuard } from './core/guards/login.guard';
 // components
 import { LoginComponent } from './shared/login/login.component';
 import { PageNotFoundComponent } from './shared/not-found/not-found.component';
-import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/process', pathMatch: 'full' },
@@ -20,11 +19,6 @@ const routes: Routes = [
   {
     path: 'process',
     loadChildren: 'app/process/process.module#ProcessModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'about',
-    component: AboutComponent,
     canActivate: [AuthGuard]
   },
   { path: '**', component: PageNotFoundComponent }

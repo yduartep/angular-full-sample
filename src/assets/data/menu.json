@@ -2,8 +2,8 @@
   "title": "processes",
   "action": "/process",
   "icon": "fa-cog"
-}, {
-    "title": "aboutus",
-    "action": "/about",
-    "icon": "fa-users"
+},{
+  "title": "process-regression",
+  "action": "/regression",
+  "icon": "fa-retweet"
 }]
