@@ -15,7 +15,8 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "build:prod": "ng build --aot=false --target=production",
+    "build:dev": "ng build  --env=dev --aot=false --target=development  --base-href \"/ILIONX45/custom/NettitPlus/Reposicionamiento/\"",
+    "build:prod": "ng build  --env=prod --aot=false --target=production",
     "test": "ng test",
     "pretest": "npm run lint",
     "e2e": "ng e2e",

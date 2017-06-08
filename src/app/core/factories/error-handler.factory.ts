@@ -3,7 +3,7 @@ import { SimpleErrorHandler } from '../error.handler';
 
 // configurations
 import { ErrorHandlerTypes } from './error-handler.type';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.local';
 
 export function errorHandlerFactory(): ErrorHandler {
     switch (environment.apiConfig.errorHandler) {

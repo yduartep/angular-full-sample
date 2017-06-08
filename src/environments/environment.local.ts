@@ -10,10 +10,10 @@ import {DomSanitizer} from '@angular/platform-browser';
 
 export const environment = {
   production: false,
-  envName: 'dev',
+  envName: 'local',
   defaultLanguage: 'es',
   apiConfig: {
-    apiEnv: 'dev',
+    apiEnv: 'local',
     timeExpired: 20,
     credentials: {
       clientId: 'trustedclient',

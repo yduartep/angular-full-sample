@@ -29,9 +29,6 @@ export class ProcessService extends BaseService<Process> {
   }
 
   public filter(filter: ProcessFilter): Observable<Process[]> {
-    console.info("filter");
-    console.info(filter);
-    console.info(JSON.stringify(filter));
     return this.http.post(this.getServiceUrl() + '/filter', JSON.stringify(filter)).map(this.extractData);
   }
 }

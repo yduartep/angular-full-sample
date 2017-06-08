@@ -11,7 +11,7 @@ import { OAuthService } from '../services/oauth.service';
 
 // configurations
 import { AuthTypes } from './auth.type';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.local';
 import { COOKIE_IDENTIFIERS } from '../../cookie.identifiers';
 
 export function authFactory(http: Http, authHelper: AuthHelper): AuthService {

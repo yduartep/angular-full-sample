@@ -2,8 +2,5 @@
   "title": "processes",
   "action": "/process",
   "icon": "fa-cog"
-},{
-  "title": "process-regression",
-  "action": "/regression",
-  "icon": "fa-retweet"
-}]
+}
+]

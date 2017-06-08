@@ -33,7 +33,7 @@ import { loggerFactory } from './factories/logger.factory';
 import { errorHandlerFactory } from './factories/error-handler.factory';
 
 // environment
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.local';
 import { COOKIE_IDENTIFIERS } from '../cookie.identifiers';
 
 @NgModule({

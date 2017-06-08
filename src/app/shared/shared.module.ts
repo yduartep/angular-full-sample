@@ -20,7 +20,7 @@ import { AuthHelper } from '../core/services/auth.helper';
 import { SpinnerService } from '../core/spinner/spinner.service';
 
 // environments
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.local';
 
 @NgModule({
   imports: [

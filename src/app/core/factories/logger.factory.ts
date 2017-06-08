@@ -6,7 +6,7 @@ import { ConsoleLoggerService } from '../services/console-logger.service';
 
 // configurations
 import { LoggerTypes } from './logger.type';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.local';
 
 export function loggerFactory(): LoggerService {
     switch (environment.apiConfig.loggerService) {

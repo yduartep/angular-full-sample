@@ -7,6 +7,6 @@ export class LanguageService extends JsonFileService {
     constructor(protected http: Http) { super(http); }
 
     getFilePath(): string {
-        return 'assets/data/languages.json';
+        return './assets/data/languages.json';
     }
 }

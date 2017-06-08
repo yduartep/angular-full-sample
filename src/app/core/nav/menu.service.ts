@@ -7,6 +7,6 @@ export class MenuService extends JsonFileService {
     constructor(protected http: Http) { super(http); }
 
     getFilePath(): string {
-        return 'assets/data/menu.json';
+        return './assets/data/menu.json';
     }
 }
