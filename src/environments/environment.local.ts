@@ -20,10 +20,14 @@ export const environment = {
       clientSecret: 'trustedclient123'
     },
     apiUrls: [
-      { id: 'PROCESS_SERVICE_URL', url: 'http://ariadnaeveriliondev.cloudapp.net:8080/nettit-workflow/process' },
-      { id: 'PROCESS_DEFINITION_SERVICE_URL', url: 'http://ariadnaeveriliondev.cloudapp.net:8080/nettit-workflow/definition' },
-      { id: 'PROCESS_HISTORY_SERVICE_URL', url: 'http://ariadnaeveriliondev.cloudapp.net:8080/nettit-workflow/history' },
+      { id: 'PROCESS_SERVICE_URL', url: 'http://localhost:8080/process' },
+      { id: 'PROCESS_DEFINITION_SERVICE_URL', url: 'http://localhost:8080/definition' },
+      { id: 'PROCESS_HISTORY_SERVICE_URL', url: 'http://localhost:8080/history' },
       { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:8080/oauth/token' }
+      // { id: 'PROCESS_SERVICE_URL', url: 'http://pandoraeveriliondev.cloudapp.net:8080/nettit-workflow/process' },
+      // { id: 'PROCESS_DEFINITION_SERVICE_URL', url: 'http://pandoraeveriliondev.cloudapp.net:8080/nettit-workflow/definition' },
+      // { id: 'PROCESS_HISTORY_SERVICE_URL', url: 'http://pandoraeveriliondev.cloudapp.net:8080/nettit-workflow/history' },
+      // { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:8080/oauth/token' }
     ],
     authService: AuthTypes.SKYP,
     errorHandler: ErrorHandlerTypes.SIMPLE,

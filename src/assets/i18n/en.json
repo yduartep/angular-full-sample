@@ -11,6 +11,7 @@
   "about": "About",
   "help": "Help",
   "close": "Close",
+  "playRegression": "Play Regression",
 
   "filter": "Filter",
   "search": "Search",
@@ -63,12 +64,19 @@
   "remove": "Remove",
   "back": "Back",
 
-  "aboutus" : "About Us",
+  "regression" : "Regression",
   "processes": "Processes",
 
   "processList": "Process List",
+  "regressionForm": "Regression Form",
   "processType": "Process Type",
   "activityId": "Activity Id",
+
+  "sourceProcessType": "Source Process Type",
+  "targetProcessType": "Target Process Type",
+  "sourceActivityId": "Source Activity Id",
+  "targetActivityId": "Target Activity Id",
+
 
   "no-processes": "There are no processes to show",
   "processHistoryList": "Process History List",
@@ -89,5 +97,9 @@
   "processlist.filter.variablesToFilter.add": "Add New Variable To Filter",
   "processlist.filter.variablesToFilter.remove": "Remove Variable",
   "processlist.filter.variablesToFilter.key": "Variable Key",
-  "processlist.filter.variablesToFilter.value": "Variable Value"
+  "processlist.filter.variablesToFilter.value": "Variable Value",
+
+  "process.regression.variableToInclude.add": "Add New Variable To Include",
+  "process.regression.variableToExclude.add": "Add New Variable To Exclude"
+
 }

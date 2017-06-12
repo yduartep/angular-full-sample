@@ -22,7 +22,7 @@ import { AuthHelper } from '../../core/services/auth.helper';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 
 // services
-import { ProcessService } from '../shared/process.service';
+import { ProcessService } from '../../shared/service/process.service';
 import { OAuthService } from '../../core/services/oauth.service';
 import { LoggerService } from '../../core/services/logger.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';

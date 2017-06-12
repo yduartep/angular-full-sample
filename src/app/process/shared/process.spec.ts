@@ -1,6 +1,6 @@
-import { Process } from './process';
-import {Activity} from './activity';
-import {Task} from './task';
+import { Process } from '../../shared/domain/process';
+import {Activity} from '../../shared/domain/activity';
+import {Task} from '../../shared/domain/task';
 
 describe('Process', () => {
   it('should create an instance with id', () => {

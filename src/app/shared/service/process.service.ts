@@ -3,13 +3,14 @@ import {Http} from '@angular/http';
 
 import {Observable} from 'rxjs/Rx';
 
-import {Process} from './process';
+import {Process} from '../domain/process';
 import {ApiConfig} from '../../core/models/api-config';
 import {BaseService} from '../../core/services/base.service';
 import {CommonUtil} from '../../core/utilities/common.util';
 
 import {DomSanitizer} from '@angular/platform-browser';
-import {ProcessFilter} from './process-filter';
+import {ProcessFilter} from '../../process/shared/process-filter';
+import {ProcessRegression} from "../domain/process-regression";
 
 @Injectable()
 export class ProcessService extends BaseService<Process> {
@@ -31,4 +32,11 @@ export class ProcessService extends BaseService<Process> {
   public filter(filter: ProcessFilter): Observable<Process[]> {
     return this.http.post(this.getServiceUrl() + '/filter', JSON.stringify(filter)).map(this.extractData);
   }
+
+  public regression(processRegression: ProcessRegression): Observable<Process> {
+    console.info(processRegression);
+    console.info(JSON.stringify(processRegression));
+    return this.http.put(this.getServiceUrl() + '/regression', JSON.stringify(processRegression)).map(this.extractData);
+  }
+
 }

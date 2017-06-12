@@ -21,6 +21,11 @@ const routes: Routes = [
     loadChildren: 'app/process/process.module#ProcessModule',
     canActivate: [AuthGuard]
   },
+  {
+    path: 'regression',
+    loadChildren: 'app/regression/regression.module#RegressionModule',
+    canActivate: [AuthGuard]
+  },
   { path: '**', component: PageNotFoundComponent }
 ];
 

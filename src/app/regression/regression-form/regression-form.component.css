@@ -1,0 +1,7 @@
+.list-group-item>.badge {
+    float: left;
+}
+
+.variable-to-filter {
+  padding-top: 10px;
+}

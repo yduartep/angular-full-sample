@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { ApiConfig } from '../../core/models/api-config';
 import { BaseService } from '../../core/services/base.service';
 import { CommonUtil } from '../../core/utilities/common.util';
-import {ProcessHistory} from './processHistory';
+import {ProcessHistory} from '../../shared/domain/processHistory';
 
 @Injectable()
 export class ProcessHistoryService extends BaseService<ProcessHistory> {
@@ -19,5 +19,4 @@ export class ProcessHistoryService extends BaseService<ProcessHistory> {
     return this.http.get(this.getServiceUrl() + '/' + processInstanceId)
       .map(this.extractData);
   }
-
 }

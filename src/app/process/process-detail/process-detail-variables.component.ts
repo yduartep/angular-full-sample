@@ -1,8 +1,8 @@
 ﻿import {Component, OnInit} from '@angular/core';
 // import slide in/out animation
 import {slideInOutAnimation} from '../../_animations/index';
-import {ProcessService} from '../shared/process.service';
-import {Process} from '../shared/process';
+import {ProcessService} from '../../shared/service/process.service';
+import {Process} from '../../shared/domain/process';
 import {ProcessDetailComponent} from './process-detail.component';
 import {PrettyJsonComponent} from 'angular2-prettyjson';
 

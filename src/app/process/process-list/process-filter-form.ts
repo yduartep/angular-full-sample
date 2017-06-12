@@ -1,12 +1,12 @@
-import {ProcessDefinitionElement} from '../shared/process-definition-element';
-import {ProcessDefinition} from '../shared/process-definition';
-import {ProcessFilterFormVariable} from './process-filter-form-variable';
+import {ProcessDefinitionElement} from '../../shared/domain/process-definition-element';
+import {ProcessDefinition} from '../../shared/domain/process-definition';
+import {ProcessFormVariable} from '../../shared/form/process-form-variable';
 
 export class ProcessFilterForm {
   private _processInstanceId: string;
   private _processDefinitionElement: ProcessDefinitionElement;
   private _processDefinition: ProcessDefinition;
-  private _variablesToFilter: ProcessFilterFormVariable[];
+  private _variablesToFilter: ProcessFormVariable[];
 
 
   constructor() {
@@ -29,11 +29,11 @@ export class ProcessFilterForm {
     this._processDefinition = value;
   }
 
-  get variablesToFilter(): ProcessFilterFormVariable[] {
+  get variablesToFilter(): ProcessFormVariable[] {
     return this._variablesToFilter;
   }
 
-  set variablesToFilter(value: ProcessFilterFormVariable[]) {
+  set variablesToFilter(value: ProcessFormVariable[]) {
     this._variablesToFilter = value;
   }
 

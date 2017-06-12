@@ -40,5 +40,5 @@ export const processRoutes: Routes = <Routes>[{
 export class ProcessRoutingModule {
 }
 
-export const processRoutedComponents = [ProcessComponent, ProcessDefinitionImageComponent, ProcessListComponent, ProcessDetailComponent,
+export const processRoutedComponents = [ProcessComponent, ProcessListComponent, ProcessDetailComponent,
   ProcessDetailVariablesComponent, ProcessDetailImageComponent, ProcessDetailTasksComponent];

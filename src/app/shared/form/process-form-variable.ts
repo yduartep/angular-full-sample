@@ -1,4 +1,4 @@
-export class ProcessFilterFormVariable {
+export class ProcessFormVariable {
   private _variableKey: string;
   private _variableValue: string;
 

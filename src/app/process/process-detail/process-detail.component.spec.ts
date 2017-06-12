@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SharedModule } from '../../shared/shared.module';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 import { ProcessDetailComponent } from './process-detail.component';
-import { ProcessService } from '../shared/process.service';
+import { ProcessService } from '../../shared/service/process.service';
 import { SpinnerService } from '../../core/spinner/spinner.service';
 import { AuthHelper } from '../../core/services/auth.helper';
 import { MessageService } from '../../modal-message/message.service';

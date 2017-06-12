@@ -20,7 +20,7 @@ import { AuthHelper } from '../core/services/auth.helper';
 import { SpinnerService } from '../core/spinner/spinner.service';
 
 // environments
-import { environment } from '../../environments/environment.local';
+import {ProcessDefinitionImageComponent} from '../process/process-definition/process-definition-image.component';
 
 @NgModule({
   imports: [
@@ -35,7 +35,8 @@ import { environment } from '../../environments/environment.local';
   declarations: [
     LoginComponent,
     PageNotFoundComponent,
-    ControlMessagesComponent
+    ControlMessagesComponent,
+    ProcessDefinitionImageComponent
   ],
   providers: [
     { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, SpinnerService, AuthHelper] }

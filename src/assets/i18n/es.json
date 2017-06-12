@@ -11,10 +11,10 @@
   "about": "Sobre nosotros",
   "help": "Ayuda",
   "close": "Cerrar",
-
   "filter": "Filtrar",
   "search": "Buscar",
   "reset": "Reiniciar",
+  "playRegression": "Ejecutar Regresión",
 
   "processDetail": "Detalles de Proceso",
   "button-createNew": "Crear",
@@ -63,13 +63,19 @@
   "remove": "Eliminar",
   "back": "Atras",
 
-  "aboutus" : "Acerca de Nosotros",
+  "regression" : "Regresión",
   "processes": "Procesos",
 
   "processList": "Lista de Procesos",
+  "regressionForm": "Formulario de Regresión",
   "processType": "Tipo de Proceso",
   "activityId": "Id de la Actividad",
   "activityId-help": "La lista de actividades depende del tipo de proceso seleccionado",
+
+  "sourceProcessType": "Tipo de Proceso Origen",
+  "targetProcessType": "Tipo de Proceso Destino",
+  "sourceActivityId": "Id de la Actividad Origen",
+  "targetActivityId": "Id de la Actividad Destino",
 
   "no-processes": "There are no processes to show",
   "processHistoryList": "Lista de Histórico de Procesos",
@@ -90,6 +96,9 @@
   "processlist.filter.variablesToFilter.add": "Añadir Nueva Variable Para Filtrar",
   "processlist.filter.variablesToFilter.remove": "Eliminar Variable",
   "processlist.filter.variablesToFilter.key": "Clave de la Variable",
-  "processlist.filter.variablesToFilter.value": "Valor de la Variable"
+  "processlist.filter.variablesToFilter.value": "Valor de la Variable",
+
+  "process.regression.variableToInclude.add": "Añadir Nueva Variable al proceso migrado",
+  "process.regression.variableToExclude.add": "Excluir nueva variable"
 
 }

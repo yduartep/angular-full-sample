@@ -1,8 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 
-import {ProcessDefinition} from './process-definition';
-import {ProcessDefinitionElement} from './process-definition-element';
+import {ProcessDefinition} from '../../shared/domain/process-definition';
+import {ProcessDefinitionElement} from '../../shared/domain/process-definition-element';
 import {ApiConfig} from '../../core/models/api-config';
 import {BaseService} from '../../core/services/base.service';
 import {CommonUtil} from '../../core/utilities/common.util';

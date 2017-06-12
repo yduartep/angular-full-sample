@@ -1,20 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 
 import {Router, ActivatedRoute} from '@angular/router';
-import {Process} from '../shared/process';
-import {ProcessService} from '../shared/process.service';
+import {Process} from '../../shared/domain/process';
+import {ProcessService} from '../../shared/service/process.service';
 import {ProcessHistoryService} from '../shared/processHistory.service';
 
-import {Message} from '../../modal-message/message';
-import {MessageType} from '../../modal-message/message-type';
-import {MessageStatus} from '../../modal-message/message-status';
 import {MessageService} from '../../modal-message/message.service';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
-import {Subscription} from 'rxjs/Subscription';
-import {ProcessHistory} from '../shared/processHistory';
-import {MessageFormat} from '../../modal-message/message-format';
+import {ProcessHistory} from '../../shared/domain/processHistory';
 
 import {fadeInAnimation} from '../../_animations/index';
 

@@ -1,0 +1,125 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h2>{{ 'regressionForm' | translate }}</h2>
+  </div>
+</div>
+<form (ngSubmit)="doRegression()">
+
+  <div class="panel panel-default">
+    <div class="panel-heading"></div>
+
+    <div class="panel-body">
+      <!-- Source -->
+      <div class="form-group">
+        <label for="sourceProcessType">{{ 'sourceProcessType' | translate }}</label>
+        <select id="sourceProcessType" class="form-control" [(ngModel)]="processRegressionForm.oldProcessDefinitionId"
+                name="sourceProcessType"
+                (change)="loadProcessDefinitionElementsSource(processRegressionForm.oldProcessDefinitionId)">
+          <option *ngFor="let processDefinition of processDefinitions" [ngValue]="processDefinition.id">
+            {{processDefinition.name}} ({{processDefinition.id}} | {{processDefinition.deploymentDate | date:
+            ('DATE_TIME_FORMAT' | translate)}})
+          </option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="processDefinitionElementsSource">
+        <label for="sourceActivityId">{{ 'sourceActivityId' | translate }}</label>
+        <select id="sourceActivityId" class="form-control" [(ngModel)]="processRegressionForm.elementMapping[0].sourceId"
+                name="sourceActivityId">
+          <option *ngFor="let processDefinitionElement of processDefinitionElementsSource"
+                  [ngValue]="processDefinitionElement.key">
+            {{processDefinitionElement.key}} ({{processDefinitionElement.value}})
+          </option>
+        </select>
+        <p class="help-block"><a class="btn btn-info" md-button
+                                 [routerLink]="['definition',processRegressionForm.oldProcessDefinitionId]">
+          <i class="fa fa-picture-o" aria-hidden="true"></i> {{'processDefinitionPreview' | translate}}
+        </a></p>
+      </div>
+
+      <hr />
+      <!-- Target -->
+      <div class="form-group">
+        <label for="targetProcessType">{{ 'targetProcessType' | translate }}</label>
+        <select id="targetProcessType" class="form-control" [(ngModel)]="processRegressionForm.newProcessDefinitionId"
+                name="targetProcessType"
+                (change)="loadProcessDefinitionElementsTarget(processRegressionForm.newProcessDefinitionId)">
+          <option *ngFor="let processDefinition of processDefinitions" [ngValue]="processDefinition.id">
+            {{processDefinition.name}} ({{processDefinition.id}} | {{processDefinition.deploymentDate | date:
+            ('DATE_TIME_FORMAT' | translate)}})
+          </option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="processDefinitionElementsTarget">
+        <label for="targetActivityId">{{ 'targetActivityId' | translate }}</label>
+        <select id="targetActivityId" class="form-control" [(ngModel)]="processRegressionForm.elementMapping[0].targetId"
+                name="targetActivityId">
+          <option *ngFor="let processDefinitionElement of processDefinitionElementsTarget"
+                  [ngValue]="processDefinitionElement.key">
+            {{processDefinitionElement.key}} ({{processDefinitionElement.value}})
+          </option>
+        </select>
+        <p class="help-block"><a class="btn btn-info" md-button
+                                 [routerLink]="['definition',processRegressionForm.newProcessDefinitionId]">
+          <i class="fa fa-picture-o" aria-hidden="true"></i> {{'processDefinitionPreview' | translate}}
+        </a></p>
+      </div>
+
+      <hr />
+
+      <!-- Variables To Include -->
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" [disabled]="isAddNewVariableToIncludeDisabled()" (click)="addVariableToInclude()">
+          <i class="fa fa-plus"></i> {{ 'process.regression.variableToInclude.add' | translate}}
+        </button>
+        <div class="form-inline">
+          <div class="variable-to-filter" *ngFor="let variablesToInclude of processRegressionForm.variablesToInclude">
+            <input type="text" class="form-control" name="variableToFilterKey"
+                   [value]="variablesToInclude.variableKey" (input)="variablesToInclude.variableKey = $event.target.value"
+                   placeholder="{{ 'processlist.filter.variablesToFilter.key' | translate }}">
+            <input type="text" class="form-control" name="variableToFilterValue"
+                   [value]="variablesToInclude.variableValue"
+                   (input)="variablesToInclude.variableValue = $event.target.value"
+                   placeholder="{{ 'processlist.filter.variablesToFilter.value' | translate }}">
+            <button type="button btn-primary" class="btn btn-danger" (click)="removeVariableToInclude(variablesToInclude)">
+              <i class="fa fa-times"></i> {{ 'processlist.filter.variablesToFilter.remove' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Variables To Exclude -->
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" [disabled]="isAddNewVariableToExcludeDisabled()" (click)="addVariableToExclude()">
+          <i class="fa fa-plus"></i> {{ 'process.regression.variableToExclude.add' | translate}}
+        </button>
+        <div class="form-inline">
+          <div class="variable-to-filter" *ngFor="let variableToExclude of processRegressionForm.variablesToExclude">
+            <input type="text" class="form-control" name="variableToExclude"
+                   [value]="variableToExclude" placeholder="{{ 'processlist.filter.variablesToFilter.key' | translate }}">
+            <button type="button btn-primary" class="btn btn-danger" (click)="removeVariableToExclude(variableToExclude)">
+              <i class="fa fa-times"></i> {{ 'processlist.filter.variablesToFilter.remove' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="panel-footer">
+    <button type="submit" class="btn btn-primary"
+            [disabled]="!isFormEnabled()">
+      <i class="fa"></i> {{ 'playRegression' | translate}}
+    </button>
+    <button type="button" class="btn btn-warning" (click)="reset()">
+      <i class="fa"></i> {{ 'reset' | translate}}
+    </button>
+  </div>
+</form>
+
+<div class="view-side-form">
+  <router-outlet></router-outlet>
+</div>

@@ -20,8 +20,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var base_service_1 = require("../../core/services/base.service");
-var common_util_1 = require("../../core/utilities/common.util");
+var base_service_1 = require("../../core/services/base.service.ts");
+var common_util_1 = require("../../core/utilities/common.util.ts");
 var ProcessService = (function (_super) {
     __extends(ProcessService, _super);
     function ProcessService(http, apiConfig, sanitizer) {

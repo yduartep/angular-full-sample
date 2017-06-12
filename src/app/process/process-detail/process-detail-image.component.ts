@@ -1,7 +1,7 @@
 ﻿import {Component, OnInit} from "@angular/core";
 // import slide in/out animation
 import {slideInOutAnimation} from "../../_animations/index";
-import {ProcessService} from "../shared/process.service";
+import {ProcessService} from "../../shared/service/process.service";
 import {ProcessDetailComponent} from "./process-detail.component";
 
 

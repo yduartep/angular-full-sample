@@ -26,9 +26,6 @@ import { MessageService } from './modal-message/message.service';
 
 // factories and configurations
 import { environment } from '../environments/environment.local';
-import { COOKIE_IDENTIFIERS } from './cookie.identifiers';
-
-import { httpFactory } from './shared/http.factory';
 
 @NgModule({
   imports: [

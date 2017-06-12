@@ -1,17 +1,17 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {fadeInAnimation} from '../../_animations/index';
 // models
-import {Process} from '../shared/process';
-import {ProcessDefinition} from '../shared/process-definition';
-import {ProcessDefinitionElement} from '../shared/process-definition-element';
+import {Process} from '../../shared/domain/process';
+import {ProcessDefinition} from '../../shared/domain/process-definition';
+import {ProcessDefinitionElement} from '../../shared/domain/process-definition-element';
 import {ProcessFilterForm} from './process-filter-form';
 // services
-import {ProcessService} from '../shared/process.service';
+import {ProcessService} from '../../shared/service/process.service';
 import {ProcessDefinitionService} from '../shared/process-definition.service';
 import {LoggerService} from '../../core/services/logger.service';
 import {MessageService} from '../../modal-message/message.service';
 import {ProcessFilter} from '../shared/process-filter';
-import {ProcessFilterFormVariable} from './process-filter-form-variable';
+import {ProcessFormVariable} from '../../shared/form/process-form-variable';
 
 @Component({
   moduleId: module.id.toString(),
@@ -100,10 +100,10 @@ export class ProcessListComponent implements OnInit {
   }
 
   addVariable() {
-    this.processFilterForm.variablesToFilter.push(new ProcessFilterFormVariable('', ''));
+    this.processFilterForm.variablesToFilter.push(new ProcessFormVariable('', ''));
   }
 
-  removeVariable(processFilterFormVariable: ProcessFilterFormVariable) {
+  removeVariable(processFilterFormVariable: ProcessFormVariable) {
     const index = this.processFilterForm.variablesToFilter.indexOf(processFilterFormVariable, 0);
     this.processFilterForm.variablesToFilter.splice(index, 1);
   }

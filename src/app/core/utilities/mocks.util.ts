@@ -1,8 +1,8 @@
 import {ApiConfig} from '../models/api-config';
 import {Credentials} from '../models/credentials';
-import {Process} from '../../process/shared/process';
-import {Activity} from '../../process/shared/activity';
-import {Task} from '../../process/shared/task';
+import {Process} from '../../shared/domain/process';
+import {Activity} from '../../shared/domain/activity';
+import {Task} from '../../shared/domain/task';
 const faker = require('faker');
 
 export class MocksUtil {
