@@ -46,7 +46,6 @@ export class RegressionFormComponent implements OnInit {
     this.loggerService.log('... initializing Process Regression component.');
     this.isRequesting = true;
     this.loadProcessDefinitions();
-    this.findAll();
   }
 
   findAll() {
@@ -112,7 +111,6 @@ export class RegressionFormComponent implements OnInit {
     this._processRegressionForm = new ProcessRegressionForm();
     this._processDefinitionElementsSource = null;
     this._processDefinitionElementsTarget = null;
-    this.findAll();
   }
 
 

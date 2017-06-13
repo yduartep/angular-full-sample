@@ -42,16 +42,7 @@ export class ProcessListComponent implements OnInit {
     this.loggerService.log('... initializing Process list component.');
     this.isRequesting = true;
     this.loadProcessDefinitions();
-    this.findAll();
-  }
-
-  findAll() {
-    this.processService.findAll()
-      .subscribe(processes => {
-        this._data = processes.map(process => {
-          return process;
-        });
-      });
+    this.addDefaultFilters();
   }
 
   loadProcessDefinitions() {
@@ -96,7 +87,7 @@ export class ProcessListComponent implements OnInit {
   reset() {
     this.processFilterForm = new ProcessFilterForm();
     this.processDefinitionElements = null;
-    this.findAll();
+    this.addDefaultFilters();
   }
 
   addVariable() {
@@ -120,6 +111,9 @@ export class ProcessListComponent implements OnInit {
       !processVariable.variableValue);
   }
 
+  addDefaultFilters() {
+    this.processFilterForm.variablesToFilter.push(new ProcessFormVariable('idBusiness', ''), new ProcessFormVariable('idInvoice', ''));
+  }
 
   get data(): Process[] {
     return this._data;
