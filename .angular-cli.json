@@ -24,9 +24,11 @@
         "styles.css"
       ],
       "scripts": [],
-      "environmentSource": "environments/environment.ts",
+      "environmentSource": "environments/environment.local.ts",
       "environments": {
-        "dev": "environments/environment.ts",
+        "local": "environments/environment.local.ts",
+        "dev": "environments/environment.dev.ts",
+        "pre": "environments/environment.pre.ts",
         "prod": "environments/environment.prod.ts",
         "mock": "environments/environment.mock.ts"
       }

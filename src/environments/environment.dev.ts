@@ -10,19 +10,19 @@ import {DomSanitizer} from '@angular/platform-browser';
 
 export const environment = {
   production: false,
-  envName: 'local',
+  envName: 'dev',
   defaultLanguage: 'es',
   apiConfig: {
-    apiEnv: 'local',
+    apiEnv: 'dev',
     timeExpired: 20,
     credentials: {
       clientId: 'trustedclient',
       clientSecret: 'trustedclient123'
     },
     apiUrls: [
-      { id: 'PROCESS_SERVICE_URL', url: 'http://localhost:8080/process' },
-      { id: 'PROCESS_DEFINITION_SERVICE_URL', url: 'http://localhost:8080/definition' },
-      { id: 'PROCESS_HISTORY_SERVICE_URL', url: 'http://localhost:8080/history' },
+      { id: 'PROCESS_SERVICE_URL', url: 'http://pandoraeveriliondev.cloudapp.net:8080/nettit-workflow/process' },
+      { id: 'PROCESS_DEFINITION_SERVICE_URL', url: 'http://pandoraeveriliondev.cloudapp.net:8080/nettit-workflow/definition' },
+      { id: 'PROCESS_HISTORY_SERVICE_URL', url: 'http://pandoraeveriliondev.cloudapp.net:8080/nettit-workflow/history' },
       { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:8080/oauth/token' }
     ],
     authService: AuthTypes.SKYP,
