@@ -6,6 +6,7 @@ import { ProcessDefinitionService} from './shared/process-definition.service';
 import { ProcessHistoryService } from './shared/processHistory.service';
 import { DataTableModule } from 'angular2-datatable';
 import {PrettyJsonModule} from 'angular2-prettyjson';
+import {SelectModule} from 'angular2-select';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {PrettyJsonModule} from 'angular2-prettyjson';
     SharedModule,
     ProcessRoutingModule,
     DataTableModule,
-    PrettyJsonModule
+    PrettyJsonModule,
+    SelectModule
   ],
   declarations: [processRoutedComponents],
   providers: [

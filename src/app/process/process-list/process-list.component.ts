@@ -1,4 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
+import {DatePipe} from '@angular/common';
 import {fadeInAnimation} from '../../_animations/index';
 // models
 import {Process} from '../../shared/domain/process';
@@ -20,21 +21,22 @@ import {ProcessFormVariable} from '../../shared/form/process-form-variable';
   styleUrls: ['./process-list.component.css'],
   // make fade in animation available to this component
   animations: [fadeInAnimation],
-
+  providers: [DatePipe],
   // attach the fade in animation to the host (root) element of this component
   host: {'[@fadeInAnimation]': ''}
 })
 export class ProcessListComponent implements OnInit {
   public isRequesting = false;
   private _data: Process[];
-  private _processDefinitions: ProcessDefinition[];
   private _processDefinitionElements: ProcessDefinitionElement[];
   private _processFilterForm: ProcessFilterForm = new ProcessFilterForm();
+  processDefinitionOptions: Array<any>;
 
   constructor(@Inject('LoggerService') private loggerService: LoggerService,
               private processService: ProcessService,
               private processDefinitionService: ProcessDefinitionService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private datepipe: DatePipe) {
     // subscribe to the messages sent from other components
   }
 
@@ -46,10 +48,22 @@ export class ProcessListComponent implements OnInit {
   }
 
   loadProcessDefinitions() {
+    this.processDefinitionOptions = [];
     this.processDefinitionService.findAll()
       .subscribe(processDefinitions => {
-        this._processDefinitions = processDefinitions.map(processDefinition => {
-          return processDefinition;
+        this.processDefinitionOptions = processDefinitions.map(processDefinition => {
+          return {
+            value: processDefinition, label: `${processDefinition.name} (${processDefinition.id} 
+          | ${this.datepipe.transform(new Date(processDefinition.deploymentDate), 'dd/MM/yyyy HH:mm:ss')})`
+          };
+        }).sort((processDefinitionOption1, processDefinitionOption2) => {
+          if (processDefinitionOption1.label < processDefinitionOption2.label) {
+            return -1;
+          }
+          if (processDefinitionOption1.label > processDefinitionOption2.label) {
+            return 1;
+          }
+          return 0;
         });
       });
   }
@@ -59,10 +73,9 @@ export class ProcessListComponent implements OnInit {
       .subscribe(processDefinitionElements => {
         this._processDefinitionElements = processDefinitionElements.map(processDefinitionElement => {
           return processDefinitionElement;
-        });
+        }).sort();
       });
   }
-
   filter() {
     if (this.processFilterForm.processInstanceId) {
       this.processService.findById(this.processFilterForm.processInstanceId).subscribe(process => {
@@ -121,14 +134,6 @@ export class ProcessListComponent implements OnInit {
 
   set data(value: Process[]) {
     this._data = value;
-  }
-
-  get processDefinitions(): ProcessDefinition[] {
-    return this._processDefinitions;
-  }
-
-  set processDefinitions(value: ProcessDefinition[]) {
-    this._processDefinitions = value;
   }
 
   get processDefinitionElements(): ProcessDefinitionElement[] {

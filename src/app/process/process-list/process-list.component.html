@@ -19,13 +19,12 @@
       <div *ngIf="!processFilterForm.processInstanceId">
         <div class="form-group">
           <label for="processType">{{ 'processType' | translate }}</label>
-          <select id="processType" class="form-control" [(ngModel)]="processFilterForm.processDefinition"
-                  name="processType" (change)="loadProcessDefinitionElements(processFilterForm.processDefinition)">
-            <option *ngFor="let processDefinition of processDefinitions" [ngValue]="processDefinition">
-              {{processDefinition.name}} ({{processDefinition.id}} | {{processDefinition.deploymentDate | date:
-              ('DATE_TIME_FORMAT' | translate)}})
-            </option>
-          </select>
+          <ng-select id="processType" name="processType"
+            [multiple]="false"
+            [options]="processDefinitionOptions"
+            (selected)="loadProcessDefinitionElements($event.value)"
+            [(ngModel)]="processFilterForm.processDefinition">
+          </ng-select>
         </div>
         <div class="form-group" *ngIf="processDefinitionElements">
           <label for="activityId">{{ 'activityId' | translate }}</label>
