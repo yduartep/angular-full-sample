@@ -1,31 +1,49 @@
 # Getting Started
 
 Full sample application built with Angular 4 that follows all best practices. This app contains:
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-1. Application of Lazy Loading Modules.
-2. Api configurations by environments ("dev", "prod" or "mock").
-3. Integration with translation module.
-4. Mock system defined with "json-server" and "faker.js" library.
-5. Bootstrap and Font-awsone integration.
-6. Dynamic nav bar definition.
-7. Http interceptor system.
-8. Login component configurable with different authentication service implementation.
-9. Multiple guards (auth, login, module-import) to protect routes and module loading.
-10. Custom service validation already available (es. creditCardValidator, emailValidator, passwordValidator ...).
-11. Customizable logger system.
-12. Incorporated automatic handle errors.
-13. Not found component displayed when invalid routes.
-14. TSLint integration for quality.
-15. Unit and Functional test with Jasmine, Karma and Protractor.
 
-## Get the Code
+- [Get the Code](#get-the-code)
+  - [Just in Time (JiT) Compilation](#just-in-time-jit-compilation)
+  - [Ahead of Time (AoT) Compilation](#ahead-of-time-aot-compilation)
+- [Functionalities](#functionalities)
+  - [1. How create new lazy module](#1-how-create-new-lazy-module)
+  - [2. How create new api config environment](#2-how-create-new-api-config-environment)
+  - [3. How translate elements in a page](#3-how-translate-elements-in-a-page)
+    - [i. Language initialization](#i-language-initialization)
+    - [ii. Word translations](#ii-word-translations)
+    - [iii. How to use the language selector](#iii-how-to-use-the-language-selector)
+    - [iv. How to define new language](#iv-how-to-define-new-language)
+  - [4. How to mock services](#4-how-to-mock-services)
+  - [5. Bootstrap and Font-awsone integration](#5-bootstrap-and-font-awsone-integration)
+  - [6. Dynamic nav bar](#6-dynamic-nav-bar)
+  - [7. Http interceptor system](#7-http-interceptor-system)
+  - [8. Login component configurable with different authentication service](#8-login-component-configurable-with-different-authentication-service)
+    - [How to create new Authentication service](#how-to-create-new-authentication-service)
+  - [9. Guards](#9-guards)
+  - [10. Custom service validation and control messages](#10-custom-service-validation-and-control-messages)
+  - [11. Customizable logger system](#11-customizable-logger-system)
+    - [How to create a new Logger system:](#how-to-create-a-new-logger-system)
+  - [12. Incorporated automatic handle errors](#12-incorporated-automatic-handle-errors)
+    - [How to create a new ErrorHandler:](#how-to-create-a-new-errorhandler)
+  - [13. Not found component](#13-not-found-component)
+  - [14. TSLint integration](#14-tslint-integration)
+  - [15. Unit and Functional test](#15-unit-and-functional-test)
+- [Useful Commands](#useful-commands)
+  - [Application execution](#application-execution)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# Get the Code
 ```
 git clone https://github.com/yduartep/angular-full-sample.git
 cd angular-full-sample
 npm i
 ```
 
-### Just in Time (JiT) Compilation
+## Just in Time (JiT) Compilation
 
 Runs the TypeScript compiler and launches the app
 
@@ -33,7 +51,7 @@ Runs the TypeScript compiler and launches the app
 npm start
 ```
 
-### Ahead of Time (AoT) Compilation 
+## Ahead of Time (AoT) Compilation 
 
 Runs the Angular AoT compiler, rollup, uglify for an optimized bundle, then launches the app
 
@@ -46,7 +64,7 @@ ng build --aot
 ## 1. How create new lazy module
 1. Install agular-cli globally: `npm install -g @angular/cli`
 2. Create new module from the root of the app using command: `ng g module heroes`
-3. Create new routing module in the folder of the module created before: `ng g module heroes-routing`
+3. Create new routing module in the folder of the module created before: `ng g module heroes/heroes-routing`
    - Define the routes and import them into the module as child routes: 
       ```
       export const heroesRoutes: Routes = <Routes>[{
@@ -287,7 +305,7 @@ More Info:
 - https://angular.io/docs/ts/latest/guide/router.html#!#guards
 - https://blog.thoughtram.io/angular/2016/07/18/guards-in-angular-2.html
  
- ## 10. Custom service validation and control messages
+## 10. Custom service validation and control messages
  The 'Core' module contains an static class 'ValidationService' in '/core/services/validation.service.ts' that include some custom validations that could be used during forms validations (es. creditCardValidator, emailValidator, passwordValidator ...). Angular provide the validators require, minLength, maxLength and pattern but you can assign also your custom validators to any form control.
  
  ```
@@ -379,3 +397,16 @@ npm run e2e
 More Info:
 - https://angular.io/docs/ts/latest/guide/testing.html
 - https://blog.jscrambler.com/getting-started-with-angular-2-end-to-end-testing/
+
+# Useful Commands
+## Application execution
+- npm start: starts the application, starts the mock server and opens a browser.
+- npm run start:mocks: starts the mock server.
+- npm run start:application: starts the application and opens a browser.
+## Management Console
+- npm run management:console:start: starts the management console which is accessible from http://server:2000
+- npm run management:console:stop: sopts the management console
+## Build
+- npm run build:prod: builds the application for production environment.
+## Documentation
+- npm run documentation:gentoc: generates the table of contents of the README.md file.
