@@ -7,6 +7,7 @@
     </div>
     <div class="form-group">
       <ui-input required
+                [dataErrorRequired]="'validations.required.username' | translate"
                 id="username"
                 placeholder="{{'login.placeholders.username' | translate }}"
                 title="{{ 'login.label-username' | translate }}"
@@ -17,6 +18,7 @@
     </div>
     <div class="form-group">
       <ui-password required
+                   [dataErrorRequired]="'validations.required.password' | translate"
                    id="password"
                    placeholder="{{'login.placeholders.password' | translate }}"
                    title="{{'login.label-password' | translate }}"

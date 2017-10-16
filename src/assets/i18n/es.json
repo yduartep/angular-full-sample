@@ -28,6 +28,16 @@
     "noButton": "No",
     "closeButton": "Cerrar"
   },
+  "validations": {
+    "required": {
+      "name": "El campo nombre es obligatorio",
+      "username": "El campo usuario es obligatorio",
+      "password": "La Contraseña es obligatoria"
+    },
+    "numeric": {
+      "editorial": "Selecciona una editorial"
+    }
+  },
   "heroes": {
     "detail-title": "Detalles del heroe",
     "list-title": "Lista de Heroes",

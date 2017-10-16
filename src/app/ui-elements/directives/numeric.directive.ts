@@ -20,6 +20,6 @@ export class NumericValidatorDirective {
     if (expression.test(value)) {
       return null;
     }
-    return {numeric: 'Please enter a valid value'};
+    return {numeric: 'Please enter a valid number'};
   }
 }

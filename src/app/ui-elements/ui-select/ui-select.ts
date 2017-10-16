@@ -28,7 +28,7 @@ import {CommonUtil} from '../../core/utilities/common.util';
   }],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UISelectComponent extends UIElementBase<string> implements OnChanges {
+export class UISelectComponent extends UIElementBase<number> implements OnChanges {
   /**
    * List of objects to be used for initializing the select
    */
@@ -82,6 +82,11 @@ export class UISelectComponent extends UIElementBase<string> implements OnChange
     } else {
       this.texts = this.data.map(elem => elem[this.textField as string]);
     }
+  }
+
+  onValueChanged(value) {
+    // convert string to int
+    this.value = +value;
   }
 
   /**

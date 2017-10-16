@@ -1,5 +1,5 @@
 <h1>{{'heroes.detail-title' | translate}}</h1>
-<div *ngIf="hero | async; let hero; else loading">
+<div *ngIf="hero | async; let hero;">
   <div class="row">
     <label class="col-sm-2">{{ 'heroes.fields.name' | translate}}:</label>
     <div class="col-sm-9">{{hero.name}}</div>
@@ -10,7 +10,10 @@
   </div>
   <div class="row">
     <label class="col-sm-2">{{ 'heroes.fields.preview' | translate}}:</label>
-    <div class="col-sm-9"><img src="assets/images/{{hero.image}}" alt="{{hero.name}}"/></div>
+    <div class="col-sm-9">
+      <img *ngIf="hero.image" src="assets/images/{{hero.image}}" alt="{{hero.name}}"/>
+      <img *ngIf="!hero.image" src="assets/images/not-available.png" width="130px" height="100px"/>
+    </div>
   </div>
   <div class="btn-group">
     <button class="btn btn-secondary btn-sm" routerLink="/heroes">
@@ -21,6 +24,3 @@
     </button>
   </div>
 </div>
-<ng-template #loading>
-  {{'loading' | translate }} <img alt="{{'loading' | translate }} ..." *ngIf="loading" src="./assets/images/spinner2.gif"/>
-</ng-template>

@@ -28,8 +28,8 @@ module.exports = function () {
       {id: 7, name: 'Scarecrow', editorial: {key: 2, text: 'DC'}, image: 'scarecrow.PNG'}
     ],
     editorials: [
-      {id: 1, value: 'Marvel'},
-      {id: 2, value: 'DC'}
+      {id: 1, text: 'Marvel'},
+      {id: 2, text: 'DC'}
     ],
     token: [{
       "id": "a61afd98-8e9e-4f16-9366-31abcc0bb522",

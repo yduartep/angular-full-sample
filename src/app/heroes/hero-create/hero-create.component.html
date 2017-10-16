@@ -2,7 +2,7 @@
 
 <form #frmHero="ngForm" id="frmLHero" novalidate (ngSubmit)="onSaveHero()" novalidate>
   <div class="row">
-    <ui-input required
+    <ui-input required [dataErrorRequired]="'validations.required.name' | translate"
               id="txtName"
               title="{{'heroes.fields.name' | translate}}"
               placeholder="{{'heroes.placeholders.name' | translate }}"
@@ -12,11 +12,11 @@
     </ui-input>
   </div>
   <div class="row">
-    <ui-select numeric
-               id="selName"
+    <ui-select numeric [dataErrorNumeric]="'validations.numeric.editorial' | translate"
+               id="selEditorial"
                title="{{'heroes.fields.editorial' | translate}}"
                keyField="id"
-               textField="value"
+               textField="text"
                [(ngModel)]="selected"
                [mode]="mode"
                [data]="editorials"
@@ -33,12 +33,12 @@
     </ui-input>
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn-primary">{{'heroes.save' | translate}}</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!validate()">{{'heroes.save' | translate}}</button>
     <div class="btn-group">
       <button class="btn btn-secondary btn-sm" routerLink="/heroes">
         <i class="fa fa-arrow-left"></i> {{'back' | translate}}
       </button>
-      <button type="button" (click)="frmHero.reset()" class="btn btn-danger btn-sm">
+      <button type="button" (click)="reset()" class="btn btn-danger btn-sm">
         <i class="fa fa-undo"></i> {{'reset' | translate}}
       </button>
     </div>

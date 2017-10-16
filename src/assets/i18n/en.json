@@ -29,10 +29,20 @@
     "noButton": "No",
     "closeButton": "Close"
   },
+  "validations": {
+    "required": {
+      "name": "The field name is required",
+      "username": "The username is mandatory",
+      "password": "The password is mandatory"
+    },
+    "numeric": {
+      "editorial": "You have to select one editorial value"
+    }
+  },
   "heroes": {
-    "detail-title": "Hero Details",
+    "detail-title": "Hero details",
     "list-title": "List of Heroes",
-    "create-title": "Create new Super hero",
+    "create-title": "Create new hero",
     "delete": "Delete",
     "save": "Save",
     "create": "Create new",
@@ -58,8 +68,8 @@
     "insertErrMsg": "Error while trying to insert the new hero"
   },
   "villains": {
-    "detail-title": "Villain Details",
-    "list-title": "List of Villains",
+    "detail-title": "Villain details",
+    "list-title": "List of villains",
     "delete": "Delete",
     "fields": {
       "name": "Name",

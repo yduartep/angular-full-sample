@@ -54,7 +54,7 @@ export class HeroCreateComponent extends UIFormComponent {
     this.alertService.clear();
 
     if (this.validate()) {
-      this.hero.editorial = this.editorials.find(e => e.id === this.selected);
+      this.hero.editorial = this.editorials.find(e => e.id === +this.selected);
       this.service.insert(this.hero).subscribe(res => {
         const key = res.ok ? 'heroes.insertOkMsg' : 'heroes.insertErrMsg';
 
@@ -68,5 +68,11 @@ export class HeroCreateComponent extends UIFormComponent {
         });
       });
     }
+  }
+
+  reset() {
+    this.hero.image = '';
+    this.selected = -1;
+    this.hero.name = '';
   }
 }

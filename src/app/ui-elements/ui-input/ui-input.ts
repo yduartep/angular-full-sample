@@ -16,7 +16,7 @@ import {animations} from '../animations';
 
 @Component({
   selector: 'ui-input',
-  templateUrl: 'ui-input.html',
+  templateUrl: './ui-input.html',
   animations,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
