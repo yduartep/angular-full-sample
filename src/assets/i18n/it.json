@@ -1,54 +1,94 @@
 {
-  "HELLO": "Welcome to my Angular application!<br><strong>This is an amazing app which uses the latest technologies!</strong>",
-  "home": "Home",
-  "back": "Back",
-  "delete": "Delete",
-  "about": "About",
-  "help": "Help",
-  "heroesList": "List of Super heroes",
-  "villainsList": "List of Villains",
-  "heroDetail": "Super heroes Details",
-  "villainDetail": "Villain Details",
-  "tourOfHeroes": "Tour of Heroes and Villains",
-  "button-createNew": "Create new",
-  "button-search": "Search",
-
-  "column-preview": "Preview",
-  "column-name": "Name",
-  "column-editorial": "Editorial",
-
-  "language": "Language",
-  "english": "English",
-  "spanish": "Spanish",
-  "orange": "Orange",
-  "yellow": "Yellow",
-  "cyan": "Cyan",
-  "name": "Name",
-  "nameRequired": "Name is required",
-  "hero-top": {
-    "title": "Top Heroes"
+  "appTitle": "Applicazione completa in Angular 4!!!",
+  "back": "Indietro",
+  "reset": "Pulisce",
+  "aboutUs": "Riguardo noi",
+  "help": "Aiuto",
+  "poweredBy": "Offerto da",
+  "license": "Code licensed under an MIT-style License. Documentation licensed under CC BY 4.0.",
+  "loading": "Caricando ...",
+  "logout": "Logout",
+  "menu": {
+    "heroes": "Eroi",
+    "villains": "Cattivi",
+    "aboutUs": "Riguardo noi"
   },
-  "hero-create-new": {
-    "newHero": "New hero"
-  },
-  "heroPower": "Hero power",
-  "details": "details",
-  "saveHero": "Save hero",
-  "createNewHero": "Create new hero",
-  "pickColor": "Pick a highlight color",
-  "alert": "Alert",
-  "sureRemoveHero": "Do you want to remove the hero?",
-  "cancel": "Cancel",
-  "remove": "Remove",
-  "findHero": "Find a hero",
-  "back": "Back",
-  "noHero": "There is no hero!",
-  "loading": "Loading ...",
   "login": {
-    "label-username": "Username",
+    "label-username": "Utente",
     "label-password": "Password",
-    "button-login": "Login",
-    "error-no-token-sent": "Token not sent from service during authentication",
-    "error-user-unauthorized": "The user is not authorized"
+    "button-login": "Accesso",
+    "placeholders": {
+      "username": "Inserire utente ...",
+      "password": "Inserire password ..."
+    },
+    "error-no-token-sent": "Token non inviato dal servizio durante l'autenticazione",
+    "error-user-unauthorized": "L'utente non è autorizzato"
+  },
+  "modalMessage": {
+    "yesButton": "Si",
+    "noButton": "No",
+    "closeButton": "Chiude"
+  },
+  "validations": {
+    "required": {
+      "name": "Il campo nome è richiesto",
+      "username": "Il campo utente è richiesto",
+      "password": "Il campo password è richiesto"
+    },
+    "numeric": {
+      "editorial": "Devi selezionare un editoriale"
+    }
+  },
+  "heroes": {
+    "detail-title": "Dettagli dell'eroe",
+    "list-title": "Elenco degli eroi",
+    "create-title": "Crea nuovo eroe",
+    "delete": "Cancella",
+    "save": "Registra",
+    "create": "Crea nuovo",
+    "fields": {
+      "name": "Nome",
+      "editorial": "Editoriale",
+      "preview": "Anteprima"
+    },
+    "columns": {
+      "name": "Nome",
+      "editorial": "Editoriale",
+      "preview": "Anteprima"
+    },
+    "placeholders": {
+      "name": "Inserisci il nome ...",
+      "editorial": "Sceglie editoriale ...",
+      "preview": "Inserisci nome di un'immagine memorizzata sulle risorse ..."
+    },
+    "confirmDeleteMsg": "Sei sicuro di voler eliminare questo eroe?",
+    "deleteOkMsg": "L'eroe è stato eliminato con successo!",
+    "deleteErrMsg": "Errore durante la cancellazione del eroe!",
+    "insertOkMsg": "L'eroe è stato creato con successo!!",
+    "insertErrMsg": "Errore durante il tentativo di inserire il nuovo eroe"
+  },
+  "villains": {
+    "detail-title": "Dettagli Cattivi",
+    "list-title": "Lista dei cattivi",
+    "delete": "Cancella",
+    "fields": {
+      "name": "Nome",
+      "editorial": "Editoriale",
+      "preview": "Anteprima"
+    },
+    "columns": {
+      "name": "Nome",
+      "editorial": "Editoriale",
+      "preview": "Anteprima"
+    },
+    "placeholders": {
+      "name": "Inserisci il nome ...",
+      "editorial": "Sceglie editoriale ...",
+      "preview": "Inserisci nome di un'immagine memorizzata sulle risorse ..."
+      "search": "Ricerca ..."
+    },
+    "confirmDeleteMsg": "Sei sicuro di voler eliminare questo cattivo?",
+    "deleteOkMsg": "Il cattivo è stato eliminato con successo!",
+    "deleteErrMsg": "Errore durante la cancellazione dei cattivi!"
   }
 }
