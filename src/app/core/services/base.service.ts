@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-
-import { Observable } from 'rxjs/Observable';
+import {Http, Response} from '@angular/http';
+import {CommonUtil} from '../utilities/common.util';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 export abstract class BaseService<T> {
 
-  constructor(protected http: Http) { }
+  constructor(protected http: Http) {
+  }
 
   /**
    * Load the base service url by configuration
@@ -29,8 +29,8 @@ export abstract class BaseService<T> {
    * Find all the elements
    * @returns gets the list of objects found
    */
-  public findAll(): Observable<T[]> {
-    return this.http.get(this.getServiceUrl())
+  public findAll(params?): Observable<T[]> {
+    return this.http.get(this.getServiceUrl(), {search: params})
       .map(this.extractData);
   }
 
@@ -67,7 +67,9 @@ export abstract class BaseService<T> {
    * @param res the response
    */
   protected extractData(res: Response) {
-    const body = res.json() || {};
-    return body.data || body;
+    if (!CommonUtil.isEmpty(res['_body'])) {
+      return res.json() || {};
+    }
+    return null;
   }
 }

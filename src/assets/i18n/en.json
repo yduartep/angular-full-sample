@@ -1,51 +1,84 @@
 {
-  "application.title": "Process Management",
-  "HELLO": "Welcome to my Angular application!<br><strong>This is an amazing app which uses the latest technologies!</strong>",
-  "home": "Home",
+  "appTitle": "Full sample application in Angular 4!!!",
   "back": "Back",
-  "delete": "Delete",
-  "about": "About",
+  "reset": "Reset",
+  "aboutUs": "About us",
   "help": "Help",
-  "heroesList": "List of Super heroes",
-  "villainsList": "List of Villains",
-  "heroDetail": "Super heroes Details",
-  "villainDetail": "Villain Details",
-  "tourOfHeroes": "Tour of Heroes and Villains",
-  "button-createNew": "Create new",
-  "button-search": "Search",
-
-  "column-preview": "Preview",
-  "column-name": "Name",
-  "column-editorial": "Editorial",
-
-  "language": "Language",
-  "english": "English",
-  "spanish": "Spanish",
-  "orange": "Orange",
-  "yellow": "Yellow",
-  "cyan": "Cyan",
-  "name": "Name",
-  "nameRequired": "Name is required",
-  "hero-top": {
-    "title": "Top Heroes"
+  "poweredBy": "Powered by",
+  "license": "Code licensed under an MIT-style License. Documentation licensed under CC BY 4.0.",
+  "loading": "Loading ...",
+  "logout": "Logout",
+  "menu": {
+    "heroes": "Heroes",
+    "villains": "Villains",
+    "aboutUs": "About Us"
   },
-  "hero-create-new": {
-    "newHero": "New hero"
+  "login": {
+    "label-username": "Username",
+    "label-password": "Password",
+    "button-login": "Login",
+    "placeholders": {
+      "username": "Enter username ...",
+      "password": "Enter password ..."
+    },
+    "error-no-token-sent": "Token not sent from service during authentication",
+    "error-user-unauthorized": "The user is not authorized"
   },
-  "heroPower": "Hero power",
-  "details": "details",
-  "saveHero": "Save hero",
-  "createNewHero": "Create new hero",
-  "pickColor": "Pick a highlight color",
-  "alert": "Alert",
-  "sureRemoveHero": "Do you want to remove the hero?",
-  "cancel": "Cancel",
-  "remove": "Remove",
-  "findHero": "Find a hero",
-  "back": "Back",
-  "noHero": "There is no hero!",
-
-  "heroes": "Heroes",
-  "aboutus" : "About Us",
-  "villains" : "Viallains"
+  "modalMessage": {
+    "yesButton": "Yes",
+    "noButton": "No",
+    "closeButton": "Close"
+  },
+  "heroes": {
+    "detail-title": "Hero Details",
+    "list-title": "List of Heroes",
+    "create-title": "Create new Super hero",
+    "delete": "Delete",
+    "save": "Save",
+    "create": "Create new",
+    "fields": {
+      "name": "Name",
+      "editorial": "Editorial",
+      "preview": "Preview"
+    },
+    "columns": {
+      "name": "Name",
+      "editorial": "Editorial",
+      "preview": "Preview"
+    },
+    "placeholders": {
+      "name": "Enter name ...",
+      "editorial": "Select Editorial ...",
+      "preview": "Enter image name stored on assets ..."
+    },
+    "confirmDeleteMsg": "Are you sure do you want to delete this Hero?",
+    "deleteOkMsg": "The super hero was deleted successfully!",
+    "deleteErrMsg": "Error while deleting the super hero!",
+    "insertOkMsg": "The hero was created successfully!!",
+    "insertErrMsg": "Error while trying to insert the new hero"
+  },
+  "villains": {
+    "detail-title": "Villain Details",
+    "list-title": "List of Villains",
+    "delete": "Delete",
+    "fields": {
+      "name": "Name",
+      "editorial": "Editorial",
+      "preview": "Preview"
+    },
+    "columns": {
+      "name": "Name",
+      "editorial": "Editorial",
+      "preview": "Preview"
+    },
+    "placeholders": {
+      "name": "Enter name ...",
+      "editorial": "Select Editorial ...",
+      "preview": "Enter image name stored on assets ...",
+      "search": "Search ..."
+    },
+    "confirmDeleteMsg": "Are you sure do you want to delete this villain?",
+    "deleteOkMsg": "The villain was deleted successfully!",
+    "deleteErrMsg": "Error while deleting the villain!"
+  }
 }

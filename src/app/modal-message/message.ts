@@ -1,23 +1,29 @@
-import { MessageStatus } from './message-status';
-import { MessageType } from './message-type';
+import {MessageStatus} from './message-status';
+import {MessageType} from './message-type';
+import {ModalMessageSettings} from './modal-message-settings';
 
 export class Message {
-    constructor(public text: string, public status: string = MessageStatus.DANGER, public type: string = MessageType.BLOCKING) {
-        status = status.toUpperCase();
-        if (status !== MessageStatus.INFO &&
-            status !== MessageStatus.SUCCESS &&
-            status !== MessageStatus.WARNING &&
-            status !== MessageStatus.DANGER) {
-            throw new Error('Invalid message status. Should be Info, Success, Warning or Danger.');
-        }
+  constructor(public text: string,
+              public status: string = MessageStatus.DANGER,
+              public type: string = MessageType.BLOCKING,
+              public settings?: ModalMessageSettings) {
 
-        type = type.toUpperCase();
-        if (type !== MessageType.BLOCKING &&
-            type !== MessageType.CONFIRM) {
-            throw new Error('Invalid message type. Should be Blocking or Confirm.');
-        }
-        this.text = text;
-        this.status = status;
-        this.type = type;
+    const descStatus = status.toUpperCase();
+    if (descStatus !== MessageStatus.INFO &&
+      descStatus !== MessageStatus.SUCCESS &&
+      descStatus !== MessageStatus.WARNING &&
+      descStatus !== MessageStatus.DANGER) {
+      throw new Error('Invalid message status. Should be Info, Success, Warning or Danger.');
     }
+    const descType = type.toUpperCase();
+    if (descType !== MessageType.BLOCKING && descType !== MessageType.CONFIRM) {
+      throw new Error('Invalid message type. Should be Blocking or Confirm.');
+    }
+    // TODO remove these initialization. No necessary
+    // this.title = title;
+    // this.text = text;
+    // this.status = status;
+    // this.onConfirmCallback = onConfirmCallback;
+    // this.onCancelCallback = onCancelCallback;
+  }
 }

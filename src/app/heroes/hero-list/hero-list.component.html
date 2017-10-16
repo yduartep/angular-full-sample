@@ -1,54 +1,35 @@
 <div class="row">
   <div class="col-sm-6">
-    <h2>{{ 'heroesList' | translate }}</h2>
+    <h2>{{ 'heroes.list-title' | translate }}</h2>
   </div>
-  <!--<div class="col-sm-5 align-bottom">
-      <button class="btn btn-success pull-right" (click)="modalSuccessAlert.show()">Succes Alert</button>
-      <button class="btn btn-info pull-right" (click)="modalInfoAlert.show()">Info Alert</button>
-      <button class="btn btn-warning pull-right" (click)="modalWarnConfirm.show()">Warning Confirm</button>
-      <button class="btn btn-danger pull-right" (click)="modalDangerConfirm.show()">Danger Confirm</button>   
-  </div>-->
   <div class="col-sm-6 align-bottom">
-    <button class="btn btn-primary pull-right" routerLink="/heroes/create">{{ 'button-createNew' | translate }}</button>
+    <button class="btn btn-primary pull-right" routerLink="/heroes/create">{{'heroes.create'| translate}}</button>
   </div>
 </div>
-<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+<table class="table table-striped">
   <thead>
-    <tr>
-      <th></th>
-      <th>
-        <mfDefaultSorter by="preview">{{ 'column-preview' | translate}}</mfDefaultSorter>
-      </th>
-      <th>
-        <mfDefaultSorter by="name">{{ 'column-name' | translate}}</mfDefaultSorter>
-      </th>
-      <th>
-        <mfDefaultSorter by="editorial">{{ 'column-editorial' | translate}}</mfDefaultSorter>
-      </th>
-    </tr>
+  <tr>
+    <th></th>
+    <th>{{ 'heroes.columns.preview' | translate}}</th>
+    <th>{{ 'heroes.columns.name' | translate}}</th>
+    <th>{{ 'heroes.columns.editorial' | translate}}</th>
+  </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let hero of mf.data">
-      <td>
-        <div class="btn-group">
-          <button routerLink="/heroes/detail/{{hero.id}}" class="btn btn-secondary btn-sm">
-            <i class="fa fa-search"></i>
-          </button>
-          <button (click)="delete(hero.id)" class="btn btn-danger btn-sm">
-            <i class="fa fa-times"></i>
-          </button>
-        </div>
-      </td>
-      <td><img src="assets/images/{{hero.image}}" alt="{{hero.name}}" width="60px" height="60px" /></td>
-      <td>{{hero.name}}</td>
-      <td>{{hero.editorialText}}</td>
-    </tr>
+  <tr *ngFor="let hero of heroes | async">
+    <td>
+      <div class="btn-group">
+        <button routerLink="/heroes/detail/{{hero.id}}" class="btn btn-secondary btn-sm">
+          <i class="fa fa-search"></i>
+        </button>
+        <button (click)="delete(hero.id)" class="btn btn-danger btn-sm">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </td>
+    <td><img src="assets/images/{{hero.image}}" alt="{{hero.name}}" width="60px" height="60px"/></td>
+    <td>{{hero.name}}</td>
+    <td>{{hero.editorial?.text}}</td>
+  </tr>
   </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="8">
-        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-      </td>
-    </tr>
-  </tfoot>
 </table>

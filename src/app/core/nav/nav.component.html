@@ -2,7 +2,10 @@
   <nav class="navbar navbar-default full-width">
     <ul class="nav navbar-nav">
       <li *ngFor="let menu of items" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a routerLink="{{menu.action}}" class="text-center"><i *ngIf="menu.icon" class="fa fa-2x {{menu.icon}}"></i> <span>{{ menu.title | translate}}</span></a>
+        <a routerLink="{{menu.action}}" class="text-center">
+          <i *ngIf="menu.icon" class="fa fa-2x {{menu.icon}}"></i>
+          <span>{{menu.i18n | translate}}</span>
+        </a>
       </li>
     </ul>
   </nav>

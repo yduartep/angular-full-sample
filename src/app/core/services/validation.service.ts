@@ -1,55 +1,62 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+
+import {CommonUtil} from '../utilities/common.util';
+import {Map} from '../utilities/data-structure';
+import {UIElementBase} from "../../ui-elements/ui-element-base";
 
 @Injectable()
 export class ValidationService {
+  private _elements: Map<any> = new Map<any>();
 
-  static getErrorMessage(validatorName: string, validatorValue?: any) {
-    const config = {
-      'required': 'This field is mandatory',
-      'invalidCreditCard': 'Is invalid credit card number',
-      'invalidEmailAddress': 'Invalid email address',
-      'invalidPassword': 'Password must be at least 6 characters long, and contain a number.',
-      'minlength': `Minimum length ${validatorValue ? validatorValue.requiredLength : 0}`,
-      'invalidPositiveNumber': 'The value is invalid',
-    };
-
-    return config[validatorName];
+  constructor() {
   }
-  static positiveNumberValidator(control) {
-    // Visa, MasterCard, American Express, Diners Club, Discover, JCB
-    if (parseInt(control.value, 10) >= 0) {
-      return null;
-    } else {
-      return { 'invalidPositiveNumber': true };
+
+  /**
+   * Register an ui element
+   * @param element the ui element
+   */
+  subscribe(element: any) {
+    if (element) {
+      this._elements.add(element.id, element);
     }
   }
 
-  static creditCardValidator(control) {
-    // Visa, MasterCard, American Express, Diners Club, Discover, JCB
-    if (control.value.match(/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/)) { // tslint:disable-line
-      return null;
-    } else {
-      return { 'invalidCreditCard': true };
+  /**
+   * Un-register an ui element
+   * @param element the ui element
+   */
+  unsubscribe(element: any) {
+    if (element) {
+      this._elements.remove(element.id);
     }
   }
 
-  static emailValidator(control) {
-    // RFC 2822 compliant regex
-    if (control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) { // tslint:disable-line
-      return null;
-    } else {
-      return { 'invalidEmailAddress': true };
-    }
+  /**
+   * Validate the ui element and return true if is invalid
+   * @return {boolean} true if is invalid
+   */
+  invalid(): boolean {
+    let result = false;
+    Observable.concat(this._elements.asArray()
+      .map(element => element.invalid))
+      .subscribe(element => element.subscribe(valid => result = result || valid));
+    return result;
   }
 
-  static passwordValidator(control) {
-    // {6,100}           - Assert password is between 6 and 100 characters
-    // (?=.*[0-9])       - Assert a string has at least one number
-    if (control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {
-      return null;
-    } else {
-      return { 'invalidPassword': true };
-    }
+  /**
+   * Returns the list of failure messages
+   * @return {Array} the list of error messages
+   */
+  failures(): Array<string> {
+    let result = [];
+    Observable.concat(this._elements.asArray()
+      .map(element => element.failures))
+      .subscribe(element => element.subscribe(failure => {
+        if (!CommonUtil.isEmpty(failure)) {
+          result = result.concat(failure);
+        }
+      }));
+    return result;
   }
-
 }

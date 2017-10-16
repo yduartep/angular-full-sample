@@ -1,18 +1,17 @@
-import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
-import { heroesRoutedComponents, HeroesRoutingModule } from './heroes-routing.module';
-import { HeroService } from './shared/hero.service';
-import { DataTableModule } from 'angular2-datatable';
+import {NgModule} from '@angular/core';
+import {SharedModule} from '../shared/shared.module';
+import {heroesRoutedComponents, HeroesRoutingModule} from './heroes-routing.module';
+import {HeroService} from './shared/hero.service';
 
 @NgModule({
   imports: [
     SharedModule,
-    HeroesRoutingModule,
-    DataTableModule
+    HeroesRoutingModule
   ],
   declarations: [heroesRoutedComponents],
   providers: [
     HeroService
   ]
 })
-export class HeroesModule { }
+export class HeroesModule {
+}

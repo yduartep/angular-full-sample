@@ -8,7 +8,7 @@ import { LoginGuard } from './core/guards/login.guard';
 // components
 import { LoginComponent } from './shared/login/login.component';
 import { PageNotFoundComponent } from './shared/not-found/not-found.component';
-import { AboutComponent } from './about/about.component';
+import { AboutComponent } from './core/about/about.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/heroes', pathMatch: 'full' },

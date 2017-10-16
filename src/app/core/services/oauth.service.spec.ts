@@ -1,13 +1,20 @@
-import { TestBed, getTestBed, async, inject } from '@angular/core/testing';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Headers, BaseRequestOptions, Response, HttpModule, Http, XHRBackend, RequestMethod, ResponseOptions } from '@angular/http';
-import { ApiUrl } from '../models/api-url';
-import { ApiConfig } from '../models/api-config';
-import { MocksUtil } from '../utilities/mocks.util';
-import { OAuthService } from '../services/oauth.service';
-import { AuthService } from '../services/auth.service';
-import { AuthHelper } from '../services/auth.helper';
-import { authFactory } from '../factories/auth.factory';
+import {TestBed, getTestBed, async, inject} from '@angular/core/testing';
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {
+  BaseRequestOptions,
+  Response,
+  HttpModule,
+  Http,
+  XHRBackend,
+  RequestMethod,
+  ResponseOptions
+} from '@angular/http';
+import {OAuthService} from '../services/oauth.service';
+import {AuthService} from '../services/auth.service';
+import {AuthHelper} from '../services/auth.helper';
+import {authFactory} from '../factories/auth.factory';
+import {CommonUtil} from '../utilities/common.util';
+import {MocksUtil} from '../utilities/mocks.util';
 
 describe('OAuthService', () => {
   let mockBackend: MockBackend;
@@ -18,8 +25,8 @@ describe('OAuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: 'api.config', useValue: apiConfig },
-        { provide: 'defaultLanguage', useValue: 'en' },
+        {provide: 'api.config', useValue: apiConfig},
+        {provide: 'defaultLanguage', useValue: 'en'},
         MockBackend,
         BaseRequestOptions,
         {
@@ -29,7 +36,7 @@ describe('OAuthService', () => {
             return new Http(backend, defaultOptions);
           }
         },
-        { provide: 'AuthService', useFactory: authFactory, deps: [Http] },
+        {provide: 'AuthService', useFactory: authFactory, deps: [Http]},
         AuthHelper,
         OAuthService
       ],
@@ -56,7 +63,7 @@ describe('OAuthService', () => {
         expect(connection.request.getBody()).toEqual(data);
         expect(connection.request.headers.get('Content-Type')).toEqual('application/x-www-form-urlencoded');
         expect(connection.request.headers.get('Authorization')).toEqual(authorization);
-        connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse })));
+        connection.mockRespond(new Response(new ResponseOptions({body: mockResponse})));
       });
 
       service.login(username, password).subscribe((userData) => {
@@ -73,8 +80,13 @@ describe('OAuthService', () => {
 
   it('should logout from the application', async(
     inject([OAuthService, AuthHelper], (service: AuthService, authHelper: AuthHelper) => {
-      authHelper.addTokenInfo('aaabbbccc', 5);
-      authHelper.addUserInfo('testUser', 5);
+      const token = 'aaabbbccc';
+      const userId = 'testUser';
+      const seconds = 5;
+      const expiredTimeString = CommonUtil.changeExpiredTime(seconds);
+      document.cookie = AuthHelper.TOKEN + '=' + token + '; expires=' + expiredTimeString + '; path=/';
+      document.cookie = AuthHelper.USER_ID + '=' + userId + '; expires=' + expiredTimeString + '; path=/';
+
       service.logout();
 
       expect(authHelper.getUserLogged()).toEqual('');

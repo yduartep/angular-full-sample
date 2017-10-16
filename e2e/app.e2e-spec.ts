@@ -1,14 +1,14 @@
-import { BlankPage } from './app.po';
+import { AppPage } from './app.po';
 
-describe('blank App', () => {
-  let page: BlankPage;
+describe('angular-full-sample App', () => {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new BlankPage();
+    page = new AppPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Tour of Heroes');
+    expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
 });

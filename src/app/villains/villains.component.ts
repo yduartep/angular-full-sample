@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   styleUrls: ['./villains.component.css'],
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VillainsComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject('defaultLanguage') private defaultLanguage: string,
+              private translate: TranslateService) {
+
+    translate.use(localStorage['language'] || defaultLanguage);
+  }
 
   ngOnInit() {
     console.log('... Initializing Villains component');

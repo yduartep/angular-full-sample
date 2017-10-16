@@ -1,13 +1,11 @@
-import { Component, OnInit, Output, OnChanges, EventEmitter } from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 
-import { Router, ActivatedRoute } from '@angular/router';
-import { Villain } from '../shared/villain';
-import { Editorial } from '../shared/editorial.enum';
-import { VillainService } from '../shared/villain.service';
-import { VillainSearchService } from './villains-search.service';
+import {Villain} from '../shared/villain';
+import {VillainSearchService} from './villains-search.service';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-villain-search',
@@ -15,38 +13,20 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./villain-search.component.css'],
   providers: [VillainSearchService]
 })
-export class VillainSearchComponent implements OnInit {
-  villains: Villain[] = [];
-  searchText = '';
+export class VillainSearchComponent {
+  searchTerms$ = new Subject<string>();
+  model: string;
 
   @Output()
   onSearch: EventEmitter<Villain[]> = new EventEmitter<Villain[]>();
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private service: VillainSearchService
-  ) { }
-
-  ngOnInit() { }
-
-  onSearchEvent() {
-    console.log(this.searchText);
-
-    this.service.search(this.searchText)
-      .subscribe(villains => {
-        this.villains = villains.map(villain => {
-          villain['editorialText'] = Editorial[villain.editorial];
-          return villain;
-        });
-
-        this.onSearch.emit(this.villains);
+  constructor(private service: VillainSearchService) {
+    this.searchTerms$
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(terms => this.service.search(terms))
+      .subscribe(results => {
+        this.onSearch.emit(results);
       });
-  }
-
-  handleKeyDown(event: any) {
-    if (event.keyCode === 13) {
-      this.onSearchEvent();
-    }
   }
 }

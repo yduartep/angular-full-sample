@@ -1,51 +1,83 @@
 {
-  "application.title": "Gestión de Procesos",
-  "HELLO": "Bienvenido a mi aplicacion de Angular!<br><strong>Esta es una app increible que usa lo ultimo en tecnologia!</strong>",
-  "home": "Inicio",
+  "appTitle": "Ejemplo de aplicacion en Angular 4!!!",
   "back": "Atras",
-  "delete": "Eliminar",
-  "about": "Sobre nosotros",
+  "reset": "Limpiar",
+  "loading": "Cargando ...",
+  "aboutUs": "Sobre nosotros",
   "help": "Ayuda",
-  "heroesList": "Lista de Super heroes",
-  "villainsList": "Lista de Villanos",
-  "heroDetail": "Detalles del Super heroe",
-  "villainDetail": "Detalles del Villano",
-  "tourOfHeroes": "Tour de los heroes y villanos",
-  "button-createNew": "Crear",
-  "button-search": "Buscar",
-
-  "column-preview": "Imagen",
-  "column-name": "Nombre",
-  "column-editorial": "Editorial",
-
-  "language": "Idioma",
-  "english": "Inglés",
-  "spanish": "Español",
-  "orange": "Naranja",
-  "yellow": "Amarillo",
-  "cyan": "Cian",
-  "name": "Nombre",
-  "nameRequired": "El nombre es obligatorio",
-  "hero-top": {
-    "title": "Top Heroes"
+  "poweredBy": "Creado por",
+  "license": "Code licensed under an MIT-style License. Documentation licensed under CC BY 4.0.",
+  "logout": "Desconectarse",
+  "menu": {
+    "heroes": "Heroes",
+    "villains": "Villainos",
+    "aboutUs": "Sobre nosotros"
   },
-  "hero-create-new": {
-    "newHero": "Nuevo heroe"
+  "login": {
+    "label-username": "Usuario",
+    "label-password": "Contraseña",
+    "placeholders": {
+      "username": "Entra usuario ...",
+      "password": "Entra contraseña ..."
+    },
+    "error-no-token-sent": "Token no enviado durante la autenticación",
+    "error-user-unauthorized": "El usuario no está autorizado"
   },
-  "heroPower": "Poder del heroe",
-  "details": "info",
-  "saveHero": "Guardar heroe",
-  "createNewHero": "Crear nuevo heroe",
-  "pickColor": "Escoge un color para resaltar",
-  "alert": "Alerta",
-  "sureRemoveHero": "¿Estas seguro de que quieres eliminar el heroe?",
-  "cancel": "Cancelar",
-  "remove": "Eliminar",
-  "findHero": "Busca un heroe",
-  "back": "Atras",
-  "noHero": "No hay heroe!",
-
-  "heroes": "Heroes",
-  "aboutus" : "Acerca de Nosotros",
-  "villains" : "Villanos"
+  "modalMessage": {
+    "yesButton": "Si",
+    "noButton": "No",
+    "closeButton": "Cerrar"
+  },
+  "heroes": {
+    "detail-title": "Detalles del heroe",
+    "list-title": "Lista de Heroes",
+    "create-title": "Crea nuevo heroe",
+    "delete": "Elimina",
+    "save": "Salva",
+    "create": "Crea nuevo",
+    "fields": {
+      "name": "Nombre",
+      "editorial": "Editorial",
+      "preview": "Vista previa"
+    },
+    "columns": {
+      "name": "Nombre",
+      "editorial": "Editorial",
+      "preview": "Vista previa"
+    },
+    "placeholders": {
+      "name": "Entra nombre ...",
+      "editorial": "Selecciona Editorial ...",
+      "preview": "Entra nombre de imagen almacenada en assets ..."
+    },
+    "confirmDeleteMsg": "Esta seguro que desea eliminar este heroe?",
+    "deleteOkMsg": "El heroe se ha eliminado correctamente!",
+    "deleteErrMsg": "Se ha producido un error mientras intentaba eliminar el heroe!",
+    "insertOkMsg": "El heroe se ha creado correctamente!!",
+    "insertErrMsg": "Se ha producido un error mientras intentaba agregar un heroe!"
+  },
+  "villains": {
+    "detail-title": "Detalles del villano",
+    "list-title": "Lista de villanos",
+    "delete": "Elimina",
+    "fields": {
+      "name": "Nombre",
+      "editorial": "Editorial",
+      "preview": "Vista previa"
+    },
+    "columns": {
+      "name": "Nombre",
+      "editorial": "Editorial",
+      "preview": "Vista previa"
+    },
+    "placeholders": {
+      "name": "Entra nombre ...",
+      "editorial": "Selecciona Editorial ...",
+      "preview": "Entra nombre de imagen almacenada en assets ...",
+      "search": "Buscar"
+    },
+    "confirmDeleteMsg": "Esta seguro que desea eliminar este villano?",
+    "deleteOkMsg": "El villano se ha eliminado correctamente!",
+    "deleteErrMsg": "Se ha producido un error mientras intentaba eliminar el villano!"
+  }
 }

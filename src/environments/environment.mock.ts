@@ -2,27 +2,38 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-import { AuthTypes } from '../app/core/factories/auth.type';
-import { ErrorHandlerTypes } from '../app/core/factories/error-handler.type';
-import { LoggerTypes } from '../app/core/factories/logger.type';
+
+// the timeExpired is expressed in seconds. By default is set to 3 minutes
+
+import {AuthTypes} from '../app/core/factories/auth.type';
+import {ErrorHandlerTypes} from '../app/core/factories/error-handler.type';
+import {LoggerTypes} from '../app/core/factories/logger.type';
+import {AuthScheme} from '../app/core/models/auth-scheme.enum';
+
+const server = 'http://localhost:3000/';
 
 export const environment = {
+  appName: 'My Mocked Demo Application',
   production: false,
   envName: 'mock',
+  buildVersion: '1.0.0-SNAPSHOT',
+  buildTimestamp: new Date().toISOString(),
   defaultLanguage: 'en',
   apiConfig: {
     apiEnv: 'mock',
-    timeExpired: 20,
+    timeExpired: 1200,
     credentials: {
-      clientId: 'trustedclient',
-      clientSecret: 'trustedclient123'
+      clientId: 'clientUserId',
+      clientSecret: 'clientPwd'
     },
     apiUrls: [
-      { id: 'HEROES_SERVICE_URL', url: 'http://127.0.0.1:3000/api/heroes' },
-      { id: 'VILLAINS_SERVICE_URL', url: 'http://127.0.0.1:3000/api/villains' },
-      { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:3000/api/oauth/token' }
+      {id: 'HEROES_SERVICE_URL', url: server + 'api/heroes', requireAuthBefore: true},
+      {id: 'VILLAINS_SERVICE_URL', url: server + 'api/villains', requireAuthBefore: true},
+      {id: 'OAUTH_SERVICE_URL', url: server + 'api/oauth/token', requireAuthBefore: false},
+      {id: 'EDITORIAL_SERVICE_URL', url: server + 'api/editorials', requireAuthBefore: true}
     ],
-    authService: AuthTypes.SKYP,
+    authService: AuthTypes.OAUTH,
+    authScheme: AuthScheme.BEARER,
     errorHandler: ErrorHandlerTypes.SIMPLE,
     loggerService: LoggerTypes.CONSOLE,
   }

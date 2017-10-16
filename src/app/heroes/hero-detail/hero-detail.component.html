@@ -1,23 +1,26 @@
-<h1>{{ 'heroDetail' | translate }}</h1>
-<div *ngIf="hero">
+<h1>{{'heroes.detail-title' | translate}}</h1>
+<div *ngIf="hero | async; let hero; else loading">
   <div class="row">
-    <label class="col-sm-1">{{ 'column-name' | translate}}:</label>
-    <div class="col-sm-10">{{hero.name}}</div>
+    <label class="col-sm-2">{{ 'heroes.fields.name' | translate}}:</label>
+    <div class="col-sm-9">{{hero.name}}</div>
   </div>
   <div class="row">
-    <label class="col-sm-1">{{ 'column-editorial' | translate}}: </label>
-    <div class="col-sm-10">{{hero.editorialText}}</div>
+    <label class="col-sm-2">{{ 'heroes.fields.editorial' | translate}}: </label>
+    <div class="col-sm-9">{{hero.editorial?.text}}</div>
   </div>
   <div class="row">
-    <label class="col-sm-1">{{ 'column-preview' | translate}}:</label>
-    <div class="col-sm-10"><img src="assets/images/{{hero.image}}" alt="{{hero.name}}" /></div>
+    <label class="col-sm-2">{{ 'heroes.fields.preview' | translate}}:</label>
+    <div class="col-sm-9"><img src="assets/images/{{hero.image}}" alt="{{hero.name}}"/></div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-secondary btn-sm" routerLink="/heroes">
+      <i class="fa fa-arrow-left"></i> {{'back' | translate }}
+    </button>
+    <button (click)="delete(hero.id)" class="btn btn-danger btn-sm">
+      <i class="fa fa-times"></i> {{'heroes.delete' | translate }}
+    </button>
   </div>
 </div>
-<div class="btn-group">
-  <button class="btn btn-secondary btn-sm" routerLink="/heroes">
-    <i class="fa fa-arrow-left"></i> {{ 'back' | translate}}
-  </button>
-  <button (click)="delete(hero.id)" class="btn btn-danger btn-sm">
-    <i class="fa fa-times"></i> {{ 'delete' | translate}}
-  </button>
-</div>
+<ng-template #loading>
+  {{'loading' | translate }} <img alt="{{'loading' | translate }} ..." *ngIf="loading" src="./assets/images/spinner2.gif"/>
+</ng-template>

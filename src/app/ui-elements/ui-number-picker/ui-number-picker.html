@@ -1,0 +1,24 @@
+<div>
+  <div *ngIf="mode !== Mode.VIEW" class="input-box">
+    <label [attr.for]="id" hidden>{{ title }}</label>
+    <input
+      type="text"
+      [(ngModel)]="value"
+      [ngClass]="{invalid: (invalid | async)}"
+      [id]="id"
+      [title]="title"
+      (change)="onValueChanged($event.target.value)"
+    />
+    <span class="input-title">{{ title }}{{ mandatoryLabel }}: </span>
+    <messages-validation
+      [@flyInOut]="'in,out'"
+      *ngIf="invalid | async"
+      [messages]="failures | async">
+    </messages-validation>
+  </div>
+  <div *ngIf="mode === Mode.VIEW">
+    <ui-review [title]="title"
+                [value]="value">
+    </ui-review>
+  </div>
+</div>

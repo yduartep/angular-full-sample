@@ -11,6 +11,11 @@ import { httpFactory } from '../http.factory';
 import { LoginComponent } from './login.component';
 import { MocksUtil } from '../../core/utilities/mocks.util';
 
+// translation
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { createTranslateLoader } from '../../app.translate.factory';
+
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -20,16 +25,23 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      schemas: [NO_ERRORS_SCHEMA],
+      schemas: [ NO_ERRORS_SCHEMA ],
       imports: [
         CoreModule,
         SharedModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [ Http ]
+          }
+        }),
         RouterTestingModule.withRoutes([])
       ],
       providers: [
         { provide: 'api.config', apiConfig },
         { provide: 'defaultLanguage', useValue: 'en' },
-        { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions] }
+        { provide: Http, useFactory: httpFactory, deps: [ XHRBackend, RequestOptions ] }
       ]
     })
       .compileComponents();

@@ -1,22 +1,37 @@
-<div class="col-md-6 col-md-offset-3">
-    <h2>Login</h2>
-    <form [formGroup]="f" (ngSubmit)="login()" novalidate>
-        <div *ngIf="authError" id="message" role="alert" class="alert alert-danger"><i class="fa fa-remove"></i> {{authError}}</div>
-        <div class="form-group" [ngClass]="errorClass(f.controls.username)">
-            <label for="username">User name:</label>
-            <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter user name ...">
-            <span *ngIf="isInvalid(f.controls.username)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-            <app-control-messages [control]="f.controls.username" [message]="'Username is required!'"></app-control-messages>
-        </div>  
-        <div class="form-group" [ngClass]="errorClass(f.controls.password)">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" formControlName="password" placeholder="Enter password ...">
-            <span *ngIf="isInvalid(f.controls.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-            <app-control-messages [control]="f.controls.password" [message]="'Password is required!'"></app-control-messages>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary" [disabled]="(f.dirty && !f.valid) || loading">Login</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-        </div>
-    </form>
+<div class="col-md-6 col-md-offset-3" id="loginContent">
+  <form #frmLogin="ngForm" id="frmLogin" novalidate (ngSubmit)="onLogin()" class="form-horizontal">
+    <div class="form-group">
+      <div class="col-sm-12 col-sm-offset-3">
+        <h1>Login</h1>
+      </div>
+    </div>
+    <div class="form-group">
+      <ui-input required
+                id="username"
+                placeholder="{{'login.placeholders.username' | translate }}"
+                title="{{ 'login.label-username' | translate }}"
+                [mode]="mode"
+                [(ngModel)]="username"
+                [ngModelOptions]="{standalone: true}">
+      </ui-input>
+    </div>
+    <div class="form-group">
+      <ui-password required
+                   id="password"
+                   placeholder="{{'login.placeholders.password' | translate }}"
+                   title="{{'login.label-password' | translate }}"
+                   [mode]="mode"
+                   [(ngModel)]="password"
+                   [ngModelOptions]="{standalone: true}">
+      </ui-password>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-9 pull-right">
+        <button id="btnLogin" type="submit" [disabled]="!isLoginEnable()" class="btn btn-primary">
+          {{ 'login.button-login' | translate }}
+        </button>
+        <img alt="Loading ..." *ngIf="loading" src="./assets/images/spinner2.gif"/>
+      </div>
+    </div>
+  </form>
 </div>

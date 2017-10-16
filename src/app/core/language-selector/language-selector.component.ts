@@ -1,30 +1,33 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { Language } from './language';
-import { LanguageService } from './language.service';
+import {Component, OnInit, Input} from '@angular/core';
+import {Language} from './language';
+import {JsonFileService} from '../services/json-file.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-language-selector',
-  templateUrl: './language-selector.component.html',
-  styleUrls: ['./language-selector.component.css']
+  templateUrl: './language-selector.component.html'
 })
 export class LanguageSelectorComponent implements OnInit {
   @Input()
   languages: Language[];
   languageSelected: string = localStorage['language'] || 'en';
 
-  constructor(
-    private languageService: LanguageService,
-    private translate: TranslateService) { }
+  constructor(private jsonService: JsonFileService,
+              private translate: TranslateService) {
+  }
 
   ngOnInit() {
     if (!this.languages || this.languages.length === 0) {
-      this.languageService.getData().subscribe(data => {
+      this.jsonService.getData('assets/data/languages.json').subscribe(data => {
         this.languages = data;
       });
     }
   }
 
+  /**
+   * On Language change event
+   * @param language the language selected
+   */
   onLanguageChange(language) {
     console.log('... language changed to: ' + language);
     this.translate.use(language);

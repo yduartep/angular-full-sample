@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+    .btn-calendar {
+    width: 48px;
+    background-color: #f0f0f0;
+    color: #808080;
+    border-left: 1px solid #cccccc;
+    outline: 1px solid transparent;
+    background: url(../../../assets/images/icons/icon-calendar.png) center no-repeat;
+    }
+
+    .btn-calendar:hover {
+    color: black;
+    outline: 1px solid black;
+    }
+
+    .calendar {
+    margin: 0 auto;
+    background-image: url(../../../assets/images/icons/icon-calendar.png);
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    display: block;
+    overflow: hidden;
+    width: 23px;
+    height: 24px;
+    background-size: 24px;
+    background-repeat: no-repeat;
+    text-indent: 100%;
+    white-space: nowrap;
+    transition: opacity 160ms ease-in;
+    }
+
+    .input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:first-child>.btn-group:not(:first-child)>.btn, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle {
+    height: 4.4375em;
+    }
+
+    .dp-popup {
+        width: 280px;
+        padding: 4px;
+        position: relative;
+        background: white;
+        box-shadow: 1px 1px 5px 0 fade(#000000, 10);
+        border: 1px solid #bbb;
+        z-index: 9999;
+        white-space: nowrap;
+    }
+
+    .input-group-btn {
+    font-size: inherit;
+    }
+
+

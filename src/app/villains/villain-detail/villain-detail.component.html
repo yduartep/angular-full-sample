@@ -1,18 +1,26 @@
-<h1>{{ 'villainDetail' | translate }}</h1>
-<div *ngIf="villain">
+<h1>{{'villains.detail-title' | translate}}</h1>
+<div *ngIf="villain | async; let villain; else loading">
   <div class="row">
-    <label class="col-sm-1">{{ 'column-name' | translate}}:</label>
-    <div class="col-sm-10">{{villain.name}}</div>
+    <label class="col-sm-2">{{ 'villains.fields.name' | translate}}:</label>
+    <div class="col-sm-9">{{villain.name}}</div>
   </div>
   <div class="row">
-    <label class="col-sm-1">{{ 'column-editorial' | translate}}: </label>
-    <div class="col-sm-10">{{villain.editorialText}}</div>
+    <label class="col-sm-2">{{ 'villains.fields.editorial' | translate}}: </label>
+    <div class="col-sm-9">{{villain.editorial?.text}}</div>
   </div>
   <div class="row">
-    <label class="col-sm-1">{{ 'column-preview' | translate}}:</label>
-    <div class="col-sm-10"><img src="assets/images/{{villain.image}}" alt="{{villain.name}}" /></div>
+    <label class="col-sm-2">{{ 'villains.fields.preview' | translate}}:</label>
+    <div class="col-sm-9"><img src="assets/images/{{villain.image}}" alt="{{villain.name}}"/></div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-secondary btn-sm" routerLink="/villains">
+      <i class="fa fa-arrow-left"></i> {{'back' | translate }}
+    </button>
+    <button (click)="delete(villain.id)" class="btn btn-danger btn-sm">
+      <i class="fa fa-times"></i> {{'villains.delete' | translate }}
+    </button>
   </div>
 </div>
-<button class="btn btn-secondary btn-sm" routerLink="/villains">
-  <i class="fa fa-arrow-left"></i> {{ 'back' | translate}}
-</button>
+<ng-template #loading>
+  {{'loading' | translate }} <img alt="{{'loading' | translate }} ..." *ngIf="loading" src="./assets/images/spinner2.gif"/>
+</ng-template>

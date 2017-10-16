@@ -1,74 +1,71 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
+import {Component, OnInit, AfterViewInit, Inject, EventEmitter} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {AuthService} from '../../core/services/auth.service';
+import {UIFormComponent} from '../../ui-elements/ui-form';
+import {ValidationService} from '../../core/services/validation.service';
+import {Mode} from '../../core/models/mode.enum';
+import {TranslateService} from '@ngx-translate/core';
+import {AlertService} from '../../core/alert/alert.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  f: FormGroup;
-  authError: string;
+export class LoginComponent extends UIFormComponent implements OnInit, AfterViewInit {
   loading = false;
+  username: string;
+  password: string;
+  mode = Mode.EDIT;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    @Inject('AuthService') private authService: AuthService
-  ) { }
+  public focusOnUsername = new EventEmitter<boolean>();
+
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private translate: TranslateService,
+              private alertService: AlertService,
+              @Inject('AuthService') private authService: AuthService,
+              validation: ValidationService) {
+    super(validation);
+  }
 
   ngOnInit() {
     // reset login status
     this.authService.logout();
-
-    this.f = this.formBuilder.group({
-      'username': ['', Validators.required],
-      'password': ['', Validators.required]
-    });
   }
 
-  isInvalid(control): boolean {
-    return control && control.touched && !control.valid;
+  ngAfterViewInit() {
+    this.focusOnUsername.emit(true);
   }
 
-  errorClass(control): any {
-    const condition = this.isInvalid(control);
-    return {
-      'has-error': condition,
-      'has-feedback': condition
-    };
+  isLoginEnable() {
+    return !this.loading && this.validate();
   }
 
-  login() {
-    if (this.f.dirty && this.f.valid) {
-      this.loading = true;
-      const username = this.f.value.username, password = this.f.value.password;
-
-      this.authService.login(username, password)
-        .subscribe(userData => {
-          this.loading = false;
-
-          // navigate to returnUrl just if login successfully
-          if (userData.access_token) {
-            this.router.navigate([this.route.snapshot.queryParams['returnUrl'] || '/']);
-          } else {
-            this.showAuthError('Token not sent from service during authentication.');
-          }
-        }, error => {
-          this.showAuthError('The user is not authorized');
-          this.loading = false;
-        });
+  onLogin() {
+    if (this.validate()) {
+      this.doLogin();
     }
   }
 
-  showAuthError(message) {
-    const that = this;
-    this.authError = message;
-    setTimeout(function () {
-      that.authError = null;
-    }, 1000);
+  doLogin() {
+    this.loading = true;
+    this.authService.login(this.username, this.password)
+      .subscribe(userData => {
+        this.loading = false;
+
+        // navigate to returnUrl just if login successfully
+        if (userData.access_token) {
+          this.router.navigate([this.route.snapshot.queryParams['returnUrl'] || '/']);
+        } else {
+          this.translate.get('login.error-no-token-sent').subscribe(msg => {
+            this.alertService.error('login.error-no-token-sent', {}, msg);
+          });
+        }
+      }, error => {
+        this.translate.get('login.error-user-unauthorized').subscribe(msg => {
+          this.alertService.error('login.error-user-unauthorized', {}, msg);
+        });
+        this.loading = false;
+      });
   }
 }

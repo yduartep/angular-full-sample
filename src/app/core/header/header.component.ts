@@ -1,8 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { AuthHelper } from '../services/auth.helper';
-import { LoggerService } from '../services/logger.service';
+import {Component, OnInit, Inject} from '@angular/core';
+import {Router} from '@angular/router';
+
+// services
+import {AuthService} from '../services/auth.service';
+import {AuthHelper} from '../services/auth.helper';
+import {LoggerService} from '../services/logger.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -11,12 +14,12 @@ import { LoggerService } from '../services/logger.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(
-    private router: Router,
-    private authHelper: AuthHelper,
-    @Inject('LoggerService') private loggerService: LoggerService,
-    @Inject('AuthService') private authService: AuthService
-  ) { }
+  constructor(private router: Router,
+              private authHelper: AuthHelper,
+              @Inject('LoggerService') private loggerService: LoggerService,
+              @Inject('AuthService') private authService: AuthService,
+              private translate: TranslateService) {
+  }
 
   ngOnInit() {
     this.loggerService.log('... initializing header component from core module.');

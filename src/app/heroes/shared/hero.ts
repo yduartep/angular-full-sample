@@ -1,15 +1,9 @@
-import { Editorial } from './editorial.enum';
+import {Editorial} from '../../core/models/editorial';
 
 export class Hero {
-  id: number;
-  name: string;
-  editorial: Editorial;
-  image: string;
-
-  constructor(id: number, name: string, editorial: Editorial, image: string) {
-    this.id = id;
-    this.name = name;
-    this.editorial = editorial;
-    this.image = image;
+  constructor(public id: number,
+              public name: string,
+              public editorial: Editorial,
+              public image: string) {
   }
 }

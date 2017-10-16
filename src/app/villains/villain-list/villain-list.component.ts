@@ -1,13 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
-
-import { Router, ActivatedRoute } from '@angular/router';
-import { Villain } from '../shared/villain';
-import { Editorial } from '../shared/editorial.enum';
-import { VillainService } from '../shared/villain.service';
-import { SpinnerService } from '../../core/spinner/spinner.service';
-import { LoggerService } from '../../core/services/logger.service';
-
+import {Component, OnInit, Inject} from '@angular/core';
 import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
+
+// models
+import {Villain} from '../shared/villain';
+
+// services
+import {VillainService} from '../shared/villain.service';
+import {LoggerService} from '../../core/services/logger.service';
 
 @Component({
   selector: 'app-villain-list',
@@ -15,43 +15,18 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./villain-list.component.css']
 })
 export class VillainListComponent implements OnInit {
-  public isRequesting = false;
-  data: Villain[];
+  villains: Observable<Villain[]>;
 
-  constructor(
-    @Inject('LoggerService') private loggerService: LoggerService,
-    private service: VillainService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private spinnerService: SpinnerService
-  ) { }
+  constructor(@Inject('LoggerService') private loggerService: LoggerService,
+              private service: VillainService) {
+  }
 
   ngOnInit() {
     this.loggerService.log('... initializing Villain list component.');
-    this.isRequesting = true;
-
-    this.service.findAll()
-      .subscribe(villaines => {
-        this.data = villaines.map(villain => {
-          villain['editorialText'] = Editorial[villain.editorial];
-          return villain;
-        });
-      });
-  }
-
-  delete(id: number) {
-    const confirmation = window.confirm('Are you sure you want to delete this Villain?');
-    if (confirmation) {
-      this.service.delete(id).subscribe(res => {
-        if (res.ok) {
-          const index = this.data.findIndex(villain => villain.id === id);
-          this.data.splice(index, 1);
-        }
-      });
-    }
+    this.villains = this.service.findAll();
   }
 
   onSearchText(result: Villain[]) {
-    this.data = result;
+    this.villains = Observable.of(result);
   }
 }

@@ -1,12 +1,14 @@
 import {
   Injectable,
-  Injector,
   ErrorHandler
 } from '@angular/core';
-import { Response } from '@angular/http';
+import {Response} from '@angular/http';
+import {AuthHelper} from './services/auth.helper';
 
 @Injectable()
 export class SimpleErrorHandler implements ErrorHandler {
+  constructor() {
+  }
 
   unwrap(err) {
     let res = err.rejection ? err.rejection : err;
@@ -18,9 +20,10 @@ export class SimpleErrorHandler implements ErrorHandler {
     error = this.unwrap(error);
 
     // handle 401 Unauthorized and  403 Forbidden
-    if (error.status === 401 || error.status === 403 || error === 'UNAUTHORIZED') {
-      console.log('... the authentication session has expires or the user is not authorised!');
-      location.href = location.pathname + 'login';
+    if (error.status === 0 || error.status === 401 || error.status === 403 || error === 'UNAUTHORIZED') {
+      console.log('... the authentication session has expired or the user is not authorised!');
+      AuthHelper.clearCookies();
+      location.href = location.pathname + '#/login';
       return;
     }
     // handle 4xx Client errors
@@ -46,6 +49,7 @@ export class SimpleErrorHandler implements ErrorHandler {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    alert(errMsg);
+    console.error(errMsg);
   }
 }
+

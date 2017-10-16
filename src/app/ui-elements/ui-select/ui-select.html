@@ -1,0 +1,22 @@
+<div *ngIf="mode !== Mode.VIEW">
+  <label class="control-label col-sm-3" [attr.for]="id">{{ title }}{{mandatoryLabel}}:</label>
+  <div class="col-sm-6">
+    <select [id]="id"
+            [(ngModel)]="value"
+            [ngClass]="{invalid: (invalid | async)}"
+            class="form-control">
+      <option *ngFor="let d of data; let i=index" [value]="d[keyField]">{{texts[i]}}</option>
+    </select>
+  </div>
+  <div class="col-sm-3">
+    <messages-validation
+      [@flyInOut]="'in,out'"
+      *ngIf="invalid | async"
+      [messages]="failures | async">
+    </messages-validation>
+  </div>
+</div>
+<div *ngIf="mode === Mode.VIEW">
+  <ui-review [title]="title" [value]="getSelectedText()">
+  </ui-review>
+</div>

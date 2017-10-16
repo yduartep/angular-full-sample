@@ -1,13 +1,20 @@
-[{
-    "title": "heroes",
+[
+  {
+    "title": "Heroes",
     "action": "/heroes",
-    "icon": "fa-flash"
-}, {
+    "icon": "fa-flash",
+    "i18n": "menu.heroes"
+  },
+  {
     "title": "villains",
     "action": "/villains",
-    "icon": "fa-user-secret"
-}, {
-    "title": "aboutus",
+    "icon": "fa-user-secret",
+    "i18n": "menu.villains"
+  },
+  {
+    "title": "About Us",
     "action": "/about",
-    "icon": "fa-users"
-}]
+    "icon": "fa-users",
+    "i18n": "menu.aboutUs"
+  }
+]

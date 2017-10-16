@@ -1,0 +1,50 @@
+<div class="full-width dp-nav-header vertical-align">
+  <div class="col-xs-1 full-height no-padding">
+    <button id="dp-icon-left-{{identifier}}" class="dp-icon dp-icon-left no-padding" type="button"
+      [hidden]="!shouldShowLeftNav()" (click)="onLeftNav()">
+      <label for="dp-icon-left-{{identifier}}" hidden>Icon Left nave</label>
+    </button>
+  </div>
+  <div class="col-xs-5 no-padding-right full-height">
+    <label for="txtMonth-{{identifier}}" hidden>Month</label>
+    <select id="txtMonth-{{identifier}}" class="full-size" [(ngModel)]="selectedMonth" (change)="monthSelected()">
+      <option *ngFor="let month of months" [value]="getMonthValue(month)">{{getMonthBtnText(month)}}</option>
+    </select>
+  </div>
+  <div class="col-xs-5 no-padding-left full-height">
+    <label for="txtYear-{{identifier}}" hidden>Year</label>
+    <input id="txtYear-{{identifier}}" class="full-size" style="height: 100%" type="number"
+    [(ngModel)]="selectedYear" (change)="yearSelected()" min="0"/>
+  </div>
+  <div class="col-xs-1 full-height no-padding">
+    <button id="dp-icon-right-{{identifier}}" class="dp-icon dp-icon-right no-padding" type="button"
+      [hidden]="!shouldShowRightNav()" (click)="onRightNav()">
+      <label for="dp-icon-right-{{identifier}}" hidden>Icon Right nav</label>
+    </button>
+  </div>
+</div>
+<div class="dp-calendar-wrapper full-width" [ngClass]="{'dp-hide-near-month': !componentConfig.showNearMonthDays}">
+  <div class="dp-weekdays vertical-align">
+    <span class="dp-calendar-weekday" *ngFor="let weekday of weekdays">{{weekday}}</span>
+  </div>
+  <div class="dp-calendar-week" *ngFor="let week of weeks">
+    <span *ngIf="componentConfig.showWeekNumbers" class="dp-week-number">{{week[0].date.isoWeek()}}</span>
+    <span *ngFor="let day of week" class="dp-calendar-day-container">
+      <button type="button" class="dp-calendar-day"
+              [disabled]="isDisabledDay(day)"
+              [ngClass]="{
+              'dp-selected': day.selected,
+              'dp-current-month': day.currentMonth,
+              'dp-prev-month': day.prevMonth,
+              'dp-next-month': day.nextMonth,
+              'dp-current-day': day.currentDay}"
+              (click)="dayClicked(day)"> {{getDayBtnText(day)}}
+      </button>
+    </span>
+  </div>
+</div>
+<div class="divider"></div>
+<div class="dp-footer">
+  <button type="button" class="btn btn-default btn-today" (click)="setToday()">Today</button>
+  <button type="button" class="btn btn-default pull-right btn-done" (click)="hide()">Done</button>
+</div>

@@ -1,31 +1,22 @@
-import { Injectable, Inject } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   ConnectionBackend,
   RequestOptions,
-  Request,
   RequestOptionsArgs,
   Response,
   Http, Headers
 } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { CommonUtil } from '../core/utilities/common.util';
-import { AuthService } from '../core/services/auth.service';
-import { AuthHelper } from '../core/services/auth.helper';
-import { SpinnerService } from '../core/spinner/spinner.service';
-import { COOKIE_IDENTIFIERS } from '../cookie.identifiers';
+import {Observable} from 'rxjs/Rx';
+import {AuthHelper} from '../core/services/auth.helper';
+import {SpinnerService} from '../core/spinner/spinner.service';
 
 @Injectable()
 export class InterceptedHttp extends Http {
-  // TODO how to inject these values into the service
-  NOT_REQUIRE_AUTH = ['/oauth/token', 'logout'];
-  AUTH_TYPE = 'Bearer';
 
-  constructor(
-    backend: ConnectionBackend,
-    defaultOptions: RequestOptions,
-    private spinnerService: SpinnerService,
-    private authHelper: AuthHelper
-  ) {
+  constructor(backend: ConnectionBackend,
+              defaultOptions: RequestOptions,
+              private spinnerService: SpinnerService,
+              private authHelper: AuthHelper) {
     super(backend, defaultOptions);
   }
 
@@ -84,6 +75,7 @@ export class InterceptedHttp extends Http {
       return super.delete(url, this.getRequestOptionArgs(options));
     }
   }
+
   /**
    * Determine if the url is a valid http service
    */
@@ -92,39 +84,43 @@ export class InterceptedHttp extends Http {
   }
 
   /**
-   * Returns true If the url doesn't require previous authentication or require it bu the user is already logged in
+   * Returns true If the url doesn't require previous authentication or
+   * require it but the user is already logged in
    */
   private canCallHttp(url) {
-    return this.authHelper.isUserLogged || !this.needAuthBefore(url);
+    return this.authHelper.isUserLogged() || !this.authHelper.needAuthBefore(url);
   }
 
-  private needAuthBefore(url: string) {
-    return this.NOT_REQUIRE_AUTH.find(partUrl => url.indexOf(partUrl) >= 0) == null;
-  }
-
+  /**
+   * Throw 401 request error
+   * @returns {ErrorObservable} Observable with the error info
+   */
   private getAuthError() {
-    return Observable.throw({ status: 401, statusText: 'UNAUTHORIZED' });
+    return Observable.throw({status: 401, statusText: 'UNAUTHORIZED'});
   }
 
+  /**
+   * Gets the request options
+   * @param {RequestOptionsArgs} options the options
+   * @returns {RequestOptionsArgs} the options updated
+   */
   private getRequestOptionArgs(options?: RequestOptionsArgs): RequestOptionsArgs {
     options = options || new RequestOptions();
     options.headers = options.headers || new Headers();
     if (!options.headers.get('content-type')) {
       options.headers.append('content-type', 'application/json; charset=utf-8');
     }
+    // add header authorization if specified
+    this.authHelper.addHeaderAuthorization(options.headers);
 
-    const token = CommonUtil.getCookie(COOKIE_IDENTIFIERS.TOKEN_ID);
-    if (!CommonUtil.isEmpty(token)) {
-      options.headers.set('Authorization', `${this.AUTH_TYPE} ${token}`);
-    }
     return options;
   }
 
   /**
-     * Request interceptor.
-     */
+   * Request interceptor.
+   */
   private requestInterceptor(url): void {
-    if (this.needAuthBefore(url)) {
+    if (this.authHelper.needAuthBefore(url)) {
       this.spinnerService.show();
     }
   }

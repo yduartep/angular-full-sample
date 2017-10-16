@@ -1,0 +1,13 @@
+import {IDate} from './date.model';
+
+export interface IDay extends IDate {
+  currentMonth?: boolean;
+  prevMonth?: boolean;
+  nextMonth?: boolean;
+  currentDay?: boolean;
+}
+
+export interface IDayEvent {
+  day: IDay;
+  event: MouseEvent;
+}

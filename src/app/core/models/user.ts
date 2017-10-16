@@ -5,5 +5,4 @@ export class User {
     firstName: string;
     lastName: string;
     email: string;
-    access_token: string;
 }

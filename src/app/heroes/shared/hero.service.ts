@@ -1,6 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
 
 import { Hero } from './hero';
 import { ApiConfig } from '../../core/models/api-config';

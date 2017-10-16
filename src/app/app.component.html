@@ -2,9 +2,10 @@
   <app-header *ngIf="isActive()"></app-header>
   <app-nav *ngIf="isActive()"></app-nav>
   <app-spinner></app-spinner>
-  <main class="full-height">    
+  <main class="full-height">
+    <app-alert></app-alert>
     <router-outlet></router-outlet>
   </main>
   <app-footer *ngIf="isActive()"></app-footer>
+  <app-modal-message #appModal></app-modal-message>
 </div>
-<app-modal-message #modalMessage [type]="'BLOCKING'" (onOk)="onOkConfirm($event)" (onClose)="onCloseModal($event)"></app-modal-message>

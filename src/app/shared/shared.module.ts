@@ -1,58 +1,75 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {Http, RequestOptions, XHRBackend} from '@angular/http';
 
-import { CommonModule } from '@angular/common';
-import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { ModalModule } from 'ngx-bootstrap';
+// modules
+import {CommonModule} from '@angular/common';
+import {HttpModule} from '@angular/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {TranslateModule} from '@ngx-translate/core';
+import {ModalModule, AlertModule} from 'ngx-bootstrap';
 
 // components
-import { LoginComponent } from './login/login.component';
-import { PageNotFoundComponent } from './not-found/not-found.component';
-import { ControlMessagesComponent } from './control-messages/control-messages.component';
+import {LoginComponent} from './login/login.component';
+import {PageNotFoundComponent} from './not-found/not-found.component';
+
+// directives
+import {FocusDirective} from './focus.directive';
 
 // factories
-import { httpFactory } from './http.factory';
-import { AuthHelper } from '../core/services/auth.helper';
+import {httpFactory} from './http.factory';
 
 // services
-import { SpinnerService } from '../core/spinner/spinner.service';
-
-// environments
-import { environment } from '../../environments/environment';
+import {SpinnerService} from '../core/spinner/spinner.service';
+import {AuthHelper} from '../core/services/auth.helper';
+import {ModalMessageComponent} from '../modal-message/modal-message.component';
+import {UIElementsModule} from '../ui-elements/ui-elements.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    TranslateModule,
     ModalModule.forRoot(),
-    TranslateModule
+    AlertModule.forRoot(),
+    UIElementsModule,
   ],
   declarations: [
+    FocusDirective,
     LoginComponent,
     PageNotFoundComponent,
-    ControlMessagesComponent
+    ModalMessageComponent,
   ],
   providers: [
-    { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, SpinnerService, AuthHelper] }
+    {
+      provide: Http,
+      useFactory: httpFactory,
+      deps: [XHRBackend, RequestOptions, SpinnerService, AuthHelper]
+    }
   ],
   exports: [
     CommonModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
     TranslateModule,
     ModalModule,
+    AlertModule,
+    UIElementsModule,
 
+    FocusDirective,
     LoginComponent,
     PageNotFoundComponent,
-    ControlMessagesComponent
+    ModalMessageComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class SharedModule { }
+export class SharedModule {
+}

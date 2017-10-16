@@ -1,10 +1,12 @@
 <div class="footer row">
   <div class="col-xs-9">
     <div class="row">
-      <div class="col-xs-3"><img src="assets/images/shield-large.png"></div>
+      <div class="col-xs-3"><img alt="Angular" src="./assets/images/shield-large.png"></div>
       <div class="col-xs-9 block" style="height: 210px">
         <div class="centered">
-          <div>© {{year}} Demo full application</div>
+          <div>
+            {{'poweredBy' | translate}} <a href="http://yahimaduarte.com/">Lic. Yahima Duarte</a> © {{year}}
+          </div>
           <div>Code licensed under an MIT-style License. Documentation licensed under CC BY 4.0.</div>
         </div>
       </div>
@@ -12,8 +14,9 @@
   </div>
   <div class="col-xs-3 block" style="height: 210px; text-align: center">
     <ul class="list-inline text-right centered">
-      <li class="list-inline-item"><a [routerLink]="['/about']">{{ 'about' | translate}}</a></li> |
-      <li class="list-inline-item"><a href="#">{{ 'help' | translate}}</a></li>
+      <li class="list-inline-item"><a [routerLink]="['/about']">{{'aboutUs' | translate}}</a></li>
+      |
+      <li class="list-inline-item"><a href="#">{{'help' | translate}}</a></li>
     </ul>
   </div>
 </div>

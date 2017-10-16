@@ -1,8 +1,5 @@
 import { Http } from '@angular/http';
 
-// models
-import { ApiConfig } from '../models/api-config';
-
 // services
 import { AuthService } from '../services/auth.service';
 import { AuthHelper } from '../services/auth.helper';
@@ -12,7 +9,6 @@ import { OAuthService } from '../services/oauth.service';
 // configurations
 import { AuthTypes } from './auth.type';
 import { environment } from '../../../environments/environment';
-import { COOKIE_IDENTIFIERS } from '../../cookie.identifiers';
 
 export function authFactory(http: Http, authHelper: AuthHelper): AuthService {
     switch (environment.apiConfig.authService) {

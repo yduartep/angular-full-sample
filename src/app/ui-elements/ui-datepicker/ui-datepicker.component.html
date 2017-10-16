@@ -1,0 +1,46 @@
+<div #dpInputContainer class="input-group dp-input-container">
+  <div class="input-box input-group-btn dp-picker-input">
+    <label [attr.for]="identifier" hidden>{{ title }}</label>
+    <input dateValidator
+           id="dpInput-{{identifier}}"
+           name="dpInput-{{identifier}}"
+           class="form-control" type="text"
+           [ngClass]="{invalid: (invalid | async)}"
+           [title]="title"
+           style="width: calc(100% - 48px);"
+           [ngModel]="value | date:'dd MMMM yyyy'"
+           (change)="onDateChanged($event.target.value)"/>
+    <span class="input-title">{{ title }}{{mandatoryLabel}}: </span>
+    <button id="btn-calendar" class="btn btn-calendar no-margin-bottom" type="button"
+      [ngClass]="{invalid: (invalid | async)}"
+      (click)="toogleCalendar()">
+      <label for="btn-calendar" hidden>Calendar button</label>
+    </button>
+  </div>
+</div>
+<div #dpCalendarContainer>
+  <div #dpPopup class="dp-popup" [hidden]="!areCalendarsShown">
+    <dp-day-calendar #dpCalendar
+                     [identifier]="identifier"
+                     [config]="dayCalendarConfig"
+                     [ngModel]="value"
+                     [displayDate]="currentDateView"
+                     (onSelect)="onDateSelected($event, 'day')"
+                     (onToday)="moveToCurrent()"
+                     (onHide)="hideCalendar()">
+    </dp-day-calendar>
+  </div>
+</div>
+<messages-validation
+  [@flyInOut]="'in,out'"
+  *ngIf="invalid | async"
+  [messages]="failures | async">
+</messages-validation>
+<!--<app-control-messages [control]="parentForm.controls[formName]" [message]="'invalid-select-field' | translate:{value: 'date'}"
+[validator]="'required'"></app-control-messages>
+<app-control-messages [control]="parentForm.controls[formName]" [message]="'invalid-date-format' | translate"
+[validator]="'invalidDate'"></app-control-messages>
+<app-control-messages [control]="parentForm.controls[formName]" [message]="'invalid-max-date' | translate"
+[validator]="'invalidMaxDate'"></app-control-messages>-->
+<!--</div>-->
+<!--</form>-->

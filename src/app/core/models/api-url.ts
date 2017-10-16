@@ -1,8 +1,6 @@
 export class ApiUrl {
-  id: string;
-  url: string;
-  constructor(id: string, url: string) {
-    this.id = id;
-    this.url = url;
+  constructor(public id: string,
+              public url: string,
+              public requireAuthBefore: boolean = true) {
   }
 }

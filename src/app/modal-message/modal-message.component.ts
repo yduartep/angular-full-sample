@@ -1,7 +1,12 @@
-import { Component, OnInit, EventEmitter, ViewChild, ElementRef, Input, Output } from '@angular/core';
-import { MessageType } from './message-type';
-import { MessageStatus } from './message-status';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import {Component, OnInit, ViewChild, Input} from '@angular/core';
+import {MessageStatus} from './message-status';
+import {ModalDirective} from 'ngx-bootstrap/modal';
+import {MessageType} from './message-type';
+import {MessageService} from './message.service';
+import {Message} from './message';
+import {CommonUtil} from '../core/utilities/common.util';
+import {TranslateService} from '@ngx-translate/core';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-modal-message',
@@ -9,27 +14,64 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
   styleUrls: ['./modal-message.component.css']
 })
 export class ModalMessageComponent implements OnInit {
-  @Input()
-  message: string;
+  @Input() identifier = 'modalConfirm';
+  @Input() type: string;
+  @Input() title: string;
+  @Input() status: string;
+  @Input() message: string;
+  @Input() onConfirmCallback: Function;
+  @Input() onCancelCallback: Function;
+  @Input() onHideCallback: Function;
 
-  @Input()
-  status: string;
+  // settings
 
-  @Input()
-  type: string;
+  /** Determine if display the success, warn, ... icon on the header. */
+  @Input() displayIcon = true;
 
-  @Output() onOk: EventEmitter<boolean> = new EventEmitter();
-  @Output() onClose: EventEmitter<any> = new EventEmitter();
+  /** Title of the Yes button in case of confirmation dialog */
+  @Input() yesButtonTitle: string;
+
+  /** Title of the No button in case of confirmation dialog */
+  @Input() noButtonTitle: string;
+
+  /** Title of the Close button in case of blocking dialog */
+  @Input() closeButtonTitle: string;
 
   @ViewChild('modalMsg') modal: ModalDirective;
 
-  constructor() {
+  constructor(private messageService: MessageService,
+              private translate: TranslateService) {
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.messageService.getMessage().subscribe((message: Message) => {
+      this.message = message.text;
+      this.status = message.status;
+      this.type = message.type;
+      if (message.settings) {
+        this.onConfirmCallback = message.settings.onConfirmCallback;
+        this.onCancelCallback = message.settings.onCancelCallback;
+        if (!CommonUtil.isEmpty(message.settings.title)) {
+          this.title = message.settings.title;
+        }
+        this.displayIcon = message.settings.displayIcons;
+
+        if (!CommonUtil.isEmpty(message.settings.yesButtonTitle)) {
+          this.yesButtonTitle = message.settings.yesButtonTitle;
+        }
+        if (!CommonUtil.isEmpty(message.settings.noButtonTitle)) {
+          this.noButtonTitle = message.settings.noButtonTitle;
+        }
+        if (!CommonUtil.isEmpty(message.settings.closeButtonTitle)) {
+          this.closeButtonTitle = message.settings.closeButtonTitle;
+        }
+      }
+      this.show();
+    });
+  }
 
   /**
-   * Mehtod that returns the modal icon to display depending of the modal status
+   * Gets the modal icon to display depending of the modal status
    */
   getIcon() {
     switch (this.status) {
@@ -47,40 +89,41 @@ export class ModalMessageComponent implements OnInit {
   }
 
   /**
-   * Mehtod that returns the modal title depending of the model status
+   * Gets the modal title depending of the model status
    */
   getTitle() {
-    switch (this.status) {
-      case MessageStatus.DANGER:
-        return 'Error';
-      case MessageStatus.INFO:
-        return 'Info';
-      case MessageStatus.SUCCESS:
-        return 'Success ';
-      case MessageStatus.WARNING:
-        return 'Warning';
-      default:
-        return 'Error';
+    if (CommonUtil.isEmpty(this.title)) {
+      switch (this.status) {
+        case MessageStatus.DANGER:
+          return 'Error';
+        case MessageStatus.INFO:
+          return 'Info';
+        case MessageStatus.SUCCESS:
+          return 'Success ';
+        case MessageStatus.WARNING:
+          return 'Warning';
+        default:
+          return 'Error';
+      }
     }
+    return this.title;
   }
 
   /**
-   * Mehtod that returns the Ok title button translated
+   * Gets the Ok title button in case of confirm dialog
    */
-  getOkTitle() {
-    // TO be translated
-    return 'OK';
+  getOkTitle(): Observable<String> {
+    return this.translate.get('modalMessage.yesButton');
   }
 
   /**
-   * Method that returns the cancel title button translated
+   * Gets the No/Cancel title button in case of Confirm/Blocking dialog
    */
-  getCancelTitle() {
-    // TO be translated
+  getCancelTitle(): Observable<String> {
     if (this.type === MessageType.BLOCKING) {
-      return 'Close';
+      return this.translate.get('modalMessage.closeButton');
     } else {
-      return 'Cancel';
+      return this.translate.get('modalMessage.noButton');
     }
   }
 
@@ -91,32 +134,30 @@ export class ModalMessageComponent implements OnInit {
     this.modal.show();
   }
 
-  /**
-   * Event that hide the modal dialog
-   */
   hide() {
-    if (this.modal && this.modal.isShown) {
-      if (this.type === MessageType.CONFIRM) {
-        this.onOk.emit(false);
-      }
-      this.modal.hide();
-      this.onClose.emit(null);
+    if (this.onHideCallback) {
+      this.onHideCallback();
     }
+    this.modal.hide();
   }
 
   /**
    * Event fired when click on ok button of confirm message
    */
-  onOKEvent() {
-    this.onOk.emit(true);
-    this.modal.hide();
-    this.onClose.emit(null);
+  onConfirm() {
+    if (this.onConfirmCallback) {
+      this.onConfirmCallback();
+    }
+    this.hide();
   }
 
   /**
    * Event fired when click on cancel or close button
    */
-  onCancelEvent() {
+  onCancel() {
+    if (this.onCancelCallback) {
+      this.onCancelCallback();
+    }
     this.hide();
   }
 }

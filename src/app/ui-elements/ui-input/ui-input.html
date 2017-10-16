@@ -1,0 +1,25 @@
+<div *ngIf="mode !== Mode.VIEW">
+  <label class="control-label col-sm-3" [attr.for]="id">{{ title }}{{mandatoryLabel}}:</label>
+  <div class="col-sm-6">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="value"
+      [ngClass]="{invalid: (invalid | async)}"
+      [id]="id"
+      [title]="title"
+      [placeholder]="placeholder"
+    />
+  </div>
+  <div class="col-sm-3">
+    <messages-validation
+      [@flyInOut]="'in,out'"
+      *ngIf="invalid | async"
+      [messages]="failures | async">
+    </messages-validation>
+  </div>
+</div>
+<div *ngIf="mode === Mode.VIEW">
+  <ui-review [title]="title" [value]="value">
+  </ui-review>
+</div>
