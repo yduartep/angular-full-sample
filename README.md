@@ -31,6 +31,7 @@ Full sample application built with Angular 4 that follows all best practices. Th
   - [13. Not found component](#13-not-found-component)
   - [14. TSLint integration](#14-tslint-integration)
   - [15. Unit and Functional test](#15-unit-and-functional-test)
+  - [16. Cache Services](#16-cache-services)
 - [Useful Commands](#useful-commands)
   - [Application execution](#application-execution)
 
@@ -397,6 +398,9 @@ npm run e2e
 More Info:
 - https://angular.io/docs/ts/latest/guide/testing.html
 - https://blog.jscrambler.com/getting-started-with-angular-2-end-to-end-testing/
+
+## 16. Cache Services
+To define cache services is necessary to extend from the clase CacheService ...
 
 # Useful Commands
 ## Application execution
