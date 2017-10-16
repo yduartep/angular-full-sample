@@ -14,16 +14,16 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "npm run start:mocks",
     "build": "ng build",
     "build:prod": "ng build --aot=false --target=production",
-    "pretest": "npm run lint",
     "test": "ng test",
-    "lint": "ng lint",
+    "pretest": "npm run lint",
     "e2e": "ng e2e",
-    "client:mocks": "ng serve --environment=mock",
-    "server:mocks": "json-server prototype/apiMocks.js --routes prototype/routes.json",
-    "start:mocks": "npm-run-all --parallel client:mocks server:mocks"
+    "lint": "ng lint",
+
+    "start": "concurrent --kill-others --kill-others-on-fail --prefix \"[{time}-{name}]\" --names \"MOCKS,APPLICATION\" -c \"blue.bold,magenta\" \"npm run start:mocks\" \"npm run start:application\"",
+    "start:mocks": "json-server prototype/apiMocks.js --routes prototype/routes.json",
+    "start:application": "ng serve --environment=mock --open true --live-reload true"
   },
   "dependencies": {
     "@angular/common": "^4.0.0",
@@ -51,6 +51,7 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
+    "concurrently": "^3.4.0",
     "faker": "^4.1.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
