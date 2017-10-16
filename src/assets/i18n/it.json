@@ -68,7 +68,7 @@
     "insertErrMsg": "Errore durante il tentativo di inserire il nuovo eroe"
   },
   "villains": {
-    "detail-title": "Dettagli Cattivi",
+    "detail-title": "Dettagli cattivo",
     "list-title": "Lista dei cattivi",
     "delete": "Cancella",
     "fields": {
@@ -84,7 +84,7 @@
     "placeholders": {
       "name": "Inserisci il nome ...",
       "editorial": "Sceglie editoriale ...",
-      "preview": "Inserisci nome di un'immagine memorizzata sulle risorse ..."
+      "preview": "Inserisci nome di un'immagine memorizzata sulle risorse ...",
       "search": "Ricerca ..."
     },
     "confirmDeleteMsg": "Sei sicuro di voler eliminare questo cattivo?",
