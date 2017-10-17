@@ -20,7 +20,10 @@
     <td>
       <div class="btn-group">
         <button routerLink="/heroes/detail/{{hero.id}}" class="btn btn-secondary btn-sm">
-          <i class="fa fa-search"></i>
+        <i class="fa fa-search"></i>
+      </button>
+        <button routerLink="/heroes/edit/{{hero.id}}" class="btn btn-info btn-sm">
+          <i class="fa fa-pencil-square-o"></i>
         </button>
         <button (click)="delete(hero.id)" class="btn btn-danger btn-sm">
           <i class="fa fa-times"></i>

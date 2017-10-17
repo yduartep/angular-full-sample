@@ -1,0 +1,53 @@
+<div *ngIf="hero">
+  <h1>{{'heroes.edit-title' | translate}}</h1>
+
+  <form #frmHero="ngForm" id="frmHero" novalidate (ngSubmit)="onSaveHero()" novalidate>
+    <div class="row">
+      <ui-input required [dataErrorRequired]="'validations.required.name' | translate"
+                id="txtName"
+                title="{{'heroes.fields.name' | translate}}"
+                placeholder="{{'heroes.placeholders.name' | translate }}"
+                [mode]="mode"
+                [(ngModel)]="hero.name"
+                [ngModelOptions]="{standalone: true}">
+      </ui-input>
+    </div>
+    <div class="row">
+      <ui-select numeric [dataErrorNumeric]="'validations.numeric.editorial' | translate"
+                 id="selEditorial"
+                 title="{{'heroes.fields.editorial' | translate}}"
+                 keyField="id"
+                 textField="text"
+                 [(ngModel)]="selected"
+                 [mode]="mode"
+                 [data]="editorials"
+                 [ngModelOptions]="{standalone: true}">
+      </ui-select>
+    </div>
+    <div class="row">
+      <ui-input id="txtImage"
+                title="{{'heroes.fields.preview' | translate}}"
+                placeholder="{{'heroes.placeholders.preview' | translate}}"
+                [(ngModel)]="hero.image"
+                [mode]="mode"
+                [ngModelOptions]="{standalone: true}">
+      </ui-input>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="!validate() || mode == 0">{{'heroes.save' |
+        translate}}
+      </button>
+      <div class="btn-group">
+        <button (click)="onBack()" class="btn btn-secondary btn-sm">
+          <i class="fa fa-arrow-left"></i> {{'back' | translate}}
+        </button>
+        <button type="button" (click)="reset()" [disabled]="mode == 0" class="btn btn-danger btn-sm">
+          <i class="fa fa-undo"></i> {{'reset' | translate}}
+        </button>
+        <button type="button" (click)="onReview()" class="btn btn-danger btn-sm">
+          <i class="fa fa-search"></i> {{'review' | translate}}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

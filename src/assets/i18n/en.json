@@ -43,9 +43,12 @@
     "detail-title": "Hero details",
     "list-title": "List of Heroes",
     "create-title": "Create new hero",
+    "edit-title": "Edit heroe",
     "delete": "Delete",
     "save": "Save",
     "create": "Create new",
+    "edit": "Edit",
+    "review": "View mode",
     "fields": {
       "name": "Name",
       "editorial": "Editorial",
@@ -65,7 +68,9 @@
     "deleteOkMsg": "The super hero was deleted successfully!",
     "deleteErrMsg": "Error while deleting the super hero!",
     "insertOkMsg": "The hero was created successfully!!",
-    "insertErrMsg": "Error while trying to insert the new hero"
+    "insertErrMsg": "Error while trying to insert the new hero",
+    "editOkMsg": "The hero was updated successfully!!",
+    "editErrMsg": "Error while trying to update the hero"
   },
   "villains": {
     "detail-title": "Villain details",

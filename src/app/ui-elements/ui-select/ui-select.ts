@@ -2,20 +2,21 @@ import {
   Component,
   Optional,
   Inject,
-  Input, OnInit, SimpleChanges, OnChanges, ChangeDetectionStrategy
+  Input, SimpleChanges, OnChanges, ChangeDetectionStrategy, OnInit
 } from '@angular/core';
 
 import {
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS, RequiredValidator,
+  NG_ASYNC_VALIDATORS,
 } from '@angular/forms';
 
 import {ValidationService} from '../../core/services/validation.service';
 import {UIElementBase} from '../ui-element-base';
 import {animations} from '../animations';
-import {Mode} from '../../core/models/mode.enum';
 import {CommonUtil} from '../../core/utilities/common.util';
+import {KeyText} from '../../core/models/key-text';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'ui-select',
@@ -25,10 +26,9 @@ import {CommonUtil} from '../../core/utilities/common.util';
     provide: NG_VALUE_ACCESSOR,
     useExisting: UISelectComponent,
     multi: true,
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  }]
 })
-export class UISelectComponent extends UIElementBase<number> implements OnChanges {
+export class UISelectComponent extends UIElementBase<number> implements OnChanges, OnInit {
   /**
    * List of objects to be used for initializing the select
    */
@@ -39,13 +39,13 @@ export class UISelectComponent extends UIElementBase<number> implements OnChange
    * Name of the field that will be used as value
    */
   @Input()
-  keyField: string;
+  keyField = 'id';
 
   /**
    * Name of the field(s) to be used for display the text value
    */
   @Input()
-  textField: string | Array<string> = [];
+  textField: string | Array<string> = ['text'];
 
   /**
    * Separator to be used when multiple texts to be displayed
@@ -54,10 +54,10 @@ export class UISelectComponent extends UIElementBase<number> implements OnChange
   separator: string;
 
   /**
-   * The list of texts to be used in the select
+   * the final values to be used in select
    * @type {Array}
    */
-  protected texts: string[] = [];
+  values: Array<KeyText>;
 
   constructor(@Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
               @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
@@ -65,11 +65,27 @@ export class UISelectComponent extends UIElementBase<number> implements OnChange
     super(validators, asyncValidators, validationService);
   }
 
+  ngOnInit() {
+    super.ngOnInit();
+
+    this.initialize();
+  }
+
   ngOnChanges(changes: SimpleChanges) {
-    const dataChanged = changes['data'] && changes['data'].previousValue !== changes['data'].currentValue;
+    const dataChanged = changes['data']
+      && changes['data'].previousValue
+      && changes['data'].previousValue !== changes['data'].currentValue;
     if (dataChanged) {
       this.initialize();
     }
+  }
+
+  /**
+   * Update the value on change
+   * @param selected the selected value
+   */
+  onValueChanged(selected) {
+    this.value = +selected;
   }
 
   /**
@@ -78,15 +94,15 @@ export class UISelectComponent extends UIElementBase<number> implements OnChange
   private initialize() {
     if (CommonUtil.isArray(this.textField)) {
       const fields = this.textField as string[];
-      this.texts = this.data.map(elem => fields.map(f => elem[f]).join(this.separator));
+      this.values = this.data.map(elem => {
+        const id = this.data[this.keyField];
+        return new KeyText(id, fields.map(f => elem[f]).join(this.separator), this.value === id);
+      });
     } else {
-      this.texts = this.data.map(elem => elem[this.textField as string]);
+      this.values = this.data.map(elem => {
+        return new KeyText(elem[this.keyField], elem[this.textField as string], this.value === elem[this.keyField]);
+      });
     }
-  }
-
-  onValueChanged(value) {
-    // convert string to int
-    this.value = +value;
   }
 
   /**

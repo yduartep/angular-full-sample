@@ -1,6 +1,6 @@
 <h1>{{'heroes.create-title' | translate}}</h1>
 
-<form #frmHero="ngForm" id="frmLHero" novalidate (ngSubmit)="onSaveHero()" novalidate>
+<form #frmHero="ngForm" id="frmHero" novalidate (ngSubmit)="onSaveHero()" novalidate>
   <div class="row">
     <ui-input required [dataErrorRequired]="'validations.required.name' | translate"
               id="txtName"

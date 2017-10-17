@@ -42,9 +42,12 @@
     "detail-title": "Detalles del heroe",
     "list-title": "Lista de Heroes",
     "create-title": "Crea nuevo heroe",
+    "edit-title": "Modifica heroe",
     "delete": "Elimina",
     "save": "Salva",
     "create": "Crea nuevo",
+    "edit": "Edit",
+    "review": "Modo lectura",
     "fields": {
       "name": "Nombre",
       "editorial": "Editorial",
@@ -64,7 +67,9 @@
     "deleteOkMsg": "El heroe se ha eliminado correctamente!",
     "deleteErrMsg": "Se ha producido un error mientras intentaba eliminar el heroe!",
     "insertOkMsg": "El heroe se ha creado correctamente!!",
-    "insertErrMsg": "Se ha producido un error mientras intentaba agregar un heroe!"
+    "insertErrMsg": "Se ha producido un error mientras intentaba agregar un heroe!",
+    "editOkMsg": "El heroe se ha actualizado correctamente!!",
+    "editErrMsg": "Se ha producido un error mientras intentaba actualizar un heroe!"
   },
   "villains": {
     "detail-title": "Detalles del villano",

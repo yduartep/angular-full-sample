@@ -43,9 +43,12 @@
     "detail-title": "Dettagli dell'eroe",
     "list-title": "Elenco degli eroi",
     "create-title": "Crea nuovo eroe",
+    "edit-title": "Modifica heroe",
     "delete": "Cancella",
     "save": "Registra",
     "create": "Crea nuovo",
+    "edit": "Modifica",
+    "review": "Modalità lettura",
     "fields": {
       "name": "Nome",
       "editorial": "Editoriale",
@@ -65,7 +68,9 @@
     "deleteOkMsg": "L'eroe è stato eliminato con successo!",
     "deleteErrMsg": "Errore durante la cancellazione del eroe!",
     "insertOkMsg": "L'eroe è stato creato con successo!!",
-    "insertErrMsg": "Errore durante il tentativo di inserire il nuovo eroe"
+    "insertErrMsg": "Errore durante il tentativo di inserire il nuovo eroe",
+    "editOkMsg": "L'eroe è stato modificato con successo!!",
+    "editErrMsg": "Errore nel tentativo di modificare il eroe!"
   },
   "villains": {
     "detail-title": "Dettagli cattivo",

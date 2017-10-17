@@ -1,12 +1,9 @@
-<div *ngIf="mode !== Mode.VIEW">
+<div *ngIf="mode !== Mode.VIEW && values">
   <label class="control-label col-sm-3" [attr.for]="id">{{ title }}{{mandatoryLabel}}:</label>
   <div class="col-sm-5">
-    <select [id]="id"
-            [(ngModel)]="value"
-            (change)="onValueChanged($event.target.value)"
-            [ngClass]="{invalid: (invalid | async)}"
-            class="form-control">
-      <option *ngFor="let d of data; let i=index" [value]="d[keyField]">{{texts[i]}}</option>
+    <select [id]="id" class="form-control" [ngClass]="{invalid: (invalid | async)}"
+            [ngModel]="value" (change)="onValueChanged($event.target.value)">
+      <option *ngFor="let v of values" [value]="v.id">{{v.text}}</option>
     </select>
   </div>
   <div class="col-sm-4">
