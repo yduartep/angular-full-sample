@@ -107,24 +107,32 @@ More Info: https://angular-2-training-book.rangle.io/handout/modules/lazy-loadin
 2. Define the configuration to be used in this new environment:
    ```
    export const environment = {
+      appName: 'My Demo Application',
       production: false,
       envName: 'qa',
+      buildVersion: '1.0.0-SNAPSHOT',
+      buildTimestamp: new Date().toISOString(),
+      defaultLanguage: 'en',
       apiConfig: {
-        apiEnv: 'qa',
-        timeExpired: 5,
+        apiEnv: 'dev',
+        timeExpired: 1200,
         credentials: {
           clientId: 'userClientId',
           clientSecret: 'pwdClient'
         },
         apiUrls: [
-          { id: 'HEROES_SERVICE_URL', url: 'http://127.0.0.1:3000/api/heroes' },
+          {id: 'HEROES_SERVICE_URL', url: 'http://127.0.0.1:3000/api/heroes', requireAuthBefore: true},
           ...
-          { id: 'OAUTH_SERVICE_URL', url: 'http://localhost:3000/api/oauth/token' }
+          {id: 'OAUTH_SERVICE_URL', url: 'http://127.0.0.1:3000/api/oauth/token', requireAuthBefore: false}
         ],
+        authService: AuthTypes.OAUTH,
+        authScheme: AuthScheme.BEARER,
+        errorHandler: ErrorHandlerTypes.SIMPLE,
+        loggerService: LoggerTypes.CONSOLE,
       }
-    };
+   };
    ```
-   Note: If you want to use the OAuth Client during authentication, the ID of the url should be OAUTH_SERVICE_URL. Also, if your services use the basic authentication, define the property credentials like in the example below.
+   Note: If you want to use the OAuth Client during authentication, the ID of the url should be OAUTH_SERVICE_URL. Also, if your services use the basic authentication, define the property credentials like in the example below.There are other authentication scheme that can be used like BASIC, DIGEST, HOBA or AWS depending of the authentication system you need to integrate.
    
 3. Edit the file .angular-cli.json, go to the environments property and add the new configuration:
    ```
