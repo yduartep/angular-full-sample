@@ -2,7 +2,9 @@ import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+// modules
 import {AlertModule} from 'ngx-bootstrap';
+import {BsDatepickerModule} from 'ngx-bootstrap';
 
 // components
 import {MessagesValidationComponent} from './messages-validation/messages-validation';
@@ -11,7 +13,6 @@ import {UISelectComponent} from './ui-select/ui-select';
 import {UIReviewComponent} from './ui-review/ui-review';
 import {UINumberPickerComponent} from './ui-number-picker/ui-number-picker';
 import {UIDatePickerComponent} from './ui-datepicker/ui-datepicker.component';
-import {UIDayCalendarComponent} from './ui-datepicker/day-calendar/day-calendar.component';
 import {UIPasswordComponent} from './ui-password/ui-password';
 
 // directives
@@ -21,13 +22,15 @@ import {DateValidatorDirective} from './directives/date.directive';
 import {EmailValidatorDirective} from './directives/email.directive';
 import {MaxDateTodayValidatorDirective} from './directives/maxDateToday.directive';
 import {PasswordValidatorDirective} from './directives/password-valid.directive';
+import {FocusDirective} from './focus.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   declarations: [
     UIInputComponent,
@@ -35,7 +38,6 @@ import {PasswordValidatorDirective} from './directives/password-valid.directive'
     UISelectComponent,
     UIReviewComponent,
     UIDatePickerComponent,
-    UIDayCalendarComponent,
     UIPasswordComponent,
     MessagesValidationComponent,
     HexadecimalValidatorDirective,
@@ -43,7 +45,8 @@ import {PasswordValidatorDirective} from './directives/password-valid.directive'
     DateValidatorDirective,
     EmailValidatorDirective,
     MaxDateTodayValidatorDirective,
-    PasswordValidatorDirective
+    PasswordValidatorDirective,
+    FocusDirective
   ],
   providers: [],
   exports: [

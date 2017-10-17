@@ -21,7 +21,7 @@ import {
   validate,
 } from './validate';
 import {Mode} from '../core/models/mode.enum';
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined} from 'util';
 
 let indexId = 0;
 

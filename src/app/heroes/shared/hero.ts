@@ -4,6 +4,7 @@ export class Hero {
   constructor(public id: number,
               public name: string,
               public editorial: Editorial,
-              public image: string) {
+              public image: string,
+              public creationDate: Date = new Date()) {
   }
 }

@@ -7,14 +7,11 @@ import {HttpModule} from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
-import {ModalModule, AlertModule} from 'ngx-bootstrap';
+import {ModalModule, AlertModule, BsDatepickerModule} from 'ngx-bootstrap';
 
 // components
 import {LoginComponent} from './login/login.component';
 import {PageNotFoundComponent} from './not-found/not-found.component';
-
-// directives
-import {FocusDirective} from './focus.directive';
 
 // factories
 import {httpFactory} from './http.factory';
@@ -37,10 +34,11 @@ import {HttpClientModule} from '@angular/common/http';
     TranslateModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     UIElementsModule,
   ],
   declarations: [
-    FocusDirective,
+    // FocusDirective,
     LoginComponent,
     PageNotFoundComponent,
     ModalMessageComponent,
@@ -62,9 +60,10 @@ import {HttpClientModule} from '@angular/common/http';
     TranslateModule,
     ModalModule,
     AlertModule,
+    BsDatepickerModule,
     UIElementsModule,
 
-    FocusDirective,
+    // FocusDirective,
     LoginComponent,
     PageNotFoundComponent,
     ModalMessageComponent

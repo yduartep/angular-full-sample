@@ -3,7 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { LoggerService } from '../../core/services/logger.service';
 
 @Component({
-  selector: 'hague-page-not-found',
+  selector: 'app-page-not-found',
   templateUrl: './not-found.component.html',
 })
 export class PageNotFoundComponent implements OnInit {

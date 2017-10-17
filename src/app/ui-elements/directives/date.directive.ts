@@ -24,6 +24,9 @@ export class DateValidatorDirective {
     if (typeof control.value === 'string' && moment(control.value.trim(), DateUtil.FORMAT_DATE, true).isValid()) {
       return null;
     }
+    if (moment(control.value).isValid()) {
+      return null;
+    }
     return {dateValidator: 'Please enter a valid date (format: ' + DateUtil.FORMAT_DATE + ')'};
   }
 }

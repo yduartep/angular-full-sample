@@ -10,11 +10,11 @@
       (change)="onValueChanged($event.target.value)"
     />
     <span class="input-title">{{ title }}{{ mandatoryLabel }}: </span>
-    <messages-validation
+    <ui-messages-validation
       [@flyInOut]="'in,out'"
       *ngIf="invalid | async"
       [messages]="failures | async">
-    </messages-validation>
+    </ui-messages-validation>
   </div>
   <div *ngIf="mode === Mode.VIEW">
     <ui-review [title]="title"

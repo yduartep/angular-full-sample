@@ -11,13 +11,11 @@ import {AlertService} from '../../core/alert/alert.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
 })
-export class LoginComponent extends UIFormComponent implements OnInit, AfterViewInit {
+export class LoginComponent extends UIFormComponent implements OnInit {
   loading = false;
   username: string;
   password: string;
   mode = Mode.EDIT;
-
-  public focusOnUsername = new EventEmitter<boolean>();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -31,10 +29,6 @@ export class LoginComponent extends UIFormComponent implements OnInit, AfterView
   ngOnInit() {
     // reset login status
     this.authService.logout();
-  }
-
-  ngAfterViewInit() {
-    this.focusOnUsername.emit(true);
   }
 
   isLoginEnable() {

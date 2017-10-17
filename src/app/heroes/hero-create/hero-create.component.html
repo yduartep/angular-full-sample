@@ -8,6 +8,7 @@
               placeholder="{{'heroes.placeholders.name' | translate }}"
               [mode]="mode"
               [(ngModel)]="hero.name"
+              [focus]="true"
               [ngModelOptions]="{standalone: true}">
     </ui-input>
   </div>
@@ -31,6 +32,16 @@
               [mode]="mode"
               [ngModelOptions]="{standalone: true}">
     </ui-input>
+  </div>
+  <div class="row">
+    <ui-datepicker required dateValidator
+                   id="dpDate"
+                   title="{{'heroes.fields.creationDate' | translate}}"
+                   placeholder="{{'heroes.placeholders.creationDate' | translate}}"
+                   [mode]="mode"
+                   [(ngModel)]="hero.creationDate"
+                   [ngModelOptions]="{standalone: true}">
+    </ui-datepicker>
   </div>
   <div class="form-group">
     <button type="submit" class="btn btn-primary" [disabled]="!validate()">{{'heroes.save' | translate}}</button>

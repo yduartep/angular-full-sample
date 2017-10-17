@@ -342,7 +342,7 @@ export class UITimePickerComponent extends UIElementBase<string> {
   }
 }
 ```
-3. Define the html content including the **messages-validation** component to be displayed in case of error validations:
+3. Define the html content including the **ui-messages-validation** component to be displayed in case of error validations:
 ```
 <div *ngIf="mode !== Mode.VIEW">
   <label class="control-label col-sm-3" [attr.for]="id">{{ title }}{{mandatoryLabel}}:</label>
@@ -350,10 +350,10 @@ export class UITimePickerComponent extends UIElementBase<string> {
     <timepicker [(ngModel)]="value" [ngClass]="{invalid: (invalid | async)}" [id]="id"></timepicker>
   </div>
   <div class="col-sm-4">
-    <messages-validation
+    <ui-messages-validation
       *ngIf="invalid | async"
       [messages]="failures | async">
-    </messages-validation>
+    </ui-messages-validation>
   </div>
 </div>
 <div *ngIf="mode === Mode.VIEW">

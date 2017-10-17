@@ -3,7 +3,6 @@ import {Observable} from 'rxjs/Observable';
 
 import {CommonUtil} from '../utilities/common.util';
 import {Map} from '../utilities/data-structure';
-import {UIElementBase} from "../../ui-elements/ui-element-base";
 
 @Injectable()
 export class ValidationService {

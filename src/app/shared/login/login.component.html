@@ -13,7 +13,8 @@
                 title="{{ 'login.label-username' | translate }}"
                 [mode]="mode"
                 [(ngModel)]="username"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}"
+                [focus]="true">
       </ui-input>
     </div>
     <div class="form-group">

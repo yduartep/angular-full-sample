@@ -52,7 +52,8 @@
     "fields": {
       "name": "Nome",
       "editorial": "Editoriale",
-      "preview": "Anteprima"
+      "preview": "Anteprima",
+      "creationDate": "Data creazione"
     },
     "columns": {
       "name": "Nome",
@@ -62,7 +63,8 @@
     "placeholders": {
       "name": "Inserisci il nome ...",
       "editorial": "Sceglie editoriale ...",
-      "preview": "Inserisci nome di un'immagine memorizzata sulle risorse ..."
+      "preview": "Inserisci nome di un'immagine memorizzata sulle risorse ...",
+      "creationDate": "Inserisci data di creazione"
     },
     "confirmDeleteMsg": "Sei sicuro di voler eliminare questo eroe?",
     "deleteOkMsg": "L'eroe è stato eliminato con successo!",

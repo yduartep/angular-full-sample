@@ -16,7 +16,6 @@ import {UIElementBase} from '../ui-element-base';
 import {animations} from '../animations';
 import {CommonUtil} from '../../core/utilities/common.util';
 import {KeyText} from '../../core/models/key-text';
-import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'ui-select',
@@ -111,8 +110,8 @@ export class UISelectComponent extends UIElementBase<number> implements OnChange
    * @returns {string} the text
    */
   getText(value: any): string {
-    if (!CommonUtil.isEmpty(this.data)) {
-      return this.data.find(elem => elem[this.keyField] === value);
+    if (!CommonUtil.isEmpty(this.values)) {
+      return this.values.find(elem => elem.id === value).text;
     }
     return '';
   }
@@ -122,7 +121,7 @@ export class UISelectComponent extends UIElementBase<number> implements OnChange
    * @returns {any} the text selected
    */
   getSelectedText() {
-    if (!CommonUtil.isEmpty(this.value)) {
+    if (this.value > 0) {
       return this.getText(this.value);
     }
     return '';

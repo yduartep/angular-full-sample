@@ -1,4 +1,3 @@
-import {IDatePickerConfig} from '../../ui-elements/ui-datepicker/common/config/date-picker-config';
 import {CommonUtil} from './common.util';
 import {Moment} from 'moment';
 import * as moment from 'moment';
@@ -7,46 +6,13 @@ export class DateUtil {
   /**
    * Global format date of the application
    */
-  static FORMAT_DATE = 'DD MMMM YYYY';
+  static FORMAT_DATE = 'MM/dd/yyyy';
 
   static dataToString(date: Date, format?: string) {
     if (CommonUtil.isEmpty(format)) {
       format = DateUtil.FORMAT_DATE;
     }
     return date ? moment(date).format(format) : '';
-  }
-
-  static getDatePickerConfig(): IDatePickerConfig {
-    const dpConfig: IDatePickerConfig = {
-      firstDayOfWeek: 'su',
-      format: this.FORMAT_DATE,
-      monthFormat: 'MMMM, YYYY',
-      disableKeypress: false,
-      allowMultiSelect: false,
-      closeOnSelect: true,
-      closeOnSelectDelay: 100,
-      onOpenDelay: 100,
-      weekdayNames: {
-        su: 'Su',
-        mo: 'Mo',
-        tu: 'Tu',
-        we: 'We',
-        th: 'Th',
-        fr: 'Fr',
-        sa: 'Sa'
-      },
-      appendTo: document.body,
-      drops: 'down',
-      opens: 'right',
-      showNearMonthDays: true,
-      showWeekNumbers: false,
-      enableMonthSelector: true,
-      yearFormat: 'YYYY',
-      showGoToCurrent: true,
-      dayBtnFormat: 'DD',
-      monthBtnFormat: 'MMM'
-    };
-    return dpConfig;
   }
 
   static getDateTimeFromMoment(date: Moment) {

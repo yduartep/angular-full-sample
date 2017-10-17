@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'messages-validation',
+  selector: 'ui-messages-validation',
   templateUrl: './messages-validation.html',
   styleUrls: ['./messages-validation.css'],
 })

@@ -40,7 +40,7 @@
   },
   "heroes": {
     "detail-title": "Detalles del heroe",
-    "list-title": "Lista de Heroes",
+    "list-title": "Lista de heroes",
     "create-title": "Crea nuevo heroe",
     "edit-title": "Modifica heroe",
     "delete": "Elimina",
@@ -51,7 +51,8 @@
     "fields": {
       "name": "Nombre",
       "editorial": "Editorial",
-      "preview": "Vista previa"
+      "preview": "Vista previa",
+      "creationDate": "Fecha creacion"
     },
     "columns": {
       "name": "Nombre",
@@ -61,7 +62,8 @@
     "placeholders": {
       "name": "Entra nombre ...",
       "editorial": "Selecciona Editorial ...",
-      "preview": "Entra nombre de imagen almacenada en assets ..."
+      "preview": "Entra nombre de imagen almacenada en assets ...",
+      "creationDate": "Entra fecha de creacion"
     },
     "confirmDeleteMsg": "Esta seguro que desea eliminar este heroe?",
     "deleteOkMsg": "El heroe se ha eliminado correctamente!",

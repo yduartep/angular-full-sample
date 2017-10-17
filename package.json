@@ -19,7 +19,7 @@
     "test": "ng test",
     "pretest": "npm run lint",
     "e2e": "ng e2e",
-    "lint": "ng lint",
+    "lint": "ng lint --type-check",
     "documentation:gentoc": "doctoc -s --maxlevel 2 README.md",
 
     "management:console:start": "hotel add \"npm run start:application\" --name \"APPLICATION\" -o application.log &  hotel add \"npm run start:mocks &\" --name \"MOCK SERVER\" -o mockserver.log & hotel start",

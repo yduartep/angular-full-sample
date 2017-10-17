@@ -9,13 +9,14 @@
       [id]="id"
       [title]="title"
       [placeholder]="placeholder"
+      [focus]="focusOnField"
     />
   </div>
   <div class="col-sm-4">
-    <messages-validation
+    <ui-messages-validation
       *ngIf="invalid | async"
       [messages]="failures | async">
-    </messages-validation>
+    </ui-messages-validation>
   </div>
 </div>
 <div *ngIf="mode === Mode.VIEW">

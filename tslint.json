@@ -13,6 +13,7 @@
     "curly": true,
     "eofline": true,
     "forin": true,
+    "forin": true,
     "import-blacklist": [
       true,
       "rxjs"
@@ -45,7 +46,6 @@
     "no-console": [
       true,
       "debug",
-      "info",
       "time",
       "timeEnd",
       "trace"
@@ -117,13 +117,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      ["app", "["],
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      ["app", "ui"],
       "kebab-case"
     ],
     "use-input-property-decorator": true,

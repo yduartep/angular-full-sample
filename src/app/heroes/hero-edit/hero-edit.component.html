@@ -1,5 +1,6 @@
 <div *ngIf="hero">
-  <h1>{{'heroes.edit-title' | translate}}</h1>
+  <h1 *ngIf="mode > 0">{{'heroes.edit-title' | translate}}</h1>
+  <h1 *ngIf="mode == 0">{{'heroes.detail-title' | translate}}</h1>
 
   <form #frmHero="ngForm" id="frmHero" novalidate (ngSubmit)="onSaveHero()" novalidate>
     <div class="row">
@@ -33,18 +34,28 @@
                 [ngModelOptions]="{standalone: true}">
       </ui-input>
     </div>
+    <div class="row">
+      <ui-datepicker required dateValidator
+                     id="dpDate"
+                     title="{{'heroes.fields.creationDate' | translate}}"
+                     placeholder="{{'heroes.placeholders.creationDate' | translate}}"
+                     [mode]="mode"
+                     [(ngModel)]="hero.creationDate"
+                     [ngModelOptions]="{standalone: true}">
+      </ui-datepicker>
+    </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary" [disabled]="!validate() || mode == 0">{{'heroes.save' |
         translate}}
       </button>
       <div class="btn-group">
-        <button (click)="onBack()" class="btn btn-secondary btn-sm">
+        <button type="button" (click)="onBack()" class="btn btn-secondary btn-sm">
           <i class="fa fa-arrow-left"></i> {{'back' | translate}}
         </button>
-        <button type="button" (click)="reset()" [disabled]="mode == 0" class="btn btn-danger btn-sm">
+        <button type="button" (click)="reset()" *ngIf="mode > 0" class="btn btn-danger btn-sm">
           <i class="fa fa-undo"></i> {{'reset' | translate}}
         </button>
-        <button type="button" (click)="onReview()" class="btn btn-danger btn-sm">
+        <button type="button" (click)="onReview()" *ngIf="mode > 0" class="btn btn-info btn-sm">
           <i class="fa fa-search"></i> {{'review' | translate}}
         </button>
       </div>

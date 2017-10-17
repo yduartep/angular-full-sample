@@ -79,9 +79,6 @@ export class HeroEditComponent extends UIFormComponent implements OnInit {
     }
   }
 
-  onEditorialChange(value){
-    alert("editorial is " + value);
-  }
   /**
    * Display form in view mode
    */
