@@ -24,6 +24,7 @@ Full sample application built with Angular 4 that follows all best practices. Th
     - [How to create new Authentication service](#how-to-create-new-authentication-service)
   - [9. Guards](#9-guards)
   - [10. Custom service validation and control messages](#10-custom-service-validation-and-control-messages)
+    - [How to create new ui component:](#how-to-create-new-ui-component)
   - [11. Customizable logger system](#11-customizable-logger-system)
     - [How to create a new Logger system:](#how-to-create-a-new-logger-system)
   - [12. Incorporated automatic handle errors](#12-incorporated-automatic-handle-errors)
