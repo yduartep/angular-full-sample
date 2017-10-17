@@ -150,23 +150,23 @@ More Info: https://angular-2-training-book.rangle.io/handout/modules/lazy-loadin
 More Info: http://tattoocoder.com/angular-cli-using-the-environment-option/
 
 ## 3. How translate elements in a page
-The application use the module ngx-translate for translation. The configuration of the TranslateModule is defined in the app.module.ts and exported from the SharedModule, so always be sure the module who expose the component to be translated import the SharedModule. The json files used during translation are stored in the folder /assets/i18n/ with the code of the specific language of translation (es. es.json, en.json, it.json ...).
+The application use the module **ngx-translate** for translation. The configuration of the TranslateModule is defined in the app.module.ts and exported from the SharedModule, so always be sure the module who expose the component to be translated import the SharedModule. The json files used during translation are stored in the folder /assets/i18n/ with the code of the specific language of translation (es. es.json, en.json, it.json ...).
    ```
-   // app.translate.factory.ts
-   export function createTranslateLoader(http: Http) {
-      return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+   // app.translate.factory.ts - custom TranslateLoader while using AoT compilation
+   export function createTranslateLoader(http: HttpClient) {
+     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
    }
    
    // app.module.ts
    @NgModule({
     imports: [..., 
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [Http]
-        }
-      })
+          TranslateModule.forRoot({
+            loader: {
+              provide: TranslateLoader,
+              useFactory: createTranslateLoader,
+              deps: [HttpClient]
+            }
+        })
      ], ...
    })
    export class AppModule { }
@@ -184,7 +184,7 @@ The application use the module ngx-translate for translation. The configuration 
    ```
 ### i. Language initialization
 When the app.component is instantiated set the following translation settings:
-- Set the language to be used as a fallback when a translation isn't found in the current language based on the property 'defaultLanguage' defined in the current environment: `translate.setDefaultLang(defaultLanguage);`.
+- Set the language to be used as a fallback when a translation isn't found in the current language based on the property '**defaultLanguage**' defined in the current environment: `translate.setDefaultLang(defaultLanguage);`.
 - Set the language to use, if the lang isn't available. First take the language defined in the localStorage and if no value was defined will use the default language defined before: `translate.use(localStorage['language'] || defaultLanguage);`
 
 ### ii. Word translations
@@ -201,9 +201,9 @@ Now to translate our words in the HTML view:
 3. Each time you change the language, that title will change.
 
 ### iii. How to use the language selector
-In the core module, there is a 'language-selector' component that could be displayed anywhere to select the language for translation. On this sample application, was added in the header component.
+In the core module, there is a **language-selector** component that could be displayed anywhere to select the language for translation. On this sample application, was added in the header component.
 
-The 'language-selector' component could be initialized in two ways:
+The **language-selector** component could be initialized in two ways:
 1. With a list of custom languages: `<app-language-selector [languages]="languages"></app-language-selector>`
 2. Without any predefined language: `<app-language-selector></app-language-selector>`
 
