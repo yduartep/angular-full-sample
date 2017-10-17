@@ -402,6 +402,7 @@ export class MyFormComponent extends UIFormComponent {
 Note: The component will display the invalid field with a red border and all the validator will be activated when you click on the field and leave it.
 
 More Info: 
+- http://blog.rangle.io/angular-2-ngmodel-and-custom-form-components/
 - https://angular.io/docs/ts/latest/cookbook/form-validation.html
 - https://auth0.com/blog/angular2-series-forms-and-custom-validation/
 
