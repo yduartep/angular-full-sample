@@ -315,21 +315,91 @@ More Info:
 - https://blog.thoughtram.io/angular/2016/07/18/guards-in-angular-2.html
  
 ## 10. Custom service validation and control messages
- The 'Core' module contains an static class 'ValidationService' in '/core/services/validation.service.ts' that include some custom validations that could be used during forms validations (es. creditCardValidator, emailValidator, passwordValidator ...). Angular provide the validators require, minLength, maxLength and pattern but you can assign also your custom validators to any form control.
- 
- ```
- this.f = this.formBuilder.group({
-    'username': ['', Validators.required],
-    'password': ['', [Validators.required, Validator.passwordValidator] ]
- });
- ```
- 
- In the 'Shared' module there is a 'control-messages' component that could be used to display errors associated to one or many validators over an specific field. If you don't initialize the component with an specific message, a default message would be displayed. Also, if you don't initialize the 'validator' attribute, the component will display all the messages associated to each validator failed. 
- 
- ```
- <app-control-messages [control]="f.controls.password" [message]="'Password is required!'" [validator]="'required'"></app-control-messages>
- ```
-The component will display the invalid field with a red border and all the validator will be activated when you click on the field and leave it.
+There is a new module '**ui-elements**' that contains a list of basic ui components (like input text, password text, number picker, datepicker, select...) with validation support. This '**ui-elements**' module is imported and exported in the SharedModule with the objective of use it from all parts of the application. The project provide a list of predefined directives that are used to validates the ui elements (`dateValidator, emailValidator, hexadecimal, maxDateToday, numeric and passwordValidator`). Also the directives already defined by angular like `required, minLength or maxLength` can be used.
+
+### How to create new ui component
+1. Create new component using angular-cli `ng g component ui-timepicker`.
+2. Extends your class from UIElementBase and define the generic type that will be returned as value:
+```
+@Component({
+  selector: 'ui-timepicker',
+  templateUrl: './ui-timepicker.html',
+  animations,
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: UITimePickerComponent,
+    multi: true,
+  }]
+})
+export class UITimePickerComponent extends UIElementBase<string> {
+  @Input() placeholder = '';
+
+  constructor(@Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
+              @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
+              validationService: ValidationService) {
+    super(validators, asyncValidators, validationService);
+  }
+}
+```
+3. Define the html content including the **messages-validation** component to be displayed in case of error validations:
+```
+<div *ngIf="mode !== Mode.VIEW">
+  <label class="control-label col-sm-3" [attr.for]="id">{{ title }}{{mandatoryLabel}}:</label>
+  <div class="col-sm-5">
+    <timepicker [(ngModel)]="value" [ngClass]="{invalid: (invalid | async)}" [id]="id"></timepicker>
+  </div>
+  <div class="col-sm-4">
+    <messages-validation
+      *ngIf="invalid | async"
+      [messages]="failures | async">
+    </messages-validation>
+  </div>
+</div>
+<div *ngIf="mode === Mode.VIEW">
+  <!-- to display the component in read only mode -->
+  <ui-review [title]="title" [value]="value"></ui-review>
+</div>
+```
+4. Include the new component in the '**ui-elements**' module:
+```
+@NgModule({
+  ...
+  declarations: [..., UITimePickerComponent],
+  exports: [..., UITimePickerComponent]
+})
+export class UIElementsModule {}
+```
+5. Use the new component from any other module, include the directive validation you need and set the custom error message you want to display:
+```
+<form #frmName="ngForm" id="frmName" novalidate (ngSubmit)="onSubmit()" novalidate>
+  <div class="row">
+    <ui-timepicker  required 
+                    dataErrorRequired="The time field is mandatory"
+                    id="tpName"
+                    title="{{'fields.time.title' | translate}}"
+                    [mode]="mode"
+                    [(ngModel)]="model"
+                    [ngModelOptions]="{standalone: true}">
+    </ui-timepicker>
+  </div>
+```
+
+6. The form that include the component should extends from the class **UIFormComponent** that include the **validate()** method. If the whould form is not valid then you can't proceed:
+```
+@Component({...})
+export class MyFormComponent extends UIFormComponent {
+   constructor(..., validation: ValidationService) {
+    super(validation);
+  }
+  onSubmit() {
+     if (this.validate()) {
+        // ... continue saving data
+     }
+  }
+}
+```
+
+Note: The component will display the invalid field with a red border and all the validator will be activated when you click on the field and leave it.
 
 More Info: 
 - https://angular.io/docs/ts/latest/cookbook/form-validation.html
