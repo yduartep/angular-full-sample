@@ -306,9 +306,9 @@ The application include a login component that could be integrated with any auth
 ## 9. Guards
 The application have implemented multiple guards (auth, login, module-import) to protect routes and module loading. All the guards are registered using providers in the 'Core' module. 
 
-- auth.guard: Is used to check if the user was already logged before to continue or redirect it to the login page if a Login system is enable. Note: If you are using the SkypAuthentication service, no login is enable so you always will be able to continue without to be redirected to the login page.
-- login.guard: Is used to check if the user wants to go to the login page after he was logged in the application. In that case will be redirected to the home page (/).
-- module-import.guard: This is another kind of guard that check the 'Core' module is imported just one time in all the application otherwise will rise an error.
+- **auth.guard**: Is used to check if the user was already logged before to continue or redirect him to the login page if a Login system is enable. Note: If you are using the SkypAuthentication service, no login is enable so you always will be able to continue without to be redirected to the login page.
+- **login.guard**: Is used to check if the user wants to go to the login page after he was logged in the application. In that case will be redirected to the home page (/).
+- **module-import.guard**: This is another kind of guard that check that the 'Core' module is imported just one time in all the application otherwise will rise an error.
 
 More Info:
 - https://angular.io/docs/ts/latest/guide/router.html#!#guards
