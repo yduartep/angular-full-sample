@@ -408,7 +408,7 @@ More Info:
 - https://auth0.com/blog/angular2-series-forms-and-custom-validation/
 
 ## 11. Customizable logger system
-The application include a 'Logger' service in the 'Core' module that could be implemented in different ways: Using just the console or using other system like logs into a file. To enable the application to use one or other system you have to change the class to be instanciated in the factory '/core/factories/logger.factory.ts'.
+The application include a '**Logger**' service in the 'Core' module that could be implemented in different ways: Using just the console or using other system like logs into a file. To enable the application to use one or other system you have to change the class to be instanciated in the factory '/core/factories/logger.factory.ts'.
 
 ### How to create a new Logger system:
 1. Create a new class that implement the interface '/core/services/logger.service'.
@@ -429,7 +429,7 @@ The application include a 'Logger' service in the 'Core' module that could be im
 3. Restart the server
 
 ## 12. Incorporated automatic handle errors
-The 'Core' module contains also a 'Simple Error Handler' that implements the interface 'ErrorHandler' present in the package '@angular/core'. Each http call that fails, automatically will call the method handleError() of the handler. In 'Simple Error Handler' the errors are displayed in different ways depending of the HTTP status code (if is a server, authentication or request errors...).
+The 'Core' module contains also a '**Simple Error Handler**' that implements the interface 'ErrorHandler' present in the package '@angular/core'. Each http call that fails, automatically will call the method handleError() of the handler. In 'Simple Error Handler' the errors are displayed in different ways depending of the HTTP status code (if is a server, authentication or request errors...).
 
 ### How to create a new ErrorHandler:
 1. Create a new class that implement the angular interface 'ErrorHandler'.
@@ -480,7 +480,22 @@ More Info:
 - https://blog.jscrambler.com/getting-started-with-angular-2-end-to-end-testing/
 
 ## 16. Cache Services
-To define cache services is necessary to extend from the clase CacheService ...
+The application include a '**Cache Service**' defined in `/core/services/cached.service.ts` that fetch information just the first time and the rest of the time return the cached information. If I want to define a service that cache the information returned, just extends your service from the 'CacheService' class:
+
+```
+@Injectable()
+export class EditorialService extends CachedService<Editorial> {
+  constructor(protected http: Http, @Inject('api.config') protected apiConfig: ApiConfig) {
+    super(http, apiConfig);
+  }
+  public getServiceUrl(): string {
+    return CommonUtil.getApiUrl('EDITORIAL_SERVICE_URL', this.apiConfig);
+  }
+}
+```
+
+More Info:
+- https://hackernoon.com/angular-simple-in-memory-cache-service-on-the-ui-with-rxjs-77f167387e39
 
 # Useful Commands
 ## Application execution
