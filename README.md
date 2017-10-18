@@ -33,6 +33,9 @@ Full sample application built with Angular 4 that follows all best practices. Th
   - [15. Unit and Functional test](#15-unit-and-functional-test)
 - [Useful Commands](#useful-commands)
   - [Application execution](#application-execution)
+  - [Management Console](#management-console)
+  - [Build](#build)
+  - [Documentation](#documentation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
