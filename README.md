@@ -50,6 +50,10 @@ Full sample application built with Angular 4 that follows all steps of [Angular 
   - [16. Cache Services](#16-cache-services)
 - [Useful Commands](#useful-commands)
   - [Application execution](#application-execution)
+  - [Management Console](#management-console)
+  - [Build](#build)
+  - [Documentation](#gocumentation)
+
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
