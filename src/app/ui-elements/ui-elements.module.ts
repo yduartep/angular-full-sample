@@ -22,7 +22,7 @@ import {DateValidatorDirective} from './directives/date.directive';
 import {EmailValidatorDirective} from './directives/email.directive';
 import {MaxDateTodayValidatorDirective} from './directives/maxDateToday.directive';
 import {PasswordValidatorDirective} from './directives/password-valid.directive';
-import {FocusDirective} from './focus.directive';
+import {FocusDirective} from './directives/focus.directive';
 
 @NgModule({
   imports: [

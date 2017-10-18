@@ -84,7 +84,7 @@ describe('OAuthService', () => {
       const userId = 'testUser';
       const seconds = 5;
       const expiredTimeString = CommonUtil.changeExpiredTime(seconds);
-      document.cookie = AuthHelper.TOKEN + '=' + token + '; expires=' + expiredTimeString + '; path=/';
+      document.cookie = AuthHelper.TOKEN_ID + '=' + token + '; expires=' + expiredTimeString + '; path=/';
       document.cookie = AuthHelper.USER_ID + '=' + userId + '; expires=' + expiredTimeString + '; path=/';
 
       service.logout();

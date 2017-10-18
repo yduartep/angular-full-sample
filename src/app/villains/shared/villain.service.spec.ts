@@ -1,9 +1,10 @@
 import { TestBed, getTestBed, async, inject } from '@angular/core/testing';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Headers, BaseRequestOptions, Response, HttpModule, Http, XHRBackend, RequestMethod, ResponseOptions } from '@angular/http';
+import { BaseRequestOptions, Response, HttpModule, Http, XHRBackend, RequestMethod, ResponseOptions } from '@angular/http';
 import { Villain } from './villain';
 import { VillainService } from './villain.service';
 import { MocksUtil } from '../../core/utilities/mocks.util';
+import {Editorial} from '../../core/models/editorial';
 
 describe('VillainsService', () => {
   let mockBackend: MockBackend;
@@ -62,7 +63,7 @@ describe('VillainsService', () => {
       expect(response.id).toBe(1);
       expect(response.name).toBe('Villain 1');
       expect(response.image).toBe('image 1.png');
-      expect(response.editorial).toBe(1);
+      expect(response.editorial.id).toBe(1);
     });
   })));
 
@@ -72,7 +73,7 @@ describe('VillainsService', () => {
       expect(connection.request.url).toEqual(expectedUrl);
       connection.mockRespond(new Response(new ResponseOptions({ status: 201, body: mockResponse[1] })));
     });
-    const villain = new Villain(null, 'Villain new', 1, 'imageNew.jspg');
+    const villain = new Villain(null, 'Villain new', new Editorial(1, 'Marvel'), 'imageNew.jspg');
     service.insert(villain).subscribe((successResult) => {
       expect(successResult).toBeDefined();
       expect(successResult.status).toBe(201);
@@ -88,7 +89,7 @@ describe('VillainsService', () => {
       connection.mockRespond(new Response(new ResponseOptions({ status: 204 })));
     });
 
-    const villain = new Villain(1, 'Villain changed', 1, 'imageChanged.jspg');
+    const villain = new Villain(1, 'Villain changed', new Editorial(1, 'Marvel'), 'imageChanged.jspg');
     service.update('id', villain).subscribe((successResult) => {
       expect(successResult).toBeDefined();
       expect(successResult.status).toBe(204);

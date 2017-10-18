@@ -1,9 +1,18 @@
-import { TestBed, getTestBed, async, inject } from '@angular/core/testing';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Headers, BaseRequestOptions, Response, HttpModule, Http, XHRBackend, RequestMethod, ResponseOptions } from '@angular/http';
-import { Hero } from './hero';
-import { HeroService } from './hero.service';
-import { MocksUtil } from '../../core/utilities/mocks.util';
+import {TestBed, getTestBed, async, inject} from '@angular/core/testing';
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {
+  BaseRequestOptions,
+  Response,
+  HttpModule,
+  Http,
+  XHRBackend,
+  RequestMethod,
+  ResponseOptions
+} from '@angular/http';
+import {Hero} from './hero';
+import {HeroService} from './hero.service';
+import {MocksUtil} from '../../core/utilities/mocks.util';
+import {Editorial} from '../../core/models/editorial';
 
 describe('HerosService', () => {
   let mockBackend: MockBackend;
@@ -14,8 +23,8 @@ describe('HerosService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: 'api.config', useValue: apiConfig },
-        { provide: 'defaultLanguage', useValue: 'en' },
+        {provide: 'api.config', useValue: apiConfig},
+        {provide: 'defaultLanguage', useValue: 'en'},
         MockBackend,
         BaseRequestOptions,
         {
@@ -38,7 +47,7 @@ describe('HerosService', () => {
 
   it('should get list of all heroes', async(inject([HeroService], (heroService) => {
     mockBackend.connections.subscribe((connection: MockConnection) => {
-      connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse })));
+      connection.mockRespond(new Response(new ResponseOptions({body: mockResponse})));
     });
 
     heroService.findAll().subscribe((data) => {
@@ -55,14 +64,14 @@ describe('HerosService', () => {
     mockBackend.connections.subscribe((connection: MockConnection) => {
       expect(connection.request.method).toBe(RequestMethod.Get);
       expect(connection.request.url).toEqual(expectedUrl + '/' + id);
-      connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse[0] })));
+      connection.mockRespond(new Response(new ResponseOptions({body: mockResponse[0]})));
     });
 
     service.findById(id).subscribe((response: Hero) => {
       expect(response.id).toBe(1);
       expect(response.name).toBe('Hero 1');
       expect(response.image).toBe('image 1.png');
-      expect(response.editorial).toBe(1);
+      expect(response.editorial.id).toBe(1);
     });
   })));
 
@@ -70,9 +79,9 @@ describe('HerosService', () => {
     mockBackend.connections.subscribe((connection: MockConnection) => {
       expect(connection.request.method).toBe(RequestMethod.Post);
       expect(connection.request.url).toEqual(expectedUrl);
-      connection.mockRespond(new Response(new ResponseOptions({ status: 201, body: mockResponse[1] })));
+      connection.mockRespond(new Response(new ResponseOptions({status: 201, body: mockResponse[1]})));
     });
-    const hero = new Hero(null, 'Hero new', 1, 'imageNew.jspg');
+    const hero = new Hero(null, 'Hero new', new Editorial(1, 'Marvel'), 'imageNew.jspg');
     heroService.insert(hero).subscribe((successResult) => {
       expect(successResult).toBeDefined();
       expect(successResult.status).toBe(201);
@@ -85,10 +94,10 @@ describe('HerosService', () => {
     mockBackend.connections.subscribe((connection: MockConnection) => {
       expect(connection.request.method).toBe(RequestMethod.Put);
       expect(connection.request.url).toEqual(expectedUrl + '/' + id);
-      connection.mockRespond(new Response(new ResponseOptions({ status: 204 })));
+      connection.mockRespond(new Response(new ResponseOptions({status: 204})));
     });
 
-    const hero = new Hero(1, 'Hero changed', 1, 'imageChanged.jspg');
+    const hero = new Hero(1, 'Hero changed', new Editorial(1, 'Marvel'), 'imageChanged.jspg');
     service.update('id', hero).subscribe((successResult) => {
       expect(successResult).toBeDefined();
       expect(successResult.status).toBe(204);
@@ -99,7 +108,7 @@ describe('HerosService', () => {
   it('should delete an existing Hero', async(inject([HeroService], (heroService) => {
     mockBackend.connections.subscribe(connection => {
       expect(connection.request.method).toBe(RequestMethod.Delete);
-      connection.mockRespond(new ResponseOptions({ status: 204 }));
+      connection.mockRespond(new ResponseOptions({status: 204}));
     });
 
     heroService.delete(1).subscribe(

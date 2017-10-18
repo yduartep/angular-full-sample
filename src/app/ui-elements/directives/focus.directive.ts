@@ -5,7 +5,7 @@
  *  public myFocusTriggeringEventEmitter = new EventEmitter<boolean>();
  *  someMethod() {this.myFocusTriggeringEventEmitter.emit(true);}
  */
-import {Directive, OnInit, Input, EventEmitter, ElementRef, Inject, Renderer, Renderer2} from '@angular/core';
+import {Directive, OnInit, Input, EventEmitter, ElementRef, Inject} from '@angular/core';
 
 @Directive({
   selector: '[focus]'
@@ -13,7 +13,7 @@ import {Directive, OnInit, Input, EventEmitter, ElementRef, Inject, Renderer, Re
 export class FocusDirective implements OnInit {
   @Input('focus') focus: EventEmitter<boolean>;
 
-  constructor(@Inject(ElementRef) private element: ElementRef, private renderer: Renderer2) {
+  constructor(@Inject(ElementRef) private element: ElementRef) {
   }
 
   ngOnInit() {

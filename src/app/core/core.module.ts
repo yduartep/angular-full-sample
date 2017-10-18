@@ -16,7 +16,6 @@ import {NavComponent} from './nav/nav.component';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {AboutComponent} from './about/about.component';
 import {LanguageSelectorComponent} from './language-selector/language-selector.component';
-import {InfoComponent} from './info/info.component';
 import {AlertComponent} from './alert/alert.component';
 
 // services
@@ -48,8 +47,7 @@ import {errorHandlerFactory} from './factories/error-handler.factory';
     NavComponent,
     SpinnerComponent,
     LanguageSelectorComponent,
-    AboutComponent,
-    InfoComponent
+    AboutComponent
   ],
   declarations: [
     AlertComponent,
@@ -58,8 +56,7 @@ import {errorHandlerFactory} from './factories/error-handler.factory';
     NavComponent,
     SpinnerComponent,
     LanguageSelectorComponent,
-    AboutComponent,
-    InfoComponent
+    AboutComponent
   ],
   providers: [
     AlertService,

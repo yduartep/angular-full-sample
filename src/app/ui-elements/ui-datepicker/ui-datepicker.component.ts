@@ -44,7 +44,4 @@ export class UIDatePickerComponent extends UIElementBase<Date> implements AfterV
   ngAfterViewInit() {
     this.focusOnField.emit(this.focus);
   }
-  onChange(value){
-    console.log(value)
-  }
 }
