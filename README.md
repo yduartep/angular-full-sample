@@ -400,13 +400,16 @@ More Info:
 
 # Useful Commands
 ## Application execution
-- npm start: starts the application, starts the mock server and opens a browser.
+- npm start: starts concurrently the angular application and the mock server creating two logs in the root (application.log, and mockserver.log) with the output that appears in console. Finally will open the application in the browser on http://localhost:4200.
 - npm run start:mocks: starts the mock server.
 - npm run start:application: starts the application and opens a browser.
 ## Management Console
-- npm run management:console:start: starts the management console which is accessible from http://server:2000
-- npm run management:console:stop: sopts the management console
+- **npm run management:console:start**: starts the management console which is accessible from http://server:2000
+- **npm run management:console:stop**: stops the management console
+
+See example below:
+![Hotel Integration](https://github.com/yduartep/angular-full-sample/blob/master/documentation/hotel%20integration.PNG)
 ## Build
-- npm run build:prod: builds the application for production environment.
+- **npm run build:prod**: builds the application for production environment.
 ## Documentation
-- npm run documentation:gentoc: generates the table of contents of the README.md file.
+- **npm run documentation:gentoc**: generates the table of contents of the README.md file.
