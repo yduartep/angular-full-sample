@@ -26,10 +26,10 @@
     "lint": "ng lint --type-check",
     "documentation:gentoc": "doctoc -s --maxlevel 2 README.md",
 
-    "management:console:start": "hotel add \"npm run start:application\" --name \"APPLICATION\" -o application.log &  hotel add \"npm run start:mocks &\" --name \"MOCK SERVER\" -o mockserver.log & hotel start",
+    "management:console:start": "hotel add \"npm run start:application\" --name \"APPLICATION\" -o application.log -p 4200 &  hotel add \"npm run start:mocks &\" --name \"MOCK SERVER\" -o mockserver.log -p 3000 & hotel start",
     "management:console:stop": "hotel stop",
 
-    "start": "npm-run-all --parallel start:mocks start:application",
+    "start": "concurrent --kill-others --kill-others-on-fail --prefix \"[{time}-{name}]\" --names \"MOCKS,APPLICATION\" -c \"blue.bold,magenta\" \"npm run start:mocks\" \"npm run start:application\"",
     "start:mocks": "json-server prototype/apiMocks.js --routes prototype/routes.json",
     "start:application": "ng serve --environment=mock --open true --live-reload true"
   },
