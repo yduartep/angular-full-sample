@@ -211,6 +211,8 @@ In the second case, the languages will loaded from the file 'assets/data/languag
 ```
 The icon should be stored in the 'assets/images/flags' folder to be displayed correctly in the component.
 
+![Demo of translate integration](https://github.com/yduartep/angular-full-sample/blob/master/documentation/translate-demo.gif)
+
 ### iv. How to define new language
 1. Add new json file in the folder 'assets/i18n' and copy the content from other json file already defined. Example: `assets/i18n/fr.json`
 2. Translate all the properties of the new file 'fr.json'.
@@ -325,6 +327,8 @@ More Info:
  ```
 The component will display the invalid field with a red border and all the validator will be activated when you click on the field and leave it.
 
+![Demo UI validation](https://github.com/yduartep/angular-full-sample/blob/master/documentation/ui-validation.PNG)
+
 More Info: 
 - https://angular.io/docs/ts/latest/cookbook/form-validation.html
 - https://auth0.com/blog/angular2-series-forms-and-custom-validation/
@@ -403,9 +407,12 @@ More Info:
 
 # Useful Commands
 ## Application execution
-- npm start: starts concurrently the angular application and the mock server creating two logs in the root (application.log, and mockserver.log) with the output that appears in console. Finally will open the application in the browser on http://localhost:4200.
-- npm run start:mocks: starts the mock server.
-- npm run start:application: starts the application and opens a browser.
+- **npm start**: starts concurrently the angular application and the mock server creating two logs in the root (application.log, and mockserver.log) with the output that appears in console. Finally will open the application in the browser on http://localhost:4200.
+
+![Console when start concurrently](https://github.com/yduartep/angular-full-sample/blob/master/documentation/start-concurrently.PNG)
+
+- **npm run start:mocks**: starts the mock server.
+- **npm run start:application**: starts the application and opens a browser.
 ## Management Console
 - **npm run management:console:start**: starts the management console which is accessible from http://server:2000
 - **npm run management:console:stop**: stops the management console
