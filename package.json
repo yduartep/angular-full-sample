@@ -15,7 +15,6 @@
     "angular demo"
   ],
   "author": "Yahima Duarte <layahi@gmail.com>",
-  "private": true,
   "scripts": {
     "ng": "ng",
     "build": "ng build",
