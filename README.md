@@ -1,9 +1,24 @@
 # Getting Started
 
-Full sample application built with Angular 4 that follows all steps of [Angular Style Guide](https://angular.io/guide/styleguide), include **lazy loading** of modules, **Api rest configurations** by environment, integrated with [ngx-translate](http://www.ngx-translate.com/), backend mocked with [json-server](https://github.com/typicode/json-server) and [faker.js](https://github.com/marak/Faker.js/), **Bootstrap** and **Font-awsone** integration including  [ngx-bootstrap](https://valor-software.com/ngx-bootstrap/#/) library, **Http interceptor** system, configurable **Login component** implementing multiple authentication client like **OAuth**, **Guards** for check authentication and singleton module loading, custom **UI and Form validations** with **control messages**, customizable **Logger systems** and **Error handlers**, **Cache of services**, [typicode/hotel](https://github.com/typicode/hotel) integration for manage processes, visualization of **Modal dialog** and **Alerts** through services, **Search component** with **RxJs**.
+Full sample application built with Angular 4 that follows all steps of [Angular Style Guide](https://angular.io/guide/styleguide). Include:
+- **Lazy loading** of modules.
+- **Api rest configurations** by environment.
+- Integrated with [ngx-translate](http://www.ngx-translate.com/) module.
+- Backend mocked with [json-server](https://github.com/typicode/json-server) and [faker.js](https://github.com/marak/Faker.js/). 
+- **Bootstrap** and **Font-awsone** integration including  [ngx-bootstrap](https://valor-software.com/ngx-bootstrap/#/) library.
+- **Http interceptor** system that dinamically add info into request header, check authentication before call and display/hide spinner before/after rest call.
+- Configurable **Login component** implementing multiple authentication client like **OAuth**.
+- **Guards** for check authentication and singleton module loading.
+- Custom **UI and Form validations** with **control messages**.
+- Customizable **Logger systems** and **Error handlers**.
+- Definition of **Cache** services.
+- [typicode/hotel](https://github.com/typicode/hotel) integration for manage processes.
+- Visualization of **Modal dialog** and **Alerts** through services.
+- **Search component** provided using **RxJs**.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+# Summary
 
 - [Get the Code](#get-the-code)
   - [Just in Time (JiT) Compilation](#just-in-time-jit-compilation)
