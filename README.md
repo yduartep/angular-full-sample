@@ -32,7 +32,7 @@ Full sample application built with Angular 4 that follows all steps of [Angular 
     - [iii. How to use the language selector](#iii-how-to-use-the-language-selector)
     - [iv. How to define new language](#iv-how-to-define-new-language)
   - [4. How to mock services](#4-how-to-mock-services)
-  - [5. Bootstrap and Font-awsone integration](#5-bootstrap-and-font-awsone-integration)
+  - [5. Bootstrap and Font-awesome integration](#5-bootstrap-and-font-awesome-integration)
   - [6. Dynamic nav bar](#6-dynamic-nav-bar)
   - [7. Http interceptor system](#7-http-interceptor-system)
   - [8. Login component configurable with different authentication service](#8-login-component-configurable-with-different-authentication-service)
@@ -278,7 +278,7 @@ More Info:
 - https://scotch.io/tutorials/json-server-as-a-fake-rest-api-in-frontend-development
 - https://github.com/marak/Faker.js/
 
-## 5. Bootstrap and Font-awsone integration
+## 5. Bootstrap and Font-awesome integration
 The application has already installed the library 'font-awesome' and 'bootstrap', so you can create new responsive components with a pack of pre-defined icons. The application also incorporate the library 'ngx-bootstrap' that contains many modules like accordion, alerts, datepicker, progressbar, etc, that could be imported separately in the case you need it. See how to use it from http://valor-software.com/ngx-bootstrap/#/.
 
 ## 6. Dynamic nav bar
