@@ -1,6 +1,7 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 // models
 import {Villain} from '../shared/villain';

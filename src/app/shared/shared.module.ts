@@ -1,9 +1,6 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {Http, RequestOptions, XHRBackend} from '@angular/http';
-
 // modules
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HttpModule} from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
@@ -13,20 +10,18 @@ import {ModalModule, AlertModule, BsDatepickerModule} from 'ngx-bootstrap';
 import {LoginComponent} from './login/login.component';
 import {PageNotFoundComponent} from './not-found/not-found.component';
 
-// factories
-import {httpFactory} from './http.factory';
-
 // services
-import {SpinnerService} from '../core/spinner/spinner.service';
-import {AuthHelper} from '../core/services/auth.helper';
 import {ModalMessageComponent} from '../modal-message/modal-message.component';
 import {UIElementsModule} from '../ui-elements/ui-elements.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {TokenInterceptor} from './token.interceptor';
+import {AuthInterceptor} from './auth.interceptor';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -36,6 +31,8 @@ import {HttpClientModule} from '@angular/common/http';
     AlertModule.forRoot(),
     BsDatepickerModule.forRoot(),
     UIElementsModule,
+    StoreModule,
+    EffectsModule
   ],
   declarations: [
     // FocusDirective,
@@ -45,14 +42,17 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   providers: [
     {
-      provide: Http,
-      useFactory: httpFactory,
-      deps: [XHRBackend, RequestOptions, SpinnerService, AuthHelper]
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     }
   ],
   exports: [
     CommonModule,
-    HttpModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -62,6 +62,8 @@ import {HttpClientModule} from '@angular/common/http';
     AlertModule,
     BsDatepickerModule,
     UIElementsModule,
+    StoreModule,
+    EffectsModule,
 
     // FocusDirective,
     LoginComponent,

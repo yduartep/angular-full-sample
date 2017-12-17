@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import {Http} from '@angular/http';
 
 // translate
 import {createTranslateLoader} from './app.translate.factory';
@@ -20,6 +19,9 @@ import {MessageService} from './modal-message/message.service';
 // factories and configurations
 import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import { reducers } from './reducers';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import {HttpClient} from '@angular/common/http';
     CoreModule,
     SharedModule,
     AppRoutingModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([]),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

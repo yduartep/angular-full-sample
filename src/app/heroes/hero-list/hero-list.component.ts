@@ -17,6 +17,12 @@ import {MessageService} from '../../modal-message/message.service';
 import {AuthHelper} from '../../core/services/auth.helper';
 import {AlertService} from '../../core/alert/alert.service';
 
+// ngrx
+import {Store} from '@ngrx/store';
+import * as heroActions from '../heroes.actions';
+import {AppState} from '../../app.state';
+import {getAllHeroes, getDeleteError, getHeroesError, isDeleted} from '../heroes.reducers';
+
 @Component({
   selector: 'app-hero-list',
   templateUrl: './hero-list.component.html',
@@ -30,12 +36,14 @@ export class HeroListComponent implements OnInit {
               private authHelper: AuthHelper,
               private alertService: AlertService,
               private messageService: MessageService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private store: Store<AppState>) {
   }
 
   ngOnInit() {
     this.loggerService.log('... initializing Hero list component.');
-    this.heroes = this.service.findAll();
+
+    this.heroes = this.store.select(getAllHeroes);
   }
 
   /**
@@ -61,16 +69,6 @@ export class HeroListComponent implements OnInit {
    * @param id the hero identifier
    */
   onOkDelete(id) {
-    this.service.delete(id).subscribe(res => {
-      const key = res.ok ? 'heroes.deleteOkMsg' : 'heroes.deleteErrMsg';
-      this.translate.get(key).subscribe(text => {
-        if (res.ok) {
-          this.heroes = this.service.findAll();
-          this.alertService.success(key, {}, text);
-        } else {
-          this.alertService.error(key, {}, text);
-        }
-      });
-    });
+    this.store.dispatch(new heroActions.RemoveHero(id));
   }
 }

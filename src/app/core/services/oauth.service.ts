@@ -1,15 +1,17 @@
 import {Injectable, Inject} from '@angular/core';
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {ApiConfig} from '../models/api-config';
 import 'rxjs/add/operator/map';
 
 import {CommonUtil} from '../utilities/common.util';
 import {AuthService} from './auth.service';
 import {AuthHelper} from './auth.helper';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {OauthToken} from '../models/oauth-token';
+
 @Injectable()
 export class OAuthService implements AuthService {
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
               @Inject('api.config') private apiConfig: ApiConfig,
               private authHelper: AuthHelper) {
   }
@@ -20,16 +22,13 @@ export class OAuthService implements AuthService {
 
   login(username: string, password: string) {
     const data = 'grant_type=password&username=' + username + '&password=' + password;
-    const headers: Headers = new Headers();
+    const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     // add header authorization
     this.authHelper.addHeaderAuthorization(headers);
 
-    const opts = new RequestOptions({headers: headers});
-
-    return this.http.post(this.getServiceUrl(), data, opts).map((res: Response) => {
-      const userData = res.json() || {};
+    return this.http.post(this.getServiceUrl(), data, {headers: headers}).map((userData: OauthToken) => {
       const expiresIn = userData.expires_in || this.apiConfig.timeExpired;
 
       // add access token when mock environment

@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {AuthHelper} from './core/services/auth.helper';
 import {TranslateService} from '@ngx-translate/core';
+import { StoreModule } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',

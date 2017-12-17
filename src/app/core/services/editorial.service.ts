@@ -1,5 +1,4 @@
 import {Injectable, Inject} from '@angular/core';
-import {Http} from '@angular/http';
 
 // models
 import {ApiConfig} from '../models/api-config';
@@ -10,11 +9,12 @@ import {CachedService} from './cached.service';
 
 // utilities
 import {CommonUtil} from '../utilities/common.util';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class EditorialService extends CachedService<Editorial> {
 
-  constructor(protected http: Http, @Inject('api.config') protected apiConfig: ApiConfig) {
+  constructor(protected http: HttpClient, @Inject('api.config') protected apiConfig: ApiConfig) {
     super(http, apiConfig);
   }
 

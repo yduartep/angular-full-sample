@@ -7,6 +7,7 @@ import {AuthScheme} from '../models/auth-scheme.enum';
 import {OauthToken} from '../models/oauth-token';
 import {User} from '../models/user';
 import {Md5} from 'ts-md5/dist/md5';
+import {HttpHeaders} from '@angular/common/http';
 
 export class AuthHelper {
 
@@ -72,19 +73,29 @@ export class AuthHelper {
   }
 
   /**
+   * Determine if the url is a valid http service
+   */
+  private static isHttpService(url) {
+    return url && url.startsWith('http');
+  }
+
+  /**
    * Determine if the current url require authentication before to be called
    * @param {string} url the url
    * @returns {boolean} true if required or false
    */
   needAuthBefore(url: string) {
-    const apiUrl = CommonUtil.getApiByUrl(url, this.apiConfig);
-    return apiUrl.requireAuthBefore;
+    if (AuthHelper.isHttpService(url)) {
+      const apiUrl = CommonUtil.getApiByUrl(url, this.apiConfig);
+      return apiUrl.requireAuthBefore;
+    }
+    return false;
   }
 
   /**
    * Add specific Authorization header depending of the authentication scheme defined.
    */
-  addHeaderAuthorization(headers: Headers, user?: User, uri?: string, method?: string) {
+  addHeaderAuthorization(headers: HttpHeaders, user?: User, uri?: string, method?: string) {
     const authType = this.apiConfig.authService;
     let clientId, clientSecret;
     if (!CommonUtil.isEmpty(this.apiConfig.credentials)) {

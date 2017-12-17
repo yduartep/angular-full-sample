@@ -19,7 +19,7 @@ export class LanguageSelectorComponent implements OnInit {
   ngOnInit() {
     if (!this.languages || this.languages.length === 0) {
       this.jsonService.getData('assets/data/languages.json').subscribe(data => {
-        this.languages = data;
+        this.languages = data as Language[];
       });
     }
   }

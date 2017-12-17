@@ -13,7 +13,7 @@ import {AuthScheme} from '../app/core/models/auth-scheme.enum';
 const server = 'http://127.0.0.1:9002/';
 
 export const environment = {
-  appName: 'My Demo Application',
+  appName: 'Angular Demo Application',
   production: false,
   envName: 'dev',
   buildVersion: '1.0.0-SNAPSHOT',

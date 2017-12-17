@@ -1,5 +1,5 @@
 {
-  "appTitle": "Ejemplo de aplicacion en Angular 4!!!",
+  "appTitle": "Ejemplo de aplicacion en Angular 5!!!",
   "back": "Atras",
   "reset": "Limpiar",
   "loading": "Cargando ...",
@@ -71,7 +71,8 @@
     "insertOkMsg": "El heroe se ha creado correctamente!!",
     "insertErrMsg": "Se ha producido un error mientras intentaba agregar un heroe!",
     "editOkMsg": "El heroe se ha actualizado correctamente!!",
-    "editErrMsg": "Se ha producido un error mientras intentaba actualizar un heroe!"
+    "editErrMsg": "Se ha producido un error mientras intentaba actualizar un heroe!",
+    "loadErrMsg": "Se ha producido un error mientras intentaba cargar la lista de heroes"
   },
   "villains": {
     "detail-title": "Detalles del villano",

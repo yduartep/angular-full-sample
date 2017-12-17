@@ -30,7 +30,7 @@
         </button>
       </div>
     </td>
-    <td><img src="assets/images/{{hero.image}}" alt="{{hero.name}}" width="60px" height="60px"/></td>
+    <td><img *ngIf="hero.image" src="assets/images/{{hero.image}}" alt="{{hero.name}}" width="60px" height="60px"/></td>
     <td>{{hero.name}}</td>
     <td>{{hero.editorial?.text}}</td>
   </tr>

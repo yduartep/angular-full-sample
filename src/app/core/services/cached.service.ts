@@ -1,4 +1,3 @@
-import {Http} from '@angular/http';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Observable} from 'rxjs/Observable';
 
@@ -7,13 +6,14 @@ import {BaseService} from './base.service';
 
 // models
 import {ApiConfig} from '../models/api-config';
+import {HttpClient} from '@angular/common/http';
 
 
 export abstract class CachedService<T> extends BaseService<T> {
   protected dataSubject = new ReplaySubject<T[]>(1);
   protected data: Observable<T[]> = this.dataSubject.asObservable();
 
-  constructor(protected http: Http, protected apiConfig: ApiConfig) {
+  constructor(protected http: HttpClient, protected apiConfig: ApiConfig) {
     super(http);
 
     this.fetch();
@@ -23,7 +23,7 @@ export abstract class CachedService<T> extends BaseService<T> {
    * Fetch the data from the DB
    */
   fetch() {
-    return this.http.get(this.getServiceUrl()).map(this.extractData).subscribe(response => {
+    return this.http.get<T[]>(this.getServiceUrl()).subscribe(response => {
       this.dataSubject.next(response);
     });
   }

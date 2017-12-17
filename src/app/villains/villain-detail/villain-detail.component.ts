@@ -65,9 +65,9 @@ export class VillainDetailComponent implements OnInit {
    */
   onOkDelete(id) {
     this.service.delete(id).subscribe(res => {
-      const key = res.ok ? 'villains.deleteOkMsg' : 'villains.deleteErrMsg';
+      const key = res ? 'villains.deleteOkMsg' : 'villains.deleteErrMsg';
       this.translate.get(key).subscribe(text => {
-        if (res.ok) {
+        if (res) {
           this.messageService.showMessage(new Message(text, MessageStatus.SUCCESS));
           this.router.navigate(['/villains']);
         } else {

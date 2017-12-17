@@ -5,6 +5,8 @@ import {VillainSearchService} from './villains-search.service';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 import {Subject} from 'rxjs/Subject';
 
 @Component({
