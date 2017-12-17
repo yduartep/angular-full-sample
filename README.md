@@ -2,6 +2,7 @@
 
 Full sample application built with Angular 4 that follows all steps of [Angular Style Guide](https://angular.io/guide/styleguide). Include:
 - **Lazy loading** of modules.
+- **Ngrx** integration using store / effects / selectors.
 - **Api rest configurations** by environment.
 - Integrated with [ngx-translate](http://www.ngx-translate.com/) module.
 - Backend mocked with [json-server](https://github.com/typicode/json-server) and [faker.js](https://github.com/marak/Faker.js/). 
@@ -44,10 +45,11 @@ Full sample application built with Angular 4 that follows all steps of [Angular 
     - [How to create a new Logger system:](#how-to-create-a-new-logger-system)
   - [12. Incorporated automatic handle errors](#12-incorporated-automatic-handle-errors)
     - [How to create a new ErrorHandler:](#how-to-create-a-new-errorhandler)
-  - [13. Not found component](#13-not-found-component)
-  - [14. TSLint integration](#14-tslint-integration)
+  - [13. How to apply NGRX on CRUD operations of a module](#13-how-to=apply-ngrx-on-crud-operations-of-a-module)  
+  - [14. Not found component](#13-not-found-component)
+  - [15. TSLint integration](#14-tslint-integration)
   - [15. Unit and Functional test](#15-unit-and-functional-test)
-  - [16. Cache Services](#16-cache-services)
+  - [17. Cache Services](#16-cache-services)
 - [Useful Commands](#useful-commands)
   - [Application execution](#application-execution)
   - [Management Console](#management-console)
@@ -473,10 +475,13 @@ The 'Core' module contains also a '**Simple Error Handler**' that implements the
 
 More Info: https://netbasal.com/angular-2-custom-exception-handler-1bcbc45c3230
 
-## 13. Not found component
+## 13. How to apply NGRX on CRUD operations of a module
+TODO
+
+## 14. Not found component
 The application include a 'Not-Found' component inside the 'Shared' module that will be displayed in the case the user type an invalid route in the browser.
 
-## 14. TSLint integration
+## 15. TSLint integration
 To check if the application have quality errors execute the following command:
 
 ```
@@ -485,7 +490,7 @@ npm run lint
 
 More Info: http://blog.rangle.io/understanding-the-real-advantages-of-using-eslint/
 
-## 15. Unit and Functional test
+## 16. Unit and Functional test
 The project have some predefined unit tests defined in the files '.spec' related of each service and component and the functional test should be implemented in the 'e2e' folder outside of the app.
 
 - To run then unit tests execute the command:
@@ -502,7 +507,7 @@ More Info:
 - https://angular.io/docs/ts/latest/guide/testing.html
 - https://blog.jscrambler.com/getting-started-with-angular-2-end-to-end-testing/
 
-## 16. Cache Services
+## 17. Cache Services
 The application include a '**Cache Service**' defined in `/core/services/cached.service.ts` that fetch information just the first time and the rest of the time return the cached information. If I want to define a service that cache the information returned, just extends your service from the 'CacheService' class:
 
 ```
