@@ -20,14 +20,17 @@ import {CoreModule} from '../core.module';
 import {SharedModule} from '../../shared/shared.module';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {HttpClientModule, HttpParams, HttpRequest} from '@angular/common/http';
+import {Injector} from "@angular/core";
 
 describe('OAuthService', () => {
+  let injector: Injector;
   const expectedUrl = 'http://localhost:3000/api/oauth/token';
   const apiConfig = MocksUtil.createMockedApiConfig();
   const mockResponse = MocksUtil.createMockedOauthToken();
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    injector = TestBed.configureTestingModule({
       providers: [
         {provide: 'api.config', useValue: apiConfig},
         {provide: 'defaultLanguage', useValue: 'en'},
@@ -39,11 +42,16 @@ describe('OAuthService', () => {
         BrowserModule,
         CoreModule,
         SharedModule,
-        HttpClientModule,
         HttpClientTestingModule
       ]
     });
+
+    httpMock = injector.get(HttpTestingController);
   });
+
+  // afterEach(() => {
+  //   httpMock.verify();
+  // });
 
   it('should create an instance of the service',
     inject([OAuthService], (service: AuthService) => {
@@ -51,33 +59,31 @@ describe('OAuthService', () => {
     }));
 
   it('should get oauth token', async(
-    inject([OAuthService, AuthHelper, HttpTestingController],
-      (service: AuthService, authHelper: AuthHelper, backend: HttpTestingController) => {
-        const username = 'fakeUserId', password = 'fakePassword';
+    inject([OAuthService, AuthHelper], (service: AuthService, authHelper: AuthHelper) => {
+      const username = 'fakeUserId', password = 'fakePassword';
 
-        // backend.expectOne((req: HttpRequest<any>) => {
-        //   const body = new HttpParams({fromString: req.body});
-        //
-        //   return req.url === expectedUrl
-        //     && req.method === 'POST'
-        //     && req.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
-        //     && body.get('username') === 'fakeUserId'
-        //     && body.get('password') === 'fakePassword'
-        //     && body.get('grant_type') === 'password';
-        // }, `POST to 'oauth/login' with form-encoded user and password`);
+      service.login(username, password).subscribe((userData) => {
+        expect(userData.access_token).toEqual(mockResponse.access_token);
+        expect(userData.token_type).toEqual(mockResponse.token_type);
+        expect(userData.expires_in).toEqual(mockResponse.expires_in);
+        expect(userData.refresh_token).toEqual(mockResponse.refresh_token);
+        expect(userData.scope).toEqual(mockResponse.scope);
 
+        expect(authHelper.getUserLogged()).toEqual(username);
+        expect(authHelper.getToken()).toEqual(mockResponse.access_token);
+      });
 
-        service.login(username, password).subscribe((userData) => {
-          expect(userData.access_token).toEqual(mockResponse.access_token);
-          expect(userData.token_type).toEqual(mockResponse.token_type);
-          expect(userData.expires_in).toEqual(mockResponse.expires_in);
-          expect(userData.refresh_token).toEqual(mockResponse.refresh_token);
-          expect(userData.scope).toEqual(mockResponse.scope);
-
-          expect(authHelper.getUserLogged()).toEqual(username);
-          expect(authHelper.getToken()).toEqual(mockResponse.access_token);
-        });
-      })));
+      // backend.expectOne((req: HttpRequest<any>) => {
+      //   const body = new HttpParams({fromString: req.body});
+      //
+      //   return req.url === expectedUrl
+      //     && req.method === 'POST'
+      //     && req.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
+      //     && body.get('username') === 'fakeUserId'
+      //     && body.get('password') === 'fakePassword'
+      //     && body.get('grant_type') === 'password';
+      // }, `POST to 'oauth/login' with form-encoded user and password`);
+    })));
 
   it('should logout from the application', async(
     inject([OAuthService, AuthHelper], (service: AuthService, authHelper: AuthHelper) => {

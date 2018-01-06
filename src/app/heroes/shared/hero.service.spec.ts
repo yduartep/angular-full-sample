@@ -19,6 +19,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {SharedModule} from '../../shared/shared.module';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {AuthHelper} from '../../core/services/auth.helper';
 
 describe('HerosService', () => {
   const apiConfig = MocksUtil.createMockedApiConfig();
@@ -26,6 +27,9 @@ describe('HerosService', () => {
   const mockResponse = MocksUtil.createMockedHeroes();
 
   beforeEach(() => {
+    AuthHelper.addUserInfo('fakeUser', 5);
+    AuthHelper.addTokenInfo(MocksUtil.createMockedOauthToken(), 5);
+
     TestBed.configureTestingModule({
       providers: [
         {provide: 'api.config', useValue: apiConfig},
