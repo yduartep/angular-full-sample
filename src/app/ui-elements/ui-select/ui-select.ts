@@ -56,7 +56,7 @@ export class UISelectComponent extends UIElementBase<number> implements OnChange
    * the final values to be used in select
    * @type {Array}
    */
-  values: Array<KeyText>;
+  values: Array<KeyText<number>>;
 
   constructor(@Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
               @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
@@ -95,11 +95,11 @@ export class UISelectComponent extends UIElementBase<number> implements OnChange
       const fields = this.textField as string[];
       this.values = this.data.map(elem => {
         const id = this.data[this.keyField];
-        return new KeyText(id, fields.map(f => elem[f]).join(this.separator), this.value === id);
+        return new KeyText<number>(id, fields.map(f => elem[f]).join(this.separator), this.value === id);
       });
     } else {
       this.values = this.data.map(elem => {
-        return new KeyText(elem[this.keyField], elem[this.textField as string], this.value === elem[this.keyField]);
+        return new KeyText<number>(elem[this.keyField], elem[this.textField as string], this.value === elem[this.keyField]);
       });
     }
   }

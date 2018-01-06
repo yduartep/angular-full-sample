@@ -19,9 +19,6 @@ import {MessageService} from './modal-message/message.service';
 // factories and configurations
 import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {StoreModule} from '@ngrx/store';
-import {EffectsModule} from '@ngrx/effects';
-import { reducers } from './reducers';
 
 @NgModule({
   declarations: [
@@ -32,8 +29,6 @@ import { reducers } from './reducers';
     CoreModule,
     SharedModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([]),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

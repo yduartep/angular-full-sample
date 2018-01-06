@@ -2,7 +2,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 export abstract class BaseService<T> {
 
@@ -46,7 +46,7 @@ export abstract class BaseService<T> {
    * @returns gets the response
    */
   public insert(data: T): Observable<T> {
-    return this.http.post<T>(this.getServiceUrl(), JSON.stringify(data));
+    return this.http.post<T>(this.getServiceUrl(), JSON.stringify(data), {headers: this.getHttpHeaders()});
   }
 
   /**
@@ -56,6 +56,17 @@ export abstract class BaseService<T> {
    * @returns gets the response
    */
   public update(fieldId: string, data: T): Observable<T> {
-    return this.http.put<T>(this.getServiceUrl() + '/' + data[fieldId], JSON.stringify(data));
+    const url = this.getServiceUrl() + '/' + data[fieldId];
+    return this.http.put<T>(url, JSON.stringify(data), {headers: this.getHttpHeaders()});
+  }
+
+  /**
+   * Get the common HttpHeaders
+   */
+  private getHttpHeaders(): HttpHeaders {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    return headers;
   }
 }

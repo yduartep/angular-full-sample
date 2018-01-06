@@ -2,63 +2,71 @@
   <h1 *ngIf="mode > 0">{{'heroes.edit-title' | translate}}</h1>
   <h1 *ngIf="mode == 0">{{'heroes.detail-title' | translate}}</h1>
 
-  <form #frmHero="ngForm" id="frmHero" novalidate (ngSubmit)="onSaveHero()" novalidate>
-    <div class="row">
-      <ui-input required [dataErrorRequired]="'validations.required.name' | translate"
-                id="txtName"
-                title="{{'heroes.fields.name' | translate}}"
-                placeholder="{{'heroes.placeholders.name' | translate }}"
-                [mode]="mode"
-                [(ngModel)]="hero.name"
-                [ngModelOptions]="{standalone: true}">
-      </ui-input>
+  <div class="row">
+    <div class="col-sm-3">
+      <img *ngIf="hero.image" src="assets/images/{{hero.image}}" alt="{{hero.name}}"/>
+      <img *ngIf="!hero.image" src="assets/images/not-available.png" width="130px" height="100px"/>
     </div>
-    <div class="row">
-      <ui-select numeric [dataErrorNumeric]="'validations.numeric.editorial' | translate"
-                 id="selEditorial"
-                 title="{{'heroes.fields.editorial' | translate}}"
-                 keyField="id"
-                 textField="text"
-                 [(ngModel)]="selected"
-                 [mode]="mode"
-                 [data]="editorials"
-                 [ngModelOptions]="{standalone: true}">
-      </ui-select>
-    </div>
-    <div class="row">
-      <ui-input id="txtImage"
-                title="{{'heroes.fields.preview' | translate}}"
-                placeholder="{{'heroes.placeholders.preview' | translate}}"
-                [(ngModel)]="hero.image"
-                [mode]="mode"
-                [ngModelOptions]="{standalone: true}">
-      </ui-input>
-    </div>
-    <div class="row">
-      <ui-datepicker required dateValidator
-                     id="dpDate"
-                     title="{{'heroes.fields.creationDate' | translate}}"
-                     placeholder="{{'heroes.placeholders.creationDate' | translate}}"
+    <div class="col-sm-9">
+      <form #frmHero="ngForm" id="frmHero" novalidate (ngSubmit)="onSaveHero()" novalidate>
+        <div class="row">
+          <ui-input required [dataErrorRequired]="'validations.required.name' | translate"
+                    id="txtName"
+                    title="{{'heroes.fields.name' | translate}}"
+                    placeholder="{{'heroes.placeholders.name' | translate }}"
+                    [mode]="mode"
+                    [(ngModel)]="hero.name"
+                    [ngModelOptions]="{standalone: true}">
+          </ui-input>
+        </div>
+        <div class="row">
+          <ui-select numeric [dataErrorNumeric]="'validations.numeric.editorial' | translate"
+                     id="selEditorial"
+                     title="{{'heroes.fields.editorial' | translate}}"
+                     keyField="id"
+                     textField="text"
+                     [(ngModel)]="hero.editorial"
                      [mode]="mode"
-                     [(ngModel)]="hero.creationDate"
+                     [data]="editorials"
                      [ngModelOptions]="{standalone: true}">
-      </ui-datepicker>
+          </ui-select>
+        </div>
+        <!--<div class="row">-->
+        <!--<ui-input id="txtImage"-->
+        <!--title="{{'heroes.fields.preview' | translate}}"-->
+        <!--placeholder="{{'heroes.placeholders.preview' | translate}}"-->
+        <!--[(ngModel)]="hero.image"-->
+        <!--[mode]="mode"-->
+        <!--[ngModelOptions]="{standalone: true}">-->
+        <!--</ui-input>-->
+        <!--</div>-->
+        <div class="row">
+          <ui-datepicker required dateValidator
+                         id="dpDate"
+                         title="{{'heroes.fields.creationDate' | translate}}"
+                         placeholder="{{'heroes.placeholders.creationDate' | translate}}"
+                         [mode]="mode"
+                         [(ngModel)]="hero.creationDate"
+                         [ngModelOptions]="{standalone: true}">
+          </ui-datepicker>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="!validate() || mode == 0">{{'heroes.save' |
+            translate}}
+          </button>
+          <div class="btn-group">
+            <button type="button" (click)="onBack()" class="btn btn-secondary btn-sm">
+              <i class="fa fa-arrow-left"></i> {{'back' | translate}}
+            </button>
+            <button type="button" (click)="reset()" *ngIf="mode > 0" class="btn btn-danger btn-sm">
+              <i class="fa fa-undo"></i> {{'reset' | translate}}
+            </button>
+            <button type="button" (click)="onReview()" *ngIf="mode > 0" class="btn btn-info btn-sm">
+              <i class="fa fa-search"></i> {{'review' | translate}}
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary" [disabled]="!validate() || mode == 0">{{'heroes.save' |
-        translate}}
-      </button>
-      <div class="btn-group">
-        <button type="button" (click)="onBack()" class="btn btn-secondary btn-sm">
-          <i class="fa fa-arrow-left"></i> {{'back' | translate}}
-        </button>
-        <button type="button" (click)="reset()" *ngIf="mode > 0" class="btn btn-danger btn-sm">
-          <i class="fa fa-undo"></i> {{'reset' | translate}}
-        </button>
-        <button type="button" (click)="onReview()" *ngIf="mode > 0" class="btn btn-info btn-sm">
-          <i class="fa fa-search"></i> {{'review' | translate}}
-        </button>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>

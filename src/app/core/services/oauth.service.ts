@@ -22,11 +22,8 @@ export class OAuthService implements AuthService {
 
   login(username: string, password: string) {
     const data = 'grant_type=password&username=' + username + '&password=' + password;
-    const headers: HttpHeaders = new HttpHeaders();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-
-    // add header authorization
-    this.authHelper.addHeaderAuthorization(headers);
+    let headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    headers = this.authHelper.addHeaderAuthorization(headers);
 
     return this.http.post(this.getServiceUrl(), data, {headers: headers}).map((userData: OauthToken) => {
       const expiresIn = userData.expires_in || this.apiConfig.timeExpired;

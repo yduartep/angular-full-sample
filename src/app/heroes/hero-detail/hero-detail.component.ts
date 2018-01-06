@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+
+// observable
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
@@ -10,19 +12,21 @@ import {ModalMessageSettings} from '../../modal-message/modal-message-settings';
 import {Message} from '../../modal-message/message';
 import {MessageStatus} from '../../modal-message/message-status';
 import {MessageType} from '../../modal-message/message-type';
+import {Editorial} from '../../core/models/editorial';
 
 // services
 import {AuthHelper} from '../../core/services/auth.helper';
-import {AlertService} from '../../core/alert/alert.service';
 import {MessageService} from '../../modal-message/message.service';
 import {TranslateService} from '@ngx-translate/core';
+import {EditorialService} from '../../core/services/editorial.service';
 
-// ngrx
+// NgRx
 import {Store} from '@ngrx/store';
-import * as heroActions from '../heroes.actions';
-import {GetHero} from '../heroes.actions';
+import * as heroActions from '../store/heroes.actions';
+import {GetHero} from '../store/heroes.actions';
 import {AppState} from '../../app.state';
-import {getHero} from '../heroes.reducers';
+import {getHero} from '../store/heroes.reducers';
+
 
 @Component({
   selector: 'app-hero-detail',
@@ -31,10 +35,11 @@ import {getHero} from '../heroes.reducers';
 })
 export class HeroDetailComponent implements OnInit {
   hero: Observable<Hero>;
+  editorials: Observable<Editorial[]>;
 
   constructor(private route: ActivatedRoute,
               private authHelper: AuthHelper,
-              private alertService: AlertService,
+              private editorialService: EditorialService,
               private messageService: MessageService,
               private translate: TranslateService,
               private store: Store<AppState>) {
@@ -44,16 +49,16 @@ export class HeroDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.store.dispatch(new GetHero(+params['id']));
     });
+    this.editorials = this.editorialService.findAll();
     this.hero = this.store.select(getHero);
   }
 
   /**
-   * Delete the selected hero
-   * @param {number} id the hero id
+   * Display delete confirmation message
+   * @param {number} id the hero id o be deleted
    */
   delete(id: number) {
     this.authHelper.checkAuthentication();
-    this.alertService.clear();
 
     this.translate.get('heroes.confirmDeleteMsg').subscribe(text => {
       // create settings

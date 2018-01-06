@@ -1,11 +1,39 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {TestBed, async} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {APP_BASE_HREF, CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {StoreModule} from '@ngrx/store';
+import {RouterModule} from '@angular/router';
+import {EffectsModule} from '@ngrx/effects';
+import {SharedModule} from './shared/shared.module';
+import {CoreModule} from './core/core.module';
+import {MocksUtil} from './core/utilities/mocks.util';
+import {MessageService} from './modal-message/message.service';
+import {TranslateModule} from '@ngx-translate/core';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        BrowserModule,
+        CoreModule,
+        SharedModule,
+        TranslateModule.forRoot(),
+        RouterModule.forRoot([]),
+        StoreModule,
+        EffectsModule
+      ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        {provide: APP_BASE_HREF, useValue: '/'},
+        {provide: 'api.config', useValue: MocksUtil.createMockedApiConfig()},
+        {provide: 'defaultLanguage', useValue: 'en'},
+        MessageService
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
@@ -17,11 +45,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('app');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
   }));
 });

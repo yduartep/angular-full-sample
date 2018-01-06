@@ -1,7 +1,9 @@
 import {Component, OnInit, Inject} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+
+// observable
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {TranslateService} from '@ngx-translate/core';
 
 // models
 import {Hero} from '../shared/hero';
@@ -11,17 +13,18 @@ import {MessageStatus} from '../../modal-message/message-status';
 import {ModalMessageSettings} from '../../modal-message/modal-message-settings';
 
 // services
-import {HeroService} from '../shared/hero.service';
 import {LoggerService} from '../../core/services/logger.service';
 import {MessageService} from '../../modal-message/message.service';
 import {AuthHelper} from '../../core/services/auth.helper';
 import {AlertService} from '../../core/alert/alert.service';
 
-// ngrx
+// NgRx
 import {Store} from '@ngrx/store';
-import * as heroActions from '../heroes.actions';
+import * as heroActions from '../store/heroes.actions';
 import {AppState} from '../../app.state';
-import {getAllHeroes, getDeleteError, getHeroesError, isDeleted} from '../heroes.reducers';
+import {getAllHeroes} from '../store/heroes.reducers';
+import {Editorial} from '../../core/models/editorial';
+import {EditorialService} from '../../core/services/editorial.service';
 
 @Component({
   selector: 'app-hero-list',
@@ -30,10 +33,11 @@ import {getAllHeroes, getDeleteError, getHeroesError, isDeleted} from '../heroes
 })
 export class HeroListComponent implements OnInit {
   heroes: Observable<Hero[]>;
+  editorials: Observable<Editorial[]>;
 
   constructor(@Inject('LoggerService') private loggerService: LoggerService,
-              private service: HeroService,
               private authHelper: AuthHelper,
+              private editorialService: EditorialService,
               private alertService: AlertService,
               private messageService: MessageService,
               private translate: TranslateService,
@@ -42,7 +46,7 @@ export class HeroListComponent implements OnInit {
 
   ngOnInit() {
     this.loggerService.log('... initializing Hero list component.');
-
+    this.editorials = this.editorialService.findAll();
     this.heroes = this.store.select(getAllHeroes);
   }
 

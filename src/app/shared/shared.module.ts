@@ -16,8 +16,7 @@ import {UIElementsModule} from '../ui-elements/ui-elements.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './token.interceptor';
 import {AuthInterceptor} from './auth.interceptor';
-import {StoreModule} from '@ngrx/store';
-import {EffectsModule} from '@ngrx/effects';
+import {DescriptionPipe} from './description.pipe';
 
 @NgModule({
   imports: [
@@ -30,15 +29,13 @@ import {EffectsModule} from '@ngrx/effects';
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    UIElementsModule,
-    StoreModule,
-    EffectsModule
+    UIElementsModule
   ],
   declarations: [
-    // FocusDirective,
     LoginComponent,
     PageNotFoundComponent,
     ModalMessageComponent,
+    DescriptionPipe
   ],
   providers: [
     {
@@ -62,13 +59,10 @@ import {EffectsModule} from '@ngrx/effects';
     AlertModule,
     BsDatepickerModule,
     UIElementsModule,
-    StoreModule,
-    EffectsModule,
-
-    // FocusDirective,
     LoginComponent,
     PageNotFoundComponent,
-    ModalMessageComponent
+    ModalMessageComponent,
+    DescriptionPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

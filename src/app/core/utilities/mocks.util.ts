@@ -48,7 +48,7 @@ export class MocksUtil {
   static createMockedHeroes(): Hero[] {
     const result: Hero[] = [];
     for (let i = 1; i <= 3; i++) {
-      const data = new Hero(i, 'Hero ' + i, new KeyText(1, 'Marvel'), 'image ' + i + '.png');
+      const data = new Hero(i, 'Hero ' + i, 1, 'image ' + i + '.png');
       result.push(data);
     }
     return result;
@@ -60,7 +60,7 @@ export class MocksUtil {
   static createMockedVillains(): Villain[] {
     const result: Villain[] = [];
     for (let i = 1; i <= 3; i++) {
-      const data = new Villain(i, 'Villain ' + i, new KeyText(1, 'Marvel'), 'image ' + i + '.png');
+      const data = new Villain(i, 'Villain ' + i, 1, 'image ' + i + '.png');
       result.push(data);
     }
     return result;

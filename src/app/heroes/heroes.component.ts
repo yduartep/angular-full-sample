@@ -1,14 +1,22 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
+
+// NgRx
 import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
-import {GetAllHeroes} from './heroes.actions';
-import {getDeleteError, getHeroesError, isDeleted} from './heroes.reducers';
-import {MessageStatus} from '../modal-message/message-status';
+import {GetAllHeroes} from './store/heroes.actions';
+import {
+  isCreated, getCreateError, isDeleted, getDeleteError,
+  getHeroesError, isUpdated, getUpdateError
+} from './store/heroes.reducers';
+
+// model & services
 import {MessageService} from '../modal-message/message.service';
-import {Router} from '@angular/router';
-import {Message} from '../modal-message/message';
 import {AlertService} from '../core/alert/alert.service';
+import {Message} from '../modal-message/message';
+import {MessageStatus} from '../modal-message/message-status';
+
 
 @Component({
   styleUrls: ['./heroes.component.css'],
@@ -32,51 +40,65 @@ export class HeroesComponent implements OnInit {
     this.store.dispatch(new GetAllHeroes());
 
     // subscriptions when success or error action
-    this.store.select(getHeroesError).subscribe((error) => {
-      if (error) {
-        this.loadingError();
-      }
-    });
-    this.store.select(isDeleted).subscribe((deleted) => {
-      if (deleted) {
-        this.deleteSuccess();
-      }
+    this.store.select(getHeroesError).subscribe((error) => this.loadingError(error));
+    this.store.select(isDeleted).subscribe((done) => {
+      this.actionSuccess(done, 'heroes.deleteOkMsg');
     });
     this.store.select(getDeleteError).subscribe((error) => {
-      if (error) {
-        this.deleteError();
-      }
+      this.actionError(error, 'heroes.deleteErrMsg');
+    });
+    this.store.select(isUpdated).subscribe((done) => {
+      this.actionSuccess(done, 'heroes.editOkMsg');
+    });
+    this.store.select(getUpdateError).subscribe((error) => {
+      this.actionError(error, 'heroes.editErrMsg');
+    });
+    this.store.select(isCreated).subscribe((done) => {
+      this.actionSuccess(done, 'heroes.insertOkMsg');
+    });
+    this.store.select(getCreateError).subscribe((error) => {
+      this.actionError(error, 'heroes.insertErrMsg');
     });
   }
 
   /**
    * Display error message if load of heroes fails
    */
-  loadingError() {
-    const key = 'heroes.loadErrMsg';
-    this.translate.get(key).subscribe(text => {
-      this.alertService.error(key, {}, text);
-    });
+  loadingError(error) {
+    if (error) {
+      const key = 'heroes.loadErrMsg';
+      this.translate.get(key).subscribe(text => {
+        this.alertService.error(key, {}, text);
+        window.scrollTo(0, 0);
+      });
+    }
   }
 
   /**
-   * Display success message after delete the hero
+   * Display success message after execute specific action over the hero
+   * @param done true if action was completed or false
+   * @param message the message to be displayed
    */
-  deleteSuccess() {
-    const key = 'heroes.deleteOkMsg';
-    this.translate.get(key).subscribe(text => {
-      this.messageService.showMessage(new Message(text, MessageStatus.SUCCESS));
-      this.router.navigate(['/heroes']);
-    });
+  actionSuccess(done: boolean, message: string) {
+    if (done) {
+      this.translate.get(message).subscribe(text => {
+        this.messageService.showMessage(new Message(text, MessageStatus.SUCCESS));
+        this.router.navigate(['/heroes']);
+      });
+    }
   }
 
   /**
-   * Display error message is deletion fails
+   * Display error message if execution of action fails
+   * @param error the error thrown
+   * @param message the i18n key of the message to be displayed
    */
-  deleteError() {
-    const key = 'heroes.deleteErrMsg';
-    this.translate.get(key).subscribe(text => {
-      this.alertService.error(key, {}, text);
-    });
+  actionError(error, message: string) {
+    if (error) {
+      this.translate.get(message).subscribe(text => {
+        this.alertService.error(message, {}, text);
+        window.scrollTo(0, 0);
+      });
+    }
   }
 }

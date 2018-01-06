@@ -15,7 +15,10 @@
     "angular sample",
     "angular demo",
     "ngrx",
-    "typescript"
+    "typescript",
+    "http",
+    "ngx-translate",
+    "form validation"
   ],
   "author": "Yahima Duarte <layahi@gmail.com>",
   "scripts": {

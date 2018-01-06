@@ -1,9 +1,6 @@
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
-import {
-  HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
-  HttpResponse
-} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {AuthHelper} from '../core/services/auth.helper';
 import {SpinnerService} from '../core/spinner/spinner.service';
 
@@ -16,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!this.isUserAuthenticated(request.url)) {
-      return this.getAuthError();
+      return Observable.throw({status: 401, statusText: 'UNAUTHORIZED'});
     } else {
       // show spinner before call the request
       this.spinnerService.show();
@@ -33,13 +30,5 @@ export class AuthInterceptor implements HttpInterceptor {
    */
   private isUserAuthenticated(url) {
     return this.authHelper.isUserLogged() || !this.authHelper.needAuthBefore(url);
-  }
-
-  /**
-   * Throw 401 request error
-   * @returns {ErrorObservable} Observable with the error info
-   */
-  private getAuthError() {
-    return Observable.throw({status: 401, statusText: 'UNAUTHORIZED'});
   }
 }
