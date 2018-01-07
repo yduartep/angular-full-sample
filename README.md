@@ -516,7 +516,7 @@ this.store.select(getDeleteError).subscribe((error) => {
 
 See next diagram:
 
-![Flow Diagram](https://github.com/yduartep/angular-full-sample/blob/master/Diagram%20ngrx.png)
+![Flow Diagram](https://github.com/yduartep/angular-full-sample/blob/IT1/ngrx_integration/documentation/diagram-ngrx.png)
 
 ## 14. Not found component
 The application include a 'Not-Found' component inside the 'Shared' module that will be displayed in the case the user type an invalid route in the browser.
