@@ -300,7 +300,26 @@ In the second case, the menus will loaded from the file 'assets/data/menu.json'.
 The icon is a font-awsone icon. See some example from http://fontawesome.io/examples/.
 
 ## 7. Http interceptor system
-The application include an 'Http Interceptor' used to capture HTTP errors, authentication and show loading after any HTTP requests. The class is defined as a provider of the shared module (/shared/http.interceptor.ts), in that way, will be imported for each new module automatically. 
+From the Angular 4.3 version the new **HttpClientModule** has been introduced as a complete re-implementation of the former HttpModule. The new **HttpClient** service is included to initiate HTTP request and process responses within your application and the **HttpInterceptor** to intercept an outgoing `HttpRequest`.
+So, in the project I have include two new http interceptors **AuthInterceptor** and **TokenInterceptor** to check authentication,  add authorization token into the header of the request and display / hide spinner before and after complete each request.
+The classes are defined as providers of the shared module, in that way, can be imported for each new module automatically. 
+
+```
+@NgModule({
+providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ]
+})
+export class SharedModule {}
+```
 
 More Info:
 - https://blog.slinto.sk/angular-2-http-interceptors-7e2d74b7f14e
