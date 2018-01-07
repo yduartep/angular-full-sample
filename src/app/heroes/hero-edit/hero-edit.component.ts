@@ -63,7 +63,6 @@ export class HeroEditComponent extends UIFormComponent implements OnInit {
     this.alertService.clear();
 
     if (this.validate()) {
-      // this.hero.editorial = this.editorials.find((e) => e.selected === true).id;
       this.store.dispatch(new UpdateHero(this.hero));
     }
   }
