@@ -3,7 +3,7 @@
     <h1>{{ 'villains.list-title' | translate }}</h1>
   </div>
   <div class="col-sm-4">
-    <app-villain-search (onSearch)="onSearchText($event)"></app-villain-search>
+    <app-villain-search (search)="onSearchText($event)"></app-villain-search>
   </div>
 </div>
 <table class="table table-striped">

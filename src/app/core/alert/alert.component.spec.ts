@@ -7,8 +7,8 @@ import {AlertService} from './alert.service';
 import {SharedModule} from '../../shared/shared.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {RouterModule} from '@angular/router';
-import {APP_BASE_HREF} from "@angular/common";
-import {MocksUtil} from "../utilities/mocks.util";
+import {APP_BASE_HREF} from '@angular/common';
+import {MocksUtil} from '../utilities/mocks.util';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;

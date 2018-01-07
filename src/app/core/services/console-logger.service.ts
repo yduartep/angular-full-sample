@@ -17,6 +17,6 @@ export class ConsoleLoggerService implements LoggerService {
   }
 
   info(msg: string) {
-    console.info(msg);
+    console.log(msg);
   }
 }

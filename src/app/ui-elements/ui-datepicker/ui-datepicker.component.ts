@@ -12,14 +12,12 @@ import {
 
 import {ValidationService} from '../../core/services/validation.service';
 import {UIElementBase} from '../ui-element-base';
-import {animations} from '../animations';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'ui-datepicker',
   templateUrl: './ui-datepicker.component.html',
   styleUrls: ['./ui-datepicker.component.css'],
-  animations,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: UIDatePickerComponent,

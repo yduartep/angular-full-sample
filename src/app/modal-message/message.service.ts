@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Rx';
-import {Subject} from 'rxjs/Subject';
 
+// models
 import {Message} from './message';
+
+// observable
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class MessageService {
   private subjectMsg = new Subject<Message>();
-  private subjectConfirmed = new Subject<boolean>();
 
   showMessage(message: Message) {
     this.subjectMsg.next(message);

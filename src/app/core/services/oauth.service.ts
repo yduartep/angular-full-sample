@@ -1,11 +1,11 @@
-import {Injectable, Inject} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {ApiConfig} from '../models/api-config';
 import 'rxjs/add/operator/map';
 
 import {CommonUtil} from '../utilities/common.util';
 import {AuthService} from './auth.service';
 import {AuthHelper} from './auth.helper';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {OauthToken} from '../models/oauth-token';
 
 @Injectable()

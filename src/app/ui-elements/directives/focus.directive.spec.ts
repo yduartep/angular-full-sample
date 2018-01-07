@@ -1,8 +1,6 @@
-import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {TestBed, async, inject} from '@angular/core/testing';
+import {ElementRef, NO_ERRORS_SCHEMA} from '@angular/core';
+import {async, inject, TestBed} from '@angular/core/testing';
 import {FocusDirective} from './focus.directive';
-import {ElementRef} from '@angular/core';
-import {HttpModule} from '@angular/http';
 import {RouterTestingModule} from '@angular/router/testing';
 
 // factory and helpers
@@ -14,6 +12,7 @@ import {MocksUtil} from '../../core/utilities/mocks.util';
 import {OAuthService} from '../../core/services/oauth.service';
 import {LoggerService} from '../../core/services/logger.service';
 import {SpinnerService} from '../../core/spinner/spinner.service';
+import {SharedModule} from '../../shared/shared.module';
 
 class MockElementRef implements ElementRef {
   nativeElement = {};
@@ -26,7 +25,7 @@ describe('FocusDirective', () => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
-        HttpModule,
+        SharedModule,
         RouterTestingModule.withRoutes([])
       ],
       providers: [

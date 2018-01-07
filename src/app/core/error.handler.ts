@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  ErrorHandler
-} from '@angular/core';
-import {Response} from '@angular/http';
+import {ErrorHandler, Injectable} from '@angular/core';
 import {AuthHelper} from './services/auth.helper';
 
 @Injectable()
@@ -38,17 +34,7 @@ export class SimpleErrorHandler implements ErrorHandler {
     }
 
     // In a real world app, you might use a remote logging infrastructure
-    let errMsg = '';
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      if (error.status > 0) {
-        errMsg += `${error.status} - `;
-      }
-      errMsg += `${error.statusText || 'Error in the application'}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
+    const errMsg = error.message ? error.message : error.toString();
     console.error(errMsg);
   }
 }

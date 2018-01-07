@@ -1,9 +1,6 @@
 import {async, getTestBed, inject, TestBed} from '@angular/core/testing';
-import {Http} from '@angular/http';
 import {OAuthService} from '../services/oauth.service';
-import {AuthService} from '../services/auth.service';
 import {AuthHelper} from '../services/auth.helper';
-import {authFactory} from '../factories/auth.factory';
 import {CommonUtil} from '../utilities/common.util';
 import {MocksUtil} from '../utilities/mocks.util';
 import {BrowserModule} from '@angular/platform-browser';
@@ -23,7 +20,6 @@ describe('OAuthService', () => {
       providers: [
         {provide: 'api.config', useValue: apiConfig},
         {provide: 'defaultLanguage', useValue: 'en'},
-        {provide: 'AuthService', useFactory: authFactory, deps: [Http]},
         AuthHelper,
         OAuthService
       ],

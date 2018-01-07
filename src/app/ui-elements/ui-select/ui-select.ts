@@ -1,26 +1,13 @@
-import {
-  Component,
-  Optional,
-  Inject,
-  Input, SimpleChanges, OnChanges, ChangeDetectionStrategy, OnInit
-} from '@angular/core';
-
-import {
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS,
-} from '@angular/forms';
-
+import {Component, Inject, Input, OnChanges, OnInit, Optional, SimpleChanges} from '@angular/core';
+import {NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ValidationService} from '../../core/services/validation.service';
 import {UIElementBase} from '../ui-element-base';
-import {animations} from '../animations';
 import {CommonUtil} from '../../core/utilities/common.util';
 import {KeyText} from '../../core/models/key-text';
 
 @Component({
   selector: 'ui-select',
   templateUrl: './ui-select.html',
-  animations,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: UISelectComponent,
