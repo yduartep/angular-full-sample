@@ -1,5 +1,5 @@
 {
-  "appTitle": "Applicazione completa in Angular 4!!!",
+  "appTitle": "Applicazione completa in Angular 5!!!",
   "back": "Indietro",
   "reset": "Pulisce",
   "aboutUs": "Riguardo noi",
@@ -72,7 +72,8 @@
     "insertOkMsg": "L'eroe è stato creato con successo!!",
     "insertErrMsg": "Errore durante il tentativo di inserire il nuovo eroe",
     "editOkMsg": "L'eroe è stato modificato con successo!!",
-    "editErrMsg": "Errore nel tentativo di modificare il eroe!"
+    "editErrMsg": "Errore nel tentativo di modificare il eroe!",
+    "loadErrMsg": "Errore nel tentativo di caricare la lista di eroi"
   },
   "villains": {
     "detail-title": "Dettagli cattivo",

@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <label class="col-sm-2">{{ 'villains.fields.editorial' | translate}}: </label>
-    <div class="col-sm-9">{{villain.editorial?.text}}</div>
+    <div class="col-sm-9">{{villain.editorial | description : (editorials | async)}}</div>
   </div>
   <div class="row">
     <label class="col-sm-2">{{ 'villains.fields.preview' | translate}}:</label>

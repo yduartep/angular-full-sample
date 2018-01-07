@@ -2,11 +2,11 @@ import {Inject} from '@angular/core';
 import {ApiConfig} from '../models/api-config';
 import {CommonUtil} from '../utilities/common.util';
 import {AuthTypes} from '../factories/auth.type';
-import {environment} from '../../../environments/environment';
 import {AuthScheme} from '../models/auth-scheme.enum';
 import {OauthToken} from '../models/oauth-token';
 import {User} from '../models/user';
 import {Md5} from 'ts-md5/dist/md5';
+import {HttpHeaders} from '@angular/common/http';
 
 export class AuthHelper {
 
@@ -72,19 +72,34 @@ export class AuthHelper {
   }
 
   /**
+   * Determine if the url is a valid http service
+   */
+  private static isHttpService(url) {
+    return url && url.startsWith('http');
+  }
+
+  /**
    * Determine if the current url require authentication before to be called
    * @param {string} url the url
    * @returns {boolean} true if required or false
    */
   needAuthBefore(url: string) {
-    const apiUrl = CommonUtil.getApiByUrl(url, this.apiConfig);
-    return apiUrl.requireAuthBefore;
+    if (AuthHelper.isHttpService(url)) {
+      const apiUrl = CommonUtil.getApiByUrl(url, this.apiConfig);
+      return apiUrl.requireAuthBefore;
+    }
+    return false;
   }
 
   /**
    * Add specific Authorization header depending of the authentication scheme defined.
+   * @param {HttpHeaders} headers the headers
+   * @param {User} user the user
+   * @param {string} uri the uri
+   * @param {string} method the method
+   * @returns {HttpHeaders} the headers updated
    */
-  addHeaderAuthorization(headers: Headers, user?: User, uri?: string, method?: string) {
+  addHeaderAuthorization(headers: HttpHeaders, user?: User, uri?: string, method?: string) {
     const authType = this.apiConfig.authService;
     let clientId, clientSecret;
     if (!CommonUtil.isEmpty(this.apiConfig.credentials)) {
@@ -94,56 +109,22 @@ export class AuthHelper {
     switch (this.apiConfig.authScheme) {
       case AuthScheme.BASIC:
         if (!CommonUtil.isEmpty(user)) {
-          headers.set('Authorization', 'Basic ' + btoa(user.username + ':' + user.password));
+          return this.getBasicAuthorization(headers, user);
         } else if (!CommonUtil.isEmpty(clientId) && !CommonUtil.isEmpty(clientSecret) && authType === AuthTypes.OAUTH) {
-          // return Oauth basic authentication
-          headers.set('Authorization', 'Basic ' + btoa(clientId + ':' + clientSecret));
+          return this.getOauthBasicAuthorization(headers, clientId, clientSecret);
+        } else {
+          return headers;
         }
-        break;
       case AuthScheme.BEARER:
-        const token = CommonUtil.getCookie(AuthHelper.TOKEN_ID);
-        if (!CommonUtil.isEmpty(token)) {
-          headers.set('Authorization', 'Bearer ' + token);
-        }
-        break;
+        return this.getBearerAuthorization(headers);
       case AuthScheme.DIGEST:
-        if (!CommonUtil.isEmpty(user)) {
-          // TODO check from where arrive this fields
-          const nonce = 'dcd98b7102dd2f0e8b11d0f600bfb0c093';
-          const nc = '00000001';
-          const cnonce = '0a4f113b';
-          const opaque = '5ccc069c403ebaf9f0171e9517f40e41';
-          const qop = 'auth';
-
-          const HA1 = Md5.hashStr(user.username + ':' + user.email + ':' + user.password);
-          const HA2 = Md5.hashStr(method + ':' + uri);
-          const response = Md5.hashStr(HA1 + ':' + nonce + ':' + nc + ':' + cnonce + ':' + qop + ':' + HA2);
-
-          headers.set('Authorization', 'Digest ' +
-            ' username="' + user.username + '",' +
-            ' realm="' + user.email + '",' +
-            ' nonce="' + nonce + '",' +
-            ' uri="' + uri + '",' +
-            ' qop=auth,' +
-            ' nc=' + nc + ',' +
-            ' cnonce="' + cnonce + '",' +
-            ' response="' + response + '",' +
-            ' opaque="' + opaque + '"');
-        }
-        break;
+        return this.getDigestAuthorization(headers, user, uri, method);
       case AuthScheme.HOBA:
-        const signedClientResult = CommonUtil.getCookie(AuthHelper.HOBA_CLIENT_RESULT);
-        if (!CommonUtil.isEmpty(signedClientResult)) {
-          headers.set('Authorized', signedClientResult);
-        }
-        break;
+        return this.getHOBAAuthorization(headers);
       case AuthScheme.AWS:
-        // the clientId is the AWSAccessKeyId
-        // the clientSecret is the AWSSecretAccessKey
-        if (!CommonUtil.isEmpty(clientId) && !CommonUtil.isEmpty(clientSecret)) {
-          headers.set('Authorization', 'AWS ' + clientId + ':' + clientSecret);
-        }
-        break;
+        return this.getAWSAuthorization(headers, clientId, clientSecret);
+      default:
+        return headers;
     }
   }
 
@@ -186,5 +167,108 @@ export class AuthHelper {
     if (!this.isUserLogged()) {
       location.href = location.pathname + '#/login';
     }
+  }
+
+  /**
+   * Get the basic authorization
+   * @param headers the headers
+   * @param {User} user the user
+   * @returns the HttpHeaders updated
+   */
+  private getBasicAuthorization(headers: HttpHeaders, user?: User): HttpHeaders {
+    if (!CommonUtil.isEmpty(user)) {
+      const credentials = btoa(user.username + ':' + user.password);
+      return headers.set('Authorization', `Basic ${credentials}`);
+    }
+    return headers;
+  }
+
+  /**
+   * Get the OAUTH basic authorization
+   * @param headers the headers
+   * @param clientId the clientId
+   * @param clientSecret the clientSecret
+   * @returns {{Authorization: string}} the authorization object
+   */
+  private getOauthBasicAuthorization(headers: HttpHeaders, clientId, clientSecret): HttpHeaders {
+    if (!CommonUtil.isEmpty(clientId) && !CommonUtil.isEmpty(clientSecret)) {
+      const credentials = btoa(clientId + ':' + clientSecret);
+      return headers.set('Authorization', `Basic ${credentials}`);
+    }
+    return headers;
+  }
+
+  /**
+   * Get the bearer authorization
+   *
+   * @param headers the headers
+   * @returns {any}  the bearer authorization
+   */
+  private getBearerAuthorization(headers: HttpHeaders): HttpHeaders {
+    const token = CommonUtil.getCookie(AuthHelper.TOKEN_ID);
+    if (!CommonUtil.isEmpty(token)) {
+      return headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+
+  /**
+   * Get the digest authorization
+   *
+   * @param headers the headers
+   * @param user the user
+   * @param uri the uri
+   * @param method the method
+   * @returns {any}  the digest authorization
+   */
+  private getDigestAuthorization(headers: HttpHeaders, user: User, uri: string, method: string): HttpHeaders {
+    if (!CommonUtil.isEmpty(user)) {
+      // TODO check from where arrive this fields
+      const nonce = 'dcd98b7102dd2f0e8b11d0f600bfb0c093';
+      const nc = '00000001';
+      const cnonce = '0a4f113b';
+      const opaque = '5ccc069c403ebaf9f0171e9517f40e41';
+      const qop = 'auth';
+
+      const HA1 = Md5.hashStr(user.username + ':' + user.email + ':' + user.password);
+      const HA2 = Md5.hashStr(method + ':' + uri);
+      const response = Md5.hashStr(HA1 + ':' + nonce + ':' + nc + ':' + cnonce + ':' + qop + ':' + HA2);
+
+      const credentials = `username=${user.username},
+                          realm=${user.email},nonce=${nonce},uri=${uri},qop=auth,
+                          nc=${nc},cnonce=${cnonce},response=${response},opaque=${opaque}`;
+      return headers.set('Authorization', `Digest ${credentials}`);
+    }
+    return headers;
+  }
+
+  /**
+   * Get the HOBA authorization
+   *
+   * @param headers the headers
+   * @returns {any}  the HOBA authorization
+   */
+  private getHOBAAuthorization(headers: HttpHeaders): HttpHeaders {
+    const signedClientResult = CommonUtil.getCookie(AuthHelper.HOBA_CLIENT_RESULT);
+    if (!CommonUtil.isEmpty(signedClientResult)) {
+      return headers.set('Authorized', signedClientResult);
+    }
+    return headers;
+  }
+
+  /**
+   * Get the AWS authorization
+   *
+   * @param headers the headers
+   * @param clientId the AWSAccessKeyId
+   * @param clientSecret the AWSSecretAccessKey
+   * @returns {any}  the AWS authorization
+   */
+  private getAWSAuthorization(headers: HttpHeaders, clientId, clientSecret): HttpHeaders {
+    if (!CommonUtil.isEmpty(clientId) && !CommonUtil.isEmpty(clientSecret)) {
+      const credentials = `${clientId}:${clientSecret}`;
+      return headers.set('Authorization', `AWS ${credentials}`);
+    }
+    return headers;
   }
 }

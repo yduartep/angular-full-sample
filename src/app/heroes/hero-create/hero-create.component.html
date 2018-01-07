@@ -18,21 +18,21 @@
                title="{{'heroes.fields.editorial' | translate}}"
                keyField="id"
                textField="text"
-               [(ngModel)]="selected"
+               [(ngModel)]="hero.editorial"
                [mode]="mode"
                [data]="editorials"
                [ngModelOptions]="{standalone: true}">
     </ui-select>
   </div>
-  <div class="row">
-    <ui-input id="txtImage"
-              title="{{'heroes.fields.preview' | translate}}"
-              placeholder="{{'heroes.placeholders.preview' | translate}}"
-              [(ngModel)]="hero.image"
-              [mode]="mode"
-              [ngModelOptions]="{standalone: true}">
-    </ui-input>
-  </div>
+  <!--<div class="row">-->
+    <!--<ui-input id="txtImage"-->
+              <!--title="{{'heroes.fields.preview' | translate}}"-->
+              <!--placeholder="{{'heroes.placeholders.preview' | translate}}"-->
+              <!--[(ngModel)]="hero.image"-->
+              <!--[mode]="mode"-->
+              <!--[ngModelOptions]="{standalone: true}">-->
+    <!--</ui-input>-->
+  <!--</div>-->
   <div class="row">
     <ui-datepicker required dateValidator
                    id="dpDate"

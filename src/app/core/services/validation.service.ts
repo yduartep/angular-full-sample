@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/concat';
 
 import {CommonUtil} from '../utilities/common.util';
 import {Map} from '../utilities/data-structure';

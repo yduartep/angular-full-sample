@@ -1,6 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AlertComponent } from './alert.component';
+import {AlertComponent} from './alert.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {CoreModule} from '../core.module';
+import {AlertService} from './alert.service';
+import {SharedModule} from '../../shared/shared.module';
+import {TranslateModule} from '@ngx-translate/core';
+import {RouterModule} from '@angular/router';
+import {APP_BASE_HREF} from '@angular/common';
+import {MocksUtil} from '../utilities/mocks.util';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -8,9 +16,21 @@ describe('AlertComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlertComponent ]
+      declarations: [],
+      imports: [
+        BrowserModule,
+        CoreModule,
+        SharedModule,
+        TranslateModule.forRoot(),
+        RouterModule.forRoot([])
+      ],
+      providers: [AlertService,
+        {provide: APP_BASE_HREF, useValue: '/'},
+        {provide: 'api.config', useValue: MocksUtil.createMockedApiConfig()},
+        {provide: 'defaultLanguage', useValue: 'en'}
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

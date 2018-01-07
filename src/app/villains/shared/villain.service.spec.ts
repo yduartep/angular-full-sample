@@ -1,115 +1,121 @@
-import { TestBed, getTestBed, async, inject } from '@angular/core/testing';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { BaseRequestOptions, Response, HttpModule, Http, XHRBackend, RequestMethod, ResponseOptions } from '@angular/http';
-import { Villain } from './villain';
-import { VillainService } from './villain.service';
-import { MocksUtil } from '../../core/utilities/mocks.util';
-import {Editorial} from '../../core/models/editorial';
+import {async, getTestBed, TestBed} from '@angular/core/testing';
+import {Villain} from './villain';
+import {VillainService} from './villain.service';
+import {MocksUtil} from '../../core/utilities/mocks.util';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController, TestRequest} from '@angular/common/http/testing';
+import {AuthHelper} from '../../core/services/auth.helper';
 
 describe('VillainsService', () => {
-  let mockBackend: MockBackend;
   const apiConfig = MocksUtil.createMockedApiConfig();
-  const expectedUrl = 'http://127.0.0.1:3000/api/villains';
   const mockResponse = MocksUtil.createMockedVillains();
 
+  let injector: TestBed;
+  let service: VillainService;
+  let httpMock: HttpTestingController;
+
   beforeEach(() => {
+    AuthHelper.addUserInfo('fakeUser', 5);
+    AuthHelper.addTokenInfo(MocksUtil.createMockedOauthToken(), 5);
+
     TestBed.configureTestingModule({
       providers: [
-        { provide: 'api.config', useValue: apiConfig },
-        { provide: 'defaultLanguage', useValue: 'en' },
-        MockBackend,
-        BaseRequestOptions,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-            return new Http(backend, defaultOptions);
-          }
-        },
+        {provide: 'api.config', useValue: apiConfig},
+        {provide: 'defaultLanguage', useValue: 'en'},
         VillainService
       ],
-      imports: [HttpModule]
+      imports: [
+        BrowserModule,
+        HttpClientModule,
+        HttpClientTestingModule
+      ]
     });
-    mockBackend = getTestBed().get(MockBackend);
+
+    injector = getTestBed();
+    service = injector.get(VillainService);
+    httpMock = injector.get(HttpTestingController);
   });
 
-  it('should create an instance of the VillainService', inject([VillainService], (service: VillainService) => {
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should create an instance of the VillainService', () => {
     expect(service).toBeTruthy();
-  }));
+  });
 
-  it('should get list of all villains', async(inject([VillainService], (service: VillainService) => {
-    mockBackend.connections.subscribe((connection: MockConnection) => {
-      connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse })));
-    });
-
-    service.findAll().subscribe((data) => {
+  it('should get list of all villains', async(() => {
+    service.findAll().subscribe((data: Villain[]) => {
       expect(data.length).toBe(3);
       expect(data[0].id).toBe(1);
       expect(data[0].name).toBe('Villain 1');
       expect(data[0].image).toBe('image 1.png');
     });
-  })));
 
-  it('should get villain by id', async(inject([VillainService], (service: VillainService) => {
+    const req = httpMock.expectOne(service.getServiceUrl());
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+  }));
+
+  it('should get villain by id', async(() => {
     const id = 1;
-
-    mockBackend.connections.subscribe((connection: MockConnection) => {
-      expect(connection.request.method).toBe(RequestMethod.Get);
-      expect(connection.request.url).toEqual(expectedUrl + '/' + id);
-      connection.mockRespond(new Response(new ResponseOptions({ body: mockResponse[0] })));
-    });
 
     service.findById(id).subscribe((response: Villain) => {
-      expect(response.id).toBe(1);
+      expect(response.id).toBe(id);
       expect(response.name).toBe('Villain 1');
       expect(response.image).toBe('image 1.png');
-      expect(response.editorial.id).toBe(1);
+      expect(response.editorial).toBe(1);
     });
-  })));
 
-  it('should insert new villain', async(inject([VillainService], (service: VillainService) => {
-    mockBackend.connections.subscribe((connection: MockConnection) => {
-      expect(connection.request.method).toBe(RequestMethod.Post);
-      expect(connection.request.url).toEqual(expectedUrl);
-      connection.mockRespond(new Response(new ResponseOptions({ status: 201, body: mockResponse[1] })));
-    });
-    const villain = new Villain(null, 'Villain new', new Editorial(1, 'Marvel'), 'imageNew.jspg');
+    const req = httpMock.expectOne(`${service.getServiceUrl()}/${id}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse[0]);
+  }));
+
+  it('should insert new Villain', async(() => {
+    const villain = new Villain(null, 'Villain new', 2, 'imageNew.jpg');
     service.insert(villain).subscribe((successResult) => {
       expect(successResult).toBeDefined();
-      expect(successResult.status).toBe(201);
-      expect(successResult.ok).toBe(true);
+      expect(successResult.name).toBe('Villain new');
+      expect(successResult.editorial).toBe(2);
+      expect(successResult.image).toBe('imageNew.jpg');
     });
-  })));
 
-  it('should save updates to an existing villain', async(inject([VillainService], (service: VillainService) => {
+    const req: TestRequest = httpMock.expectOne(service.getServiceUrl());
+    expect(req.request.method).toBe('POST');
+    expect(req.request.headers.get('Content-Type')).toBe('application/json; charset=utf-8');
+    req.flush(villain);
+  }));
+
+  it('should save updates to an existing villain', async(() => {
     const id = 1;
-    mockBackend.connections.subscribe((connection: MockConnection) => {
-      expect(connection.request.method).toBe(RequestMethod.Put);
-      expect(connection.request.url).toEqual(expectedUrl + '/' + id);
-      connection.mockRespond(new Response(new ResponseOptions({ status: 204 })));
-    });
-
-    const villain = new Villain(1, 'Villain changed', new Editorial(1, 'Marvel'), 'imageChanged.jspg');
+    const villain = new Villain(id, 'Villain changed', 2, 'imageChanged.jpg');
     service.update('id', villain).subscribe((successResult) => {
       expect(successResult).toBeDefined();
-      expect(successResult.status).toBe(204);
-      expect(successResult.ok).toBe(true);
-    });
-  })));
-
-  it('should delete an existing villain', async(inject([VillainService], (service: VillainService) => {
-    mockBackend.connections.subscribe(connection => {
-      expect(connection.request.method).toBe(RequestMethod.Delete);
-      connection.mockRespond(new ResponseOptions({ status: 204 }));
+      expect(successResult.id).toBe(1);
+      expect(successResult.name).toBe('Villain changed');
+      expect(successResult.editorial).toBe(2);
+      expect(successResult.image).toBe('imageChanged.jpg');
     });
 
-    service.delete(1).subscribe(
+    const req: TestRequest = httpMock.expectOne(`${service.getServiceUrl()}/${id}`);
+    expect(req.request.method).toBe('PUT');
+    expect(req.request.headers.get('Content-Type')).toBe('application/json; charset=utf-8');
+    req.flush(villain);
+  }));
+
+  it('should delete an existing Villain', async(() => {
+    const id = 1;
+    service.delete(id).subscribe(
       (successResult) => {
         expect(successResult).toBeDefined();
-        expect(successResult.status).toBe(204);
       },
       (errorResult) => {
         throw (errorResult);
       });
-  })));
+
+    const req: TestRequest = httpMock.expectOne(`${service.getServiceUrl()}/${id}`);
+    expect(req.request.method).toBe('DELETE');
+  }));
 });

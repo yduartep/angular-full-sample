@@ -1,9 +1,9 @@
-![Build Status](https://travis-ci.org/yduartep/angular-full-sample.svg?branch=master)
-
 # Getting Started
 
 Full sample application built with Angular 4 that follows all steps of [Angular Style Guide](https://angular.io/guide/styleguide). Include:
 - **Lazy loading** of modules.
+- **Ngrx** integration using store / effects / selectors.
+- keeping track of *ngFor* using the **trackBy** property in all list.
 - **Api rest configurations** by environment.
 - Integrated with [ngx-translate](http://www.ngx-translate.com/) module.
 - Backend mocked with [json-server](https://github.com/typicode/json-server) and [faker.js](https://github.com/marak/Faker.js/). 
@@ -34,7 +34,7 @@ Full sample application built with Angular 4 that follows all steps of [Angular 
     - [iii. How to use the language selector](#iii-how-to-use-the-language-selector)
     - [iv. How to define new language](#iv-how-to-define-new-language)
   - [4. How to mock services](#4-how-to-mock-services)
-  - [5. Bootstrap and Font-awesome integration](#5-bootstrap-and-font-awesome-integration)
+  - [5. Bootstrap and Font-awsone integration](#5-bootstrap-and-font-awsone-integration)
   - [6. Dynamic nav bar](#6-dynamic-nav-bar)
   - [7. Http interceptor system](#7-http-interceptor-system)
   - [8. Login component configurable with different authentication service](#8-login-component-configurable-with-different-authentication-service)
@@ -46,10 +46,11 @@ Full sample application built with Angular 4 that follows all steps of [Angular 
     - [How to create a new Logger system:](#how-to-create-a-new-logger-system)
   - [12. Incorporated automatic handle errors](#12-incorporated-automatic-handle-errors)
     - [How to create a new ErrorHandler:](#how-to-create-a-new-errorhandler)
-  - [13. Not found component](#13-not-found-component)
-  - [14. TSLint integration](#14-tslint-integration)
+  - [13. How to apply NGRX on CRUD operations of a module](#13-how-to-apply-ngrx-on-crud-operations-of-a-module)  
+  - [14. Not found component](#13-not-found-component)
+  - [15. TSLint integration](#14-tslint-integration)
   - [15. Unit and Functional test](#15-unit-and-functional-test)
-  - [16. Cache Services](#16-cache-services)
+  - [17. Cache Services](#16-cache-services)
 - [Useful Commands](#useful-commands)
   - [Application execution](#application-execution)
   - [Management Console](#management-console)
@@ -280,7 +281,7 @@ More Info:
 - https://scotch.io/tutorials/json-server-as-a-fake-rest-api-in-frontend-development
 - https://github.com/marak/Faker.js/
 
-## 5. Bootstrap and Font-awesome integration
+## 5. Bootstrap and Font-awsone integration
 The application has already installed the library 'font-awesome' and 'bootstrap', so you can create new responsive components with a pack of pre-defined icons. The application also incorporate the library 'ngx-bootstrap' that contains many modules like accordion, alerts, datepicker, progressbar, etc, that could be imported separately in the case you need it. See how to use it from http://valor-software.com/ngx-bootstrap/#/.
 
 ## 6. Dynamic nav bar
@@ -299,7 +300,26 @@ In the second case, the menus will loaded from the file 'assets/data/menu.json'.
 The icon is a font-awsone icon. See some example from http://fontawesome.io/examples/.
 
 ## 7. Http interceptor system
-The application include an 'Http Interceptor' used to capture HTTP errors, authentication and show loading after any HTTP requests. The class is defined as a provider of the shared module (/shared/http.interceptor.ts), in that way, will be imported for each new module automatically. 
+From the Angular 4.3 version the new **HttpClientModule** has been introduced as a complete re-implementation of the former HttpModule. The new **HttpClient** service is included to initiate HTTP request and process responses within your application and the **HttpInterceptor** to intercept an outgoing `HttpRequest`.
+So, in the project I have include two new http interceptors **AuthInterceptor** and **TokenInterceptor** to check authentication,  add authorization token into the header of the request and display / hide spinner before and after complete each request.
+The classes are defined as providers of the shared module, in that way, can be imported for each new module automatically. 
+
+```
+@NgModule({
+providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ]
+})
+export class SharedModule {}
+```
 
 More Info:
 - https://blog.slinto.sk/angular-2-http-interceptors-7e2d74b7f14e
@@ -475,10 +495,52 @@ The 'Core' module contains also a '**Simple Error Handler**' that implements the
 
 More Info: https://netbasal.com/angular-2-custom-exception-handler-1bcbc45c3230
 
-## 13. Not found component
+## 13. How to apply NGRX on CRUD operations of a module
+- Each module have a folder **store** where will be saved the **actions** (heroes.actions.ts), **effects** (heroes.effects.ts) and **reducers** (heroes.reducers.ts).
+
+- In the module class (heroes.module.ts) are imported the reducers to be called by each feature using the class **StoreModule** and also the **EffectsModule**.
+
+```
+export const reducers: ActionReducerMap<any> = {
+  heroes: heroReducer.reducer
+};
+
+@NgModule({
+  imports: [
+    ...
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([HeroEffects])
+  ],...
+})
+export class HeroesModule {}
+```
+
+- In the main component of the specific module (*heroes.component.ts*), I have centralized all the actions to be executed when a CRUD operation has successfully finish or the error thrown using a subscription to the specific select defined in the reducer:
+
+```
+this.store.select(isDeleted).subscribe((deleted) => {
+    this.actionSuccess(...);
+});
+this.store.select(getDeleteError).subscribe((error) => {
+    this.actionError(...);
+});
+    
+```
+
+### How to EDIT a hero using Ngrx/store & Effects:
+1. To edit a hero, the system **dispatch** an event with the action **"UPDATE_HERO"**.
+2. The **reducer** related to the module **heroes** is executed and the state is changed updating the information of specific hero.
+3. An **“ngrx effect”** class is implemented (HeroEffects) by module and will be triggered when we dispatch actions with the store.
+4. Using some selectors defined in my **reducer** class, we can monitor the success of each action and exceute some specific code after that (like display a success message and/or come back to the home page).
+
+See next diagram:
+
+![Flow Diagram](https://github.com/yduartep/angular-full-sample/blob/IT1/ngrx_integration/documentation/diagram-ngrx.png)
+
+## 14. Not found component
 The application include a 'Not-Found' component inside the 'Shared' module that will be displayed in the case the user type an invalid route in the browser.
 
-## 14. TSLint integration
+## 15. TSLint integration
 To check if the application have quality errors execute the following command:
 
 ```
@@ -487,7 +549,7 @@ npm run lint
 
 More Info: http://blog.rangle.io/understanding-the-real-advantages-of-using-eslint/
 
-## 15. Unit and Functional test
+## 16. Unit and Functional test
 The project have some predefined unit tests defined in the files '.spec' related of each service and component and the functional test should be implemented in the 'e2e' folder outside of the app.
 
 - To run then unit tests execute the command:
@@ -504,7 +566,7 @@ More Info:
 - https://angular.io/docs/ts/latest/guide/testing.html
 - https://blog.jscrambler.com/getting-started-with-angular-2-end-to-end-testing/
 
-## 16. Cache Services
+## 17. Cache Services
 The application include a '**Cache Service**' defined in `/core/services/cached.service.ts` that fetch information just the first time and the rest of the time return the cached information. If I want to define a service that cache the information returned, just extends your service from the 'CacheService' class:
 
 ```

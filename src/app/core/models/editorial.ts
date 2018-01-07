@@ -1,6 +1,4 @@
-import {EditorialType} from './editorial-type.enum';
+import {KeyText} from './key-text';
 
-export class Editorial {
-  constructor(public id: EditorialType, public text: string) {
-  }
+export class Editorial extends KeyText<number> {
 }

@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 export interface ValidationResult {
   validator: string | boolean;

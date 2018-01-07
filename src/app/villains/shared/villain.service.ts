@@ -1,14 +1,14 @@
 import {Injectable, Inject} from '@angular/core';
-import {Http} from '@angular/http';
 
 import {Villain} from './villain';
 import {ApiConfig} from '../../core/models/api-config';
 import {BaseService} from '../../core/services/base.service';
 import {CommonUtil} from '../../core/utilities/common.util';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class VillainService extends BaseService<Villain> {
-  constructor(protected http: Http, @Inject('api.config') protected apiConfig: ApiConfig) {
+  constructor(protected http: HttpClient, @Inject('api.config') protected apiConfig: ApiConfig) {
     super(http);
   }
 

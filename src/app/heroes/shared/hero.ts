@@ -1,9 +1,7 @@
-import {Editorial} from '../../core/models/editorial';
-
 export class Hero {
   constructor(public id: number,
               public name: string,
-              public editorial: Editorial,
+              public editorial: number,
               public image: string,
               public creationDate: Date = new Date()) {
   }

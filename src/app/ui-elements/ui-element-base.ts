@@ -9,7 +9,7 @@ import {
   RequiredValidator,
 } from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-
+import 'rxjs/add/observable/empty';
 import {ValidationService} from '../core/services/validation.service';
 import {ValueAccessorBase} from './value-accessor';
 
@@ -32,17 +32,17 @@ export abstract class UIElementBase<T> extends ValueAccessorBase<T> implements O
    * The visualization mode. By default in EDIT mode is displayed
    * @type {Mode}
    */
-  @Input() mode: Mode = Mode.EDIT;
+  @Input() protected mode: Mode = Mode.EDIT;
 
   /**
    * The identifier of the field that will be used as formControlName
    */
-  @Input() public id = `txt-${indexId++}`;
+  @Input() protected id = `txt-${indexId++}`;
 
   /**
    * The title of the field
    */
-  @Input() public title: string;
+  @Input() protected title: string;
 
   /**
    * The custom messages for specific validations

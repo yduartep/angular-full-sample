@@ -1,23 +1,11 @@
-import {
-  Component,
-  Optional,
-  Inject, Input, EventEmitter, AfterViewInit
-} from '@angular/core';
-
-import {
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS, RequiredValidator,
-} from '@angular/forms';
-
+import {AfterViewInit, Component, EventEmitter, Inject, Input, Optional} from '@angular/core';
+import {NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ValidationService} from '../../core/services/validation.service';
 import {UIElementBase} from '../ui-element-base';
-import {animations} from '../animations';
 
 @Component({
   selector: 'ui-input',
   templateUrl: './ui-input.html',
-  animations,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: UIInputComponent,

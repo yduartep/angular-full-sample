@@ -1,5 +1,5 @@
 {
-  "appTitle": "Full sample application in Angular 4!!!",
+  "appTitle": "Full sample application in Angular 5!!!",
   "back": "Back",
   "reset": "Reset",
   "aboutUs": "About us",
@@ -72,7 +72,8 @@
     "insertOkMsg": "The hero was created successfully!!",
     "insertErrMsg": "Error while trying to insert the new hero",
     "editOkMsg": "The hero was updated successfully!!",
-    "editErrMsg": "Error while trying to update the hero"
+    "editErrMsg": "Error while trying to update the hero",
+    "loadErrMsg": "Error while loading the list of heroes"
   },
   "villains": {
     "detail-title": "Villain details",

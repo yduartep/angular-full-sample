@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import {Http} from '@angular/http';
 
 // translate
 import {createTranslateLoader} from './app.translate.factory';

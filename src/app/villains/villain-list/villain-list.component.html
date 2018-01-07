@@ -3,28 +3,28 @@
     <h1>{{ 'villains.list-title' | translate }}</h1>
   </div>
   <div class="col-sm-4">
-    <app-villain-search (onSearch)="onSearchText($event)"></app-villain-search>
+    <app-villain-search (search)="onSearchText($event)"></app-villain-search>
   </div>
 </div>
 <table class="table table-striped">
   <thead>
-    <tr>
-      <th></th>
-      <th>{{ 'villains.columns.preview' | translate}}</th>
-      <th>{{ 'villains.columns.name' | translate}}</th>
-      <th>{{ 'villains.columns.editorial' | translate}}</th>
-    </tr>
+  <tr>
+    <th></th>
+    <th>{{ 'villains.columns.preview' | translate}}</th>
+    <th>{{ 'villains.columns.name' | translate}}</th>
+    <th>{{ 'villains.columns.editorial' | translate}}</th>
+  </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let villain of villains | async">
-      <td>
-        <button routerLink="/villains/detail/{{villain.id}}" class="btn btn-secondary btn-sm">
-          <i class="fa fa-search"></i>
-        </button>
-      </td>
-      <td><img src="assets/images/{{villain.image}}" alt="{{villain.name}}" width="60px" height="60px" /></td>
-      <td>{{villain.name}}</td>
-      <td>{{villain.editorial.text}}</td>
-    </tr>
+  <tr *ngFor="let villain of villains | async; trackBy: trackById">
+    <td>
+      <button routerLink="/villains/detail/{{villain.id}}" class="btn btn-secondary btn-sm">
+        <i class="fa fa-search"></i>
+      </button>
+    </td>
+    <td><img src="assets/images/{{villain.image}}" alt="{{villain.name}}" width="60px" height="60px"/></td>
+    <td>{{villain.name}}</td>
+    <td>{{villain.editorial | description : (editorials | async)}}</td>
+  </tr>
   </tbody>
 </table>

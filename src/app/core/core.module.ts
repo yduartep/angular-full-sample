@@ -1,5 +1,4 @@
 import {NgModule, Optional, SkipSelf, ErrorHandler} from '@angular/core';
-import {Http} from '@angular/http';
 
 // modules
 import {SharedModule} from '../shared/shared.module';
@@ -35,6 +34,7 @@ import {EditorialService} from './services/editorial.service';
 import {authFactory} from './factories/auth.factory';
 import {loggerFactory} from './factories/logger.factory';
 import {errorHandlerFactory} from './factories/error-handler.factory';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -68,7 +68,7 @@ import {errorHandlerFactory} from './factories/error-handler.factory';
     LoginGuard,
     AuthHelper,
     {provide: ErrorHandler, useFactory: errorHandlerFactory},
-    {provide: 'AuthService', useFactory: authFactory, deps: [Http, AuthHelper]},
+    {provide: 'AuthService', useFactory: authFactory, deps: [HttpClient, AuthHelper]},
     {provide: 'LoggerService', useFactory: loggerFactory},
     BroadcasterService,
     ValidationService,

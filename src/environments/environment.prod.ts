@@ -7,7 +7,7 @@ import {AuthScheme} from '../app/core/models/auth-scheme.enum';
 
 const server = '/gateway-bo/';
 export const environment = {
-  appName: 'My Demo Application',
+  appName: 'Angular Demo Application',
   production: true,
   envName: 'prod',
   buildVersion: '{BUILD_VERSION}',

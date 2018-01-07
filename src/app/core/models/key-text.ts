@@ -1,3 +1,4 @@
-export class KeyText {
-    constructor(public id: number, public text: string, public selected = false) { }
+export class KeyText<T> {
+  constructor(public id: T, public text: string, selected?: boolean) {
+  }
 }

@@ -1,10 +1,13 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 import {Villain} from '../shared/villain';
 import {VillainSearchService} from './villains-search.service';
 
+// observables
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 import {Subject} from 'rxjs/Subject';
 
 @Component({
@@ -18,7 +21,7 @@ export class VillainSearchComponent {
   model: string;
 
   @Output()
-  onSearch: EventEmitter<Villain[]> = new EventEmitter<Villain[]>();
+  search: EventEmitter<Villain[]> = new EventEmitter<Villain[]>();
 
   constructor(private service: VillainSearchService) {
     this.searchTerms$
@@ -26,7 +29,7 @@ export class VillainSearchComponent {
       .distinctUntilChanged()
       .switchMap(terms => this.service.search(terms))
       .subscribe(results => {
-        this.onSearch.emit(results);
+        this.search.emit(results);
       });
   }
 }
