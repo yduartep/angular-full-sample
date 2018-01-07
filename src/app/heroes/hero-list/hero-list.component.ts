@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject, ChangeDetectionStrategy} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
 // observable
@@ -29,7 +29,8 @@ import {EditorialService} from '../../core/services/editorial.service';
 @Component({
   selector: 'app-hero-list',
   templateUrl: './hero-list.component.html',
-  styleUrls: ['./hero-list.component.css']
+  styleUrls: ['./hero-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroListComponent implements OnInit {
   heroes: Observable<Hero[]>;
@@ -74,5 +75,15 @@ export class HeroListComponent implements OnInit {
    */
   onOkDelete(id) {
     this.store.dispatch(new heroActions.RemoveHero(id));
+  }
+
+  /**
+   * The track by function
+   *
+   * @param index the index
+   * @param item the item
+   */
+  trackById(index, item) {
+    return item.id;
   }
 }

@@ -1,16 +1,19 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
-
 // NgRx
 import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
 import {GetAllHeroes} from './store/heroes.actions';
 import {
-  isCreated, getCreateError, isDeleted, getDeleteError,
-  getHeroesError, isUpdated, getUpdateError
+  getCreateError,
+  getDeleteError,
+  getHeroesError,
+  getUpdateError,
+  isCreated,
+  isDeleted,
+  isUpdated
 } from './store/heroes.reducers';
-
 // model & services
 import {MessageService} from '../modal-message/message.service';
 import {AlertService} from '../core/alert/alert.service';
@@ -42,7 +45,12 @@ export class HeroesComponent implements OnInit {
     // subscriptions when success or error action
     this.store.select(getHeroesError).subscribe((error) => this.loadingError(error));
     this.store.select(isDeleted).subscribe((done) => {
-      this.actionSuccess(done, 'heroes.deleteOkMsg');
+      if (this.router.url === '/heroes') {
+        // not change page
+        this.actionSuccess(done, 'heroes.deleteOkMsg', false);
+      } else {
+        this.actionSuccess(done, 'heroes.deleteOkMsg');
+      }
     });
     this.store.select(getDeleteError).subscribe((error) => {
       this.actionError(error, 'heroes.deleteErrMsg');
@@ -78,12 +86,16 @@ export class HeroesComponent implements OnInit {
    * Display success message after execute specific action over the hero
    * @param done true if action was completed or false
    * @param message the message to be displayed
+   * @param goHome determine if redirect to the home page or not
    */
-  actionSuccess(done: boolean, message: string) {
+  actionSuccess(done: boolean, message: string, goHome: boolean = true) {
     if (done) {
       this.translate.get(message).subscribe(text => {
         this.messageService.showMessage(new Message(text, MessageStatus.SUCCESS));
-        this.router.navigate(['/heroes']);
+
+        if (goHome) {
+          this.router.navigate(['/heroes']);
+        }
       });
     }
   }

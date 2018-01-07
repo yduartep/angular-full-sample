@@ -16,7 +16,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let villain of villains | async">
+  <tr *ngFor="let villain of villains | async; trackBy: trackById">
     <td>
       <button routerLink="/villains/detail/{{villain.id}}" class="btn btn-secondary btn-sm">
         <i class="fa fa-search"></i>

@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject, ChangeDetectionStrategy} from '@angular/core';
 
 // observable
 import 'rxjs/add/operator/map';
@@ -21,7 +21,8 @@ import {getAllVillains} from '../store/villains.reducers';
 @Component({
   selector: 'app-villain-list',
   templateUrl: './villain-list.component.html',
-  styleUrls: ['./villain-list.component.css']
+  styleUrls: ['./villain-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VillainListComponent implements OnInit {
   villains: Observable<Villain[]>;
@@ -40,5 +41,15 @@ export class VillainListComponent implements OnInit {
 
   onSearchText(result: Villain[]) {
     this.villains = Observable.of(result);
+  }
+
+  /**
+   * The track by function
+   *
+   * @param index the index
+   * @param item the item
+   */
+  trackById(index, item) {
+    return item.id;
   }
 }

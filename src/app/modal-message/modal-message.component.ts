@@ -142,6 +142,7 @@ export class ModalMessageComponent implements OnInit {
 
     // additional to avoid the bug that the body remain with class modal-open and the scroll hidden
     document.body.classList.remove('modal-open');
+    document.body.removeAttribute('style');
   }
 
   /**
