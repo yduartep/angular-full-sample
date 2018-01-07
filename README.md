@@ -46,7 +46,7 @@ Full sample application built with Angular 4 that follows all steps of [Angular 
     - [How to create a new Logger system:](#how-to-create-a-new-logger-system)
   - [12. Incorporated automatic handle errors](#12-incorporated-automatic-handle-errors)
     - [How to create a new ErrorHandler:](#how-to-create-a-new-errorhandler)
-  - [13. How to apply NGRX on CRUD operations of a module](#13-how-to=apply-ngrx-on-crud-operations-of-a-module)  
+  - [13. How to apply NGRX on CRUD operations of a module](#13-how-to-apply-ngrx-on-crud-operations-of-a-module)  
   - [14. Not found component](#13-not-found-component)
   - [15. TSLint integration](#14-tslint-integration)
   - [15. Unit and Functional test](#15-unit-and-functional-test)
