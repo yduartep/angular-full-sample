@@ -3,6 +3,7 @@
 Full sample application built with Angular 4 that follows all steps of [Angular Style Guide](https://angular.io/guide/styleguide). Include:
 - **Lazy loading** of modules.
 - **Ngrx** integration using store / effects / selectors.
+- keeping track of *ngFor* using the **trackBy** property in all list.
 - **Api rest configurations** by environment.
 - Integrated with [ngx-translate](http://www.ngx-translate.com/) module.
 - Backend mocked with [json-server](https://github.com/typicode/json-server) and [faker.js](https://github.com/marak/Faker.js/). 
