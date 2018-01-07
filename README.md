@@ -477,7 +477,46 @@ The 'Core' module contains also a '**Simple Error Handler**' that implements the
 More Info: https://netbasal.com/angular-2-custom-exception-handler-1bcbc45c3230
 
 ## 13. How to apply NGRX on CRUD operations of a module
-TODO
+- Each module have a folder **store** where will be saved the **actions** (heroes.actions.ts), **effects** (heroes.effects.ts) and **reducers** (heroes.reducers.ts).
+
+- In the module class (heroes.module.ts) are imported the reducers to be called by each feature using the class **StoreModule** and also the **EffectsModule**.
+
+```
+export const reducers: ActionReducerMap<any> = {
+  heroes: heroReducer.reducer
+};
+
+@NgModule({
+  imports: [
+    ...
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([HeroEffects])
+  ],...
+})
+export class HeroesModule {}
+```
+
+- In the main component of the specific module (*heroes.component.ts*), I have centralized all the actions to be executed when a CRUD operation has successfully finish or the error thrown using a subscription to the specific select defined in the reducer:
+
+```
+this.store.select(isDeleted).subscribe((deleted) => {
+    this.actionSuccess(...);
+});
+this.store.select(getDeleteError).subscribe((error) => {
+    this.actionError(...);
+});
+    
+```
+
+### How to EDIT a hero using Ngrx/store & Effects:
+1. To edit a hero, the system **dispatch** an event with the action **"UPDATE_HERO"**.
+2. The **reducer** related to the module **heroes** is executed and the state is changed updating the information of specific hero.
+3. An **“ngrx effect”** class is implemented (HeroEffects) by module and will be triggered when we dispatch actions with the store.
+4. Using some selectors defined in my **reducer** class, we can monitor the success of each action and exceute some specific code after that (like display a success message and/or come back to the home page).
+
+See next diagram:
+
+![Flow Diagram](https://github.com/yduartep/angular-full-sample/blob/master/Diagram%20ngrx.png)
 
 ## 14. Not found component
 The application include a 'Not-Found' component inside the 'Shared' module that will be displayed in the case the user type an invalid route in the browser.
