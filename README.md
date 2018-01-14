@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.org/yduartep/angular-full-sample.svg?branch=master)
+
 # Getting Started
 
 Full sample application built with Angular 4 that follows all steps of [Angular Style Guide](https://angular.io/guide/styleguide). Include:
