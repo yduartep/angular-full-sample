@@ -13,10 +13,10 @@ import {AuthScheme} from '../app/core/models/auth-scheme.enum';
 const server = 'http://localhost:3000/';
 
 export const environment = {
-  appName: 'My Mocked Demo Application',
+  appName: 'Angular Demo Application',
   production: false,
   envName: 'mock',
-  buildVersion: '1.0.0-SNAPSHOT',
+  buildVersion: '2.0.0-SNAPSHOT',
   buildTimestamp: new Date().toISOString(),
   defaultLanguage: 'en',
   apiConfig: {

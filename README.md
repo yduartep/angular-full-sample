@@ -3,6 +3,7 @@
 Full sample application built with Angular 4 that follows all steps of [Angular Style Guide](https://angular.io/guide/styleguide). Include:
 - **Lazy loading** of modules.
 - **Ngrx** integration using store / effects / selectors.
+- Use of **Service Worker** on production environment for HTTP caching.
 - keeping track of *ngFor* using the **trackBy** property in all list.
 - **Api rest configurations** by environment.
 - Integrated with [ngx-translate](http://www.ngx-translate.com/) module.

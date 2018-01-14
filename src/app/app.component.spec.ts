@@ -1,9 +1,7 @@
-import {TestBed, async} from '@angular/core/testing';
+import {async, TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_BASE_HREF, CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {APP_BASE_HREF} from '@angular/common';
 import {StoreModule} from '@ngrx/store';
 import {RouterModule} from '@angular/router';
 import {EffectsModule} from '@ngrx/effects';
@@ -12,8 +10,10 @@ import {CoreModule} from './core/core.module';
 import {MocksUtil} from './core/utilities/mocks.util';
 import {MessageService} from './modal-message/message.service';
 import {TranslateModule} from '@ngx-translate/core';
+import {ServiceWorkerModule, SwUpdate} from '@angular/service-worker';
 
 describe('AppComponent', () => {
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -23,7 +23,8 @@ describe('AppComponent', () => {
         TranslateModule.forRoot(),
         RouterModule.forRoot([]),
         StoreModule,
-        EffectsModule
+        EffectsModule,
+        ServiceWorkerModule.register('./ngsw-worker.js', {enabled: false})
       ],
       declarations: [
         AppComponent
@@ -32,7 +33,8 @@ describe('AppComponent', () => {
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: 'api.config', useValue: MocksUtil.createMockedApiConfig()},
         {provide: 'defaultLanguage', useValue: 'en'},
-        MessageService
+        MessageService,
+        SwUpdate
       ]
     }).compileComponents();
   }));

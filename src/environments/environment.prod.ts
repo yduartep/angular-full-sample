@@ -5,13 +5,13 @@ import {ErrorHandlerTypes} from '../app/core/factories/error-handler.type';
 import {LoggerTypes} from '../app/core/factories/logger.type';
 import {AuthScheme} from '../app/core/models/auth-scheme.enum';
 
-const server = '/gateway-bo/';
+const server = 'http://localhost:3000/';
 export const environment = {
   appName: 'Angular Demo Application',
   production: true,
   envName: 'prod',
-  buildVersion: '{BUILD_VERSION}',
-  buildTimestamp: '{BUILD_TIMESTAMP}',
+  buildVersion: '2.0.0',
+  buildTimestamp: new Date().toISOString(),
   defaultLanguage: 'en',
   apiConfig: {
     apiEnv: 'prod',

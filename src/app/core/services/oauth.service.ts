@@ -29,9 +29,14 @@ export class OAuthService implements AuthService {
       const expiresIn = userData.expires_in || this.apiConfig.timeExpired;
 
       // add access token when mock environment
-      if (this.apiConfig.apiEnv === 'mock') {
-        userData.access_token = '12345-67890-5555';
-        userData.token_type = 'bearer';
+      if (!userData.access_token && !userData.token_type) {
+        userData = {
+          'access_token': 'a61afd98-8e9e-4f16-9366-31abcc0bb522',
+          'token_type': 'bearer',
+          'refresh_token': 'a61afd98-8e9e-4f16-9366-31abcc0bb522',
+          'expires_in': 43199,
+          'scope': 'openid'
+        };
       }
 
       // login successful if there's a jwt token in the response

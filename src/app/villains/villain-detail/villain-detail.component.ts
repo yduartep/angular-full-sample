@@ -47,6 +47,7 @@ export class VillainDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.alertService.clear();
     this.route.params.subscribe(params => {
       this.store.dispatch(new GetVillain(+params['id']));
     });

@@ -6,7 +6,7 @@
     "i18n": "menu.heroes"
   },
   {
-    "title": "villains",
+    "title": "Villains",
     "action": "/villains",
     "icon": "fa-user-secret",
     "i18n": "menu.villains"
