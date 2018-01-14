@@ -9,6 +9,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './app-routing.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 // components
 import {AppComponent} from './app.component';
@@ -35,7 +36,8 @@ import {HttpClient} from '@angular/common/http';
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
     {provide: 'api.config', useValue: environment.apiConfig},

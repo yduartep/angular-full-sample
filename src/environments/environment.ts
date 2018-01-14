@@ -16,7 +16,7 @@ export const environment = {
   appName: 'Angular Demo Application',
   production: false,
   envName: 'dev',
-  buildVersion: '1.0.0-SNAPSHOT',
+  buildVersion: '2.0.0-SNAPSHOT',
   buildTimestamp: new Date().toISOString(),
   defaultLanguage: 'en',
   apiConfig: {

@@ -32,17 +32,17 @@ export abstract class UIElementBase<T> extends ValueAccessorBase<T> implements O
    * The visualization mode. By default in EDIT mode is displayed
    * @type {Mode}
    */
-  @Input() protected mode: Mode = Mode.EDIT;
+  @Input() mode: Mode = Mode.EDIT;
 
   /**
    * The identifier of the field that will be used as formControlName
    */
-  @Input() protected id = `txt-${indexId++}`;
+  @Input() id = `txt-${indexId++}`;
 
   /**
    * The title of the field
    */
-  @Input() protected title: string;
+  @Input() title: string;
 
   /**
    * The custom messages for specific validations
