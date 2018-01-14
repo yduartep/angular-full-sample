@@ -33,7 +33,7 @@
       "urls": [
         "/heroes",
         "/villains",
-        "editorials"
+        "/editorials"
       ],
       "cacheConfig": {
         "strategy": "freshness",
