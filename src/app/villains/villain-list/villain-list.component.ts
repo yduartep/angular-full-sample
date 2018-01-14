@@ -12,6 +12,7 @@ import {Villain} from '../shared/villain';
 // services
 import {LoggerService} from '../../core/services/logger.service';
 import {EditorialService} from '../../core/services/editorial.service';
+import {AlertService} from '../../core/alert/alert.service';
 
 // NgRx
 import {AppState} from '../../app.state';
@@ -30,10 +31,12 @@ export class VillainListComponent implements OnInit {
 
   constructor(@Inject('LoggerService') private loggerService: LoggerService,
               private editorialService: EditorialService,
+              private alertService: AlertService,
               private store: Store<AppState>) {
   }
 
   ngOnInit() {
+    this.alertService.clear();
     this.loggerService.log('... initializing Villain list component.');
     this.editorials = this.editorialService.findAll();
     this.villains = this.store.select(getAllVillains);

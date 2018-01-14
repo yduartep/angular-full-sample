@@ -97,6 +97,7 @@
     },
     "confirmDeleteMsg": "Are you sure do you want to delete this villain?",
     "deleteOkMsg": "The villain was deleted successfully!",
-    "deleteErrMsg": "Error while deleting the villain!"
+    "deleteErrMsg": "Error while deleting the villain!",
+    "loadErrMsg": "Error while loading the list of villains"
   }
 }

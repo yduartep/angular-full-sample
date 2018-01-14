@@ -4,15 +4,16 @@
     {
       "name": "app",
       "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
           "/index.html"
         ],
         "versionedFiles": [
-          "/*.bundle.css",
-          "/*.bundle.js",
-          "/*.chunk.js"
+          "/**/*.bundle.css",
+          "/**/*.bundle.js",
+          "/**/*.chunk.js"
         ]
       }
     },

@@ -74,6 +74,7 @@ export class HeroesComponent implements OnInit {
    */
   loadingError(error) {
     if (error) {
+      this.alertService.clear();
       const key = 'heroes.loadErrMsg';
       this.translate.get(key).subscribe(text => {
         this.alertService.error(key, {}, text);
@@ -108,6 +109,7 @@ export class HeroesComponent implements OnInit {
   actionError(error, message: string) {
     if (error) {
       this.translate.get(message).subscribe(text => {
+        this.alertService.clear();
         this.alertService.error(message, {}, text);
         window.scrollTo(0, 0);
       });

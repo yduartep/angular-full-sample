@@ -37,7 +37,7 @@ import {HttpClient} from '@angular/common/http';
         deps: [HttpClient]
       }
     }),
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('./ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
     {provide: 'api.config', useValue: environment.apiConfig},
