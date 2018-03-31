@@ -17,7 +17,7 @@ import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 @Component({
   selector: 'ui-datepicker',
   templateUrl: './ui-datepicker.component.html',
-  styleUrls: ['./ui-datepicker.component.css'],
+  styleUrls: ['./ui-datepicker.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: UIDatePickerComponent,

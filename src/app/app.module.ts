@@ -3,8 +3,8 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 // translate
 import {createTranslateLoader} from './app.translate.factory';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 // modules
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
@@ -19,7 +19,6 @@ import {MessageService} from './modal-message/message.service';
 
 // factories and configurations
 import {environment} from '../environments/environment';
-import {HttpClient} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,7 @@ import {HttpClient} from '@angular/common/http';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: createTranslateLoader,
+        useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
     }),

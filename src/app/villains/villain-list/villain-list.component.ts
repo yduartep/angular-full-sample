@@ -22,7 +22,7 @@ import {getAllVillains} from '../store/villains.reducers';
 @Component({
   selector: 'app-villain-list',
   templateUrl: './villain-list.component.html',
-  styleUrls: ['./villain-list.component.css'],
+  styleUrls: ['./villain-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VillainListComponent implements OnInit {

@@ -46,24 +46,36 @@ export class MocksUtil {
    * Create a mocked list of heroes
    */
   static createMockedHeroes(): Hero[] {
-    const result: Hero[] = [];
-    for (let i = 1; i <= 3; i++) {
-      const data = new Hero(i, 'Hero ' + i, 1, 'image ' + i + '.png');
-      result.push(data);
-    }
-    return result;
+    const data: Hero[] = [
+      {'id': 1, 'name': 'Spider-Man', 'editorial': 1, 'image': 'spider-man.PNG', creationDate: new Date()},
+      {'id': 2, 'name': 'Iron Man', 'editorial': 1, 'image': 'iron-man.PNG', creationDate: new Date()},
+      {'id': 3, 'name': 'Captain America', 'editorial': 1, 'image': 'captain-america.PNG', creationDate: new Date()},
+      {'id': 4, 'name': 'Deadpool', 'editorial': 1, 'image': 'deadpool.PNG', creationDate: new Date()},
+      {'id': 5, 'name': 'Hulk', 'editorial': 1, 'image': 'hulk.PNG', creationDate: new Date()},
+      {'id': 6, 'name': 'Thor', 'editorial': 1, 'image': 'thor.PNG', creationDate: new Date()},
+      {'id': 7, 'name': 'Flash', 'editorial': 2, 'image': 'flash.PNG', creationDate: new Date()},
+      {'id': 8, 'name': 'Batman', 'editorial': 2, 'image': 'batman.PNG', creationDate: new Date()},
+      {'id': 9, 'name': 'Wonder Woman', 'editorial': 2, 'image': 'wonder-woman.PNG', creationDate: new Date()},
+      {'id': 10, 'name': 'Superman', 'editorial': 2, 'image': 'superman.PNG', creationDate: new Date()},
+      {'id': 11, 'name': 'Cyborg', 'editorial': 2, 'image': 'cyborg.PNG', creationDate: new Date()}
+    ];
+    return data;
   }
 
   /**
    * Create a mocked list of villains
    */
   static createMockedVillains(): Villain[] {
-    const result: Villain[] = [];
-    for (let i = 1; i <= 3; i++) {
-      const data = new Villain(i, 'Villain ' + i, 1, 'image ' + i + '.png');
-      result.push(data);
-    }
-    return result;
+    const data: Villain[] = [
+      {'id': 1, 'name': 'Magneto', 'editorial': 1, 'image': 'magneto.PNG'},
+      {'id': 2, 'name': 'Venon', 'editorial': 1, 'image': 'venon.PNG'},
+      {'id': 3, 'name': 'Ultron', 'editorial': 1, 'image': 'ultron.PNG'},
+      {'id': 4, 'name': 'Joker', 'editorial': 2, 'image': 'joker.PNG'},
+      {'id': 5, 'name': 'Ras Al Ghul', 'editorial': 2, 'image': 'rasalghul.PNG'},
+      {'id': 6, 'name': 'Mr. Freeze', 'editorial': 2, 'image': 'freeze.PNG'},
+      {'id': 7, 'name': 'Scarecrow', 'editorial': 2, 'image': 'scarecrow.PNG'}
+    ];
+    return data;
   }
 
 }

@@ -17,7 +17,7 @@ import {GetAllVillains} from './store/villains.actions';
 import {getDeleteError, getVillainsError, isDeleted} from './store/villains.reducers';
 
 @Component({
-  styleUrls: ['./villains.component.css'],
+  styleUrls: ['./villains.component.scss'],
   template: `
     <router-outlet></router-outlet>`
 })

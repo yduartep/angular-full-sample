@@ -47,10 +47,10 @@ describe('VillainsService', () => {
 
   it('should get list of all villains', async(() => {
     service.findAll().subscribe((data: Villain[]) => {
-      expect(data.length).toBe(3);
-      expect(data[0].id).toBe(1);
-      expect(data[0].name).toBe('Villain 1');
-      expect(data[0].image).toBe('image 1.png');
+      expect(data.length).toBe(mockResponse.length);
+      expect(data[0].id).toBe(mockResponse[0].id);
+      expect(data[0].name).toBe(mockResponse[0].name);
+      expect(data[0].image).toBe(mockResponse[0].image);
     });
 
     const req = httpMock.expectOne(service.getServiceUrl());
@@ -63,9 +63,9 @@ describe('VillainsService', () => {
 
     service.findById(id).subscribe((response: Villain) => {
       expect(response.id).toBe(id);
-      expect(response.name).toBe('Villain 1');
-      expect(response.image).toBe('image 1.png');
-      expect(response.editorial).toBe(1);
+      expect(response.name).toBe(mockResponse[0].name);
+      expect(response.image).toBe(mockResponse[0].image);
+      expect(response.editorial).toBe(mockResponse[0].editorial);
     });
 
     const req = httpMock.expectOne(`${service.getServiceUrl()}/${id}`);

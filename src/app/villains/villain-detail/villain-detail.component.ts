@@ -31,7 +31,7 @@ import {getVillain} from '../store/villains.reducers';
 @Component({
   selector: 'app-villain-detail',
   templateUrl: './villain-detail.component.html',
-  styleUrls: ['./villain-detail.component.css']
+  styleUrls: ['./villain-detail.component.scss']
 })
 export class VillainDetailComponent implements OnInit {
   villain: Observable<Villain>;

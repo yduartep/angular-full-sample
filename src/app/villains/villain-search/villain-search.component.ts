@@ -13,7 +13,7 @@ import {Subject} from 'rxjs/Subject';
 @Component({
   selector: 'app-villain-search',
   templateUrl: './villain-search.component.html',
-  styleUrls: ['./villain-search.component.css'],
+  styleUrls: ['./villain-search.component.scss'],
   providers: [VillainSearchService]
 })
 export class VillainSearchComponent {

@@ -22,7 +22,7 @@ import {getHero} from '../store/heroes.reducers';
 @Component({
   selector: 'app-hero-edit',
   templateUrl: './hero-edit.component.html',
-  styleUrls: ['./hero-edit.component.css']
+  styleUrls: ['./hero-edit.component.scss']
 })
 export class HeroEditComponent extends UIFormComponent implements OnInit {
   @Input() mode: Mode = Mode.EDIT;
@@ -50,7 +50,7 @@ export class HeroEditComponent extends UIFormComponent implements OnInit {
 
     this.store.select(getHero).subscribe(hero => {
       if (hero != null) {
-        this.hero = hero;
+        this.hero = {...hero};
       }
     });
   }
@@ -89,8 +89,6 @@ export class HeroEditComponent extends UIFormComponent implements OnInit {
    * Reset all fields in the form
    */
   reset() {
-    this.hero.editorial = -1;
-    this.hero.name = '';
-    this.hero.creationDate = null;
+    this.hero = {...this.hero, editorial: -1, name: '', creationDate: null};
   }
 }

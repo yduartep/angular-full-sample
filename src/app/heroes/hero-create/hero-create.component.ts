@@ -23,7 +23,7 @@ import {AppState} from '../../app.state';
 @Component({
   selector: 'app-hero-create',
   templateUrl: './hero-create.component.html',
-  styleUrls: ['./hero-create.component.css']
+  styleUrls: ['./hero-create.component.scss']
 })
 export class HeroCreateComponent extends UIFormComponent {
   @Input() mode: Mode = Mode.CREATE;

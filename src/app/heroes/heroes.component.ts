@@ -22,7 +22,7 @@ import {MessageStatus} from '../modal-message/message-status';
 
 
 @Component({
-  styleUrls: ['./heroes.component.css'],
+  styleUrls: ['./heroes.component.scss'],
   template: `
     <router-outlet></router-outlet>`
 })

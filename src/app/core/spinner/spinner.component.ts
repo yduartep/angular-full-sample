@@ -6,7 +6,7 @@ import { SpinnerState, SpinnerService } from './spinner.service';
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.css']
+  styleUrls: ['./spinner.component.scss']
 })
 export class SpinnerComponent implements OnDestroy, OnInit {
     visible = false;
