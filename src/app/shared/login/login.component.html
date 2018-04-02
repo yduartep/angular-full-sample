@@ -6,27 +6,50 @@
       </div>
     </div>
     <div class="form-group">
-      <ui-input required
-                [dataErrorRequired]="'validations.required.username' | translate"
-                id="username"
-                placeholder="{{'login.placeholders.username' | translate }}"
-                title="{{ 'login.label-username' | translate }}"
-                [mode]="mode"
-                [(ngModel)]="username"
-                [ngModelOptions]="{standalone: true}"
-                [focus]="true">
-      </ui-input>
+      <!--<ui-input required-->
+      <!--[dataErrorRequired]="'validations.required.username' | translate"-->
+      <!--id="username"-->
+      <!--placeholder="{{'login.placeholders.username' | translate }}"-->
+      <!--title="{{ 'login.label-username' | translate }}"-->
+      <!--[mode]="mode"-->
+      <!--[(ngModel)]="username"-->
+      <!--[ngModelOptions]="{standalone: true}"-->
+      <!--[focus]="true">-->
+      <!--</ui-input>-->
+      <label class="control-label col-sm-3" [attr.for]="id">{{ 'login.label-username' | translate }}*:</label>
+      <div class="col-sm-5">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="username"
+          id="username" name="username"
+          title="{{ 'login.label-username' | translate }}"
+          placeholder="{{'login.placeholders.username' | translate }}"
+        />
+      </div>
     </div>
     <div class="form-group">
-      <ui-password required
-                   [dataErrorRequired]="'validations.required.password' | translate"
-                   id="password"
-                   placeholder="{{'login.placeholders.password' | translate }}"
-                   title="{{'login.label-password' | translate }}"
-                   [mode]="mode"
-                   [(ngModel)]="password"
-                   [ngModelOptions]="{standalone: true}">
-      </ui-password>
+      <!--TODO re-define dinamic input with validations-->
+      <!--<ui-password required-->
+                   <!--[dataErrorRequired]="'validations.required.password' | translate"-->
+                   <!--id="password"-->
+                   <!--placeholder="{{'login.placeholders.password' | translate }}"-->
+                   <!--title="{{'login.label-password' | translate }}"-->
+                   <!--[mode]="mode"-->
+                   <!--[(ngModel)]="password"-->
+                   <!--[ngModelOptions]="{standalone: true}">-->
+      <!--</ui-password>-->
+      <label class="control-label col-sm-3" [attr.for]="password">{{ 'login.label-password' | translate }}*:</label>
+      <div class="col-sm-5">
+        <input
+          type="password"
+          class="form-control"
+          [(ngModel)]="password"
+          id="password" name="password"
+          title="{{ 'login.label-password' | translate }}"
+          placeholder="{{'login.placeholders.password' | translate }}"
+        />
+      </div>
     </div>
     <div class="form-group">
       <div class="col-sm-9 pull-right">

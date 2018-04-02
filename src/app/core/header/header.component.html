@@ -6,7 +6,7 @@
     </div>
     <div class="col-xs-2" *ngIf="getUser()">
       <i class="fa fa-user" aria-hidden="true"></i> {{getUser()}} |
-      <a (click)="onLogout()">{{'logout' | translate}}</a>
+      <a id="linkLogout" (click)="onLogout()">{{'logout' | translate}}</a>
     </div>
     <div class="col-xs-2 pull-right" *ngIf="isActive()">
       <app-language-selector></app-language-selector>
