@@ -1,29 +1,32 @@
-import {Component, OnInit, AfterViewInit, Inject, EventEmitter} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../core/services/auth.service';
-import {UIFormComponent} from '../../ui-elements/ui-form';
-import {ValidationService} from '../../core/services/validation.service';
-import {Mode} from '../../core/models/mode.enum';
 import {TranslateService} from '@ngx-translate/core';
 import {AlertService} from '../../core/alert/alert.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponent extends UIFormComponent implements OnInit {
+export class LoginComponent implements OnInit {
   loading = false;
   username: string;
   password: string;
-  mode = Mode.EDIT;
+  frmLogin: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private translate: TranslateService,
               private alertService: AlertService,
               @Inject('AuthService') private authService: AuthService,
-              validation: ValidationService) {
-    super(validation);
+              private fb: FormBuilder) {
+
+    this.frmLogin = this.fb.group({
+      username: '',
+      password: ''
+    });
   }
 
   ngOnInit() {
@@ -31,12 +34,8 @@ export class LoginComponent extends UIFormComponent implements OnInit {
     this.authService.logout();
   }
 
-  isLoginEnable() {
-    return !this.loading && this.validate();
-  }
-
   onLogin() {
-    if (this.validate()) {
+    if (!this.frmLogin.invalid) {
       this.doLogin();
     }
   }

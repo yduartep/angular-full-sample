@@ -12,6 +12,7 @@ import {PageNotFoundComponent} from './not-found/not-found.component';
 
 // services
 import {ModalMessageComponent} from '../modal-message/modal-message.component';
+import {ValidationMessageComponent} from '../validation-message/validation-message.component';
 import {UIElementsModule} from '../ui-elements/ui-elements.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './token.interceptor';
@@ -35,6 +36,7 @@ import {DescriptionPipe} from './description.pipe';
     LoginComponent,
     PageNotFoundComponent,
     ModalMessageComponent,
+    ValidationMessageComponent,
     DescriptionPipe
   ],
   providers: [
@@ -62,6 +64,7 @@ import {DescriptionPipe} from './description.pipe';
     LoginComponent,
     PageNotFoundComponent,
     ModalMessageComponent,
+    ValidationMessageComponent,
     DescriptionPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
