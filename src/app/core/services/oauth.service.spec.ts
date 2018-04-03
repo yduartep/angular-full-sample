@@ -79,7 +79,7 @@ describe('OAuthService', () => {
 
       service.logout();
 
-      expect(authHelper.getUserLogged()).toBeNull('User should be null after logout');
-      expect(authHelper.getToken()).toBeNull('Token should be null after logout');
+      expect(authHelper.getUserLogged()).toEqual('');
+      expect(authHelper.getToken()).toEqual('');
     })));
 });

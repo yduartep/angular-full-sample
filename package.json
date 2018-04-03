@@ -29,19 +29,15 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "serve": "ng serve",
-
-    "prebuild:prod": "npm install",
-    "build:prod": "ng build --prod --env=prod --base-href ./",
+    "build:prod": "ng build --prod --env=prod --base-href ./ --deploy-url ./public/ && node ./move-resources.js",
     "move-resources": "node ./move-resources.js",
-
+    "pretest": "npm run lint",
     "test": "ng test",
     "lint": "ng lint",
     "documentation:gentoc": "doctoc -s --maxlevel 2 README.md",
     "management:console:start": "hotel add \"npm run start:application\" --name \"APPLICATION\" -o application.log -p 4200 &  hotel add \"npm run start:mocks &\" --name \"MOCK SERVER\" -o mockserver.log -p 3000 & hotel start",
     "management:console:stop": "hotel stop",
 
-    "prestart": "npm install",
     "start": "concurrent --kill-others --kill-others-on-fail --prefix \"[{time}-{name}]\" --names \"MOCKS,APPLICATION\" -c \"blue.bold,magenta\" \"npm run start:mocks\" \"npm run start:application\"",
     "start:mocks": "json-server prototype/apiMocks.js --routes prototype/routes.json",
     "start:application": "ng serve --environment=mock --open true --live-reload true",
@@ -50,7 +46,7 @@
     "webdriver:start": "webdriver-manager start --detach",
     "webdriver:stop": "webdriver-manager shutdown",
 
-    "e2e:servers": "npm run webdriver:update && concurrent --kill-others --kill-others-on-fail --prefix \"[{time}-{name}]\" --names \"MOCKS,APPLICATION,WEBDRIVER\" -c \"blue.bold,magenta,green\" \"npm run start:mocks\" \"npm run start:application\" \"npm run webdriver:start\"",
+    "e2e:servers": "concurrent --kill-others --kill-others-on-fail --prefix \"[{time}-{name}]\" --names \"MOCKS,APPLICATION,WEBDRIVER\" -c \"blue.bold,magenta,green\" \"npm run start:mocks\" \"npm run start:application\" \"npm run webdriver:start\"",
     "e2e": "ng e2e --webdriver-update=false",
     "e2e:hub": "protractor protractor.hub.conf.js"
   },
