@@ -1,0 +1,101 @@
+{
+  "appTitle": "Ejemplo de aplicacion en Angular 5!!!",
+  "back": "Atras",
+  "reset": "Limpiar",
+  "loading": "Cargando ...",
+  "aboutUs": "Sobre nosotros",
+  "help": "Ayuda",
+  "poweredBy": "Creado por",
+  "license": "Code licensed under an MIT-style License. Documentation licensed under CC BY 4.0.",
+  "logout": "Desconectarse",
+  "menu": {
+    "heroes": "Heroes",
+    "villains": "Villanos",
+    "aboutUs": "Sobre nosotros"
+  },
+  "login": {
+    "label-username": "Usuario",
+    "label-password": "Contraseña",
+    "placeholders": {
+      "username": "Entra usuario ...",
+      "password": "Entra contraseña ..."
+    },
+    "error-no-token-sent": "Token no enviado durante la autenticación",
+    "error-user-unauthorized": "El usuario no está autorizado"
+  },
+  "modalMessage": {
+    "yesButton": "Si",
+    "noButton": "No",
+    "closeButton": "Cerrar"
+  },
+  "validations": {
+    "required": {
+      "name": "El campo nombre es obligatorio",
+      "username": "El campo usuario es obligatorio",
+      "password": "La Contraseña es obligatoria"
+    },
+    "numeric": {
+      "editorial": "Selecciona una editorial"
+    }
+  },
+  "heroes": {
+    "detail-title": "Detalles del heroe",
+    "list-title": "Lista de heroes",
+    "create-title": "Crea nuevo heroe",
+    "edit-title": "Modifica heroe",
+    "delete": "Elimina",
+    "save": "Salva",
+    "create": "Crea nuevo",
+    "edit": "Edit",
+    "review": "Modo lectura",
+    "fields": {
+      "name": "Nombre",
+      "editorial": "Editorial",
+      "preview": "Vista previa",
+      "creationDate": "Fecha creacion"
+    },
+    "columns": {
+      "name": "Nombre",
+      "editorial": "Editorial",
+      "preview": "Vista previa"
+    },
+    "placeholders": {
+      "name": "Entra nombre ...",
+      "editorial": "Selecciona Editorial ...",
+      "preview": "Entra nombre de imagen almacenada en assets ...",
+      "creationDate": "Entra fecha de creacion"
+    },
+    "confirmDeleteMsg": "Esta seguro que desea eliminar este heroe?",
+    "deleteOkMsg": "El heroe se ha eliminado correctamente!",
+    "deleteErrMsg": "Se ha producido un error mientras intentaba eliminar el heroe!",
+    "insertOkMsg": "El heroe se ha creado correctamente!!",
+    "insertErrMsg": "Se ha producido un error mientras intentaba agregar un heroe!",
+    "editOkMsg": "El heroe se ha actualizado correctamente!!",
+    "editErrMsg": "Se ha producido un error mientras intentaba actualizar un heroe!",
+    "loadErrMsg": "Se ha producido un error mientras intentaba cargar la lista de heroes"
+  },
+  "villains": {
+    "detail-title": "Detalles del villano",
+    "list-title": "Lista de villanos",
+    "delete": "Elimina",
+    "fields": {
+      "name": "Nombre",
+      "editorial": "Editorial",
+      "preview": "Vista previa"
+    },
+    "columns": {
+      "name": "Nombre",
+      "editorial": "Editorial",
+      "preview": "Vista previa"
+    },
+    "placeholders": {
+      "name": "Entra nombre ...",
+      "editorial": "Selecciona Editorial ...",
+      "preview": "Entra nombre de imagen almacenada en assets ...",
+      "search": "Buscar"
+    },
+    "confirmDeleteMsg": "Esta seguro que desea eliminar este villano?",
+    "deleteOkMsg": "El villano se ha eliminado correctamente!",
+    "deleteErrMsg": "Se ha producido un error mientras intentaba eliminar el villano!"
+  }
+}

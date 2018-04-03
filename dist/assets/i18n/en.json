@@ -1,0 +1,103 @@
+{
+  "appTitle": "Full sample application in Angular 5!!!",
+  "back": "Back",
+  "reset": "Reset",
+  "aboutUs": "About us",
+  "help": "Help",
+  "poweredBy": "Powered by",
+  "license": "Code licensed under an MIT-style License. Documentation licensed under CC BY 4.0.",
+  "loading": "Loading ...",
+  "logout": "Logout",
+  "menu": {
+    "heroes": "Heroes",
+    "villains": "Villains",
+    "aboutUs": "About Us"
+  },
+  "login": {
+    "label-username": "Username",
+    "label-password": "Password",
+    "button-login": "Login",
+    "placeholders": {
+      "username": "Enter username ...",
+      "password": "Enter password ..."
+    },
+    "error-no-token-sent": "Token not sent from service during authentication",
+    "error-user-unauthorized": "The user is not authorized"
+  },
+  "modalMessage": {
+    "yesButton": "Yes",
+    "noButton": "No",
+    "closeButton": "Close"
+  },
+  "validations": {
+    "required": {
+      "name": "The field name is required",
+      "username": "The username is mandatory",
+      "password": "The password is mandatory"
+    },
+    "numeric": {
+      "editorial": "You have to select one editorial value"
+    }
+  },
+  "heroes": {
+    "detail-title": "Hero details",
+    "list-title": "List of Heroes",
+    "create-title": "Create new hero",
+    "edit-title": "Edit heroe",
+    "delete": "Delete",
+    "save": "Save",
+    "create": "Create new",
+    "edit": "Edit",
+    "review": "View mode",
+    "fields": {
+      "name": "Name",
+      "editorial": "Editorial",
+      "preview": "Preview",
+      "creationDate": "Creation date"
+    },
+    "columns": {
+      "name": "Name",
+      "editorial": "Editorial",
+      "preview": "Preview"
+    },
+    "placeholders": {
+      "name": "Enter name ...",
+      "editorial": "Select Editorial ...",
+      "preview": "Enter image name stored on assets ...",
+      "creationDate": "Enter the creation date"
+    },
+    "confirmDeleteMsg": "Are you sure do you want to delete this Hero?",
+    "deleteOkMsg": "The super hero was deleted successfully!",
+    "deleteErrMsg": "Error while deleting the super hero!",
+    "insertOkMsg": "The hero was created successfully!!",
+    "insertErrMsg": "Error while trying to insert the new hero",
+    "editOkMsg": "The hero was updated successfully!!",
+    "editErrMsg": "Error while trying to update the hero",
+    "loadErrMsg": "Error while loading the list of heroes"
+  },
+  "villains": {
+    "detail-title": "Villain details",
+    "list-title": "List of villains",
+    "delete": "Delete",
+    "fields": {
+      "name": "Name",
+      "editorial": "Editorial",
+      "preview": "Preview"
+    },
+    "columns": {
+      "name": "Name",
+      "editorial": "Editorial",
+      "preview": "Preview"
+    },
+    "placeholders": {
+      "name": "Enter name ...",
+      "editorial": "Select Editorial ...",
+      "preview": "Enter image name stored on assets ...",
+      "search": "Search ..."
+    },
+    "confirmDeleteMsg": "Are you sure do you want to delete this villain?",
+    "deleteOkMsg": "The villain was deleted successfully!",
+    "deleteErrMsg": "Error while deleting the villain!",
+    "loadErrMsg": "Error while loading the list of villains"
+  }
+}

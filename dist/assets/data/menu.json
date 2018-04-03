@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Heroes",
+    "action": "/heroes",
+    "icon": "fa-flash",
+    "i18n": "menu.heroes"
+  },
+  {
+    "title": "Villains",
+    "action": "/villains",
+    "icon": "fa-user-secret",
+    "i18n": "menu.villains"
+  },
+  {
+    "title": "About Us",
+    "action": "/about",
+    "icon": "fa-users",
+    "i18n": "menu.aboutUs"
+  }
+]

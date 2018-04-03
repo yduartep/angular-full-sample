@@ -33,6 +33,7 @@ export class AuthHelper {
   static addUserInfo(value: string, expiredTime: number) {
     const expiredTimeString = CommonUtil.changeExpiredTime(expiredTime);
     document.cookie = AuthHelper.USER_ID + '=' + value + '; expires=' + expiredTimeString + '; path=/';
+    window.localStorage.setItem('ls.user', value);
   }
 
   /**
@@ -44,6 +45,7 @@ export class AuthHelper {
     const expiredTimeString = CommonUtil.changeExpiredTime(expiredTime);
     document.cookie = AuthHelper.TOKEN_ID + '=' + token.access_token + '; expires=' + expiredTimeString + '; path=/';
     document.cookie = AuthHelper.TOKEN_TYPE + '=' + token.token_type + '; expires=' + expiredTimeString + '; path=/';
+    window.localStorage.setItem('ls.token', token.access_token);
   }
 
   /**
@@ -52,6 +54,7 @@ export class AuthHelper {
   static removeUserInfo() {
     const expiredTimeString = CommonUtil.changeExpiredTime(0);
     document.cookie = AuthHelper.USER_ID + '=; expires=' + expiredTimeString + '; path=/';
+    window.localStorage.removeItem('ls.user');
   }
 
   /**
@@ -61,6 +64,7 @@ export class AuthHelper {
     const expiredTimeString = CommonUtil.changeExpiredTime(0);
     document.cookie = AuthHelper.TOKEN_ID + '=; expires=' + expiredTimeString + '; path=/';
     document.cookie = AuthHelper.TOKEN_TYPE + '=; expires=' + expiredTimeString + '; path=/';
+    window.localStorage.removeItem('ls.token');
   }
 
   /**
@@ -137,7 +141,10 @@ export class AuthHelper {
     }
     const userId = this.getUserLogged();
     const token = this.getToken();
-    return (!CommonUtil.isEmpty(userId) && !CommonUtil.isEmpty(token));
+    const result = (!CommonUtil.isEmpty(userId) && !CommonUtil.isEmpty(token));
+
+    console.log('logged: ' + result);
+    return result;
   }
 
   /**
@@ -147,7 +154,11 @@ export class AuthHelper {
     if (this.apiConfig.authService === AuthTypes.SKYP) {
       return null;
     }
-    return CommonUtil.getCookie(AuthHelper.USER_ID);
+    const user = CommonUtil.getCookie(AuthHelper.USER_ID) ||
+      (localStorage.getItem('ls.user') ? JSON.parse(localStorage.getItem("ls.user")).name: null);
+
+    console.log('Logged user: '+ user);
+    return user;
   }
 
   /**
@@ -157,7 +168,7 @@ export class AuthHelper {
     if (this.apiConfig.authService === AuthTypes.SKYP) {
       return null;
     }
-    return CommonUtil.getCookie(AuthHelper.TOKEN_ID);
+    return CommonUtil.getCookie(AuthHelper.TOKEN_ID) || localStorage.getItem('ls.token') || null;
   }
 
   /**

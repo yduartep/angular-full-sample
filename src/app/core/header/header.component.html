@@ -1,8 +1,11 @@
 <div class="row header">
   <span class="helper"></span>
   <div class="row content full-width">
-    <div class="col-xs-8" *ngIf="isActive()">
+    <div class="col-xs-6" *ngIf="isActive()">
       <img src="assets/images/logo.png"><span style="padding-left: 20px;">{{'appTitle' | translate}}</span>
+    </div>
+    <div class="col-xs-2">
+      <a href="/#!/departments" style="color: red">Iristrace Departments</a>
     </div>
     <div class="col-xs-2" *ngIf="getUser()">
       <i class="fa fa-user" aria-hidden="true"></i> {{getUser()}} |
